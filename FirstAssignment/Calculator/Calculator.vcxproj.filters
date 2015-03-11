@@ -13,10 +13,90 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="소스 파일\System">
+      <UniqueIdentifier>{783ad76c-65f2-4956-939e-a9035fbf3571}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Instruction">
+      <UniqueIdentifier>{df7b2a2a-b965-4986-8430-47c0eecd7d9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Instruction\Operand">
+      <UniqueIdentifier>{594acf92-a769-495b-b0ae-a518305f0dcb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Common">
+      <UniqueIdentifier>{6963a74f-d902-4c9f-9bc9-4661b0103819}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Instruction\Arithmetic">
+      <UniqueIdentifier>{98c5f1dc-2710-4993-85d2-da7cb33b1fc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Instruction\Control">
+      <UniqueIdentifier>{dc0c0147-85b9-4851-9b21-045ca20a4b8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Instruction\Logic">
+      <UniqueIdentifier>{d1b9d613-3d64-4be2-a31d-adb369466730}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Instruction\Transmit">
+      <UniqueIdentifier>{49cf2414-7ebf-4467-b89a-a4884e368995}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="System\System.cpp">
+      <Filter>소스 파일\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Instruction\Instruction.cpp">
+      <Filter>소스 파일\Instruction</Filter>
+    </ClCompile>
+    <ClCompile Include="Instruction\Operand.cpp">
+      <Filter>소스 파일\Instruction\Operand</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Common.cpp">
+      <Filter>소스 파일\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Instruction\Arithmetic\Div.cpp">
+      <Filter>소스 파일\Instruction\Arithmetic</Filter>
+    </ClCompile>
+    <ClCompile Include="Instruction\Arithmetic\Mul.cpp">
+      <Filter>소스 파일\Instruction\Arithmetic</Filter>
+    </ClCompile>
+    <ClCompile Include="Instruction\Arithmetic\Sub.cpp">
+      <Filter>소스 파일\Instruction\Arithmetic</Filter>
+    </ClCompile>
+    <ClCompile Include="Instruction\Arithmetic\Add.cpp">
+      <Filter>소스 파일\Instruction\Arithmetic</Filter>
+    </ClCompile>
+    <ClCompile Include="Instruction\Transmit\Move.cpp">
+      <Filter>소스 파일\Instruction\Transmit</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="System\System.h">
+      <Filter>소스 파일\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Instruction\Instruction.h">
+      <Filter>소스 파일\Instruction</Filter>
+    </ClInclude>
+    <ClInclude Include="Instruction\Operand.h">
+      <Filter>소스 파일\Instruction\Operand</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Common.h">
+      <Filter>소스 파일\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Instruction\Arithmetic\Div.h">
+      <Filter>소스 파일\Instruction\Arithmetic</Filter>
+    </ClInclude>
+    <ClInclude Include="Instruction\Arithmetic\Mul.h">
+      <Filter>소스 파일\Instruction\Arithmetic</Filter>
+    </ClInclude>
+    <ClInclude Include="Instruction\Arithmetic\Sub.h">
+      <Filter>소스 파일\Instruction\Arithmetic</Filter>
+    </ClInclude>
+    <ClInclude Include="Instruction\Arithmetic\Add.h">
+      <Filter>소스 파일\Instruction\Arithmetic</Filter>
+    </ClInclude>
+    <ClInclude Include="Instruction\Transmit\Move.h">
+      <Filter>소스 파일\Instruction\Transmit</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

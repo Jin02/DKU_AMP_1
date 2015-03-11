@@ -41,6 +41,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <ReferencePath>$(ReferencePath)</ReferencePath>
+    <IncludePath>System;Instruction;Common;Instruction/Arithmetic;Instruction/Control;Instruction/Logic;Instruction/Transmit;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -76,7 +78,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Common\Common.cpp" />
+    <ClCompile Include="Instruction\Arithmetic\Add.cpp" />
+    <ClCompile Include="Instruction\Arithmetic\Div.cpp" />
+    <ClCompile Include="Instruction\Arithmetic\Mul.cpp" />
+    <ClCompile Include="Instruction\Arithmetic\Sub.cpp" />
+    <ClCompile Include="Instruction\Instruction.cpp" />
+    <ClCompile Include="Instruction\Operand.cpp" />
+    <ClCompile Include="Instruction\Transmit\Move.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="System\System.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Common\Common.h" />
+    <ClInclude Include="Instruction\Arithmetic\Add.h" />
+    <ClInclude Include="Instruction\Arithmetic\Div.h" />
+    <ClInclude Include="Instruction\Arithmetic\Mul.h" />
+    <ClInclude Include="Instruction\Arithmetic\Sub.h" />
+    <ClInclude Include="Instruction\Instruction.h" />
+    <ClInclude Include="Instruction\Operand.h" />
+    <ClInclude Include="Instruction\Transmit\Move.h" />
+    <ClInclude Include="System\System.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -6,10 +6,11 @@
 //  Copyright (c) 2015년 __Jin__. All rights reserved.
 //
 
-#include <iostream>
+#include <stdio.h>
+#include "System.h"
 
-int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!\n";
+int main(int argc, const char * argv[])
+{
+
     return 0;
 }
