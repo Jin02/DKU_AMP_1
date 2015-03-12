@@ -14,7 +14,7 @@ namespace Core
 	private:
 		std::array<unsigned int, MAX_DATA_REGISTER_NUM>		_dataRegisters;
 
-	private:
+	public:
 		System(void);
 		~System(void);
 
