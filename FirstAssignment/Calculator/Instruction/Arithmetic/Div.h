@@ -1,24 +1,22 @@
 #pragma once
 
-#include "Instruction.h"
+#include "ArithmeticInstruction.h"
 
 namespace Instruction
 {
 	namespace Arithmetic
 	{
-		class Div : public Instruction
+		class Div : public ArithmeticInstruction
 		{
 		private:
 
 
 		public:
-			Div(void){}
-			~Div(void){}
+            Div(void);
+            virtual ~Div(void);
 
-		public:
-			virtual void Work()
-			{
-			}
+        public:
+            virtual unsigned int Instruct(unsigned int operand0_value, unsigned int operand1_value);
 		};
 	}
 }

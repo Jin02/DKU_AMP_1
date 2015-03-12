@@ -22,7 +22,7 @@ namespace Core
 		void ClearAllDataRegisters();
 		void ClearRegister(unsigned int index);
 
-		inline void	SetDataToRegister(unsigned int index, unsigned int data);
-		inline unsigned int GetDataFromRegister(unsigned int index);
+		inline void	SetDataToRegister(unsigned int index, unsigned int data) { _dataRegisters[index] = data; }
+		inline unsigned int GetDataFromRegister(unsigned int index) { return _dataRegisters[index]; }
 	};
 }

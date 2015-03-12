@@ -12,13 +12,11 @@ namespace Instruction
 
 
 		public:
-			Move(void){}
-			~Move(void){}
+            Move(void);
+            ~Move(void);
 
 		public:
-			virtual void Work()
-			{
-			}
-		};
+            virtual void Work();
+        };
 	}
 }

@@ -11,21 +11,7 @@ Add::~Add(void)
 {
 }
 
-void Add::Work()
+unsigned int Add::Instruct(unsigned int operand0_value, unsigned int operand1_value)
 {
-	ASSERT_COND_MSG(_operands.size() != 2, "Error, can not support current instruction yet");
-	{
-		Core::System* system = Core::System::GetInstance();
-		unsigned int registerIndex = 0;
-
-		const Operand* operand0 = _operands[0];
-		if( operand0->GetType() == Operand::Type::Register)
-		{
-			registerIndex = operand0->GetData();
-		}
-		else if( operand0->GetType() == Operand::Type::Value )
-		{
-
-		}
-	}
+    return operand0_value + operand1_value;
 }

@@ -8,10 +8,13 @@ namespace Instruction
 	class Instruction
 	{
 	public:
-		Instruction(void)	{}
-		virtual ~Instruction(void)	{}
+        Instruction(void);
+        virtual ~Instruction(void);
 
-	public:
+    protected:
+        unsigned int GetData(const Operand* operand);
+        
+	protected:
 		virtual void Work() = 0;
 
 	protected:
