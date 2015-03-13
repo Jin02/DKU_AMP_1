@@ -21,6 +21,7 @@
     <ClInclude Include="inc\Move.h" />
     <ClInclude Include="inc\Mul.h" />
     <ClInclude Include="inc\Operand.h" />
+    <ClInclude Include="inc\Singleton.h" />
     <ClInclude Include="inc\Sub.h" />
     <ClInclude Include="inc\System.h" />
     <ClInclude Include="inc\Transmit.h" />
