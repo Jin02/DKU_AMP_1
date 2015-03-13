@@ -10,6 +10,38 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="inc\Add.h" />
+    <ClInclude Include="inc\Arithmetic.h" />
+    <ClInclude Include="inc\ArithmeticInstruction.h" />
+    <ClInclude Include="inc\Common.h" />
+    <ClInclude Include="inc\Div.h" />
+    <ClInclude Include="inc\DumpLogManager.h" />
+    <ClInclude Include="inc\Instruction.h" />
+    <ClInclude Include="inc\Move.h" />
+    <ClInclude Include="inc\Mul.h" />
+    <ClInclude Include="inc\Operand.h" />
+    <ClInclude Include="inc\Singleton.h" />
+    <ClInclude Include="inc\Sub.h" />
+    <ClInclude Include="inc\System.h" />
+    <ClInclude Include="inc\Transmit.h" />
+    <ClInclude Include="inc\TransmitInstruction.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\Add.cpp" />
+    <ClCompile Include="src\ArithmeticInstruction.cpp" />
+    <ClCompile Include="src\Common.cpp" />
+    <ClCompile Include="src\Div.cpp" />
+    <ClCompile Include="src\DumpLogManager.cpp" />
+    <ClCompile Include="src\Instruction.cpp" />
+    <ClCompile Include="src\Move.cpp" />
+    <ClCompile Include="src\Mul.cpp" />
+    <ClCompile Include="src\Operand.cpp" />
+    <ClCompile Include="src\Sub.cpp" />
+    <ClCompile Include="src\System.cpp" />
+    <ClCompile Include="src\TransmitInstruction.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{D37DDF01-D15D-486D-AAF4-EEA4EDD37444}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
@@ -41,8 +73,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <ReferencePath>$(ReferencePath)</ReferencePath>
-    <IncludePath>System;Instruction;Common;Instruction/Arithmetic;Instruction/Control;Instruction/Logic;Instruction/Transmit;$(IncludePath)</IncludePath>
+    <ReferencePath>src;$(ReferencePath)</ReferencePath>
+    <IncludePath>inc;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -77,29 +109,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="Common\Common.cpp" />
-    <ClCompile Include="Instruction\Arithmetic\Add.cpp" />
-    <ClCompile Include="Instruction\Arithmetic\Div.cpp" />
-    <ClCompile Include="Instruction\Arithmetic\Mul.cpp" />
-    <ClCompile Include="Instruction\Arithmetic\Sub.cpp" />
-    <ClCompile Include="Instruction\Instruction.cpp" />
-    <ClCompile Include="Instruction\Operand.cpp" />
-    <ClCompile Include="Instruction\Transmit\Move.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="System\System.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Common\Common.h" />
-    <ClInclude Include="Instruction\Arithmetic\Add.h" />
-    <ClInclude Include="Instruction\Arithmetic\Div.h" />
-    <ClInclude Include="Instruction\Arithmetic\Mul.h" />
-    <ClInclude Include="Instruction\Arithmetic\Sub.h" />
-    <ClInclude Include="Instruction\Instruction.h" />
-    <ClInclude Include="Instruction\Operand.h" />
-    <ClInclude Include="Instruction\Transmit\Move.h" />
-    <ClInclude Include="System\System.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

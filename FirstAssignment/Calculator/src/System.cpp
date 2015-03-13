@@ -33,7 +33,7 @@ void System::ParseAssemblyDumpFile(const std::string& dumpFileFullPath)
     std::ifstream file(dumpFileFullPath);
     ASSERT_COND_MSG(file.is_open() && file.good(), "Error, strange file");
     
-    auto Tokenize = [](std::vector<std::string>& outTokens, const std::string& str, const std::string& delimiters = " ")
+    auto Tokenize = [](std::vector<std::string>& outTokens, const std::string& str, const std::string& delimiters)
     {
         std::string::size_type lastPos = str.find_first_not_of(delimiters, 0);
         std::string::size_type pos     = str.find_first_of(delimiters, lastPos);
@@ -78,7 +78,7 @@ void System::ParseAssemblyDumpFile(const std::string& dumpFileFullPath)
         
         {
             std::vector<std::string> tokens;
-            Tokenize(tokens, buff);
+            Tokenize(tokens, buff, " ");
             
             std::vector<const Operand> operands;
             for(int i=1; i<tokens.size(); ++i)
