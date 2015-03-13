@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Common.h"
-#include "SingleTon.h"
+#include "Singleton.h"
 
 #include <string>
 

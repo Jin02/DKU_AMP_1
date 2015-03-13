@@ -8,7 +8,7 @@ private:
     
     
 public:
-    Move(const std::vector<const Operand>& operands);
+    Move(const std::vector<Operand>& operands);
     ~Move(void);
     
 protected:

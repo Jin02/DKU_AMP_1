@@ -7,7 +7,7 @@ class ArithmeticInstruction : public Instruction
 private:
     
 public:
-    ArithmeticInstruction(const std::vector<const Operand>& operands);
+    ArithmeticInstruction(const std::vector<Operand>& operands);
     virtual ~ArithmeticInstruction(void);
     
 protected:

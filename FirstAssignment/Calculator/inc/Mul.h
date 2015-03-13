@@ -8,7 +8,7 @@ private:
     
     
 public:
-    Mul(const std::vector<const Operand>& operands);
+    Mul(const std::vector<Operand>& operands);
     virtual ~Mul(void);
     
 public:

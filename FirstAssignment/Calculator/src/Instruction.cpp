@@ -1,7 +1,7 @@
 #include "Instruction.h"
 #include "System.h"
 
-Instruction::Instruction(const std::vector<const Operand>& operands) : _operands(operands)
+Instruction::Instruction(const std::vector<Operand>& operands) : _operands(operands)
 {
     
 }

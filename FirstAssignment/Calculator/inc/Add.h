@@ -8,7 +8,7 @@ private:
     
     
 public:
-    Add(const std::vector<const Operand>& operands);
+    Add(const std::vector<Operand>& operands);
     virtual ~Add(void);
     
 public:

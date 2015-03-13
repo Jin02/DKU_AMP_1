@@ -6,7 +6,7 @@
 class Instruction
 {
 public:
-    Instruction(const std::vector<const Operand>& operands);
+    Instruction(const std::vector<Operand>& operands);
     virtual ~Instruction(void);
     
 protected:
@@ -16,5 +16,5 @@ public:
     virtual void Work() = 0;
     
 protected:
-    std::vector<const Operand>      _operands;
+    std::vector<Operand>      _operands;
 };

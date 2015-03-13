@@ -2,7 +2,7 @@
 #include "System.h"
 
 
-Add::Add(const std::vector<const Operand>& operands)
+Add::Add(const std::vector<Operand>& operands)
     : ArithmeticInstruction(operands)
 {
 }

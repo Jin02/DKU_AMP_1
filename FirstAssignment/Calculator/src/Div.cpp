@@ -1,7 +1,7 @@
 #include "Div.h"
 #include "System.h"
 
-Div::Div(const std::vector<const Operand>& operands)
+Div::Div(const std::vector<Operand>& operands)
     : ArithmeticInstruction(operands)
 {
 }

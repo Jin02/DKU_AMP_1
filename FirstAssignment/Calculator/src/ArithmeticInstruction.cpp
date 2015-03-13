@@ -3,7 +3,7 @@
 #include "DumpLogManager.h"
 #include <string>
 
-ArithmeticInstruction::ArithmeticInstruction(const std::vector<const Operand>& operands)
+ArithmeticInstruction::ArithmeticInstruction(const std::vector<Operand>& operands)
     : Instruction(operands)
 {
 }

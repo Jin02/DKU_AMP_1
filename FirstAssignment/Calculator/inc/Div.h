@@ -8,7 +8,7 @@ private:
     
     
 public:
-    Div(const std::vector<const Operand>& operands);
+    Div(const std::vector<Operand>& operands);
     virtual ~Div(void);
     
 public:

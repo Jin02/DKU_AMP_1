@@ -1,7 +1,7 @@
 #include "Sub.h"
 #include "System.h"
 
-Sub::Sub(const std::vector<const Operand>& operands)
+Sub::Sub(const std::vector<Operand>& operands)
     : ArithmeticInstruction(operands)
 {
 

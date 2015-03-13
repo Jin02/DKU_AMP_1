@@ -4,7 +4,7 @@
 #include <vector>
 
 #include "Common.h"
-#include "SingleTon.h"
+#include "Singleton.h"
 
 #include "Instruction.h"
 

@@ -80,7 +80,7 @@ void System::ParseAssemblyDumpFile(const std::string& dumpFileFullPath)
             std::vector<std::string> tokens;
             Tokenize(tokens, buff, " ");
             
-            std::vector<const Operand> operands;
+            std::vector<Operand> operands;
             for(int i=1; i<tokens.size(); ++i)
             {
                 const std::string& operandStr = tokens[i];

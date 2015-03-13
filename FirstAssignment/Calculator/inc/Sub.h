@@ -8,7 +8,7 @@ private:
     
     
 public:
-    Sub(const std::vector<const Operand>& operands);
+    Sub(const std::vector<Operand>& operands);
     virtual ~Sub(void);
     
 public:

@@ -1,7 +1,7 @@
 #include "TransmitInstruction.h"
 #include "System.h"
 
-TransmitInstruction::TransmitInstruction(const std::vector<const Operand>& operands) : Instruction(operands)
+TransmitInstruction::TransmitInstruction(const std::vector<Operand>& operands) : Instruction(operands)
 {
 }
 

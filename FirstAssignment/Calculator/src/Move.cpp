@@ -2,7 +2,7 @@
 #include "System.h"
 #include "DumpLogManager.h"
 
-Move::Move(const std::vector<const Operand>& operands)
+Move::Move(const std::vector<Operand>& operands)
     : TransmitInstruction(operands)
 {
 }
