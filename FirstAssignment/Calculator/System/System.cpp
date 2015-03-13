@@ -5,6 +5,8 @@
 #include "Transmit.h"
 #include "Arithmetic.h"
 
+#include "DumpLogManager.h"
+
 System::System()
 {
 }
@@ -145,14 +147,18 @@ void System::ClearInstructionStr(unsigned int index)
 void System::Run(unsigned int start)
 {
 #ifdef USE_OUTPUT_DUMP_LOG
-    printf("\tInput\t\tOutput\n");
+    DumpLogManager::GetInstance()->AddLog("\tInput\t\t\tOutput\n");
 #endif
     
     for(unsigned int i = start; i < _instructions.size(); ++i)
     {
 #ifdef USE_OUTPUT_DUMP_LOG
-        printf("%s\t\t", _inst_reg_string[i].c_str());
+    DumpLogManager::GetInstance()->AddLog(_inst_reg_string[i] + "\t\t");
 #endif
         _instructions[i]->Work();
     }
+    
+#ifdef USE_OUTPUT_DUMP_LOG
+    DumpLogManager::GetInstance()->Print();
+#endif
 }

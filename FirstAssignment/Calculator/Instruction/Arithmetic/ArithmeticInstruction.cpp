@@ -1,5 +1,6 @@
 #include "ArithmeticInstruction.h"
 #include "System.h"
+#include "DumpLogManager.h"
 #include <string>
 
 ArithmeticInstruction::ArithmeticInstruction(const std::vector<const Operand>& operands)
@@ -36,7 +37,10 @@ void ArithmeticInstruction::Work()
         
 #ifdef USE_OUTPUT_DUMP_LOG
         unsigned int operand0Data = GetData(_operands[0]);
-        printf("R%d : %2d = %2d %2c %2d\n", registerIndex, result, operand0Data, GetDumpLogSymbol(), operand1Data);
+        char buffer[256] = {0, };
+        sprintf(buffer, "R%d : %2d = %2d %2c %2d", registerIndex, result, operand0Data, GetDumpLogSymbol(), operand1Data);
+        
+        DumpLogManager::GetInstance()->AddLog(buffer, true);
 #endif
         
         system->SetDataToRegister(registerIndex, result);

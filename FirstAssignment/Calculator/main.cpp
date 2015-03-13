@@ -9,10 +9,14 @@
 #include <stdio.h>
 #include <string>
 #include "System.h"
+#include "DumpLogManager.h"
 
 int main(int argc, const char * argv[])
 {
-    System::GetInstance()->ParseAssemblyDumpFile("/Users/jin/Project/DKU_AMP_1/FirstAssignment/Calculator/test.txt");
+    System::GetInstance()->ParseAssemblyDumpFile("/Users/jin/Desktop/test.txt");
     System::GetInstance()->Run(0);
+    
+    DumpLogManager::GetInstance()->WriteFile("/Users/jin/Desktop/yo.txt");
+    
     return 0;
 }

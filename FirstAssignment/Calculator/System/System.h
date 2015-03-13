@@ -18,7 +18,7 @@ private:
     std::vector<std::string>                            _inst_reg_string;
     std::vector<Instruction*>                           _instructions;
     
-public:
+private:
     System(void);
     ~System(void);
     
@@ -39,4 +39,6 @@ public:
     
     void ClearAllInstructionStr();
     void ClearInstructionStr(unsigned int index);
+    
+    friend class Singleton<System>;
 };

@@ -1,5 +1,6 @@
 #include "Move.h"
 #include "System.h"
+#include "DumpLogManager.h"
 
 Move::Move(const std::vector<const Operand>& operands)
     : TransmitInstruction(operands)
@@ -19,7 +20,9 @@ void Move::Instruct(const Operand& operand0, const Operand& operand1)
         unsigned int inputData = GetData(operand1);
         system->SetDataToRegister(operand0.GetData(), inputData);
 #ifdef USE_OUTPUT_DUMP_LOG
-        printf("R%d : %2d\n", operand0.GetData(), inputData);
+        char buffer[256] = {0, };
+        sprintf(buffer, "R%d : %2d", operand0.GetData(), inputData);
+        DumpLogManager::GetInstance()->AddLog(buffer, true);
 #endif
     }
 }

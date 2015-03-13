@@ -21,6 +21,7 @@
 		3CF1FB811AB139EC0064AA2D /* System.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3CF1FB751AB139EC0064AA2D /* System.cpp */; };
 		3CF1FB851AB1694A0064AA2D /* ArithmeticInstruction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3CF1FB831AB1694A0064AA2D /* ArithmeticInstruction.cpp */; };
 		3CF1FB891AB1BC4B0064AA2D /* TransmitInstruction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3CF1FB871AB1BC4B0064AA2D /* TransmitInstruction.cpp */; };
+		3CF1FB8E1AB299520064AA2D /* DumpLogManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3CF1FB8C1AB299520064AA2D /* DumpLogManager.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -65,6 +66,8 @@
 		3CF1FB881AB1BC4B0064AA2D /* TransmitInstruction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransmitInstruction.h; sourceTree = "<group>"; };
 		3CF1FB8A1AB208870064AA2D /* Transmit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Transmit.h; sourceTree = "<group>"; };
 		3CF1FB8B1AB2092F0064AA2D /* Arithmetic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Arithmetic.h; sourceTree = "<group>"; };
+		3CF1FB8C1AB299520064AA2D /* DumpLogManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DumpLogManager.cpp; sourceTree = "<group>"; };
+		3CF1FB8D1AB299520064AA2D /* DumpLogManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DumpLogManager.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +174,7 @@
 		3CF1FB741AB139EC0064AA2D /* System */ = {
 			isa = PBXGroup;
 			children = (
+				3CF1FB8F1AB299560064AA2D /* DumpLog */,
 				3CF1FB751AB139EC0064AA2D /* System.cpp */,
 				3CF1FB761AB139EC0064AA2D /* System.h */,
 			);
@@ -199,6 +203,15 @@
 				3CF1FB681AB139EC0064AA2D /* Sub.h */,
 			);
 			name = Instructions;
+			sourceTree = "<group>";
+		};
+		3CF1FB8F1AB299560064AA2D /* DumpLog */ = {
+			isa = PBXGroup;
+			children = (
+				3CF1FB8C1AB299520064AA2D /* DumpLogManager.cpp */,
+				3CF1FB8D1AB299520064AA2D /* DumpLogManager.h */,
+			);
+			name = DumpLog;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -269,6 +282,7 @@
 				3CF1FB771AB139EC0064AA2D /* Common.cpp in Sources */,
 				3CF1FB851AB1694A0064AA2D /* ArithmeticInstruction.cpp in Sources */,
 				3CF1FB7E1AB139EC0064AA2D /* README.md in Sources */,
+				3CF1FB8E1AB299520064AA2D /* DumpLogManager.cpp in Sources */,
 				3CF1FB551AB072640064AA2D /* main.cpp in Sources */,
 				3CF1FB791AB139EC0064AA2D /* Div.cpp in Sources */,
 			);
