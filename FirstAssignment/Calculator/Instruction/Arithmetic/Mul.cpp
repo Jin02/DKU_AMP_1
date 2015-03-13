@@ -1,9 +1,8 @@
 #include "Mul.h"
 #include "System.h"
 
-using namespace Instruction::Arithmetic;
-
-Mul::Mul(void)
+Mul::Mul(const std::vector<const Operand>& operands)
+    : ArithmeticInstruction(operands)
 {
 }
 

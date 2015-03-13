@@ -1,22 +1,16 @@
 #pragma once
 
-#include "Instruction.h"
+#include "TransmitInstruction.h"
 
-namespace Instruction
+class Move : public TransmitInstruction
 {
-	namespace Transmit
-	{
-		class Move : public Instruction
-		{
-		private:
-
-
-		public:
-            Move(void);
-            ~Move(void);
-
-		public:
-            virtual void Work();
-        };
-	}
-}
+private:
+    
+    
+public:
+    Move(const std::vector<const Operand>& operands);
+    ~Move(void);
+    
+protected:
+    virtual void Instruct(const Operand& operand0, const Operand& operand1);
+};

@@ -12,3 +12,5 @@
 
 #define ASSERT_MSG(MSG) assert(!MSG)
 #define ASSERT_COND_MSG(CONDITION, MSG) if(!(CONDITION)){assert(!MSG);}
+
+#define USE_OUTPUT_DUMP_LOG

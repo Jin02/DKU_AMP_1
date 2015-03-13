@@ -20,6 +20,7 @@
 		3CF1FB801AB139EC0064AA2D /* Move.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3CF1FB721AB139EC0064AA2D /* Move.cpp */; };
 		3CF1FB811AB139EC0064AA2D /* System.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3CF1FB751AB139EC0064AA2D /* System.cpp */; };
 		3CF1FB851AB1694A0064AA2D /* ArithmeticInstruction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3CF1FB831AB1694A0064AA2D /* ArithmeticInstruction.cpp */; };
+		3CF1FB891AB1BC4B0064AA2D /* TransmitInstruction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3CF1FB871AB1BC4B0064AA2D /* TransmitInstruction.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -60,6 +61,10 @@
 		3CF1FB761AB139EC0064AA2D /* System.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = System.h; sourceTree = "<group>"; };
 		3CF1FB831AB1694A0064AA2D /* ArithmeticInstruction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ArithmeticInstruction.cpp; sourceTree = "<group>"; };
 		3CF1FB841AB1694A0064AA2D /* ArithmeticInstruction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArithmeticInstruction.h; sourceTree = "<group>"; };
+		3CF1FB871AB1BC4B0064AA2D /* TransmitInstruction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TransmitInstruction.cpp; sourceTree = "<group>"; };
+		3CF1FB881AB1BC4B0064AA2D /* TransmitInstruction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransmitInstruction.h; sourceTree = "<group>"; };
+		3CF1FB8A1AB208870064AA2D /* Transmit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Transmit.h; sourceTree = "<group>"; };
+		3CF1FB8B1AB2092F0064AA2D /* Arithmetic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Arithmetic.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +132,7 @@
 		3CF1FB601AB139EC0064AA2D /* Arithmetic */ = {
 			isa = PBXGroup;
 			children = (
+				3CF1FB8B1AB2092F0064AA2D /* Arithmetic.h */,
 				3CF1FB861AB1694D0064AA2D /* Instructions */,
 				3CF1FB831AB1694A0064AA2D /* ArithmeticInstruction.cpp */,
 				3CF1FB841AB1694A0064AA2D /* ArithmeticInstruction.h */,
@@ -153,6 +159,9 @@
 		3CF1FB711AB139EC0064AA2D /* Transmit */ = {
 			isa = PBXGroup;
 			children = (
+				3CF1FB8A1AB208870064AA2D /* Transmit.h */,
+				3CF1FB871AB1BC4B0064AA2D /* TransmitInstruction.cpp */,
+				3CF1FB881AB1BC4B0064AA2D /* TransmitInstruction.h */,
 				3CF1FB721AB139EC0064AA2D /* Move.cpp */,
 				3CF1FB731AB139EC0064AA2D /* Move.h */,
 			);
@@ -255,6 +264,7 @@
 				3CF1FB7F1AB139EC0064AA2D /* Operand.cpp in Sources */,
 				3CF1FB781AB139EC0064AA2D /* Add.cpp in Sources */,
 				3CF1FB801AB139EC0064AA2D /* Move.cpp in Sources */,
+				3CF1FB891AB1BC4B0064AA2D /* TransmitInstruction.cpp in Sources */,
 				3CF1FB7C1AB139EC0064AA2D /* README.md in Sources */,
 				3CF1FB771AB139EC0064AA2D /* Common.cpp in Sources */,
 				3CF1FB851AB1694A0064AA2D /* ArithmeticInstruction.cpp in Sources */,

@@ -1,10 +1,10 @@
 #include "Sub.h"
 #include "System.h"
 
-using namespace Instruction::Arithmetic;
-
-Sub::Sub(void)
+Sub::Sub(const std::vector<const Operand>& operands)
+    : ArithmeticInstruction(operands)
 {
+
 }
 
 Sub::~Sub(void)

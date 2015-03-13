@@ -7,10 +7,12 @@
 //
 
 #include <stdio.h>
+#include <string>
 #include "System.h"
 
 int main(int argc, const char * argv[])
 {
-
+    System::GetInstance()->ParseAssemblyDumpFile("/Users/jin/Project/DKU_AMP_1/FirstAssignment/Calculator/test.txt");
+    System::GetInstance()->Run(0);
     return 0;
 }

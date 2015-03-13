@@ -1,9 +1,9 @@
 #include "Add.h"
 #include "System.h"
 
-using namespace Instruction::Arithmetic;
 
-Add::Add(void)
+Add::Add(const std::vector<const Operand>& operands)
+    : ArithmeticInstruction(operands)
 {
 }
 

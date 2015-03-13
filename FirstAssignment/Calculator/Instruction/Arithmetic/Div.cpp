@@ -1,9 +1,8 @@
 #include "Div.h"
 #include "System.h"
 
-using namespace Instruction::Arithmetic;
-
-Div::Div(void)
+Div::Div(const std::vector<const Operand>& operands)
+    : ArithmeticInstruction(operands)
 {
 }
 
