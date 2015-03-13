@@ -7,6 +7,8 @@
 
 #include "DumpLogManager.h"
 
+System* System::_instance = nullptr;
+
 System::System()
 {
 }
@@ -16,6 +18,19 @@ System::~System()
    	ClearAllDataRegisters();
     ClearAllInstruction();
     ClearAllInstructionStr();
+}
+
+System* System::GetInstance()
+{
+	if(_instance == nullptr)
+		_instance = new System;
+
+	return _instance;
+}
+
+void System::Destory()
+{
+	SAFE_DELETE(_instance);
 }
 
 void System::ClearAllDataRegisters()

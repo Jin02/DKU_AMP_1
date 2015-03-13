@@ -17,5 +17,8 @@ int main(int argc, const char * argv[])
     System::GetInstance()->Run(0);
     DumpLogManager::GetInstance()->WriteFile("/Users/jin/Desktop/yo.txt");
     
+	System::GetInstance()->Destory();
+	DumpLogManager::GetInstance()->Destory();
+
     return 0;
 }
