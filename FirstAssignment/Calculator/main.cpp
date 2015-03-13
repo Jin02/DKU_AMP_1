@@ -13,9 +13,9 @@
 
 int main(int argc, const char * argv[])
 {
-    System::GetInstance()->ParseAssemblyDumpFile("/Users/jin/Desktop/test.txt");
+    System::GetInstance()->ParseAssemblyDumpFile("./input.txt");
     System::GetInstance()->Run(0);
-    DumpLogManager::GetInstance()->WriteFile("/Users/jin/Desktop/yo.txt");
+    DumpLogManager::GetInstance()->WriteFile("./result.txt");
     
     return 0;
 }
