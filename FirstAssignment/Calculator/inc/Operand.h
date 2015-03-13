@@ -17,10 +17,10 @@ public:
     ~Operand(void){}
     
 public:
-    GET_SET_ACCESSOR(Data, unsigned int, _value);
+    GET_SET_ACCESSOR(Data, int, _value);
     GET_ACCESSOR(Type, Type, _type);
     
 private:
-    unsigned int	_value;
+    int	_value;
     Type			_type;
 };

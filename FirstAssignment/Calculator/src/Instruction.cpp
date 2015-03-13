@@ -11,7 +11,7 @@ Instruction::~Instruction()
     
 }
 
-unsigned int Instruction::GetData(const Operand& operand)
+int Instruction::GetData(const Operand& operand)
 {
     System* system = System::GetInstance();
     

@@ -11,7 +11,7 @@ Add::~Add(void)
 {
 }
 
-unsigned int Add::Instruct(unsigned int operand0_value, unsigned int operand1_value)
+int Add::Instruct(int operand0_value, int operand1_value)
 {
     return operand0_value + operand1_value;
 }

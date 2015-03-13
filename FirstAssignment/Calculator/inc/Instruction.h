@@ -10,7 +10,7 @@ public:
     virtual ~Instruction(void);
     
 protected:
-    unsigned int GetData(const Operand& operand);
+    int GetData(const Operand& operand);
     
 public:
     virtual void Work() = 0;

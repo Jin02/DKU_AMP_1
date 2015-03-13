@@ -17,7 +17,7 @@ void Move::Instruct(const Operand& operand0, const Operand& operand1)
     {
         System* system = System::GetInstance();
         
-        unsigned int inputData = GetData(operand1);
+        int inputData = GetData(operand1);
         system->SetDataToRegister(operand0.GetData(), inputData);
 #ifdef USE_OUTPUT_DUMP_LOG
         char buffer[256] = {0, };

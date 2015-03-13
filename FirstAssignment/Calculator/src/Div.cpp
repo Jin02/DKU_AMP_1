@@ -10,7 +10,7 @@ Div::~Div(void)
 {
 }
 
-unsigned int Div::Instruct(unsigned int operand0_value, unsigned int operand1_value)
+int Div::Instruct(int operand0_value, int operand1_value)
 {
     return operand0_value / operand1_value;
 }

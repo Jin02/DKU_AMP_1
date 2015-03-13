@@ -17,12 +17,12 @@ void ArithmeticInstruction::Work()
 	ASSERT_COND_MSG(_operands.size() == 2, "Error, can not support current instruction yet");
 	{
 		System* system = System::GetInstance();
-		unsigned int registerIndex = 0;
+		int registerIndex = 0;
         
 		const Operand& operand0 = _operands[0];
-        unsigned int operand1Data = GetData(_operands[1]);
+        int operand1Data = GetData(_operands[1]);
         
-        unsigned int result = 0;
+        int result = 0;
         
         if( operand0.GetType() == Operand::Type::Register)
 		{
@@ -36,7 +36,7 @@ void ArithmeticInstruction::Work()
         }
         
 #ifdef USE_OUTPUT_DUMP_LOG
-        unsigned int operand0Data = GetData(_operands[0]);
+        int operand0Data = GetData(_operands[0]);
         char buffer[256] = {0, };
         sprintf(buffer, "R%d : %2d = %2d %2c %2d", registerIndex, result, operand0Data, GetDumpLogSymbol(), operand1Data);
         

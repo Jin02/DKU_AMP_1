@@ -23,7 +23,7 @@ void System::ClearAllDataRegisters()
     std::fill(_dataRegisters.begin(), _dataRegisters.end(), 0);
 }
 
-void System::ClearRegister(unsigned int index)
+void System::ClearRegister(int index)
 {
     _dataRegisters[index] = 0;
 }
@@ -89,7 +89,7 @@ void System::ParseAssemblyDumpFile(const std::string& dumpFileFullPath)
                 {
                     unsigned long hexValue = std::stoul(operandStr, nullptr, 16);
                     Operand operand(Operand::Type::Value);
-                    operand.SetData((unsigned int)hexValue);
+                    operand.SetData((int)hexValue);
                     
                     operands.push_back(operand);
                 }
@@ -98,7 +98,7 @@ void System::ParseAssemblyDumpFile(const std::string& dumpFileFullPath)
                     ASSERT_COND_MSG(operandStr[0] == 'R', "Error, strange text");
                     
                     Operand operand(Operand::Type::Register);
-                    unsigned int value = (unsigned int)std::stoul(operandStr.c_str()+1, nullptr, 16);
+                    int value = (int)std::stoul(operandStr.c_str()+1, nullptr, 16);
                     operand.SetData(value);
                     
                     operands.push_back(operand);
@@ -128,7 +128,7 @@ void System::ClearAllInstruction()
         SAFE_DELETE(elem);
 }
 
-void System::ClearInstruction(unsigned int index)
+void System::ClearInstruction(int index)
 {
     SAFE_DELETE( _instructions[index] );
     _instructions.erase(_instructions.begin() + index);
@@ -139,18 +139,18 @@ void System::ClearAllInstructionStr()
     _inst_reg_string.clear();
 }
 
-void System::ClearInstructionStr(unsigned int index)
+void System::ClearInstructionStr(int index)
 {
     _inst_reg_string.erase(_inst_reg_string.begin() + index);
 }
 
-void System::Run(unsigned int start)
+void System::Run(int start)
 {
 #ifdef USE_OUTPUT_DUMP_LOG
     DumpLogManager::GetInstance()->AddLog("\tInput\t\t\tOutput\n");
 #endif
     
-    for(unsigned int i = start; i < _instructions.size(); ++i)
+    for(int i = start; i < _instructions.size(); ++i)
     {
 #ifdef USE_OUTPUT_DUMP_LOG
     DumpLogManager::GetInstance()->AddLog(_inst_reg_string[i] + "\t\t");

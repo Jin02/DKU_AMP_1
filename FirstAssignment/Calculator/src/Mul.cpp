@@ -10,7 +10,7 @@ Mul::~Mul(void)
 {
 }
 
-unsigned int Mul::Instruct(unsigned int operand0_value, unsigned int operand1_value)
+int Mul::Instruct(int operand0_value, int operand1_value)
 {
     return operand0_value * operand1_value;
 }

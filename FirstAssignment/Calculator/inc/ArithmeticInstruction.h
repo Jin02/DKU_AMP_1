@@ -11,7 +11,7 @@ public:
     virtual ~ArithmeticInstruction(void);
     
 protected:
-    virtual unsigned int Instruct(unsigned int operand0_value, unsigned int operand1_value) = 0;
+    virtual int Instruct(int operand0_value, int operand1_value) = 0;
     
 public:
     virtual void Work();
