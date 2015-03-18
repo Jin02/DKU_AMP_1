@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		3C617F201AB9304C00FC8FBD /* Add.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C617F141AB9304C00FC8FBD /* Add.cpp */; };
 		3C617F211AB9304C00FC8FBD /* ArithmeticInstruction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C617F151AB9304C00FC8FBD /* ArithmeticInstruction.cpp */; };
-		3C617F221AB9304C00FC8FBD /* Common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C617F161AB9304C00FC8FBD /* Common.cpp */; };
 		3C617F231AB9304C00FC8FBD /* Div.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C617F171AB9304C00FC8FBD /* Div.cpp */; };
 		3C617F241AB9304C00FC8FBD /* DumpLogManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C617F181AB9304C00FC8FBD /* DumpLogManager.cpp */; };
 		3C617F251AB9304C00FC8FBD /* Instruction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C617F191AB9304C00FC8FBD /* Instruction.cpp */; };
@@ -52,7 +51,6 @@
 		3C617F131AB9302F00FC8FBD /* TransmitInstruction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TransmitInstruction.h; path = inc/TransmitInstruction.h; sourceTree = "<group>"; };
 		3C617F141AB9304C00FC8FBD /* Add.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Add.cpp; path = src/Add.cpp; sourceTree = "<group>"; };
 		3C617F151AB9304C00FC8FBD /* ArithmeticInstruction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ArithmeticInstruction.cpp; path = src/ArithmeticInstruction.cpp; sourceTree = "<group>"; };
-		3C617F161AB9304C00FC8FBD /* Common.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Common.cpp; path = src/Common.cpp; sourceTree = "<group>"; };
 		3C617F171AB9304C00FC8FBD /* Div.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Div.cpp; path = src/Div.cpp; sourceTree = "<group>"; };
 		3C617F181AB9304C00FC8FBD /* DumpLogManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DumpLogManager.cpp; path = src/DumpLogManager.cpp; sourceTree = "<group>"; };
 		3C617F191AB9304C00FC8FBD /* Instruction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Instruction.cpp; path = src/Instruction.cpp; sourceTree = "<group>"; };
@@ -189,7 +187,6 @@
 		3C617F371AB9338A00FC8FBD /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				3C617F161AB9304C00FC8FBD /* Common.cpp */,
 				3C617F081AB9302F00FC8FBD /* Common.h */,
 				3C617F0F1AB9302F00FC8FBD /* Singleton.h */,
 			);
@@ -286,7 +283,6 @@
 				3C617F231AB9304C00FC8FBD /* Div.cpp in Sources */,
 				3C617F281AB9304C00FC8FBD /* Operand.cpp in Sources */,
 				3C617F271AB9304C00FC8FBD /* Mul.cpp in Sources */,
-				3C617F221AB9304C00FC8FBD /* Common.cpp in Sources */,
 				3C617F251AB9304C00FC8FBD /* Instruction.cpp in Sources */,
 				3CF1FB551AB072640064AA2D /* main.cpp in Sources */,
 				3C617F211AB9304C00FC8FBD /* ArithmeticInstruction.cpp in Sources */,
