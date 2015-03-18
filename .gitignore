@@ -32,3 +32,5 @@ Debug
 *.opensdf
 *.ipch
 *.v11.suo
+
+Calculator/*.xcodeproj/project.xcworkspace/xcuserdata/*.xcuserdatad/UserInterfaceState.xcuserstate
