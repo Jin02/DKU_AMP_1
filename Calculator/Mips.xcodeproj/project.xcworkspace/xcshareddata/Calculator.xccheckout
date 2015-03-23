@@ -14,7 +14,7 @@
 		<string>https://github.com/Jin02/DKU_AMP_1.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>FirstAssignment/Calculator.xcodeproj</string>
+	<string>Calculator/Calculator.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>C2C980D6F747BE4BE3F5A3044D9034CD97CD4675</key>
