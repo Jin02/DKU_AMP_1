@@ -2,6 +2,7 @@
 
 #include <array>
 #include <vector>
+#include <map>
 
 #include "Common.h"
 #include "Singleton.h"
@@ -13,10 +14,11 @@
 class System : public Singleton<System>
 {
 private:
-    std::array<int, MAX_DATA_REGISTER_NUM>		_dataRegisters;
+    std::array<int, MAX_DATA_REGISTER_NUM>      _registers;
+    std::map<std::string, int>                  _jumpAddrs;
+    std::vector<Instruction*>                   _instructions;
     
-    std::vector<std::string>                            _inst_reg_string;
-    std::vector<Instruction*>                           _instructions;
+    //또 뭐? 점프요. 아 씨 -_-;
     
 private:
     System(void);
@@ -27,18 +29,13 @@ public:
     void Run(int start);
 
 public:
-    inline void	SetDataToRegister(int index, int data) { _dataRegisters[index] = data; }
-    inline int GetDataFromRegister(int index) { return _dataRegisters[index]; }
+    inline void	SetDataToRegister(int index, int data) { _registers[index] = data; }
+    inline int GetDataFromRegister(int index) { return _registers[index]; }
     
 public:
     void ClearAllDataRegisters();
     void ClearRegister(int index);
     
-    void ClearAllInstruction();
-    void ClearInstruction(int index);
-    
-    void ClearAllInstructionStr();
-    void ClearInstructionStr(int index);
     
     friend class Singleton<System>;
 };
