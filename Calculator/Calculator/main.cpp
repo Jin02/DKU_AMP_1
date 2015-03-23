@@ -13,7 +13,7 @@
 
 int main(int argc, const char * argv[])
 {
-    System::GetInstance()->ParseAssemblyDumpFile("/Users/jin/Desktop/input.txt");
+    System::GetInstance()->ParseAssemblyDumpFile("/Users/jin/Desktop/input.s");
     System::GetInstance()->Run(0);
     DumpLogManager::GetInstance()->WriteFile("/Users/jin/Desktop/result.txt");
     

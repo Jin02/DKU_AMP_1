@@ -14,7 +14,6 @@
 		3C617F251AB9304C00FC8FBD /* Instruction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C617F191AB9304C00FC8FBD /* Instruction.cpp */; };
 		3C617F261AB9304C00FC8FBD /* Move.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C617F1A1AB9304C00FC8FBD /* Move.cpp */; };
 		3C617F271AB9304C00FC8FBD /* Mul.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C617F1B1AB9304C00FC8FBD /* Mul.cpp */; };
-		3C617F281AB9304C00FC8FBD /* Operand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C617F1C1AB9304C00FC8FBD /* Operand.cpp */; };
 		3C617F291AB9304C00FC8FBD /* Sub.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C617F1D1AB9304C00FC8FBD /* Sub.cpp */; };
 		3C617F2A1AB9304C00FC8FBD /* System.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C617F1E1AB9304C00FC8FBD /* System.cpp */; };
 		3C617F2B1AB9304C00FC8FBD /* TransmitInstruction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C617F1F1AB9304C00FC8FBD /* TransmitInstruction.cpp */; };
@@ -56,7 +55,6 @@
 		3C617F191AB9304C00FC8FBD /* Instruction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Instruction.cpp; path = src/Instruction.cpp; sourceTree = "<group>"; };
 		3C617F1A1AB9304C00FC8FBD /* Move.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Move.cpp; path = src/Move.cpp; sourceTree = "<group>"; };
 		3C617F1B1AB9304C00FC8FBD /* Mul.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Mul.cpp; path = src/Mul.cpp; sourceTree = "<group>"; };
-		3C617F1C1AB9304C00FC8FBD /* Operand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Operand.cpp; path = src/Operand.cpp; sourceTree = "<group>"; };
 		3C617F1D1AB9304C00FC8FBD /* Sub.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Sub.cpp; path = src/Sub.cpp; sourceTree = "<group>"; };
 		3C617F1E1AB9304C00FC8FBD /* System.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = System.cpp; path = src/System.cpp; sourceTree = "<group>"; };
 		3C617F1F1AB9304C00FC8FBD /* TransmitInstruction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TransmitInstruction.cpp; path = src/TransmitInstruction.cpp; sourceTree = "<group>"; };
@@ -140,7 +138,6 @@
 		3C617F321AB9318B00FC8FBD /* Operand */ = {
 			isa = PBXGroup;
 			children = (
-				3C617F1C1AB9304C00FC8FBD /* Operand.cpp */,
 				3C617F0E1AB9302F00FC8FBD /* Operand.h */,
 			);
 			name = Operand;
@@ -282,7 +279,6 @@
 				3C617F261AB9304C00FC8FBD /* Move.cpp in Sources */,
 				3C617F241AB9304C00FC8FBD /* DumpLogManager.cpp in Sources */,
 				3C617F231AB9304C00FC8FBD /* Div.cpp in Sources */,
-				3C617F281AB9304C00FC8FBD /* Operand.cpp in Sources */,
 				3C617F271AB9304C00FC8FBD /* Mul.cpp in Sources */,
 				3C617F251AB9304C00FC8FBD /* Instruction.cpp in Sources */,
 				3CF1FB551AB072640064AA2D /* main.cpp in Sources */,

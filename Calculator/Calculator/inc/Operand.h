@@ -21,6 +21,6 @@ public:
     GET_ACCESSOR(Type, Type, _type);
     
 private:
-    int	_value;
-    Type			_type;
+    int         _value;
+    Type		_type;
 };
