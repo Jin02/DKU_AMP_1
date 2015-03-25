@@ -1,164 +1,88 @@
 #include "System.h"
+
 #include <memory.h>
 #include <fstream>
-
-#include "Transmit.h"
-#include "Arithmetic.h"
-
-#include "DumpLogManager.h"
+#include <string>
 
 System::System()
 {
+	std::fill(_processorMemory.begin(), _processorMemory.end(), 0);
+	std::fill(_registers.begin(), _registers.end(), 0);
+
+	SetStackPointer(0x8000);
+	SetReturnAddress(0xffffffff);
 }
 
 System::~System()
 {
-   	ClearAllDataRegisters();
-    ClearAllInstruction();
-    ClearAllInstructionStr();
 }
 
-void System::ClearAllDataRegisters()
+void System::Load(const std::string& path)
 {
-    std::fill(_dataRegisters.begin(), _dataRegisters.end(), 0);
-}
-
-void System::ClearRegister(int index)
-{
-    _dataRegisters[index] = 0;
-}
-
-void System::ParseAssemblyDumpFile(const std::string& dumpFileFullPath)
-{
-    std::ifstream file(dumpFileFullPath);
+	std::ifstream file(path, std::ios::in | std::ios::binary | std::ios::ate);
     ASSERT_COND_MSG(file.is_open() && file.good(), "Error, strange file");
-    
-    auto Tokenize = [](std::vector<std::string>& outTokens, const std::string& str, const std::string& delimiters)
-    {
-        std::string::size_type lastPos = str.find_first_not_of(delimiters, 0);
-        std::string::size_type pos     = str.find_first_of(delimiters, lastPos);
-        
-        while (std::string::npos != pos || std::string::npos != lastPos)
-        {
-            outTokens.push_back(str.substr(lastPos, pos - lastPos));
-            lastPos = str.find_first_not_of(delimiters, pos);
-            pos = str.find_first_of(delimiters, lastPos);
-        }
-    };
-    
-    auto Replace = [](std::string& outString, const std::string& targetStr, const std::string& from, const std::string& to)
-    {
-        outString = targetStr;
-        
-        for(size_t pos = 0;
-            ( pos = targetStr.find(from, pos) ) != std::string::npos;
-            pos += to.length())
-        {
-            outString.replace(pos, from.length(), to);
-        }
-    };
-    
 
-    std::string buff = "";
-    while (std::getline(file, buff))
-    {
-        _inst_reg_string.push_back(buff);
+	int length = file.tellg();
+	file.seekg(0, file.beg);
 
-        // \t, '  ' 를 ' '로 통일. 속도는 신경 쓰지 않음 ㅋ
-        {
-            Replace(buff, buff, "\t", " ");
-            
-            while (1)
-            {
-                size_t pos = buff.find("  ");
-                if(pos != std::string::npos)    buff.replace(pos, 2, " ");
-                else                            break;
-            }
-        }
-        
-        {
-            std::vector<std::string> tokens;
-            Tokenize(tokens, buff, " ");
-            
-            std::vector<Operand> operands;
-            for(int i=1; i<tokens.size(); ++i)
-            {
-                const std::string& operandStr = tokens[i];
-                
-                try
-                {
-                    unsigned long hexValue = std::stoul(operandStr, nullptr, 16);
-                    Operand operand(Operand::Type::Value);
-                    operand.SetData((int)hexValue);
-                    
-                    operands.push_back(operand);
-                }
-                catch(...) // maybe.. register
-                {
-                    ASSERT_COND_MSG(operandStr[0] == 'R', "Error, strange text");
-                    
-                    Operand operand(Operand::Type::Register);
-                    int value = (int)std::stoul(operandStr.c_str()+1, nullptr, 16);
-                    operand.SetData(value);
-                    
-                    operands.push_back(operand);
-                }
-            }
-            
-            const std::string& opCode = tokens[0];
-            if(opCode == "+")
-                _instructions.push_back( new Add(operands) );
-            else if(opCode == "-")
-                _instructions.push_back( new Sub(operands) );
-            else if(opCode == "/")
-                _instructions.push_back( new Div(operands) );
-            else if(opCode == "*")
-                _instructions.push_back( new Mul(operands) );
-            else if(opCode == "M")
-                _instructions.push_back( new Move(operands) );
-        }
-    }
-    
+	unsigned char* buffer = new unsigned char[length];
+	{
+		file.read((char*)buffer, length);
+		std::copy((unsigned int*)buffer, (unsigned int*)&buffer[length - sizeof(unsigned int)], _processorMemory.begin());
+	}
+	delete buffer;
+
     file.close();
+
+	auto IsLittleEndian = []()
+	{
+		union{
+			int a;
+			char b;
+		}Test;
+
+		Test.a = 1;
+		return Test.b;
+	};
+	auto LittleEndianToBigEndian = [](unsigned int x)
+	{
+		return x = ( x >> 24 ) | (( x << 8) & 0x00ff0000 )| ((x >> 8) & 0x0000ff00) | ( x << 24); 
+	};
+
+	if(IsLittleEndian())
+	{
+		for(int i=0; i<length / 4; ++i)
+			_processorMemory[i] = LittleEndianToBigEndian(_processorMemory[i]);
+	}
 }
 
-void System::ClearAllInstruction()
+void System::RunCycle(int procMemIndex)
 {
-    for(auto elem : _instructions)
-        SAFE_DELETE(elem);
+
 }
 
-void System::ClearInstruction(int index)
+void System::Fetch(int procMemIndex)
 {
-    SAFE_DELETE( _instructions[index] );
-    _instructions.erase(_instructions.begin() + index);
+
 }
 
-void System::ClearAllInstructionStr()
+void System::Decode(unsigned int instruction)
 {
-    _inst_reg_string.clear();
+	unsigned int opCode = (instruction & 0xFC000000) >> 26;
+
+	if(opCode == 0) // R
+	{
+	}
+	else if(opCode == (uint)Opcode::Jump || opCode == (uint)Opcode::JumpAndLink) // J
+	{
+	}
+	else // I
+	{
+
+	}
+
 }
 
-void System::ClearInstructionStr(int index)
+void System::Execution()
 {
-    _inst_reg_string.erase(_inst_reg_string.begin() + index);
-}
-
-void System::Run(int start)
-{
-#ifdef USE_OUTPUT_DUMP_LOG
-    DumpLogManager::GetInstance()->AddLog("\tInput\t\t\tOutput\n");
-#endif
-    
-    for(int i = start; i < _instructions.size(); ++i)
-    {
-#ifdef USE_OUTPUT_DUMP_LOG
-    DumpLogManager::GetInstance()->AddLog(_inst_reg_string[i] + "\t\t");
-#endif
-        _instructions[i]->Work();
-    }
-    
-#ifdef USE_OUTPUT_DUMP_LOG
-    DumpLogManager::GetInstance()->Print();
-#endif
 }

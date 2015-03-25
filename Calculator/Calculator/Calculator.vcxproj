@@ -11,36 +11,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="inc\Add.h" />
-    <ClInclude Include="inc\Arithmetic.h" />
-    <ClInclude Include="inc\ArithmeticInstruction.h" />
     <ClInclude Include="inc\Common.h" />
-    <ClInclude Include="inc\Div.h" />
-    <ClInclude Include="inc\DumpLogManager.h" />
-    <ClInclude Include="inc\Instruction.h" />
-    <ClInclude Include="inc\Move.h" />
-    <ClInclude Include="inc\Mul.h" />
-    <ClInclude Include="inc\Operand.h" />
     <ClInclude Include="inc\Singleton.h" />
-    <ClInclude Include="inc\Sub.h" />
     <ClInclude Include="inc\System.h" />
-    <ClInclude Include="inc\Transmit.h" />
-    <ClInclude Include="inc\TransmitInstruction.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="src\Add.cpp" />
-    <ClCompile Include="src\ArithmeticInstruction.cpp" />
-    <ClCompile Include="src\Common.cpp" />
-    <ClCompile Include="src\Div.cpp" />
-    <ClCompile Include="src\DumpLogManager.cpp" />
-    <ClCompile Include="src\Instruction.cpp" />
-    <ClCompile Include="src\Move.cpp" />
-    <ClCompile Include="src\Mul.cpp" />
-    <ClCompile Include="src\Operand.cpp" />
-    <ClCompile Include="src\Sub.cpp" />
     <ClCompile Include="src\System.cpp" />
-    <ClCompile Include="src\TransmitInstruction.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{D37DDF01-D15D-486D-AAF4-EEA4EDD37444}</ProjectGuid>

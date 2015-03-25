@@ -6,39 +6,32 @@
 #include "Common.h"
 #include "Singleton.h"
 
-#include "Instruction.h"
-
-#define MAX_DATA_REGISTER_NUM 32
+//8192 = 0x8000 / 4
+#define MAX_PROCESSOR_MEMORY 8192
 
 class System : public Singleton<System>
 {
 private:
-    std::array<int, MAX_DATA_REGISTER_NUM>		_dataRegisters;
-    
-    std::vector<std::string>                            _inst_reg_string;
-    std::vector<Instruction*>                           _instructions;
-    
+    std::array<unsigned int, MAX_PROCESSOR_MEMORY>	_processorMemory;
+	std::array<unsigned int, 32>					_registers;
+
 private:
     System(void);
     ~System(void);
     
 public:
-    void ParseAssemblyDumpFile(const std::string& dumpFileFullPath);
-    void Run(int start);
+    void Load(const std::string& path);
+
+	void RunCycle(int procMemIndex);
+	void Fetch(int procMemIndex);
+	void Decode(unsigned int instruction);
+	void Execution();
 
 public:
-    inline void	SetDataToRegister(int index, int data) { _dataRegisters[index] = data; }
-    inline int GetDataFromRegister(int index) { return _dataRegisters[index]; }
-    
-public:
-    void ClearAllDataRegisters();
-    void ClearRegister(int index);
-    
-    void ClearAllInstruction();
-    void ClearInstruction(int index);
-    
-    void ClearAllInstructionStr();
-    void ClearInstructionStr(int index);
-    
+	GET_SET_ACCESSOR(ReturnAddress, unsigned int, _registers[31]);
+	GET_SET_ACCESSOR(FramePointer,	unsigned int, _registers[30]);
+	GET_SET_ACCESSOR(StackPointer,	unsigned int, _registers[29]);
+	GET_SET_ACCESSOR(GlobalPointer, unsigned int, _registers[28]);
+
     friend class Singleton<System>;
 };

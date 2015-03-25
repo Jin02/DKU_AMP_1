@@ -9,13 +9,11 @@
 #include <stdio.h>
 #include <string>
 #include "System.h"
-#include "DumpLogManager.h"
+
 
 int main(int argc, const char * argv[])
 {
-    System::GetInstance()->ParseAssemblyDumpFile("/Users/jin/Desktop/input.txt");
-    System::GetInstance()->Run(0);
-    DumpLogManager::GetInstance()->WriteFile("/Users/jin/Desktop/result.txt");
-    
+	System::GetInstance()->Load("input2.bin");
+	System::GetInstance()->Decode(0x27bdffd8);
     return 0;
 }
