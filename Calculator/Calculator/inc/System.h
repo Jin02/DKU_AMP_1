@@ -23,7 +23,7 @@ public:
     void Load(const std::string& path);
 
 	void RunCycle(int procMemIndex);
-	void Fetch(int procMemIndex);
+	inline unsigned int Fetch(int procMemIndex) { return _processorMemory[procMemIndex]; }
 	void Decode(unsigned int instruction);
 	void Execution();
 

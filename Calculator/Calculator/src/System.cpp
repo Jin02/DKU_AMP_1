@@ -58,11 +58,7 @@ void System::Load(const std::string& path)
 
 void System::RunCycle(int procMemIndex)
 {
-
-}
-
-void System::Fetch(int procMemIndex)
-{
+	unsigned int inst = Fetch(procMemIndex);
 
 }
 
@@ -72,9 +68,25 @@ void System::Decode(unsigned int instruction)
 
 	if(opCode == 0) // R
 	{
+		unsigned int funct = (instruction & 0x0000003F);
+		
+		if(funct == (uint)Funct::Add){}
+		else if(funct == (uint)Funct::AddUnsigned){}
+		else if(funct == (uint)Funct::And){}
+		else if(funct == (uint)Funct::JumpRegister){}
+		else if(funct == (uint)Funct::Nor){}
+		else if(funct == (uint)Funct::Or){}
+		else if(funct == (uint)Funct::SetLessThan){}
+		else if(funct == (uint)Funct::SetLessThanUnsigned){}
+		else if(funct == (uint)Funct::ShiftLeftLogical){}
+		else if(funct == (uint)Funct::ShiftRightLogical){}
+		else if(funct == (uint)Funct::Subtract){}
+		else if(funct == (uint)Funct::SubtractUnsigned){}
+		else ASSERT_MSG("can not support r format instruction");
 	}
 	else if(opCode == (uint)Opcode::Jump || opCode == (uint)Opcode::JumpAndLink) // J
 	{
+
 	}
 	else // I
 	{
