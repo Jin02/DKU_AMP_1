@@ -14,7 +14,7 @@ AddUnsigned::~AddUnsigned(void)
     
 }
 
-unsigned int AddUnsigned::Instruct(unsigned int rs, unsigned int rt)
+unsigned int AddUnsigned::Instruct(unsigned int rsData, unsigned int rtData)
 {
-    return rs + rt;
+    return rsData + rtData;
 }

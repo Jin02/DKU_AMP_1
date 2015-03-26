@@ -12,6 +12,8 @@
 		3C34F2351AC445FA00A151C6 /* Subtract.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C34F2341AC445FA00A151C6 /* Subtract.cpp */; };
 		3C34F2381AC4471600A151C6 /* And.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C34F2361AC4471600A151C6 /* And.cpp */; };
 		3C34F2391AC4471600A151C6 /* AndImmediate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C34F2371AC4471600A151C6 /* AndImmediate.cpp */; };
+		3C34F2411AC44A6C00A151C6 /* Or.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C34F23F1AC44A6C00A151C6 /* Or.cpp */; };
+		3C34F2431AC44B2400A151C6 /* OrImmediate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C34F2421AC44B2400A151C6 /* OrImmediate.cpp */; };
 		3C617F2A1AB9304C00FC8FBD /* System.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C617F1E1AB9304C00FC8FBD /* System.cpp */; };
 		3CE7A43B1AC40E7A0001E0CE /* Instruction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3CE7A43A1AC40E7A0001E0CE /* Instruction.cpp */; };
 		3CE7A43D1AC40E890001E0CE /* RFormatInstruction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3CE7A43C1AC40E890001E0CE /* RFormatInstruction.cpp */; };
@@ -43,6 +45,10 @@
 		3C34F2371AC4471600A151C6 /* AndImmediate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AndImmediate.cpp; path = src/AndImmediate.cpp; sourceTree = "<group>"; };
 		3C34F23A1AC4473400A151C6 /* And.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = And.h; path = inc/And.h; sourceTree = "<group>"; };
 		3C34F23B1AC4473400A151C6 /* AndImmediate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AndImmediate.h; path = inc/AndImmediate.h; sourceTree = "<group>"; };
+		3C34F23D1AC44A5E00A151C6 /* Or.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Or.h; path = inc/Or.h; sourceTree = "<group>"; };
+		3C34F23F1AC44A6C00A151C6 /* Or.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Or.cpp; path = src/Or.cpp; sourceTree = "<group>"; };
+		3C34F2421AC44B2400A151C6 /* OrImmediate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OrImmediate.cpp; path = src/OrImmediate.cpp; sourceTree = "<group>"; };
+		3C34F2441AC44B2F00A151C6 /* OrImmediate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = OrImmediate.h; path = inc/OrImmediate.h; sourceTree = "<group>"; };
 		3C617F081AB9302F00FC8FBD /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Common.h; path = inc/Common.h; sourceTree = "<group>"; };
 		3C617F0F1AB9302F00FC8FBD /* Singleton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Singleton.h; path = inc/Singleton.h; sourceTree = "<group>"; };
 		3C617F111AB9302F00FC8FBD /* System.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = System.h; path = inc/System.h; sourceTree = "<group>"; };
@@ -103,6 +109,8 @@
 		3CE7A4421AC422DC0001E0CE /* R */ = {
 			isa = PBXGroup;
 			children = (
+				3C34F23F1AC44A6C00A151C6 /* Or.cpp */,
+				3C34F23D1AC44A5E00A151C6 /* Or.h */,
 				3C34F2361AC4471600A151C6 /* And.cpp */,
 				3C34F23A1AC4473400A151C6 /* And.h */,
 				3C34F2341AC445FA00A151C6 /* Subtract.cpp */,
@@ -118,6 +126,8 @@
 		3CE7A4431AC422E10001E0CE /* I */ = {
 			isa = PBXGroup;
 			children = (
+				3C34F2421AC44B2400A151C6 /* OrImmediate.cpp */,
+				3C34F2441AC44B2F00A151C6 /* OrImmediate.h */,
 				3C34F2371AC4471600A151C6 /* AndImmediate.cpp */,
 				3C34F23B1AC4473400A151C6 /* AndImmediate.h */,
 				3C34F22E1AC442A100A151C6 /* AddImmediate.cpp */,
@@ -221,7 +231,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C34F2411AC44A6C00A151C6 /* Or.cpp in Sources */,
 				3CE7A4481AC430C50001E0CE /* IFormatInstruction.cpp in Sources */,
+				3C34F2431AC44B2400A151C6 /* OrImmediate.cpp in Sources */,
 				3C34F22F1AC442A100A151C6 /* AddImmediate.cpp in Sources */,
 				3C34F2271AC4395C00A151C6 /* Add.cpp in Sources */,
 				3C617F2A1AB9304C00FC8FBD /* System.cpp in Sources */,

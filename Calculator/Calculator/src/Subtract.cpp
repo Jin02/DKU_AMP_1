@@ -12,7 +12,7 @@ SubtractUnsigned::~SubtractUnsigned(void)
     
 }
 
-unsigned int SubtractUnsigned::Instruct(unsigned int rs, unsigned int rt)
+unsigned int SubtractUnsigned::Instruct(unsigned int rsData, unsigned int rtData)
 {
-    return rs - rt;
+    return rsData - rtData;
 }

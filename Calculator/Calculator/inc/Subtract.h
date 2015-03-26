@@ -11,7 +11,7 @@ public:
     virtual ~SubtractUnsigned(void);
     
 public:
-    virtual unsigned int Instruct(unsigned int rs, unsigned int rt);
+    virtual unsigned int Instruct(unsigned int rsData, unsigned int rtData);
 };
 
 typedef SubtractUnsigned Subtract;

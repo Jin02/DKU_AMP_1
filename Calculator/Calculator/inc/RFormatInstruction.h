@@ -13,7 +13,7 @@ public:
     virtual ~RFormatInstruction(void);
     
 protected:
-    virtual unsigned int Instruct(unsigned int rs, unsigned int rt) = 0;
+    virtual unsigned int Instruct(unsigned int rsData, unsigned int rtData) = 0;
     
 public:
     virtual void Execution();
