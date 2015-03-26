@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		3C34F2271AC4395C00A151C6 /* Add.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C34F2261AC4395C00A151C6 /* Add.cpp */; };
 		3C34F22F1AC442A100A151C6 /* AddImmediate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C34F22E1AC442A100A151C6 /* AddImmediate.cpp */; };
+		3C34F2351AC445FA00A151C6 /* Subtract.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C34F2341AC445FA00A151C6 /* Subtract.cpp */; };
+		3C34F2381AC4471600A151C6 /* And.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C34F2361AC4471600A151C6 /* And.cpp */; };
+		3C34F2391AC4471600A151C6 /* AndImmediate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C34F2371AC4471600A151C6 /* AndImmediate.cpp */; };
 		3C617F2A1AB9304C00FC8FBD /* System.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C617F1E1AB9304C00FC8FBD /* System.cpp */; };
 		3CE7A43B1AC40E7A0001E0CE /* Instruction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3CE7A43A1AC40E7A0001E0CE /* Instruction.cpp */; };
 		3CE7A43D1AC40E890001E0CE /* RFormatInstruction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3CE7A43C1AC40E890001E0CE /* RFormatInstruction.cpp */; };
@@ -34,6 +37,12 @@
 		3C34F2261AC4395C00A151C6 /* Add.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Add.cpp; path = src/Add.cpp; sourceTree = "<group>"; };
 		3C34F22E1AC442A100A151C6 /* AddImmediate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AddImmediate.cpp; path = src/AddImmediate.cpp; sourceTree = "<group>"; };
 		3C34F2301AC442A600A151C6 /* AddImmediate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AddImmediate.h; path = inc/AddImmediate.h; sourceTree = "<group>"; };
+		3C34F2331AC445E800A151C6 /* Subtract.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Subtract.h; path = inc/Subtract.h; sourceTree = "<group>"; };
+		3C34F2341AC445FA00A151C6 /* Subtract.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Subtract.cpp; path = src/Subtract.cpp; sourceTree = "<group>"; };
+		3C34F2361AC4471600A151C6 /* And.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = And.cpp; path = src/And.cpp; sourceTree = "<group>"; };
+		3C34F2371AC4471600A151C6 /* AndImmediate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AndImmediate.cpp; path = src/AndImmediate.cpp; sourceTree = "<group>"; };
+		3C34F23A1AC4473400A151C6 /* And.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = And.h; path = inc/And.h; sourceTree = "<group>"; };
+		3C34F23B1AC4473400A151C6 /* AndImmediate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AndImmediate.h; path = inc/AndImmediate.h; sourceTree = "<group>"; };
 		3C617F081AB9302F00FC8FBD /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Common.h; path = inc/Common.h; sourceTree = "<group>"; };
 		3C617F0F1AB9302F00FC8FBD /* Singleton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Singleton.h; path = inc/Singleton.h; sourceTree = "<group>"; };
 		3C617F111AB9302F00FC8FBD /* System.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = System.h; path = inc/System.h; sourceTree = "<group>"; };
@@ -61,40 +70,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3C34F2231AC4393E00A151C6 /* Arithmetic */ = {
-			isa = PBXGroup;
-			children = (
-				3C34F2311AC4444200A151C6 /* Conditional */,
-				3C34F2241AC4394400A151C6 /* Add */,
-			);
-			name = Arithmetic;
-			sourceTree = "<group>";
-		};
-		3C34F2241AC4394400A151C6 /* Add */ = {
-			isa = PBXGroup;
-			children = (
-				3C34F2261AC4395C00A151C6 /* Add.cpp */,
-				3C34F2251AC4394D00A151C6 /* Add.h */,
-			);
-			name = Add;
-			sourceTree = "<group>";
-		};
-		3C34F2281AC4420400A151C6 /* Add */ = {
-			isa = PBXGroup;
-			children = (
-				3C34F22E1AC442A100A151C6 /* AddImmediate.cpp */,
-				3C34F2301AC442A600A151C6 /* AddImmediate.h */,
-			);
-			name = Add;
-			sourceTree = "<group>";
-		};
-		3C34F2311AC4444200A151C6 /* Conditional */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Conditional;
-			sourceTree = "<group>";
-		};
 		3C617F2C1AB9305900FC8FBD /* Instruction */ = {
 			isa = PBXGroup;
 			children = (
@@ -128,9 +103,14 @@
 		3CE7A4421AC422DC0001E0CE /* R */ = {
 			isa = PBXGroup;
 			children = (
-				3C34F2231AC4393E00A151C6 /* Arithmetic */,
-				3CE7A4401AC40F030001E0CE /* RFormatInstruction.h */,
+				3C34F2361AC4471600A151C6 /* And.cpp */,
+				3C34F23A1AC4473400A151C6 /* And.h */,
+				3C34F2341AC445FA00A151C6 /* Subtract.cpp */,
+				3C34F2331AC445E800A151C6 /* Subtract.h */,
+				3C34F2261AC4395C00A151C6 /* Add.cpp */,
+				3C34F2251AC4394D00A151C6 /* Add.h */,
 				3CE7A43C1AC40E890001E0CE /* RFormatInstruction.cpp */,
+				3CE7A4401AC40F030001E0CE /* RFormatInstruction.h */,
 			);
 			name = R;
 			sourceTree = "<group>";
@@ -138,7 +118,10 @@
 		3CE7A4431AC422E10001E0CE /* I */ = {
 			isa = PBXGroup;
 			children = (
-				3C34F2281AC4420400A151C6 /* Add */,
+				3C34F2371AC4471600A151C6 /* AndImmediate.cpp */,
+				3C34F23B1AC4473400A151C6 /* AndImmediate.h */,
+				3C34F22E1AC442A100A151C6 /* AddImmediate.cpp */,
+				3C34F2301AC442A600A151C6 /* AddImmediate.h */,
 				3CE7A4461AC430C50001E0CE /* IFormatInstruction.cpp */,
 				3CE7A4441AC430A90001E0CE /* IFormatInstruction.h */,
 			);
@@ -242,6 +225,9 @@
 				3C34F22F1AC442A100A151C6 /* AddImmediate.cpp in Sources */,
 				3C34F2271AC4395C00A151C6 /* Add.cpp in Sources */,
 				3C617F2A1AB9304C00FC8FBD /* System.cpp in Sources */,
+				3C34F2351AC445FA00A151C6 /* Subtract.cpp in Sources */,
+				3C34F2381AC4471600A151C6 /* And.cpp in Sources */,
+				3C34F2391AC4471600A151C6 /* AndImmediate.cpp in Sources */,
 				3CE7A4491AC430C50001E0CE /* JFormatInstruction.cpp in Sources */,
 				3CF1FB551AB072640064AA2D /* main.cpp in Sources */,
 				3CE7A43D1AC40E890001E0CE /* RFormatInstruction.cpp in Sources */,

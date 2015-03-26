@@ -13,7 +13,7 @@ public:
     virtual ~IFormatInstruction(void);
     
 protected:
-    virtual unsigned int Instruct(unsigned int rs, unsigned int rt, unsigned int immediate) = 0;
+    virtual void Instruct(unsigned int rs, unsigned int rt, unsigned int immediate) = 0;
     
 public:
     virtual void Execution();

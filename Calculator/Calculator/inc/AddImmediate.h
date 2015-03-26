@@ -11,7 +11,7 @@ public:
     virtual ~AddImmediateUnsigned(void);
     
 public:
-    virtual unsigned int Instruct(unsigned int rs, unsigned int rt, unsigned int immediate);
+    virtual void Instruct(unsigned int rs, unsigned int rt, unsigned int immediate);
 };
 
 typedef AddImmediateUnsigned AddImmediate;
