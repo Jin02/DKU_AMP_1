@@ -1,25 +1,41 @@
 #include "Add.h"
 #include "System.h"
 
+/** Add Unsigned **/
 
-Add::Add(TypeFlag flag, const std::vector<Operand>& operands)
-    : ArithmeticInstruction(operands), _flag(flag)
+AddUnsigned::AddUnsigned(unsigned int rs, unsigned int rt, unsigned int rd)
+    : RFormatInstruction(rs, rt, rd)
 {
     
 }
 
-Add::~Add(void)
+AddUnsigned::~AddUnsigned(void)
 {
+    
 }
 
-int Add::Instruct(const Operand& rs, const Operand& rt)
+unsigned int AddUnsigned::Instruct(unsigned int rs, unsigned int rt)
 {
-    bool immediate = (_flag & (unsigned char)Type::Immediate) != 0;
-    if( immediate )
-    {
-        if(rt.GetType() == Operand::Type::Value)
-            ASSERT_MSG("third operand must SignExtImm");
-    }
-    
-    return GetData(rs) + GetData(rt);
+    return rs + rt;
 }
+
+/** Add **/
+
+//Add::Add(unsigned int rs, unsigned int rt, unsigned int rd)
+//: RFormatInstruction(rs, rt, rd)
+//{
+//    
+//}
+//
+//Add::~Add(void)
+//{
+//    
+//}
+//
+//unsigned int Add::Instruct(unsigned int rs, unsigned int rt)
+//{
+//    int signedRs = rs;
+//    int signedRt = rt;
+//    
+//    return rs + rt;
+//}

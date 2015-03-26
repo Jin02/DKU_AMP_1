@@ -37,6 +37,7 @@ enum class Opcode : unsigned int
 	StoreByte						= 0x28,
 	StoreConditional				= 0x38,
 	StoreHalfword					= 0x29,
+	StoreWord                       = 0x2b,
 	Add								= 0x00,
 	AddUnsigned						= 0x00,
 	And								= 0x00,

@@ -13,7 +13,11 @@
 
 int main(int argc, const char * argv[])
 {
+    int test = -1234;
+    unsigned int test2 = test;
+    int test3 = test2;
+    
+    
 	System::GetInstance()->Load("input2.bin");
-	System::GetInstance()->Decode(0x27bdffd8);
     return 0;
 }

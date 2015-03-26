@@ -1,27 +1,30 @@
 #pragma once
 
-#include "ArithmeticInstruction.h"
+#include "RFormatInstruction.h"
 
-class Add : public ArithmeticInstruction
+class AddUnsigned : public RFormatInstruction
 {
-public:
-    enum class Type : unsigned char
-    {
-        None        = 0,
-        Immediate   = 1,
-        Unsigned    = 2
-    };
-    
-    // involved Add::Type
-    typedef unsigned char TypeFlag;
-    
 private:
-    TypeFlag        _flag;
     
 public:
-    Add(TypeFlag flag, const std::vector<Operand>& operands);
-    virtual ~Add(void);
+    AddUnsigned(unsigned int rs, unsigned int rt, unsigned int rd);
+    virtual ~AddUnsigned(void);
     
 public:
-    virtual int Instruct(const Operand& rs, const Operand& rt);
+    virtual unsigned int Instruct(unsigned int rs, unsigned int rt);
 };
+
+typedef AddUnsigned Add;
+
+//class Add : public RFormatInstruction
+//{
+//private:
+//    
+//public:
+//    Add(unsigned int rs, unsigned int rt, unsigned int rd);
+//    virtual ~Add(void);
+//    
+//public:
+//    virtual unsigned  int Instruct(unsigned int rs, unsigned int rt);
+//    
+//};

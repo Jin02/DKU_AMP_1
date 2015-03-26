@@ -1,0 +1,20 @@
+#pragma once
+
+#include "Instruction.h"
+
+
+class RFormatInstruction : public Instruction
+{
+private:
+    unsigned int _rs, _rt, _rd;
+    
+public:
+    RFormatInstruction(unsigned int rs, unsigned int rt, unsigned int rd);
+    virtual ~RFormatInstruction(void);
+    
+protected:
+    virtual unsigned int Instruct(unsigned int rs, unsigned int rt) = 0;
+    
+public:
+    virtual void Execution();
+};

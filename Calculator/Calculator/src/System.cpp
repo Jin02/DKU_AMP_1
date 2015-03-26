@@ -4,7 +4,9 @@
 #include <fstream>
 #include <string>
 
-System::System()
+#include "JFormatInstruction.h"
+
+System::System() : _programCounter(0)
 {
 	std::fill(_processorMemory.begin(), _processorMemory.end(), 0);
 	std::fill(_registers.begin(), _registers.end(), 0);
@@ -22,7 +24,7 @@ void System::Load(const std::string& path)
 	std::ifstream file(path, std::ios::in | std::ios::binary | std::ios::ate);
     ASSERT_COND_MSG(file.is_open() && file.good(), "Error, strange file");
 
-	int length = file.tellg();
+	long long length = file.tellg();
 	file.seekg(0, file.beg);
 
 	unsigned char* buffer = new unsigned char[length];
@@ -56,13 +58,18 @@ void System::Load(const std::string& path)
 	}
 }
 
-void System::RunCycle(int procMemIndex)
+void System::RunCycle()
 {
-	unsigned int inst = Fetch(procMemIndex);
 
 }
 
-void System::Decode(unsigned int instruction)
+unsigned int System::Fetch()
+{
+    ASSERT_COND_MSG( (_programCounter % 4) == 0, "Error, pc must has word multiplier" );
+    return _processorMemory[_programCounter / 4];
+}
+
+Instruction* System::Decode(unsigned int instruction)
 {
 	unsigned int opCode = (instruction & 0xFC000000) >> 26;
 
@@ -82,17 +89,39 @@ void System::Decode(unsigned int instruction)
 		else if(funct == (uint)Funct::ShiftRightLogical){}
 		else if(funct == (uint)Funct::Subtract){}
 		else if(funct == (uint)Funct::SubtractUnsigned){}
-		else ASSERT_MSG("can not support r format instruction");
+		else ASSERT_MSG("can not support r format this instruction");
 	}
 	else if(opCode == (uint)Opcode::Jump || opCode == (uint)Opcode::JumpAndLink) // J
 	{
-
+        unsigned int address = instruction & 0x03FFFFFF;
+        
+        if(opCode == (uint)Opcode::Jump)                return new Jump(address);
+        else if(opCode == (uint)Opcode::JumpAndLink)    return new JumpAndLink(address);
+        else ASSERT_MSG("cant support j foramt this instruction");
 	}
 	else // I
 	{
+        if(opCode == (uint)Opcode::AddImmediate){}
+        else if(opCode == (uint)Opcode::AddImmediateUnsigned){}
+        else if(opCode == (uint)Opcode::AndImmediate){}
+        else if(opCode == (uint)Opcode::BranchOnEqual){}
+        else if(opCode == (uint)Opcode::BranchOnNotEqual){}
+        else if(opCode == (uint)Opcode::LoadByteUnsigned){}
+        else if(opCode == (uint)Opcode::LoadHalfwordUnsigned){}
+        else if(opCode == (uint)Opcode::LoadLinked){}
+        else if(opCode == (uint)Opcode::LoadUpperImmediate){}
+        else if(opCode == (uint)Opcode::LoadWord){}
+        else if(opCode == (uint)Opcode::OrImmediate){}
+        else if(opCode == (uint)Opcode::SetLessThanImmediate){}
+        else if(opCode == (uint)Opcode::SetLessThanImmediateUnsigned){}
+        else if(opCode == (uint)Opcode::StoreByte){}
+        else if(opCode == (uint)Opcode::StoreConditional){}
+        else if(opCode == (uint)Opcode::StoreHalfword){}
+        else if(opCode == (uint)Opcode::StoreWord){}
+        else ASSERT_MSG("cant support i foramt this inst");
+    }
 
-	}
-
+    return nullptr;
 }
 
 void System::Execution()

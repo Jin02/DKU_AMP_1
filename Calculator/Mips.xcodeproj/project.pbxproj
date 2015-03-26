@@ -7,7 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C34F2271AC4395C00A151C6 /* Add.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C34F2261AC4395C00A151C6 /* Add.cpp */; };
+		3C34F22F1AC442A100A151C6 /* AddImmediate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C34F22E1AC442A100A151C6 /* AddImmediate.cpp */; };
 		3C617F2A1AB9304C00FC8FBD /* System.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C617F1E1AB9304C00FC8FBD /* System.cpp */; };
+		3CE7A43B1AC40E7A0001E0CE /* Instruction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3CE7A43A1AC40E7A0001E0CE /* Instruction.cpp */; };
+		3CE7A43D1AC40E890001E0CE /* RFormatInstruction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3CE7A43C1AC40E890001E0CE /* RFormatInstruction.cpp */; };
+		3CE7A4481AC430C50001E0CE /* IFormatInstruction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3CE7A4461AC430C50001E0CE /* IFormatInstruction.cpp */; };
+		3CE7A4491AC430C50001E0CE /* JFormatInstruction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3CE7A4471AC430C50001E0CE /* JFormatInstruction.cpp */; };
 		3CF1FB551AB072640064AA2D /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3CF1FB541AB072640064AA2D /* main.cpp */; };
 /* End PBXBuildFile section */
 
@@ -24,11 +30,22 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3C34F2251AC4394D00A151C6 /* Add.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Add.h; path = inc/Add.h; sourceTree = "<group>"; };
+		3C34F2261AC4395C00A151C6 /* Add.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Add.cpp; path = src/Add.cpp; sourceTree = "<group>"; };
+		3C34F22E1AC442A100A151C6 /* AddImmediate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AddImmediate.cpp; path = src/AddImmediate.cpp; sourceTree = "<group>"; };
+		3C34F2301AC442A600A151C6 /* AddImmediate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AddImmediate.h; path = inc/AddImmediate.h; sourceTree = "<group>"; };
 		3C617F081AB9302F00FC8FBD /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Common.h; path = inc/Common.h; sourceTree = "<group>"; };
-		3C617F0E1AB9302F00FC8FBD /* Operand.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Operand.h; path = inc/Operand.h; sourceTree = "<group>"; };
 		3C617F0F1AB9302F00FC8FBD /* Singleton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Singleton.h; path = inc/Singleton.h; sourceTree = "<group>"; };
 		3C617F111AB9302F00FC8FBD /* System.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = System.h; path = inc/System.h; sourceTree = "<group>"; };
 		3C617F1E1AB9304C00FC8FBD /* System.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = System.cpp; path = src/System.cpp; sourceTree = "<group>"; };
+		3CE7A43A1AC40E7A0001E0CE /* Instruction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Instruction.cpp; path = src/Instruction.cpp; sourceTree = "<group>"; };
+		3CE7A43C1AC40E890001E0CE /* RFormatInstruction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RFormatInstruction.cpp; path = src/RFormatInstruction.cpp; sourceTree = "<group>"; };
+		3CE7A4401AC40F030001E0CE /* RFormatInstruction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RFormatInstruction.h; path = inc/RFormatInstruction.h; sourceTree = "<group>"; };
+		3CE7A4411AC40F030001E0CE /* Instruction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Instruction.h; path = inc/Instruction.h; sourceTree = "<group>"; };
+		3CE7A4441AC430A90001E0CE /* IFormatInstruction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IFormatInstruction.h; path = inc/IFormatInstruction.h; sourceTree = "<group>"; };
+		3CE7A4451AC430A90001E0CE /* JFormatInstruction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = JFormatInstruction.h; path = inc/JFormatInstruction.h; sourceTree = "<group>"; };
+		3CE7A4461AC430C50001E0CE /* IFormatInstruction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IFormatInstruction.cpp; path = src/IFormatInstruction.cpp; sourceTree = "<group>"; };
+		3CE7A4471AC430C50001E0CE /* JFormatInstruction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = JFormatInstruction.cpp; path = src/JFormatInstruction.cpp; sourceTree = "<group>"; };
 		3CF1FB511AB072640064AA2D /* Mips */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Mips; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CF1FB541AB072640064AA2D /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -44,20 +61,50 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3C34F2231AC4393E00A151C6 /* Arithmetic */ = {
+			isa = PBXGroup;
+			children = (
+				3C34F2311AC4444200A151C6 /* Conditional */,
+				3C34F2241AC4394400A151C6 /* Add */,
+			);
+			name = Arithmetic;
+			sourceTree = "<group>";
+		};
+		3C34F2241AC4394400A151C6 /* Add */ = {
+			isa = PBXGroup;
+			children = (
+				3C34F2261AC4395C00A151C6 /* Add.cpp */,
+				3C34F2251AC4394D00A151C6 /* Add.h */,
+			);
+			name = Add;
+			sourceTree = "<group>";
+		};
+		3C34F2281AC4420400A151C6 /* Add */ = {
+			isa = PBXGroup;
+			children = (
+				3C34F22E1AC442A100A151C6 /* AddImmediate.cpp */,
+				3C34F2301AC442A600A151C6 /* AddImmediate.h */,
+			);
+			name = Add;
+			sourceTree = "<group>";
+		};
+		3C34F2311AC4444200A151C6 /* Conditional */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Conditional;
+			sourceTree = "<group>";
+		};
 		3C617F2C1AB9305900FC8FBD /* Instruction */ = {
 			isa = PBXGroup;
 			children = (
-				3C617F321AB9318B00FC8FBD /* Operand */,
+				3CE7A44A1AC430C80001E0CE /* J */,
+				3CE7A4431AC422E10001E0CE /* I */,
+				3CE7A4421AC422DC0001E0CE /* R */,
+				3CE7A4411AC40F030001E0CE /* Instruction.h */,
+				3CE7A43A1AC40E7A0001E0CE /* Instruction.cpp */,
 			);
 			name = Instruction;
-			sourceTree = "<group>";
-		};
-		3C617F321AB9318B00FC8FBD /* Operand */ = {
-			isa = PBXGroup;
-			children = (
-				3C617F0E1AB9302F00FC8FBD /* Operand.h */,
-			);
-			name = Operand;
 			sourceTree = "<group>";
 		};
 		3C617F351AB9324900FC8FBD /* System */ = {
@@ -76,6 +123,35 @@
 				3C617F0F1AB9302F00FC8FBD /* Singleton.h */,
 			);
 			name = Common;
+			sourceTree = "<group>";
+		};
+		3CE7A4421AC422DC0001E0CE /* R */ = {
+			isa = PBXGroup;
+			children = (
+				3C34F2231AC4393E00A151C6 /* Arithmetic */,
+				3CE7A4401AC40F030001E0CE /* RFormatInstruction.h */,
+				3CE7A43C1AC40E890001E0CE /* RFormatInstruction.cpp */,
+			);
+			name = R;
+			sourceTree = "<group>";
+		};
+		3CE7A4431AC422E10001E0CE /* I */ = {
+			isa = PBXGroup;
+			children = (
+				3C34F2281AC4420400A151C6 /* Add */,
+				3CE7A4461AC430C50001E0CE /* IFormatInstruction.cpp */,
+				3CE7A4441AC430A90001E0CE /* IFormatInstruction.h */,
+			);
+			name = I;
+			sourceTree = "<group>";
+		};
+		3CE7A44A1AC430C80001E0CE /* J */ = {
+			isa = PBXGroup;
+			children = (
+				3CE7A4471AC430C50001E0CE /* JFormatInstruction.cpp */,
+				3CE7A4451AC430A90001E0CE /* JFormatInstruction.h */,
+			);
+			name = J;
 			sourceTree = "<group>";
 		};
 		3CF1FB481AB072640064AA2D = {
@@ -162,8 +238,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CE7A4481AC430C50001E0CE /* IFormatInstruction.cpp in Sources */,
+				3C34F22F1AC442A100A151C6 /* AddImmediate.cpp in Sources */,
+				3C34F2271AC4395C00A151C6 /* Add.cpp in Sources */,
 				3C617F2A1AB9304C00FC8FBD /* System.cpp in Sources */,
+				3CE7A4491AC430C50001E0CE /* JFormatInstruction.cpp in Sources */,
 				3CF1FB551AB072640064AA2D /* main.cpp in Sources */,
+				3CE7A43D1AC40E890001E0CE /* RFormatInstruction.cpp in Sources */,
+				3CE7A43B1AC40E7A0001E0CE /* Instruction.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
