@@ -5,7 +5,7 @@
 
 class RFormatInstruction : public Instruction
 {
-private:
+protected:
     unsigned int _rs, _rt, _rd;
     
 public:

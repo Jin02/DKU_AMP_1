@@ -14,6 +14,11 @@
 		3C34F2391AC4471600A151C6 /* AndImmediate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C34F2371AC4471600A151C6 /* AndImmediate.cpp */; };
 		3C34F2411AC44A6C00A151C6 /* Or.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C34F23F1AC44A6C00A151C6 /* Or.cpp */; };
 		3C34F2431AC44B2400A151C6 /* OrImmediate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C34F2421AC44B2400A151C6 /* OrImmediate.cpp */; };
+		3C34F2471AC44EDD00A151C6 /* JumpRegister.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C34F2461AC44EDD00A151C6 /* JumpRegister.cpp */; };
+		3C34F24A1AC4500600A151C6 /* SetLessThan.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C34F2491AC4500600A151C6 /* SetLessThan.cpp */; };
+		3C34F24D1AC450A700A151C6 /* SetLessThanImmediate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C34F24C1AC450A700A151C6 /* SetLessThanImmediate.cpp */; };
+		3C34F2501AC452F000A151C6 /* ShiftLeftLogical.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C34F24E1AC452F000A151C6 /* ShiftLeftLogical.cpp */; };
+		3C34F2511AC452F000A151C6 /* ShiftRightLogical.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C34F24F1AC452F000A151C6 /* ShiftRightLogical.cpp */; };
 		3C617F2A1AB9304C00FC8FBD /* System.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C617F1E1AB9304C00FC8FBD /* System.cpp */; };
 		3CE7A43B1AC40E7A0001E0CE /* Instruction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3CE7A43A1AC40E7A0001E0CE /* Instruction.cpp */; };
 		3CE7A43D1AC40E890001E0CE /* RFormatInstruction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3CE7A43C1AC40E890001E0CE /* RFormatInstruction.cpp */; };
@@ -49,6 +54,16 @@
 		3C34F23F1AC44A6C00A151C6 /* Or.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Or.cpp; path = src/Or.cpp; sourceTree = "<group>"; };
 		3C34F2421AC44B2400A151C6 /* OrImmediate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OrImmediate.cpp; path = src/OrImmediate.cpp; sourceTree = "<group>"; };
 		3C34F2441AC44B2F00A151C6 /* OrImmediate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = OrImmediate.h; path = inc/OrImmediate.h; sourceTree = "<group>"; };
+		3C34F2451AC44ED100A151C6 /* JumpRegister.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = JumpRegister.h; path = inc/JumpRegister.h; sourceTree = "<group>"; };
+		3C34F2461AC44EDD00A151C6 /* JumpRegister.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = JumpRegister.cpp; path = src/JumpRegister.cpp; sourceTree = "<group>"; };
+		3C34F2481AC44FFC00A151C6 /* SetLessThan.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SetLessThan.h; path = inc/SetLessThan.h; sourceTree = "<group>"; };
+		3C34F2491AC4500600A151C6 /* SetLessThan.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SetLessThan.cpp; path = src/SetLessThan.cpp; sourceTree = "<group>"; };
+		3C34F24B1AC4509300A151C6 /* SetLessThanImmediate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SetLessThanImmediate.h; path = inc/SetLessThanImmediate.h; sourceTree = "<group>"; };
+		3C34F24C1AC450A700A151C6 /* SetLessThanImmediate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SetLessThanImmediate.cpp; path = src/SetLessThanImmediate.cpp; sourceTree = "<group>"; };
+		3C34F24E1AC452F000A151C6 /* ShiftLeftLogical.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ShiftLeftLogical.cpp; path = src/ShiftLeftLogical.cpp; sourceTree = "<group>"; };
+		3C34F24F1AC452F000A151C6 /* ShiftRightLogical.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ShiftRightLogical.cpp; path = src/ShiftRightLogical.cpp; sourceTree = "<group>"; };
+		3C34F2521AC4531600A151C6 /* ShiftLeftLogical.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ShiftLeftLogical.h; path = inc/ShiftLeftLogical.h; sourceTree = "<group>"; };
+		3C34F2531AC4531600A151C6 /* ShiftRightLogical.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ShiftRightLogical.h; path = inc/ShiftRightLogical.h; sourceTree = "<group>"; };
 		3C617F081AB9302F00FC8FBD /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Common.h; path = inc/Common.h; sourceTree = "<group>"; };
 		3C617F0F1AB9302F00FC8FBD /* Singleton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Singleton.h; path = inc/Singleton.h; sourceTree = "<group>"; };
 		3C617F111AB9302F00FC8FBD /* System.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = System.h; path = inc/System.h; sourceTree = "<group>"; };
@@ -109,6 +124,14 @@
 		3CE7A4421AC422DC0001E0CE /* R */ = {
 			isa = PBXGroup;
 			children = (
+				3C34F24E1AC452F000A151C6 /* ShiftLeftLogical.cpp */,
+				3C34F2521AC4531600A151C6 /* ShiftLeftLogical.h */,
+				3C34F24F1AC452F000A151C6 /* ShiftRightLogical.cpp */,
+				3C34F2531AC4531600A151C6 /* ShiftRightLogical.h */,
+				3C34F2491AC4500600A151C6 /* SetLessThan.cpp */,
+				3C34F2481AC44FFC00A151C6 /* SetLessThan.h */,
+				3C34F2461AC44EDD00A151C6 /* JumpRegister.cpp */,
+				3C34F2451AC44ED100A151C6 /* JumpRegister.h */,
 				3C34F23F1AC44A6C00A151C6 /* Or.cpp */,
 				3C34F23D1AC44A5E00A151C6 /* Or.h */,
 				3C34F2361AC4471600A151C6 /* And.cpp */,
@@ -126,6 +149,8 @@
 		3CE7A4431AC422E10001E0CE /* I */ = {
 			isa = PBXGroup;
 			children = (
+				3C34F24C1AC450A700A151C6 /* SetLessThanImmediate.cpp */,
+				3C34F24B1AC4509300A151C6 /* SetLessThanImmediate.h */,
 				3C34F2421AC44B2400A151C6 /* OrImmediate.cpp */,
 				3C34F2441AC44B2F00A151C6 /* OrImmediate.h */,
 				3C34F2371AC4471600A151C6 /* AndImmediate.cpp */,
@@ -233,17 +258,22 @@
 			files = (
 				3C34F2411AC44A6C00A151C6 /* Or.cpp in Sources */,
 				3CE7A4481AC430C50001E0CE /* IFormatInstruction.cpp in Sources */,
+				3C34F2501AC452F000A151C6 /* ShiftLeftLogical.cpp in Sources */,
 				3C34F2431AC44B2400A151C6 /* OrImmediate.cpp in Sources */,
 				3C34F22F1AC442A100A151C6 /* AddImmediate.cpp in Sources */,
 				3C34F2271AC4395C00A151C6 /* Add.cpp in Sources */,
 				3C617F2A1AB9304C00FC8FBD /* System.cpp in Sources */,
+				3C34F24D1AC450A700A151C6 /* SetLessThanImmediate.cpp in Sources */,
 				3C34F2351AC445FA00A151C6 /* Subtract.cpp in Sources */,
 				3C34F2381AC4471600A151C6 /* And.cpp in Sources */,
 				3C34F2391AC4471600A151C6 /* AndImmediate.cpp in Sources */,
+				3C34F2511AC452F000A151C6 /* ShiftRightLogical.cpp in Sources */,
 				3CE7A4491AC430C50001E0CE /* JFormatInstruction.cpp in Sources */,
 				3CF1FB551AB072640064AA2D /* main.cpp in Sources */,
 				3CE7A43D1AC40E890001E0CE /* RFormatInstruction.cpp in Sources */,
+				3C34F2471AC44EDD00A151C6 /* JumpRegister.cpp in Sources */,
 				3CE7A43B1AC40E7A0001E0CE /* Instruction.cpp in Sources */,
+				3C34F24A1AC4500600A151C6 /* SetLessThan.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
