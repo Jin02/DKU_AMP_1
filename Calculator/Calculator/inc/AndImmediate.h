@@ -11,5 +11,5 @@ public:
     virtual ~AndImmediate(void);
     
 public:
-    virtual void Instruct(unsigned int rs, unsigned int rt, unsigned int immediate);
+    virtual void Execution();
 };

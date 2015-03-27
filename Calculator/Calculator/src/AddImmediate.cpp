@@ -12,10 +12,10 @@ AddImmediateUnsigned::~AddImmediateUnsigned()
 
 }
 
-void AddImmediateUnsigned::Instruct(unsigned int rs, unsigned int rt, unsigned int immediate)
+void AddImmediateUnsigned::Execution()
 {
     System* system = System::GetInstance();
     
-    unsigned rsData = system->GetDataFromRegister(rs);
-    system->SetDataToRegister(rt, rsData + immediate);
+    unsigned rsData = system->GetDataFromRegister(_rs);
+    system->SetDataToRegister(_rt, rsData + _immediate);
 }

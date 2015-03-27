@@ -12,9 +12,10 @@ AndImmediate::~AndImmediate()
 
 }
 
-void AndImmediate::Instruct(unsigned int rs, unsigned int rt, unsigned int immediate)
+void AndImmediate::Execution()
 {
     System* system = System::GetInstance();
-    unsigned int rsData = system->GetDataFromRegister(rs);
-    system->SetDataToRegister(rt, rsData & immediate);
+    unsigned int rsData = system->GetDataFromRegister(_rs);
+
+    system->SetDataToRegister(_rt, rsData & _immediate);
 }

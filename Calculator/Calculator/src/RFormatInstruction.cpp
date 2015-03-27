@@ -2,8 +2,7 @@
 #include "System.h"
 #include <string>
 
-RFormatInstruction::RFormatInstruction(unsigned int rs, unsigned int rt, unsigned int rd)
-:_rs(rs), _rt(rt), _rd(rd)
+RFormatInstruction::RFormatInstruction(unsigned int rs, unsigned int rt, unsigned int rd) : Instruction(), _rs(rs), _rt(rt), _rd(rd)
 {
     
 }

@@ -34,7 +34,10 @@ public:
 
     inline unsigned int GetDataFromRegister(int index) { return _registers[index]; }
     inline void SetDataToRegister(int index, unsigned int value) { _registers[index] = value; }
-
+    
+    unsigned int GetDataFromMemory(int address);
+    void SetDataToMemory(int address, unsigned int data);
+    
 public:
 	GET_SET_ACCESSOR(ReturnAddress, unsigned int, _registers[31]);
 	GET_SET_ACCESSOR(FramePointer,	unsigned int, _registers[30]);
@@ -42,6 +45,8 @@ public:
 	GET_SET_ACCESSOR(GlobalPointer, unsigned int, _registers[28]);
     
     GET_SET_ACCESSOR(ProgramCounter, unsigned int, _programCounter);
+    
+    
 
     friend class Singleton<System>;
 };

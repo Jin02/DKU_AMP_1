@@ -11,7 +11,7 @@ public:
     virtual ~SetLessThanImmediateUnsigned(void);
     
 public:
-    virtual void Instruct(unsigned int rs, unsigned int rt, unsigned int immediate);
+    virtual void Execution();
 };
 
 
@@ -24,5 +24,5 @@ public:
     virtual ~SetLessThanImmediate(void);
     
 public:
-    virtual void Instruct(unsigned int rs, unsigned int rt, unsigned int immediate);
+    virtual void Execution();
 };

@@ -127,3 +127,15 @@ Instruction* System::Decode(unsigned int instruction)
 void System::Execution()
 {
 }
+
+unsigned int System::GetDataFromMemory(int address)
+{
+    ASSERT_COND_MSG((address % 4) == 0, "strange address");
+    return _processorMemory[address/4];
+}
+
+void System::SetDataToMemory(int address, unsigned int data)
+{
+    ASSERT_COND_MSG((address % 4) == 0, "strange address");
+    _processorMemory[address/4] = data;
+}

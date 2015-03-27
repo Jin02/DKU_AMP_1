@@ -13,12 +13,12 @@
 
 int main(int argc, const char * argv[])
 {
-    int test   = -1234;
-    int ee     = 1234;
+    unsigned int test   = -1237;
+    unsigned int ee     = 1234;
     
     bool t = test > ee;
     
-    int test3 = ee - test;
+    int test3 = ee + test;
     
     
 	System::GetInstance()->Load("input2.bin");
