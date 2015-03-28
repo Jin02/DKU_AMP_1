@@ -17,8 +17,6 @@
 #include "Multiply.h"
 #include "Divide.h"
 
-#include "BranchGreaterThan.h"
-#include "BranchLessThan.h"
 #include "Store.h"
 #include "Load.h"
 #include "BranchOnEqual.h"
