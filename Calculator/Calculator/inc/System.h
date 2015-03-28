@@ -18,6 +18,8 @@ private:
 	std::array<unsigned int, 32>					_registers;
     unsigned int                                    _programCounter;
 
+	unsigned int									_hi, _lo;
+
 private:
     System(void);
     ~System(void);
@@ -42,6 +44,9 @@ public:
     void SetDataToMemory(int address, unsigned int data);
     
 public:
+	GET_SET_ACCESSOR(HiRegister, unsigned int, _hi);
+	GET_SET_ACCESSOR(LoRegister, unsigned int, _lo);
+
 	GET_SET_ACCESSOR(ReturnAddress, unsigned int, _registers[31]);
 	GET_SET_ACCESSOR(FramePointer,	unsigned int, _registers[30]);
 	GET_SET_ACCESSOR(StackPointer,	unsigned int, _registers[29]);

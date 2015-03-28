@@ -14,6 +14,8 @@
 #include "And.h"
 #include "Subtract.h"
 #include "Add.h"
+#include "Multiply.h"
+#include "Divide.h"
 
 #include "BranchGreaterThan.h"
 #include "BranchLessThan.h"
@@ -26,7 +28,7 @@
 #include "AndImmediate.h"
 #include "AddImmediate.h"
 
-System::System() : _programCounter(0)
+System::System() : _programCounter(0), _hi(0), _lo(0)
 {
 	std::fill(_processorMemory.begin(), _processorMemory.end(), 0);
 	std::fill(_registers.begin(), _registers.end(), 0);
@@ -80,7 +82,7 @@ void System::Load(const std::string& path)
 
 void System::Run()
 {
-	while(_programCounter != 0xfffffff)
+	while(_programCounter != 0xffffffff)
 		RunCycle();
 }
 
@@ -108,10 +110,14 @@ unsigned int System::Fetch()
 Instruction* System::Decode(unsigned int instruction)
 {
 	unsigned int opCode     = (instruction & 0xFC000000) >> 26;
-    unsigned int immediate  = (instruction & 0x0000ffff);
-    uint rs = (instruction & 0x03e00000) >> 21;
-    uint rt = (instruction & 0x001f0000) >> 16;
-    
+	unsigned int funct  = (instruction & 0x0000003F);
+	unsigned int immediate  = (instruction & 0x0000ffff);
+
+	uint rd		= (instruction & 0x0000f800) >> 11;
+	uint rs		= (instruction & 0x03e00000) >> 21;
+    uint rt		= (instruction & 0x001f0000) >> 16;    
+    uint shamt  = (instruction & 0x000007c0) >> 6;
+
     auto FillBit = [&](unsigned int from, unsigned int to, unsigned int pos)
     {
         bool setBit = (1 << pos) & immediate;
@@ -123,11 +129,7 @@ Instruction* System::Decode(unsigned int instruction)
     };
     
 	if(opCode == 0) // R
-	{
-		unsigned int funct  = (instruction & 0x0000003F);
-        uint rd             = (instruction & 0x0000f800) >> 11;
-        uint shamt          = (instruction & 0x000007c0) >> 6;
-		
+	{		
         if(funct == (uint)Funct::Add)
             return new Add(rs, rt, rd);
 		else if(funct == (uint)Funct::AddUnsigned)
@@ -152,6 +154,25 @@ Instruction* System::Decode(unsigned int instruction)
             return new Subtract(rs, rt, rd);
 		else if(funct == (uint)Funct::SubtractUnsigned)
             return new SubtractUnsigned(rs, rt, rd);
+		else if(funct == (uint)Funct::Multiply)
+			return new Multiply(rs,rt, rd);
+		else if(funct == (uint)Funct::MultiplyUnsigned)
+			return new MultiplyUnsigned(rs, rt, rd);
+
+		else if(funct == (uint)Funct::Divide)
+			return new Divide(rs, rt, rd);
+		else if(funct == (uint)Funct::DivideUnsigned)
+			return new DivideUnsigned(rs, rt, rd);
+		else if(funct == (uint)Funct::MoveFromHi)
+			return new MoveFromHi(rd);
+		else if(funct == (uint)Funct::MoveToHi)
+			return new MoveToHi(rs);
+		else if(funct == (uint)Funct::MoveFromLo)
+			return new MoveFromLo(rd);
+		else if(funct == (uint)Funct::MoveToLo)
+			return new MoveToLo(rs);
+
+
 		else ASSERT_MSG("can not support r format this instruction");
 	}
 	else if(opCode == (uint)Opcode::Jump || opCode == (uint)Opcode::JumpAndLink) // J
@@ -210,6 +231,8 @@ Instruction* System::Decode(unsigned int instruction)
             return new StoreHalfword(rs, rt, zeroExtImm);
         else if(opCode == (uint)Opcode::StoreWord)
             return new StoreWord(rs, rt, zeroExtImm);
+		else if((opCode == (uint)Opcode::Multiply32BitRes) && (funct == (uint)Funct::Multiply32BitRes))
+			return new Multiply32BitRes(rs, rt, rd);
         
         else ASSERT_MSG("cant support i foramt this inst");
     }

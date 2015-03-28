@@ -111,13 +111,16 @@
     <ClInclude Include="inc\ShiftLeftLogical.h">
       <Filter>Module\Instruction\R</Filter>
     </ClInclude>
+    <ClInclude Include="inc\Multiply.h">
+      <Filter>Module\Instruction\R</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\Divide.h">
+      <Filter>Module\Instruction\R</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\System.cpp">
       <Filter>Module\System</Filter>
-    </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>리소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="src\Instruction.cpp">
       <Filter>Module\Instruction</Filter>
@@ -187,6 +190,15 @@
     </ClCompile>
     <ClCompile Include="src\ShiftLeftLogical.cpp">
       <Filter>Module\Instruction\R</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Multiply.cpp">
+      <Filter>Module\Instruction\R</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Divide.cpp">
+      <Filter>Module\Instruction\R</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
