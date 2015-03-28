@@ -19,6 +19,18 @@
     <Filter Include="Module\System">
       <UniqueIdentifier>{e27f8ad5-b597-4b01-8596-1333026d1ee0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Module\Instruction">
+      <UniqueIdentifier>{1e97dea8-2169-4b29-96dc-938c50dac580}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Module\Instruction\I">
+      <UniqueIdentifier>{31589293-1223-4949-a49c-af06e52fa621}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Module\Instruction\R">
+      <UniqueIdentifier>{269dc20a-e567-4d04-9796-dfb9af4ca478}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Module\Instruction\J">
+      <UniqueIdentifier>{45f4691a-06d9-427f-85f2-4d696142b5de}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="inc\System.h">
@@ -30,6 +42,75 @@
     <ClInclude Include="inc\Singleton.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="inc\Instruction.h">
+      <Filter>Module\Instruction</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\Move.h">
+      <Filter>Module\Instruction</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\Load.h">
+      <Filter>Module\Instruction\I</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\IFormatInstruction.h">
+      <Filter>Module\Instruction\I</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\AndImmediate.h">
+      <Filter>Module\Instruction\I</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\AddImmediate.h">
+      <Filter>Module\Instruction\I</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\Add.h">
+      <Filter>Module\Instruction\R</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\And.h">
+      <Filter>Module\Instruction\R</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\BranchOnNotEqual.h">
+      <Filter>Module\Instruction\I</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\BranchGreaterThan.h">
+      <Filter>Module\Instruction\I</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\BranchLessThan.h">
+      <Filter>Module\Instruction\I</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\BranchOnEqual.h">
+      <Filter>Module\Instruction\I</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\JumpRegister.h">
+      <Filter>Module\Instruction\R</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\JFormatInstruction.h">
+      <Filter>Module\Instruction\J</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\Or.h">
+      <Filter>Module\Instruction\R</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\OrImmediate.h">
+      <Filter>Module\Instruction\I</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\RFormatInstruction.h">
+      <Filter>Module\Instruction\R</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\SetLessThan.h">
+      <Filter>Module\Instruction\R</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\SetLessThanImmediate.h">
+      <Filter>Module\Instruction\I</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\Store.h">
+      <Filter>Module\Instruction\I</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\Subtract.h">
+      <Filter>Module\Instruction\R</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\ShiftRightLogical.h">
+      <Filter>Module\Instruction\R</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\ShiftLeftLogical.h">
+      <Filter>Module\Instruction\R</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\System.cpp">
@@ -37,6 +118,75 @@
     </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>리소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Instruction.cpp">
+      <Filter>Module\Instruction</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Move.cpp">
+      <Filter>Module\Instruction</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Load.cpp">
+      <Filter>Module\Instruction\I</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IFormatInstruction.cpp">
+      <Filter>Module\Instruction\I</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AndImmediate.cpp">
+      <Filter>Module\Instruction\I</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AddImmediate.cpp">
+      <Filter>Module\Instruction\I</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Add.cpp">
+      <Filter>Module\Instruction\R</Filter>
+    </ClCompile>
+    <ClCompile Include="src\And.cpp">
+      <Filter>Module\Instruction\R</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BranchGreaterThan.cpp">
+      <Filter>Module\Instruction\I</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BranchLessThan.cpp">
+      <Filter>Module\Instruction\I</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BranchOnEqual.cpp">
+      <Filter>Module\Instruction\I</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BranchOnNotEqual.cpp">
+      <Filter>Module\Instruction\I</Filter>
+    </ClCompile>
+    <ClCompile Include="src\JumpRegister.cpp">
+      <Filter>Module\Instruction\R</Filter>
+    </ClCompile>
+    <ClCompile Include="src\JFormatInstruction.cpp">
+      <Filter>Module\Instruction\J</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Or.cpp">
+      <Filter>Module\Instruction\R</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OrImmediate.cpp">
+      <Filter>Module\Instruction\I</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RFormatInstruction.cpp">
+      <Filter>Module\Instruction\R</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SetLessThan.cpp">
+      <Filter>Module\Instruction\R</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SetLessThanImmediate.cpp">
+      <Filter>Module\Instruction\I</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Store.cpp">
+      <Filter>Module\Instruction\I</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Subtract.cpp">
+      <Filter>Module\Instruction\R</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ShiftRightLogical.cpp">
+      <Filter>Module\Instruction\R</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ShiftLeftLogical.cpp">
+      <Filter>Module\Instruction\R</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

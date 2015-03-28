@@ -13,7 +13,7 @@
 int main(int argc, const char * argv[])
 {
     System* system = System::GetInstance();
-    system->Load("/Users/jin/Downloads/sample2/input2.bin");
+    system->Load("input2.bin");
     system->Run();
     
     return 0;

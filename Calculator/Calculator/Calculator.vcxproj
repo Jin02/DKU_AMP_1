@@ -11,12 +11,58 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="inc\Add.h" />
+    <ClInclude Include="inc\AddImmediate.h" />
+    <ClInclude Include="inc\And.h" />
+    <ClInclude Include="inc\AndImmediate.h" />
+    <ClInclude Include="inc\BranchGreaterThan.h" />
+    <ClInclude Include="inc\BranchLessThan.h" />
+    <ClInclude Include="inc\BranchOnEqual.h" />
+    <ClInclude Include="inc\BranchOnNotEqual.h" />
     <ClInclude Include="inc\Common.h" />
+    <ClInclude Include="inc\IFormatInstruction.h" />
+    <ClInclude Include="inc\Instruction.h" />
+    <ClInclude Include="inc\JFormatInstruction.h" />
+    <ClInclude Include="inc\JumpRegister.h" />
+    <ClInclude Include="inc\Load.h" />
+    <ClInclude Include="inc\Move.h" />
+    <ClInclude Include="inc\Or.h" />
+    <ClInclude Include="inc\OrImmediate.h" />
+    <ClInclude Include="inc\RFormatInstruction.h" />
+    <ClInclude Include="inc\SetLessThan.h" />
+    <ClInclude Include="inc\SetLessThanImmediate.h" />
+    <ClInclude Include="inc\ShiftLeftLogical.h" />
+    <ClInclude Include="inc\ShiftRightLogical.h" />
     <ClInclude Include="inc\Singleton.h" />
+    <ClInclude Include="inc\Store.h" />
+    <ClInclude Include="inc\Subtract.h" />
     <ClInclude Include="inc\System.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\Add.cpp" />
+    <ClCompile Include="src\AddImmediate.cpp" />
+    <ClCompile Include="src\And.cpp" />
+    <ClCompile Include="src\AndImmediate.cpp" />
+    <ClCompile Include="src\BranchGreaterThan.cpp" />
+    <ClCompile Include="src\BranchLessThan.cpp" />
+    <ClCompile Include="src\BranchOnEqual.cpp" />
+    <ClCompile Include="src\BranchOnNotEqual.cpp" />
+    <ClCompile Include="src\IFormatInstruction.cpp" />
+    <ClCompile Include="src\Instruction.cpp" />
+    <ClCompile Include="src\JFormatInstruction.cpp" />
+    <ClCompile Include="src\JumpRegister.cpp" />
+    <ClCompile Include="src\Load.cpp" />
+    <ClCompile Include="src\Move.cpp" />
+    <ClCompile Include="src\Or.cpp" />
+    <ClCompile Include="src\OrImmediate.cpp" />
+    <ClCompile Include="src\RFormatInstruction.cpp" />
+    <ClCompile Include="src\SetLessThan.cpp" />
+    <ClCompile Include="src\SetLessThanImmediate.cpp" />
+    <ClCompile Include="src\ShiftLeftLogical.cpp" />
+    <ClCompile Include="src\ShiftRightLogical.cpp" />
+    <ClCompile Include="src\Store.cpp" />
+    <ClCompile Include="src\Subtract.cpp" />
     <ClCompile Include="src\System.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
