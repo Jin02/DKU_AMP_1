@@ -12,5 +12,5 @@ public:
     virtual ~Move(void);
     
 public:
-    virtual void Execution();
+    virtual bool Execution();
 };

@@ -11,10 +11,11 @@ OrImmediate::~OrImmediate()
     
 }
 
-void OrImmediate::Execution()
+bool OrImmediate::Execution()
 {
     System* system = System::GetInstance();
     unsigned int rsData = system->GetDataFromRegister(_rs);
 
     system->SetDataToRegister(_rt, rsData | _immediate);
+	return true;
 }

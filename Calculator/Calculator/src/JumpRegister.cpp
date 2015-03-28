@@ -19,10 +19,12 @@ unsigned int JumpRegister::Instruct(unsigned int rsData, unsigned int rtData)
     return 0;
 }
 
-void JumpRegister::Execution()
+bool JumpRegister::Execution()
 {
     System* system = System::GetInstance();
     
     unsigned int rsData = system->GetDataFromRegister(_rs);
     system->SetProgramCounter(rsData);
+
+	return false;
 }

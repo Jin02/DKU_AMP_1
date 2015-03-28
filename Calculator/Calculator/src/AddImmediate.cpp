@@ -12,10 +12,12 @@ AddImmediateUnsigned::~AddImmediateUnsigned()
 
 }
 
-void AddImmediateUnsigned::Execution()
+bool AddImmediateUnsigned::Execution()
 {
     System* system = System::GetInstance();
     
     unsigned rsData = system->GetDataFromRegister(_rs);
     system->SetDataToRegister(_rt, rsData + _immediate);
+
+	return true;
 }

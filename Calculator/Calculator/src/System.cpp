@@ -50,7 +50,7 @@ void System::Load(const std::string& path)
 	unsigned char* buffer = new unsigned char[length];
 	{
 		file.read((char*)buffer, length);
-		std::copy((unsigned int*)buffer, (unsigned int*)&buffer[length - sizeof(unsigned int)], _processorMemory.begin());
+		std::copy((unsigned int*)buffer, (unsigned int*)&buffer[length], _processorMemory.begin());
 	}
 	delete buffer;
 
@@ -80,19 +80,23 @@ void System::Load(const std::string& path)
 
 void System::Run()
 {
-    RunCycle();
-    
-    if(_programCounter == 0xfffffff)
-        return;
-
-    _programCounter += 4;
+	while(_programCounter != 0xfffffff)
+		RunCycle();
 }
 
 void System::RunCycle()
 {
-    uint instruction        = Fetch();
-    Instruction* exectable  = Decode(instruction);
-    Execution(exectable);
+	bool ableNextPC			= true;
+
+	uint instruction        = Fetch();
+	if(instruction != 0)
+	{
+		Instruction* exectable  = Decode(instruction);
+		ableNextPC = Execution(exectable);
+	}
+
+	if(ableNextPC)
+		_programCounter += 4;
 }
 
 unsigned int System::Fetch()
@@ -105,8 +109,8 @@ Instruction* System::Decode(unsigned int instruction)
 {
 	unsigned int opCode     = (instruction & 0xFC000000) >> 26;
     unsigned int immediate  = (instruction & 0x0000ffff);
-    uint rs = (instruction & 0x03e00000);
-    uint rt = (instruction & 0x001f0000);
+    uint rs = (instruction & 0x03e00000) >> 21;
+    uint rt = (instruction & 0x001f0000) >> 16;
     
     auto FillBit = [&](unsigned int from, unsigned int to, unsigned int pos)
     {
@@ -121,8 +125,8 @@ Instruction* System::Decode(unsigned int instruction)
 	if(opCode == 0) // R
 	{
 		unsigned int funct  = (instruction & 0x0000003F);
-        uint rd             = (instruction & 0x0000f800);
-        uint shamt          = (instruction & 0x000007c0);
+        uint rd             = (instruction & 0x0000f800) >> 11;
+        uint shamt          = (instruction & 0x000007c0) >> 6;
 		
         if(funct == (uint)Funct::Add)
             return new Add(rs, rt, rd);
@@ -168,7 +172,9 @@ Instruction* System::Decode(unsigned int instruction)
         uint mask           = FillBit(15, 31, 15);
         uint signExtImm     = mask | immediate;
         uint zeroExtImm     = immediate;
-        uint branchAddr     = FillBit(17, 31, 15) | immediate << 2;
+
+		mask				= FillBit(17, 31, 15);
+        uint branchAddr     = FillBit(17, 31, 15) | (immediate << 2);
         
         if(opCode == (uint)Opcode::AddImmediate)
             return new AddImmediate(rs, rt, signExtImm);
@@ -212,10 +218,12 @@ Instruction* System::Decode(unsigned int instruction)
     return nullptr;
 }
 
-void System::Execution(Instruction* inst)
+bool System::Execution(Instruction* inst)
 {
-    inst->Execution();
+    bool ableNextPC = inst->Execution();
     delete inst;
+
+	return ableNextPC;
 }
 
 unsigned int System::GetDataFromMemory(int address)

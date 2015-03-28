@@ -15,8 +15,12 @@
     <ClInclude Include="inc\AddImmediate.h" />
     <ClInclude Include="inc\And.h" />
     <ClInclude Include="inc\AndImmediate.h" />
-    <ClInclude Include="inc\BranchGreaterThan.h" />
-    <ClInclude Include="inc\BranchLessThan.h" />
+    <ClInclude Include="inc\BranchGreaterThan.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="inc\BranchLessThan.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="inc\BranchOnEqual.h" />
     <ClInclude Include="inc\BranchOnNotEqual.h" />
     <ClInclude Include="inc\Common.h" />
@@ -44,8 +48,12 @@
     <ClCompile Include="src\AddImmediate.cpp" />
     <ClCompile Include="src\And.cpp" />
     <ClCompile Include="src\AndImmediate.cpp" />
-    <ClCompile Include="src\BranchGreaterThan.cpp" />
-    <ClCompile Include="src\BranchLessThan.cpp" />
+    <ClCompile Include="src\BranchGreaterThan.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="src\BranchLessThan.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="src\BranchOnEqual.cpp" />
     <ClCompile Include="src\BranchOnNotEqual.cpp" />
     <ClCompile Include="src\IFormatInstruction.cpp" />

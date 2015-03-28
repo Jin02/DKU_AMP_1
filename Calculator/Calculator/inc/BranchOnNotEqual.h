@@ -11,5 +11,5 @@ public:
     virtual ~BranchOnNotEqual(void);
     
 public:
-    virtual void Execution();
+    virtual bool Execution();
 };

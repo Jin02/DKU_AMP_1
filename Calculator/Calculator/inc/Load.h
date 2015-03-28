@@ -12,7 +12,7 @@ public:
     virtual ~LoadByteUnsigned(void);
     
 public:
-    virtual void Execution();
+    virtual bool Execution();
 };
 
 /** LoadHalfwordUnsigned **/
@@ -25,7 +25,7 @@ public:
     virtual ~LoadHalfwordUnsigned(void);
     
 public:
-    virtual void Execution();
+    virtual bool Execution();
 };
 
 /** LoadLinked **/
@@ -38,7 +38,7 @@ public:
 //    virtual ~LoadLinked(void);
 //    
 //public:
-//    virtual void Execution();
+//    virtual bool Execution();
 //};
 
 /** LoadUpperImmediate **/
@@ -51,7 +51,7 @@ public:
     virtual ~LoadUpperImmediate(void);
     
 public:
-    virtual void Execution();
+    virtual bool Execution();
 };
 
 
@@ -65,7 +65,7 @@ public:
     virtual ~LoadWord(void);
     
 public:
-    virtual void Execution();
+    virtual bool Execution();
 };
 
 /** LoadImmediate **/
@@ -79,5 +79,5 @@ public:
     virtual ~LoadImmediate(void);
     
 public:
-    virtual void Execution();
+    virtual bool Execution();
 };

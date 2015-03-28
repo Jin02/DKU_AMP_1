@@ -12,7 +12,7 @@ public:
     virtual ~BranchGreaterThan(void);
     
 public:
-    virtual void Execution();
+    virtual bool Execution();
 };
 
 
@@ -26,5 +26,5 @@ public:
     virtual ~BranchesGreaterThanOrEqual(void);
     
 public:
-    virtual void Execution();
+    virtual bool Execution();
 };

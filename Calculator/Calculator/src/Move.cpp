@@ -11,10 +11,12 @@ Move::~Move()
     
 }
 
-void Move::Execution()
+bool Move::Execution()
 {
     System* system = System::GetInstance();
     
     unsigned int rsData = system->GetDataFromRegister(_rs);
     system->SetDataToRegister(_rd, rsData);
+
+	return true;
 }

@@ -12,7 +12,7 @@ public:
     virtual ~JFormatInstruction(void);
     
 public:
-    virtual void Execution() = 0;
+    virtual bool Execution() = 0;
 };
 
 class Jump : public JFormatInstruction
@@ -22,7 +22,7 @@ public:
     ~Jump();
     
 public:
-    virtual void Execution();
+    virtual bool Execution();
 };
 
 class JumpAndLink : public JFormatInstruction
@@ -32,5 +32,5 @@ public:
     ~JumpAndLink();
     
 public:
-    virtual void Execution();
+    virtual bool Execution();
 };

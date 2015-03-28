@@ -11,7 +11,7 @@ public:
     virtual ~SetLessThanImmediateUnsigned(void);
     
 public:
-    virtual void Execution();
+    virtual bool Execution();
 };
 
 
@@ -24,5 +24,5 @@ public:
     virtual ~SetLessThanImmediate(void);
     
 public:
-    virtual void Execution();
+    virtual bool Execution();
 };

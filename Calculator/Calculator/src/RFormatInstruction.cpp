@@ -11,7 +11,7 @@ RFormatInstruction::~RFormatInstruction(void)
 {
 }
 
-void RFormatInstruction::Execution()
+bool RFormatInstruction::Execution()
 {
     System* system = System::GetInstance();
     
@@ -19,4 +19,5 @@ void RFormatInstruction::Execution()
     unsigned rtData = system->GetDataFromRegister(_rt);
     
     system->SetDataToRegister(_rd, Instruct(rsData, rtData));
+	return true;
 }

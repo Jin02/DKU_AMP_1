@@ -11,7 +11,7 @@ public:
     virtual ~AddImmediateUnsigned(void);
     
 public:
-    virtual void Execution();
+    virtual bool Execution();
 };
 
 typedef AddImmediateUnsigned AddImmediate;

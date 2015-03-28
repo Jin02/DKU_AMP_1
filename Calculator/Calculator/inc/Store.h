@@ -12,7 +12,7 @@ public:
     virtual ~StoreByte(void);
     
 public:
-    virtual void Execution();
+    virtual bool Execution();
 };
 
 /** StoreConditional **/
@@ -25,7 +25,7 @@ public:
 //    virtual ~StoreConditional(void);
 //    
 //public:
-//    virtual void Execution();
+//    virtual bool Execution();
 //};
 
 /** StoreHalfword **/
@@ -38,7 +38,7 @@ public:
     virtual ~StoreHalfword(void);
     
 public:
-    virtual void Execution();
+    virtual bool Execution();
 };
 
 /** StoreWord **/
@@ -51,5 +51,5 @@ public:
     virtual ~StoreWord(void);
     
 public:
-    virtual void Execution();
+    virtual bool Execution();
 };

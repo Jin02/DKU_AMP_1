@@ -25,7 +25,9 @@ private:
 private:
     unsigned int Fetch();
     Instruction* Decode(unsigned int instruction);
-    void Execution(Instruction* inst);
+
+	// if next instruction is nop, return value is true else false.
+    bool Execution(Instruction* inst);
     
 public:
     void Load(const std::string& path);

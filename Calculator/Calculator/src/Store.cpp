@@ -13,7 +13,7 @@ StoreByte::~StoreByte()
     
 }
 
-void StoreByte::Execution()
+bool StoreByte::Execution()
 {
     System* system = System::GetInstance();
     
@@ -23,6 +23,7 @@ void StoreByte::Execution()
 
     memData = (memData & 0xfffffff0) | (toMemRtData);
     system->SetDataToMemory(rsData + _immediate, memData);
+	return true;
 }
 
 
@@ -54,7 +55,7 @@ StoreHalfword::~StoreHalfword()
     
 }
 
-void StoreHalfword::Execution()
+bool StoreHalfword::Execution()
 {
     System* system = System::GetInstance();
     
@@ -64,6 +65,8 @@ void StoreHalfword::Execution()
     
     memData = (memData & 0xffff0000) | (toMemRtData);
     system->SetDataToMemory(rsData + _immediate, memData);
+
+	return true;
 }
 
 /** StoreWord **/
@@ -78,11 +81,13 @@ StoreWord::~StoreWord()
     
 }
 
-void StoreWord::Execution()
+bool StoreWord::Execution()
 {
     System* system = System::GetInstance();
     
     unsigned int toMemRtData = system->GetDataFromRegister(_rt);
     unsigned int rsData = system->GetDataFromRegister(_rs);
     system->SetDataToMemory(rsData + _immediate, toMemRtData);
+
+	return true;
 }

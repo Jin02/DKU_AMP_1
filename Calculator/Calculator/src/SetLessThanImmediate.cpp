@@ -11,11 +11,13 @@ SetLessThanImmediateUnsigned::~SetLessThanImmediateUnsigned()
     
 }
 
-void SetLessThanImmediateUnsigned::Execution()
+bool SetLessThanImmediateUnsigned::Execution()
 {
     System* system = System::GetInstance();
     unsigned int rsData = system->GetDataFromRegister(_rs);
     system->SetDataToRegister(_rt, rsData < _immediate);
+
+	return true;
 }
 
 
@@ -31,7 +33,7 @@ SetLessThanImmediate::~SetLessThanImmediate()
     
 }
 
-void SetLessThanImmediate::Execution()
+bool SetLessThanImmediate::Execution()
 {
     System* system = System::GetInstance();
     
@@ -39,6 +41,7 @@ void SetLessThanImmediate::Execution()
     int     signedImm         = _immediate;
     
     system->SetDataToRegister(_rt, signedRsData < signedImm);
+	return true;
 }
 
 

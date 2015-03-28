@@ -12,7 +12,7 @@ BranchOnEqual::~BranchOnEqual()
 
 }
 
-void BranchOnEqual::Execution()
+bool BranchOnEqual::Execution()
 {
     System* system = System::GetInstance();
     
@@ -21,5 +21,10 @@ void BranchOnEqual::Execution()
     unsigned int pc = system->GetProgramCounter();
     
     if(rsData == rtData)
+	{
         system->SetProgramCounter(pc + 4 + _immediate);
+		return false;
+	}
+
+	return true;
 }

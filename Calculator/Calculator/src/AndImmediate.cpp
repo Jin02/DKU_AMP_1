@@ -12,10 +12,11 @@ AndImmediate::~AndImmediate()
 
 }
 
-void AndImmediate::Execution()
+bool AndImmediate::Execution()
 {
     System* system = System::GetInstance();
     unsigned int rsData = system->GetDataFromRegister(_rs);
 
     system->SetDataToRegister(_rt, rsData & _immediate);
+	return true;
 }

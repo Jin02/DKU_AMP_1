@@ -12,20 +12,16 @@ JFormatInstruction::~JFormatInstruction(void)
 {
 }
 
-void JFormatInstruction::Execution()
-{
-    
-}
-
-
 /**** Jump Instruction ****/
 Jump::Jump(unsigned int address) : JFormatInstruction(address){}
 Jump::~Jump(){}
 
-void Jump::Execution()
+bool Jump::Execution()
 {
     System* system = System::GetInstance();
     system->SetProgramCounter(_address);
+
+	return false;
 }
 
 
@@ -34,7 +30,7 @@ void Jump::Execution()
 JumpAndLink::JumpAndLink(unsigned int address) : JFormatInstruction(address){}
 JumpAndLink::~JumpAndLink(){}
 
-void JumpAndLink::Execution()
+bool JumpAndLink::Execution()
 {
     System* system = System::GetInstance();
 
@@ -42,4 +38,6 @@ void JumpAndLink::Execution()
     system->SetReturnAddress(currentProgramCounter + 8);
     
     system->SetProgramCounter(_address);
+
+	return false;
 }
