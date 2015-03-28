@@ -10,17 +10,11 @@
 #include <string>
 #include "System.h"
 
-
 int main(int argc, const char * argv[])
 {
-    unsigned int test   = -1237;
-    unsigned int ee     = 1234;
+    System* system = System::GetInstance();
+    system->Load("/Users/jin/Downloads/sample2/input2.bin");
+    system->Run();
     
-    bool t = test > ee;
-    
-    int test3 = ee + test;
-    
-    
-	System::GetInstance()->Load("input2.bin");
     return 0;
 }

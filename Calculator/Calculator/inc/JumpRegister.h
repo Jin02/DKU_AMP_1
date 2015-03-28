@@ -14,5 +14,3 @@ public:
     virtual unsigned int Instruct(unsigned int rsData, unsigned int rtData);
     virtual void Execution();
 };
-
-typedef JumpRegister Add;

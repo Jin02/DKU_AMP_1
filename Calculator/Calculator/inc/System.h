@@ -25,12 +25,13 @@ private:
 private:
     unsigned int Fetch();
     Instruction* Decode(unsigned int instruction);
-    void Execution();
+    void Execution(Instruction* inst);
     
 public:
     void Load(const std::string& path);
 
 	void RunCycle();
+    void Run();
 
     inline unsigned int GetDataFromRegister(int index) { return _registers[index]; }
     inline void SetDataToRegister(int index, unsigned int value) { _registers[index] = value; }

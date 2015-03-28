@@ -5,6 +5,26 @@
 #include <string>
 
 #include "JFormatInstruction.h"
+#include "Move.h"
+#include "ShiftLeftLogical.h"
+#include "ShiftRightLogical.h"
+#include "SetLessThan.h"
+#include "JumpRegister.h"
+#include "Or.h"
+#include "And.h"
+#include "Subtract.h"
+#include "Add.h"
+
+#include "BranchGreaterThan.h"
+#include "BranchLessThan.h"
+#include "Store.h"
+#include "Load.h"
+#include "BranchOnEqual.h"
+#include "BranchOnNotEqual.h"
+#include "SetLessThanImmediate.h"
+#include "OrImmediate.h"
+#include "AndImmediate.h"
+#include "AddImmediate.h"
 
 System::System() : _programCounter(0)
 {
@@ -58,9 +78,21 @@ void System::Load(const std::string& path)
 	}
 }
 
+void System::Run()
+{
+    RunCycle();
+    
+    if(_programCounter == 0xfffffff)
+        return;
+
+    _programCounter += 4;
+}
+
 void System::RunCycle()
 {
-
+    uint instruction        = Fetch();
+    Instruction* exectable  = Decode(instruction);
+    Execution(exectable);
 }
 
 unsigned int System::Fetch()
@@ -71,61 +103,119 @@ unsigned int System::Fetch()
 
 Instruction* System::Decode(unsigned int instruction)
 {
-	unsigned int opCode = (instruction & 0xFC000000) >> 26;
-
+	unsigned int opCode     = (instruction & 0xFC000000) >> 26;
+    unsigned int immediate  = (instruction & 0x0000ffff);
+    uint rs = (instruction & 0x03e00000);
+    uint rt = (instruction & 0x001f0000);
+    
+    auto FillBit = [&](unsigned int from, unsigned int to, unsigned int pos)
+    {
+        bool setBit = (1 << pos) & immediate;
+        unsigned int ret = 0x00000000;
+        for(unsigned int i = from; i <= to; ++i)
+            ret |= (uint)setBit << i;
+        
+        return ret;
+    };
+    
 	if(opCode == 0) // R
 	{
-		unsigned int funct = (instruction & 0x0000003F);
+		unsigned int funct  = (instruction & 0x0000003F);
+        uint rd             = (instruction & 0x0000f800);
+        uint shamt          = (instruction & 0x000007c0);
 		
-		if(funct == (uint)Funct::Add){}
-		else if(funct == (uint)Funct::AddUnsigned){}
-		else if(funct == (uint)Funct::And){}
-		else if(funct == (uint)Funct::JumpRegister){}
-		else if(funct == (uint)Funct::Nor){}
-		else if(funct == (uint)Funct::Or){}
-		else if(funct == (uint)Funct::SetLessThan){}
-		else if(funct == (uint)Funct::SetLessThanUnsigned){}
-		else if(funct == (uint)Funct::ShiftLeftLogical){}
-		else if(funct == (uint)Funct::ShiftRightLogical){}
-		else if(funct == (uint)Funct::Subtract){}
-		else if(funct == (uint)Funct::SubtractUnsigned){}
+        if(funct == (uint)Funct::Add)
+            return new Add(rs, rt, rd);
+		else if(funct == (uint)Funct::AddUnsigned)
+            return new AddUnsigned(rs, rt, rd);
+		else if(funct == (uint)Funct::And)
+            return new And(rs, rt, rd);
+		else if(funct == (uint)Funct::JumpRegister)
+            return new JumpRegister(rs, rt, rd);
+		else if(funct == (uint)Funct::Nor)
+            return new Nor(rs, rt, rd);
+		else if(funct == (uint)Funct::Or)
+            return new Or(rs, rt, rd);
+		else if(funct == (uint)Funct::SetLessThan)
+            return new SetLessThan(rs, rt, rd);
+		else if(funct == (uint)Funct::SetLessThanUnsigned)
+            return new SetLessThanUnsigned(rs, rt, rd);
+		else if(funct == (uint)Funct::ShiftLeftLogical)
+            return new ShiftLeftLogical(rs, rt, rd, shamt);
+		else if(funct == (uint)Funct::ShiftRightLogical)
+            return new ShiftRightLogical(rs,rt, rd, shamt);
+		else if(funct == (uint)Funct::Subtract)
+            return new Subtract(rs, rt, rd);
+		else if(funct == (uint)Funct::SubtractUnsigned)
+            return new SubtractUnsigned(rs, rt, rd);
 		else ASSERT_MSG("can not support r format this instruction");
 	}
 	else if(opCode == (uint)Opcode::Jump || opCode == (uint)Opcode::JumpAndLink) // J
 	{
         unsigned int address = instruction & 0x03FFFFFF;
+
+        uint pc = GetProgramCounter() + 4;
+        uint jumpAddr = (pc & 0xf0000000) | address << 2;
         
-        if(opCode == (uint)Opcode::Jump)                return new Jump(address);
-        else if(opCode == (uint)Opcode::JumpAndLink)    return new JumpAndLink(address);
+        if(opCode == (uint)Opcode::Jump)
+            return new Jump(jumpAddr);
+        else if(opCode == (uint)Opcode::JumpAndLink)
+            return new JumpAndLink(jumpAddr);
         else ASSERT_MSG("cant support j foramt this instruction");
 	}
 	else // I
 	{
-        if(opCode == (uint)Opcode::AddImmediate){}
-        else if(opCode == (uint)Opcode::AddImmediateUnsigned){}
-        else if(opCode == (uint)Opcode::AndImmediate){}
-        else if(opCode == (uint)Opcode::BranchOnEqual){}
-        else if(opCode == (uint)Opcode::BranchOnNotEqual){}
-        else if(opCode == (uint)Opcode::LoadByteUnsigned){}
-        else if(opCode == (uint)Opcode::LoadHalfwordUnsigned){}
-        else if(opCode == (uint)Opcode::LoadLinked){}
-        else if(opCode == (uint)Opcode::LoadUpperImmediate){}
-        else if(opCode == (uint)Opcode::LoadWord){}
-        else if(opCode == (uint)Opcode::OrImmediate){}
-        else if(opCode == (uint)Opcode::SetLessThanImmediate){}
-        else if(opCode == (uint)Opcode::SetLessThanImmediateUnsigned){}
-        else if(opCode == (uint)Opcode::StoreByte){}
-        else if(opCode == (uint)Opcode::StoreConditional){}
-        else if(opCode == (uint)Opcode::StoreHalfword){}
-        else if(opCode == (uint)Opcode::StoreWord){}
+        uint mask           = FillBit(15, 31, 15);
+        uint signExtImm     = mask | immediate;
+        uint zeroExtImm     = immediate;
+        uint branchAddr     = FillBit(17, 31, 15) | immediate << 2;
+        
+        if(opCode == (uint)Opcode::AddImmediate)
+            return new AddImmediate(rs, rt, signExtImm);
+        else if(opCode == (uint)Opcode::AddImmediateUnsigned)
+            return new AddImmediateUnsigned(rs, rt, signExtImm);
+        else if(opCode == (uint)Opcode::AndImmediate)
+            return new AndImmediate(rs, rt, zeroExtImm);
+        else if(opCode == (uint)Opcode::BranchOnEqual)
+            return new BranchOnEqual(rs, rt, branchAddr);
+        else if(opCode == (uint)Opcode::BranchOnNotEqual)
+            return new BranchOnNotEqual(rs, rt, branchAddr);
+        else if(opCode == (uint)Opcode::LoadByteUnsigned)
+            return new LoadByteUnsigned(rs, rt, signExtImm);
+        else if(opCode == (uint)Opcode::LoadHalfwordUnsigned)
+            return new LoadHalfwordUnsigned(rs, rt, signExtImm);
+//        else if(opCode == (uint)Opcode::LoadLinked)
+//            return new LoadLinked(rs, rt, signExtImm);
+        else if(opCode == (uint)Opcode::LoadUpperImmediate)
+            return new LoadUpperImmediate(rs, rt, immediate);
+        else if(opCode == (uint)Opcode::LoadWord)
+            return new LoadWord(rs, rt, signExtImm);
+        else if(opCode == (uint)Opcode::OrImmediate)
+            return new OrImmediate(rs, rt, zeroExtImm);
+        else if(opCode == (uint)Opcode::SetLessThanImmediate)
+            return new SetLessThanImmediate(rs, rt, zeroExtImm);
+        else if(opCode == (uint)Opcode::SetLessThanImmediateUnsigned)
+            return new SetLessThanImmediateUnsigned(rs, rt, zeroExtImm);
+        else if(opCode == (uint)Opcode::StoreByte)
+            return new StoreByte(rs, rt, zeroExtImm);
+//        else if(opCode == (uint)Opcode::StoreConditional)
+//            return new StoreConditional(rs, rt, zeroExtImm);
+        else if(opCode == (uint)Opcode::StoreHalfword)
+            return new StoreHalfword(rs, rt, zeroExtImm);
+        else if(opCode == (uint)Opcode::StoreWord)
+            return new StoreWord(rs, rt, zeroExtImm);
+        
         else ASSERT_MSG("cant support i foramt this inst");
     }
 
+    ASSERT_MSG("Error!, not found inst");
     return nullptr;
 }
 
-void System::Execution()
+void System::Execution(Instruction* inst)
 {
+    inst->Execution();
+    delete inst;
 }
 
 unsigned int System::GetDataFromMemory(int address)

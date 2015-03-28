@@ -13,5 +13,3 @@ public:
 public:
     virtual void Execution();
 };
-
-typedef BranchOnNotEqual AddImmediate;
