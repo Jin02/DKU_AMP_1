@@ -62,7 +62,7 @@ bool Multiply::Execution()
 		GlobalDumpLogManager->AddLog("Hi = (R[rs] * R[rt])(63:32); Lo = (R[rs] * R[rt])(31:0)", true);
 
 		char logBuffer[64] = {0, };
-		sprintf(logBuffer, "Hi = {R[%d](0x%x) * R[%d](0x%x)}(63:32) = 0x%llx; // Lo = {R[%d](0x%x) * R[%d](0x%x)}(31:0) = 0x%llx", _rs, rsData, _rt, rtData, (result & 0xffffffff00000000) >> 32, _rs, rsData, _rt, rtData, (result & 0x00000000ffffffff));
+		sprintf(logBuffer, "Hi = {R[%d](0x%x) * R[%d](0x%x)}(63:32) = 0x%x; // Lo = {R[%d](0x%x) * R[%d](0x%x)}(31:0) = 0x%x", _rs, rsData, _rt, rtData, (uint)((result & 0xffffffff00000000) >> 32), _rs, rsData, _rt, rtData, (uint)(result & 0x00000000ffffffff));
 		GlobalDumpLogManager->AddLog(logBuffer, true);
 		GlobalDumpManagerAddLog3NewLine;
 	}
@@ -102,7 +102,7 @@ bool MultiplyUnsigned::Execution()
 		GlobalDumpLogManager->AddLog("Hi = (R[rs] * R[rt])(63:32); Lo = (R[rs] * R[rt])(31:0)", true);
 
 		char logBuffer[64] = {0, };
-		sprintf(logBuffer, "Hi = {R[%d](0x%x) * R[%d](0x%x)}(63:32) = 0x%llx; // Lo = {R[%d](0x%x) * R[%d](0x%x)}(31:0) = 0x%llx", _rs, rsData, _rt, rtData, (result & 0xffffffff00000000) >> 32, _rs, rsData, _rt, rtData, (result & 0x00000000ffffffff));
+		sprintf(logBuffer, "Hi = {R[%d](0x%x) * R[%d](0x%x)}(63:32) = 0x%x; // Lo = {R[%d](0x%x) * R[%d](0x%x)}(31:0) = 0x%x", _rs, rsData, _rt, rtData, (uint)((result & 0xffffffff00000000) >> 32), _rs, rsData, _rt, rtData, (uint)(result & 0x00000000ffffffff));
 		GlobalDumpLogManager->AddLog(logBuffer, true);
 		GlobalDumpManagerAddLog3NewLine;
 	}
