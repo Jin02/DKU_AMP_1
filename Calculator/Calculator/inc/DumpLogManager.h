@@ -4,6 +4,7 @@
 #include "Singleton.h"
 
 #include <string>
+#include <typeinfo>
 
 class DumpLogManager : public Singleton<DumpLogManager>
 {
