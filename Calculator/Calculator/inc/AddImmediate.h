@@ -14,4 +14,9 @@ public:
     virtual bool Execution();
 };
 
-typedef AddImmediateUnsigned AddImmediate;
+class AddImmediate : public AddImmediateUnsigned
+{
+public:
+	AddImmediate(unsigned int rs, unsigned int rt, unsigned int immediate);
+	virtual ~AddImmediate();
+};

@@ -14,4 +14,9 @@ public:
     virtual unsigned int Instruct(unsigned int rsData, unsigned int rtData);
 };
 
-typedef SubtractUnsigned Subtract;
+class Subtract : public SubtractUnsigned
+{
+public:
+	Subtract(unsigned int rs, unsigned int rt, unsigned int rd);
+	virtual ~Subtract();
+};

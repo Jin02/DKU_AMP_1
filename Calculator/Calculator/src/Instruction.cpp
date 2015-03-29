@@ -3,7 +3,6 @@
 
 Instruction::Instruction()
 {
-    
 }
 
 Instruction::~Instruction()

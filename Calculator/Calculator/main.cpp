@@ -9,12 +9,23 @@
 #include <stdio.h>
 #include <string>
 #include "System.h"
+#include "DumpLogManager.h"
 
 int main(int argc, const char * argv[])
 {
+	GlobalDumpManagerAddLogNewLine("--------- Init ---------");
     System* system = System::GetInstance();
-    system->Load("input2.bin");
-    system->Run();
-    
+
+	const std::string fileName = "input2.bin";
+	GlobalDumpManagerAddLogNewLine("Load .bin file : " + fileName);
+	system->Load(fileName);
+	GlobalDumpManagerAddLogNewLine("--------- Done ---------\n\n");
+
+	GlobalDumpManagerAddLogNewLine("--------- System Start ---------");
+	system->Run();
+	GlobalDumpManagerAddLogNewLine("--------- System End ---------");
+
+	GlobalDumpLogManager->WriteFile("out.txt");
+
     return 0;
 }

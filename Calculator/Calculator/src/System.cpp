@@ -26,6 +26,8 @@
 #include "AndImmediate.h"
 #include "AddImmediate.h"
 
+#include "DumpLogManager.h"
+
 System::System() : _programCounter(0), _hi(0), _lo(0)
 {
 	std::fill(_processorMemory.begin(), _processorMemory.end(), 0);
@@ -33,6 +35,16 @@ System::System() : _programCounter(0), _hi(0), _lo(0)
 
 	SetStackPointer(0x8000);
 	SetReturnAddress(0xffffffff);
+
+	GlobalDumpLogManager->AddLog("all clear register", true);
+	GlobalDumpLogManager->AddLog("all clear memory", true);
+
+	char buff[64] = {0, };
+	sprintf(buff, "sp : 0x%x", GetStackPointer());
+	GlobalDumpLogManager->AddLog(buff, true);
+
+	sprintf(buff, "ra : 0x%x", GetReturnAddress());
+	GlobalDumpLogManager->AddLog(buff, true);
 }
 
 System::~System()
@@ -73,6 +85,8 @@ void System::Load(const std::string& path)
 
 	if(IsLittleEndian())
 	{
+		GlobalDumpManagerAddLogNewLine("This system is based little endian. so, I will convert this data to big endian format");
+
 		for(int i=0; i<length / 4; ++i)
 			_processorMemory[i] = LittleEndianToBigEndian(_processorMemory[i]);
 	}
@@ -82,17 +96,54 @@ void System::Run()
 {
 	while(_programCounter != 0xffffffff)
 		RunCycle();
+
+	char buff[128] = {0,};
+	sprintf(buff, "Final Return Value is 0x%x(v0)", _registers[2]);
+	GlobalDumpLogManager->AddLog(buff, true); 
 }
 
 void System::RunCycle()
 {
+	static std::string prevState = "System Start";
+	auto StateLog = [&](const std::string& currentState)
+	{
+		GlobalDumpLogManager->AddLog("State Change | " + prevState + " -> " + currentState + " State", true);
+		prevState = currentState;
+	};
+
 	bool ableNextPC			= true;
 
+	StateLog("Fetch");
 	uint instruction        = Fetch();
+	{
+		auto Log = [&](const std::string& tag, unsigned int value)
+		{
+			char hexStr[64] = {0, };
+			sprintf(hexStr, "0x%x", value);
+
+			std::string log = tag + " : ";
+			log += hexStr;
+
+			GlobalDumpManagerAddLogNewLine(log);
+		};
+		
+		Log("PC", _programCounter);
+		Log("Instruction", instruction);
+		GlobalDumpManagerAddLogNewLine("");
+	}
+
 	if(instruction != 0)
 	{
+		StateLog("Decode");
 		Instruction* exectable  = Decode(instruction);
+
+		StateLog("Execute");
 		ableNextPC = Execution(exectable);
+	}
+	else
+	{
+		GlobalDumpManagerAddLogNewLine("nop, skip decode, execution");
+		prevState = "NOP";
 	}
 
 	if(ableNextPC)
@@ -108,7 +159,7 @@ unsigned int System::Fetch()
 Instruction* System::Decode(unsigned int instruction)
 {
 	unsigned int opCode     = (instruction & 0xFC000000) >> 26;
-	unsigned int funct  = (instruction & 0x0000003F);
+	unsigned int funct		= (instruction & 0x0000003F);
 	unsigned int immediate  = (instruction & 0x0000ffff);
 
 	uint rd		= (instruction & 0x0000f800) >> 11;
@@ -127,7 +178,7 @@ Instruction* System::Decode(unsigned int instruction)
     };
     
 	if(opCode == 0) // R
-	{		
+	{
         if(funct == (uint)Funct::Add)
             return new Add(rs, rt, rd);
 		else if(funct == (uint)Funct::AddUnsigned)
@@ -156,7 +207,6 @@ Instruction* System::Decode(unsigned int instruction)
 			return new Multiply(rs,rt, rd);
 		else if(funct == (uint)Funct::MultiplyUnsigned)
 			return new MultiplyUnsigned(rs, rt, rd);
-
 		else if(funct == (uint)Funct::Divide)
 			return new Divide(rs, rt, rd);
 		else if(funct == (uint)Funct::DivideUnsigned)

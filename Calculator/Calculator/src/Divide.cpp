@@ -1,12 +1,13 @@
 #include "Divide.h"
 #include "System.h"
+#include "DumpLogManager.h"
 
 /** Divide **/
 
 Divide::Divide(unsigned int rs, unsigned int rt, unsigned int rd)
     : RFormatInstruction(rs, rt, rd)
 {
-    
+	GlobalDumpManagerAddLogClassName;
 }
 
 Divide::~Divide(void)
@@ -27,7 +28,15 @@ bool Divide::Execution()
 	int rtData = system->GetDataFromRegister(_rt);
 
 	system->SetLoRegister(rsData / rtData);
-	system->SetHiRegister(rsData % rtData);
+	system->SetHiRegister(rsData % rtData);	
+	{
+		GlobalDumpLogManager->AddLog("Lo = R[rs] / R[rt]; Hi = R[rs] % R[rt]", true);
+
+		char logBuffer[64] = {0, };
+		sprintf(logBuffer, "Lo = R[%d](0x%x) / R[%d](0x%x) = 0x%x  //  Hi = R[%d](0x%x) % R[%d](0x%x) = 0x%x", _rs, rsData, _rt, rtData, rsData / rtData, _rs, rsData, _rt, rtData, rsData % rtData);
+		GlobalDumpLogManager->AddLog(logBuffer, true);
+		GlobalDumpManagerAddLog3NewLine;
+	}
 
 	return true;
 }
@@ -37,7 +46,7 @@ bool Divide::Execution()
 DivideUnsigned::DivideUnsigned(unsigned int rs, unsigned int rt, unsigned int rd)
     : RFormatInstruction(rs, rt, rd)
 {
-    
+	GlobalDumpManagerAddLogClassName;
 }
 
 DivideUnsigned::~DivideUnsigned(void)
@@ -59,6 +68,14 @@ bool DivideUnsigned::Execution()
 
 	system->SetLoRegister(rsData / rtData);
 	system->SetHiRegister(rsData % rtData);
+	{
+		GlobalDumpLogManager->AddLog("Lo = R[rs] / R[rt]; Hi = R[rs] % R[rt]", true);
+
+		char logBuffer[64] = {0, };
+		sprintf(logBuffer, "Lo = R[%d](0x%x) / R[%d](0x%x) = 0x%x  //  Hi = R[%d](0x%x) % R[%d](0x%x) = 0x%x", _rs, rsData, _rt, rtData, rsData / rtData, _rs, rsData, _rt, rtData, rsData % rtData);
+		GlobalDumpLogManager->AddLog(logBuffer, true);
+		GlobalDumpManagerAddLog3NewLine;
+	}
 
 	return true;
 }

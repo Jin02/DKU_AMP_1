@@ -1,0 +1,1435 @@
+--------- Init ---------
+all clear register
+all clear memory
+sp : 0x8000
+ra : 0xffffffff
+Load .bin file : input2.bin
+This system is based little endian. so, I will convert this data to big endian format
+--------- Done ---------
+
+
+--------- System Start ---------
+State Change | System Start -> Fetch State
+PC : 0x0
+Instruction : 0x27bdffd8
+
+State Change | Fetch -> Decode State
+* Instruction AddImmediateUnsigned *
+
+State Change | Decode -> Execute State
+R[rt] = R[rs] + SignExtImm
+R[29] = R[29](0x8000) + 0xffffffd8 = 0x7fd8
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x4
+Instruction : 0xafbf0024
+
+State Change | Fetch -> Decode State
+* Instruction StoreWord *
+
+State Change | Decode -> Execute State
+M[R[rs] + SignExtImm] = R[rt]
+M[(R[29](0x7fd8) + 0x24) = 0x7ffc] = R[31](0xffffffff)
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x8
+Instruction : 0xafbe0020
+
+State Change | Fetch -> Decode State
+* Instruction StoreWord *
+
+State Change | Decode -> Execute State
+M[R[rs] + SignExtImm] = R[rt]
+M[(R[29](0x7fd8) + 0x20) = 0x7ff8] = R[30](0x0)
+
+
+
+State Change | Execute -> Fetch State
+PC : 0xc
+Instruction : 0x3a0f021
+
+State Change | Fetch -> Decode State
+* Instruction AddUnsigned *
+
+State Change | Decode -> Execute State
+R[rd] = R[rs] + R[rt]
+R[30] = R[29](0x7fd8) + R[0](0x0) = 0x7fd8
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x10
+Instruction : 0xafc00018
+
+State Change | Fetch -> Decode State
+* Instruction StoreWord *
+
+State Change | Decode -> Execute State
+M[R[rs] + SignExtImm] = R[rt]
+M[(R[30](0x7fd8) + 0x18) = 0x7ff0] = R[0](0x0)
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x14
+Instruction : 0x24040005
+
+State Change | Fetch -> Decode State
+* Instruction AddImmediateUnsigned *
+
+State Change | Decode -> Execute State
+R[rt] = R[rs] + SignExtImm
+R[4] = R[0](0x0) + 0x5 = 0x5
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x18
+Instruction : 0xc000010
+
+State Change | Fetch -> Decode State
+* Instruction JumpAndLink *
+
+State Change | Decode -> Execute State
+R[31] = PC + 8; PC = JumpAddr
+R[31] = 0x20; PC = 0x40
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x40
+Instruction : 0x27bdffe0
+
+State Change | Fetch -> Decode State
+* Instruction AddImmediateUnsigned *
+
+State Change | Decode -> Execute State
+R[rt] = R[rs] + SignExtImm
+R[29] = R[29](0x7fd8) + 0xffffffe0 = 0x7fb8
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x44
+Instruction : 0xafbf001c
+
+State Change | Fetch -> Decode State
+* Instruction StoreWord *
+
+State Change | Decode -> Execute State
+M[R[rs] + SignExtImm] = R[rt]
+M[(R[29](0x7fb8) + 0x1c) = 0x7fd4] = R[31](0x20)
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x48
+Instruction : 0xafbe0018
+
+State Change | Fetch -> Decode State
+* Instruction StoreWord *
+
+State Change | Decode -> Execute State
+M[R[rs] + SignExtImm] = R[rt]
+M[(R[29](0x7fb8) + 0x18) = 0x7fd0] = R[30](0x7fd8)
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x4c
+Instruction : 0x3a0f021
+
+State Change | Fetch -> Decode State
+* Instruction AddUnsigned *
+
+State Change | Decode -> Execute State
+R[rd] = R[rs] + R[rt]
+R[30] = R[29](0x7fb8) + R[0](0x0) = 0x7fb8
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x50
+Instruction : 0xafc40020
+
+State Change | Fetch -> Decode State
+* Instruction StoreWord *
+
+State Change | Decode -> Execute State
+M[R[rs] + SignExtImm] = R[rt]
+M[(R[30](0x7fb8) + 0x20) = 0x7fd8] = R[4](0x5)
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x54
+Instruction : 0x8fc30020
+
+State Change | Fetch -> Decode State
+* Instruction LoadWord *
+
+State Change | Decode -> Execute State
+R[rt] = M[R[rs] + SignExtImmm]
+R[3] = M[R[30](0x7fb8) + 0x20] = 0x5
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x58
+Instruction : 0x24020001
+
+State Change | Fetch -> Decode State
+* Instruction AddImmediateUnsigned *
+
+State Change | Decode -> Execute State
+R[rt] = R[rs] + SignExtImm
+R[2] = R[0](0x0) + 0x1 = 0x1
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x5c
+Instruction : 0x14620004
+
+State Change | Fetch -> Decode State
+* Instruction BranchOnNotEqual *
+
+State Change | Decode -> Execute State
+if(R[rs] != R[rt])	PC = PC + 4 + BranchAddr
+if(R[3](0x5) != R[2](0x1))	PC = {0x5c + 4 + 0x10}(0x70)
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x70
+Instruction : 0x8fc20020
+
+State Change | Fetch -> Decode State
+* Instruction LoadWord *
+
+State Change | Decode -> Execute State
+R[rt] = M[R[rs] + SignExtImmm]
+R[2] = M[R[30](0x7fb8) + 0x20] = 0x5
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x74
+Instruction : 0x2442ffff
+
+State Change | Fetch -> Decode State
+* Instruction AddImmediateUnsigned *
+
+State Change | Decode -> Execute State
+R[rt] = R[rs] + SignExtImm
+R[2] = R[2](0x5) + 0xffffffff = 0x4
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x78
+Instruction : 0x402021
+
+State Change | Fetch -> Decode State
+* Instruction AddUnsigned *
+
+State Change | Decode -> Execute State
+R[rd] = R[rs] + R[rt]
+R[4] = R[2](0x4) + R[0](0x0) = 0x4
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x7c
+Instruction : 0xc000010
+
+State Change | Fetch -> Decode State
+* Instruction JumpAndLink *
+
+State Change | Decode -> Execute State
+R[31] = PC + 8; PC = JumpAddr
+R[31] = 0x84; PC = 0x40
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x40
+Instruction : 0x27bdffe0
+
+State Change | Fetch -> Decode State
+* Instruction AddImmediateUnsigned *
+
+State Change | Decode -> Execute State
+R[rt] = R[rs] + SignExtImm
+R[29] = R[29](0x7fb8) + 0xffffffe0 = 0x7f98
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x44
+Instruction : 0xafbf001c
+
+State Change | Fetch -> Decode State
+* Instruction StoreWord *
+
+State Change | Decode -> Execute State
+M[R[rs] + SignExtImm] = R[rt]
+M[(R[29](0x7f98) + 0x1c) = 0x7fb4] = R[31](0x84)
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x48
+Instruction : 0xafbe0018
+
+State Change | Fetch -> Decode State
+* Instruction StoreWord *
+
+State Change | Decode -> Execute State
+M[R[rs] + SignExtImm] = R[rt]
+M[(R[29](0x7f98) + 0x18) = 0x7fb0] = R[30](0x7fb8)
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x4c
+Instruction : 0x3a0f021
+
+State Change | Fetch -> Decode State
+* Instruction AddUnsigned *
+
+State Change | Decode -> Execute State
+R[rd] = R[rs] + R[rt]
+R[30] = R[29](0x7f98) + R[0](0x0) = 0x7f98
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x50
+Instruction : 0xafc40020
+
+State Change | Fetch -> Decode State
+* Instruction StoreWord *
+
+State Change | Decode -> Execute State
+M[R[rs] + SignExtImm] = R[rt]
+M[(R[30](0x7f98) + 0x20) = 0x7fb8] = R[4](0x4)
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x54
+Instruction : 0x8fc30020
+
+State Change | Fetch -> Decode State
+* Instruction LoadWord *
+
+State Change | Decode -> Execute State
+R[rt] = M[R[rs] + SignExtImmm]
+R[3] = M[R[30](0x7f98) + 0x20] = 0x4
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x58
+Instruction : 0x24020001
+
+State Change | Fetch -> Decode State
+* Instruction AddImmediateUnsigned *
+
+State Change | Decode -> Execute State
+R[rt] = R[rs] + SignExtImm
+R[2] = R[0](0x0) + 0x1 = 0x1
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x5c
+Instruction : 0x14620004
+
+State Change | Fetch -> Decode State
+* Instruction BranchOnNotEqual *
+
+State Change | Decode -> Execute State
+if(R[rs] != R[rt])	PC = PC + 4 + BranchAddr
+if(R[3](0x4) != R[2](0x1))	PC = {0x5c + 4 + 0x10}(0x70)
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x70
+Instruction : 0x8fc20020
+
+State Change | Fetch -> Decode State
+* Instruction LoadWord *
+
+State Change | Decode -> Execute State
+R[rt] = M[R[rs] + SignExtImmm]
+R[2] = M[R[30](0x7f98) + 0x20] = 0x4
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x74
+Instruction : 0x2442ffff
+
+State Change | Fetch -> Decode State
+* Instruction AddImmediateUnsigned *
+
+State Change | Decode -> Execute State
+R[rt] = R[rs] + SignExtImm
+R[2] = R[2](0x4) + 0xffffffff = 0x3
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x78
+Instruction : 0x402021
+
+State Change | Fetch -> Decode State
+* Instruction AddUnsigned *
+
+State Change | Decode -> Execute State
+R[rd] = R[rs] + R[rt]
+R[4] = R[2](0x3) + R[0](0x0) = 0x3
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x7c
+Instruction : 0xc000010
+
+State Change | Fetch -> Decode State
+* Instruction JumpAndLink *
+
+State Change | Decode -> Execute State
+R[31] = PC + 8; PC = JumpAddr
+R[31] = 0x84; PC = 0x40
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x40
+Instruction : 0x27bdffe0
+
+State Change | Fetch -> Decode State
+* Instruction AddImmediateUnsigned *
+
+State Change | Decode -> Execute State
+R[rt] = R[rs] + SignExtImm
+R[29] = R[29](0x7f98) + 0xffffffe0 = 0x7f78
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x44
+Instruction : 0xafbf001c
+
+State Change | Fetch -> Decode State
+* Instruction StoreWord *
+
+State Change | Decode -> Execute State
+M[R[rs] + SignExtImm] = R[rt]
+M[(R[29](0x7f78) + 0x1c) = 0x7f94] = R[31](0x84)
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x48
+Instruction : 0xafbe0018
+
+State Change | Fetch -> Decode State
+* Instruction StoreWord *
+
+State Change | Decode -> Execute State
+M[R[rs] + SignExtImm] = R[rt]
+M[(R[29](0x7f78) + 0x18) = 0x7f90] = R[30](0x7f98)
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x4c
+Instruction : 0x3a0f021
+
+State Change | Fetch -> Decode State
+* Instruction AddUnsigned *
+
+State Change | Decode -> Execute State
+R[rd] = R[rs] + R[rt]
+R[30] = R[29](0x7f78) + R[0](0x0) = 0x7f78
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x50
+Instruction : 0xafc40020
+
+State Change | Fetch -> Decode State
+* Instruction StoreWord *
+
+State Change | Decode -> Execute State
+M[R[rs] + SignExtImm] = R[rt]
+M[(R[30](0x7f78) + 0x20) = 0x7f98] = R[4](0x3)
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x54
+Instruction : 0x8fc30020
+
+State Change | Fetch -> Decode State
+* Instruction LoadWord *
+
+State Change | Decode -> Execute State
+R[rt] = M[R[rs] + SignExtImmm]
+R[3] = M[R[30](0x7f78) + 0x20] = 0x3
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x58
+Instruction : 0x24020001
+
+State Change | Fetch -> Decode State
+* Instruction AddImmediateUnsigned *
+
+State Change | Decode -> Execute State
+R[rt] = R[rs] + SignExtImm
+R[2] = R[0](0x0) + 0x1 = 0x1
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x5c
+Instruction : 0x14620004
+
+State Change | Fetch -> Decode State
+* Instruction BranchOnNotEqual *
+
+State Change | Decode -> Execute State
+if(R[rs] != R[rt])	PC = PC + 4 + BranchAddr
+if(R[3](0x3) != R[2](0x1))	PC = {0x5c + 4 + 0x10}(0x70)
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x70
+Instruction : 0x8fc20020
+
+State Change | Fetch -> Decode State
+* Instruction LoadWord *
+
+State Change | Decode -> Execute State
+R[rt] = M[R[rs] + SignExtImmm]
+R[2] = M[R[30](0x7f78) + 0x20] = 0x3
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x74
+Instruction : 0x2442ffff
+
+State Change | Fetch -> Decode State
+* Instruction AddImmediateUnsigned *
+
+State Change | Decode -> Execute State
+R[rt] = R[rs] + SignExtImm
+R[2] = R[2](0x3) + 0xffffffff = 0x2
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x78
+Instruction : 0x402021
+
+State Change | Fetch -> Decode State
+* Instruction AddUnsigned *
+
+State Change | Decode -> Execute State
+R[rd] = R[rs] + R[rt]
+R[4] = R[2](0x2) + R[0](0x0) = 0x2
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x7c
+Instruction : 0xc000010
+
+State Change | Fetch -> Decode State
+* Instruction JumpAndLink *
+
+State Change | Decode -> Execute State
+R[31] = PC + 8; PC = JumpAddr
+R[31] = 0x84; PC = 0x40
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x40
+Instruction : 0x27bdffe0
+
+State Change | Fetch -> Decode State
+* Instruction AddImmediateUnsigned *
+
+State Change | Decode -> Execute State
+R[rt] = R[rs] + SignExtImm
+R[29] = R[29](0x7f78) + 0xffffffe0 = 0x7f58
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x44
+Instruction : 0xafbf001c
+
+State Change | Fetch -> Decode State
+* Instruction StoreWord *
+
+State Change | Decode -> Execute State
+M[R[rs] + SignExtImm] = R[rt]
+M[(R[29](0x7f58) + 0x1c) = 0x7f74] = R[31](0x84)
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x48
+Instruction : 0xafbe0018
+
+State Change | Fetch -> Decode State
+* Instruction StoreWord *
+
+State Change | Decode -> Execute State
+M[R[rs] + SignExtImm] = R[rt]
+M[(R[29](0x7f58) + 0x18) = 0x7f70] = R[30](0x7f78)
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x4c
+Instruction : 0x3a0f021
+
+State Change | Fetch -> Decode State
+* Instruction AddUnsigned *
+
+State Change | Decode -> Execute State
+R[rd] = R[rs] + R[rt]
+R[30] = R[29](0x7f58) + R[0](0x0) = 0x7f58
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x50
+Instruction : 0xafc40020
+
+State Change | Fetch -> Decode State
+* Instruction StoreWord *
+
+State Change | Decode -> Execute State
+M[R[rs] + SignExtImm] = R[rt]
+M[(R[30](0x7f58) + 0x20) = 0x7f78] = R[4](0x2)
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x54
+Instruction : 0x8fc30020
+
+State Change | Fetch -> Decode State
+* Instruction LoadWord *
+
+State Change | Decode -> Execute State
+R[rt] = M[R[rs] + SignExtImmm]
+R[3] = M[R[30](0x7f58) + 0x20] = 0x2
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x58
+Instruction : 0x24020001
+
+State Change | Fetch -> Decode State
+* Instruction AddImmediateUnsigned *
+
+State Change | Decode -> Execute State
+R[rt] = R[rs] + SignExtImm
+R[2] = R[0](0x0) + 0x1 = 0x1
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x5c
+Instruction : 0x14620004
+
+State Change | Fetch -> Decode State
+* Instruction BranchOnNotEqual *
+
+State Change | Decode -> Execute State
+if(R[rs] != R[rt])	PC = PC + 4 + BranchAddr
+if(R[3](0x2) != R[2](0x1))	PC = {0x5c + 4 + 0x10}(0x70)
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x70
+Instruction : 0x8fc20020
+
+State Change | Fetch -> Decode State
+* Instruction LoadWord *
+
+State Change | Decode -> Execute State
+R[rt] = M[R[rs] + SignExtImmm]
+R[2] = M[R[30](0x7f58) + 0x20] = 0x2
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x74
+Instruction : 0x2442ffff
+
+State Change | Fetch -> Decode State
+* Instruction AddImmediateUnsigned *
+
+State Change | Decode -> Execute State
+R[rt] = R[rs] + SignExtImm
+R[2] = R[2](0x2) + 0xffffffff = 0x1
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x78
+Instruction : 0x402021
+
+State Change | Fetch -> Decode State
+* Instruction AddUnsigned *
+
+State Change | Decode -> Execute State
+R[rd] = R[rs] + R[rt]
+R[4] = R[2](0x1) + R[0](0x0) = 0x1
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x7c
+Instruction : 0xc000010
+
+State Change | Fetch -> Decode State
+* Instruction JumpAndLink *
+
+State Change | Decode -> Execute State
+R[31] = PC + 8; PC = JumpAddr
+R[31] = 0x84; PC = 0x40
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x40
+Instruction : 0x27bdffe0
+
+State Change | Fetch -> Decode State
+* Instruction AddImmediateUnsigned *
+
+State Change | Decode -> Execute State
+R[rt] = R[rs] + SignExtImm
+R[29] = R[29](0x7f58) + 0xffffffe0 = 0x7f38
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x44
+Instruction : 0xafbf001c
+
+State Change | Fetch -> Decode State
+* Instruction StoreWord *
+
+State Change | Decode -> Execute State
+M[R[rs] + SignExtImm] = R[rt]
+M[(R[29](0x7f38) + 0x1c) = 0x7f54] = R[31](0x84)
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x48
+Instruction : 0xafbe0018
+
+State Change | Fetch -> Decode State
+* Instruction StoreWord *
+
+State Change | Decode -> Execute State
+M[R[rs] + SignExtImm] = R[rt]
+M[(R[29](0x7f38) + 0x18) = 0x7f50] = R[30](0x7f58)
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x4c
+Instruction : 0x3a0f021
+
+State Change | Fetch -> Decode State
+* Instruction AddUnsigned *
+
+State Change | Decode -> Execute State
+R[rd] = R[rs] + R[rt]
+R[30] = R[29](0x7f38) + R[0](0x0) = 0x7f38
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x50
+Instruction : 0xafc40020
+
+State Change | Fetch -> Decode State
+* Instruction StoreWord *
+
+State Change | Decode -> Execute State
+M[R[rs] + SignExtImm] = R[rt]
+M[(R[30](0x7f38) + 0x20) = 0x7f58] = R[4](0x1)
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x54
+Instruction : 0x8fc30020
+
+State Change | Fetch -> Decode State
+* Instruction LoadWord *
+
+State Change | Decode -> Execute State
+R[rt] = M[R[rs] + SignExtImmm]
+R[3] = M[R[30](0x7f38) + 0x20] = 0x1
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x58
+Instruction : 0x24020001
+
+State Change | Fetch -> Decode State
+* Instruction AddImmediateUnsigned *
+
+State Change | Decode -> Execute State
+R[rt] = R[rs] + SignExtImm
+R[2] = R[0](0x0) + 0x1 = 0x1
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x5c
+Instruction : 0x14620004
+
+State Change | Fetch -> Decode State
+* Instruction BranchOnNotEqual *
+
+State Change | Decode -> Execute State
+if(R[rs] != R[rt])	PC = PC + 4 + BranchAddr
+if(R[3](0x1) != R[2](0x1))	PC = {0x5c + 4 + 0x10}(0x70)
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x60
+Instruction : 0x0
+
+nop, skip decode, execution
+State Change | NOP -> Fetch State
+PC : 0x64
+Instruction : 0x24020001
+
+State Change | Fetch -> Decode State
+* Instruction AddImmediateUnsigned *
+
+State Change | Decode -> Execute State
+R[rt] = R[rs] + SignExtImm
+R[2] = R[0](0x0) + 0x1 = 0x1
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x68
+Instruction : 0x8000024
+
+State Change | Fetch -> Decode State
+* Instruction Jump *
+
+State Change | Decode -> Execute State
+PC = JumpAddr
+PC = 0x90
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x90
+Instruction : 0x3c0e821
+
+State Change | Fetch -> Decode State
+* Instruction AddUnsigned *
+
+State Change | Decode -> Execute State
+R[rd] = R[rs] + R[rt]
+R[29] = R[30](0x7f38) + R[0](0x0) = 0x7f38
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x94
+Instruction : 0x8fbf001c
+
+State Change | Fetch -> Decode State
+* Instruction LoadWord *
+
+State Change | Decode -> Execute State
+R[rt] = M[R[rs] + SignExtImmm]
+R[31] = M[R[29](0x7f38) + 0x1c] = 0x84
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x98
+Instruction : 0x8fbe0018
+
+State Change | Fetch -> Decode State
+* Instruction LoadWord *
+
+State Change | Decode -> Execute State
+R[rt] = M[R[rs] + SignExtImmm]
+R[30] = M[R[29](0x7f38) + 0x18] = 0x7f58
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x9c
+Instruction : 0x27bd0020
+
+State Change | Fetch -> Decode State
+* Instruction AddImmediateUnsigned *
+
+State Change | Decode -> Execute State
+R[rt] = R[rs] + SignExtImm
+R[29] = R[29](0x7f38) + 0x20 = 0x7f58
+
+
+
+State Change | Execute -> Fetch State
+PC : 0xa0
+Instruction : 0x3e00008
+
+State Change | Fetch -> Decode State
+* Instruction JumpRegister *
+
+State Change | Decode -> Execute State
+PC = R[rs]
+PC = R[31](0x84)
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x84
+Instruction : 0x401821
+
+State Change | Fetch -> Decode State
+* Instruction AddUnsigned *
+
+State Change | Decode -> Execute State
+R[rd] = R[rs] + R[rt]
+R[3] = R[2](0x1) + R[0](0x0) = 0x1
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x88
+Instruction : 0x8fc20020
+
+State Change | Fetch -> Decode State
+* Instruction LoadWord *
+
+State Change | Decode -> Execute State
+R[rt] = M[R[rs] + SignExtImmm]
+R[2] = M[R[30](0x7f58) + 0x20] = 0x2
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x8c
+Instruction : 0x70621002
+
+State Change | Fetch -> Decode State
+* Instruction Multiply32BitRes *
+
+State Change | Decode -> Execute State
+R[rd] = R[rs] * R[rt]
+R[2] = R[3](0x1) * R[2](0x2) = 0x3
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x90
+Instruction : 0x3c0e821
+
+State Change | Fetch -> Decode State
+* Instruction AddUnsigned *
+
+State Change | Decode -> Execute State
+R[rd] = R[rs] + R[rt]
+R[29] = R[30](0x7f58) + R[0](0x0) = 0x7f58
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x94
+Instruction : 0x8fbf001c
+
+State Change | Fetch -> Decode State
+* Instruction LoadWord *
+
+State Change | Decode -> Execute State
+R[rt] = M[R[rs] + SignExtImmm]
+R[31] = M[R[29](0x7f58) + 0x1c] = 0x84
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x98
+Instruction : 0x8fbe0018
+
+State Change | Fetch -> Decode State
+* Instruction LoadWord *
+
+State Change | Decode -> Execute State
+R[rt] = M[R[rs] + SignExtImmm]
+R[30] = M[R[29](0x7f58) + 0x18] = 0x7f78
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x9c
+Instruction : 0x27bd0020
+
+State Change | Fetch -> Decode State
+* Instruction AddImmediateUnsigned *
+
+State Change | Decode -> Execute State
+R[rt] = R[rs] + SignExtImm
+R[29] = R[29](0x7f58) + 0x20 = 0x7f78
+
+
+
+State Change | Execute -> Fetch State
+PC : 0xa0
+Instruction : 0x3e00008
+
+State Change | Fetch -> Decode State
+* Instruction JumpRegister *
+
+State Change | Decode -> Execute State
+PC = R[rs]
+PC = R[31](0x84)
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x84
+Instruction : 0x401821
+
+State Change | Fetch -> Decode State
+* Instruction AddUnsigned *
+
+State Change | Decode -> Execute State
+R[rd] = R[rs] + R[rt]
+R[3] = R[2](0x2) + R[0](0x0) = 0x2
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x88
+Instruction : 0x8fc20020
+
+State Change | Fetch -> Decode State
+* Instruction LoadWord *
+
+State Change | Decode -> Execute State
+R[rt] = M[R[rs] + SignExtImmm]
+R[2] = M[R[30](0x7f78) + 0x20] = 0x3
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x8c
+Instruction : 0x70621002
+
+State Change | Fetch -> Decode State
+* Instruction Multiply32BitRes *
+
+State Change | Decode -> Execute State
+R[rd] = R[rs] * R[rt]
+R[2] = R[3](0x2) * R[2](0x3) = 0x5
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x90
+Instruction : 0x3c0e821
+
+State Change | Fetch -> Decode State
+* Instruction AddUnsigned *
+
+State Change | Decode -> Execute State
+R[rd] = R[rs] + R[rt]
+R[29] = R[30](0x7f78) + R[0](0x0) = 0x7f78
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x94
+Instruction : 0x8fbf001c
+
+State Change | Fetch -> Decode State
+* Instruction LoadWord *
+
+State Change | Decode -> Execute State
+R[rt] = M[R[rs] + SignExtImmm]
+R[31] = M[R[29](0x7f78) + 0x1c] = 0x84
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x98
+Instruction : 0x8fbe0018
+
+State Change | Fetch -> Decode State
+* Instruction LoadWord *
+
+State Change | Decode -> Execute State
+R[rt] = M[R[rs] + SignExtImmm]
+R[30] = M[R[29](0x7f78) + 0x18] = 0x7f98
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x9c
+Instruction : 0x27bd0020
+
+State Change | Fetch -> Decode State
+* Instruction AddImmediateUnsigned *
+
+State Change | Decode -> Execute State
+R[rt] = R[rs] + SignExtImm
+R[29] = R[29](0x7f78) + 0x20 = 0x7f98
+
+
+
+State Change | Execute -> Fetch State
+PC : 0xa0
+Instruction : 0x3e00008
+
+State Change | Fetch -> Decode State
+* Instruction JumpRegister *
+
+State Change | Decode -> Execute State
+PC = R[rs]
+PC = R[31](0x84)
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x84
+Instruction : 0x401821
+
+State Change | Fetch -> Decode State
+* Instruction AddUnsigned *
+
+State Change | Decode -> Execute State
+R[rd] = R[rs] + R[rt]
+R[3] = R[2](0x6) + R[0](0x0) = 0x6
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x88
+Instruction : 0x8fc20020
+
+State Change | Fetch -> Decode State
+* Instruction LoadWord *
+
+State Change | Decode -> Execute State
+R[rt] = M[R[rs] + SignExtImmm]
+R[2] = M[R[30](0x7f98) + 0x20] = 0x4
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x8c
+Instruction : 0x70621002
+
+State Change | Fetch -> Decode State
+* Instruction Multiply32BitRes *
+
+State Change | Decode -> Execute State
+R[rd] = R[rs] * R[rt]
+R[2] = R[3](0x6) * R[2](0x4) = 0xa
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x90
+Instruction : 0x3c0e821
+
+State Change | Fetch -> Decode State
+* Instruction AddUnsigned *
+
+State Change | Decode -> Execute State
+R[rd] = R[rs] + R[rt]
+R[29] = R[30](0x7f98) + R[0](0x0) = 0x7f98
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x94
+Instruction : 0x8fbf001c
+
+State Change | Fetch -> Decode State
+* Instruction LoadWord *
+
+State Change | Decode -> Execute State
+R[rt] = M[R[rs] + SignExtImmm]
+R[31] = M[R[29](0x7f98) + 0x1c] = 0x84
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x98
+Instruction : 0x8fbe0018
+
+State Change | Fetch -> Decode State
+* Instruction LoadWord *
+
+State Change | Decode -> Execute State
+R[rt] = M[R[rs] + SignExtImmm]
+R[30] = M[R[29](0x7f98) + 0x18] = 0x7fb8
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x9c
+Instruction : 0x27bd0020
+
+State Change | Fetch -> Decode State
+* Instruction AddImmediateUnsigned *
+
+State Change | Decode -> Execute State
+R[rt] = R[rs] + SignExtImm
+R[29] = R[29](0x7f98) + 0x20 = 0x7fb8
+
+
+
+State Change | Execute -> Fetch State
+PC : 0xa0
+Instruction : 0x3e00008
+
+State Change | Fetch -> Decode State
+* Instruction JumpRegister *
+
+State Change | Decode -> Execute State
+PC = R[rs]
+PC = R[31](0x84)
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x84
+Instruction : 0x401821
+
+State Change | Fetch -> Decode State
+* Instruction AddUnsigned *
+
+State Change | Decode -> Execute State
+R[rd] = R[rs] + R[rt]
+R[3] = R[2](0x18) + R[0](0x0) = 0x18
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x88
+Instruction : 0x8fc20020
+
+State Change | Fetch -> Decode State
+* Instruction LoadWord *
+
+State Change | Decode -> Execute State
+R[rt] = M[R[rs] + SignExtImmm]
+R[2] = M[R[30](0x7fb8) + 0x20] = 0x5
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x8c
+Instruction : 0x70621002
+
+State Change | Fetch -> Decode State
+* Instruction Multiply32BitRes *
+
+State Change | Decode -> Execute State
+R[rd] = R[rs] * R[rt]
+R[2] = R[3](0x18) * R[2](0x5) = 0x1d
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x90
+Instruction : 0x3c0e821
+
+State Change | Fetch -> Decode State
+* Instruction AddUnsigned *
+
+State Change | Decode -> Execute State
+R[rd] = R[rs] + R[rt]
+R[29] = R[30](0x7fb8) + R[0](0x0) = 0x7fb8
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x94
+Instruction : 0x8fbf001c
+
+State Change | Fetch -> Decode State
+* Instruction LoadWord *
+
+State Change | Decode -> Execute State
+R[rt] = M[R[rs] + SignExtImmm]
+R[31] = M[R[29](0x7fb8) + 0x1c] = 0x20
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x98
+Instruction : 0x8fbe0018
+
+State Change | Fetch -> Decode State
+* Instruction LoadWord *
+
+State Change | Decode -> Execute State
+R[rt] = M[R[rs] + SignExtImmm]
+R[30] = M[R[29](0x7fb8) + 0x18] = 0x7fd8
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x9c
+Instruction : 0x27bd0020
+
+State Change | Fetch -> Decode State
+* Instruction AddImmediateUnsigned *
+
+State Change | Decode -> Execute State
+R[rt] = R[rs] + SignExtImm
+R[29] = R[29](0x7fb8) + 0x20 = 0x7fd8
+
+
+
+State Change | Execute -> Fetch State
+PC : 0xa0
+Instruction : 0x3e00008
+
+State Change | Fetch -> Decode State
+* Instruction JumpRegister *
+
+State Change | Decode -> Execute State
+PC = R[rs]
+PC = R[31](0x20)
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x20
+Instruction : 0xafc20018
+
+State Change | Fetch -> Decode State
+* Instruction StoreWord *
+
+State Change | Decode -> Execute State
+M[R[rs] + SignExtImm] = R[rt]
+M[(R[30](0x7fd8) + 0x18) = 0x7ff0] = R[2](0x78)
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x24
+Instruction : 0x8fc20018
+
+State Change | Fetch -> Decode State
+* Instruction LoadWord *
+
+State Change | Decode -> Execute State
+R[rt] = M[R[rs] + SignExtImmm]
+R[2] = M[R[30](0x7fd8) + 0x18] = 0x78
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x28
+Instruction : 0x3c0e821
+
+State Change | Fetch -> Decode State
+* Instruction AddUnsigned *
+
+State Change | Decode -> Execute State
+R[rd] = R[rs] + R[rt]
+R[29] = R[30](0x7fd8) + R[0](0x0) = 0x7fd8
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x2c
+Instruction : 0x8fbf0024
+
+State Change | Fetch -> Decode State
+* Instruction LoadWord *
+
+State Change | Decode -> Execute State
+R[rt] = M[R[rs] + SignExtImmm]
+R[31] = M[R[29](0x7fd8) + 0x24] = 0xffffffff
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x30
+Instruction : 0x8fbe0020
+
+State Change | Fetch -> Decode State
+* Instruction LoadWord *
+
+State Change | Decode -> Execute State
+R[rt] = M[R[rs] + SignExtImmm]
+R[30] = M[R[29](0x7fd8) + 0x20] = 0x0
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x34
+Instruction : 0x27bd0028
+
+State Change | Fetch -> Decode State
+* Instruction AddImmediateUnsigned *
+
+State Change | Decode -> Execute State
+R[rt] = R[rs] + SignExtImm
+R[29] = R[29](0x7fd8) + 0x28 = 0x8000
+
+
+
+State Change | Execute -> Fetch State
+PC : 0x38
+Instruction : 0x3e00008
+
+State Change | Fetch -> Decode State
+* Instruction JumpRegister *
+
+State Change | Decode -> Execute State
+PC = R[rs]
+PC = R[31](0xffffffff)
+
+
+
+Final Return Value is 0x78(v0)
+--------- System End ---------

@@ -31,6 +31,9 @@
     <Filter Include="Module\Instruction\J">
       <UniqueIdentifier>{45f4691a-06d9-427f-85f2-4d696142b5de}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Module\DumpLogManager">
+      <UniqueIdentifier>{a8b1e56a-e7bc-438d-b7b4-9dafb517bc2e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="inc\System.h">
@@ -67,12 +70,6 @@
       <Filter>Module\Instruction\R</Filter>
     </ClInclude>
     <ClInclude Include="inc\BranchOnNotEqual.h">
-      <Filter>Module\Instruction\I</Filter>
-    </ClInclude>
-    <ClInclude Include="inc\BranchGreaterThan.h">
-      <Filter>Module\Instruction\I</Filter>
-    </ClInclude>
-    <ClInclude Include="inc\BranchLessThan.h">
       <Filter>Module\Instruction\I</Filter>
     </ClInclude>
     <ClInclude Include="inc\BranchOnEqual.h">
@@ -117,6 +114,9 @@
     <ClInclude Include="inc\Divide.h">
       <Filter>Module\Instruction\R</Filter>
     </ClInclude>
+    <ClInclude Include="inc\DumpLogManager.h">
+      <Filter>Module\DumpLogManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\System.cpp">
@@ -145,12 +145,6 @@
     </ClCompile>
     <ClCompile Include="src\And.cpp">
       <Filter>Module\Instruction\R</Filter>
-    </ClCompile>
-    <ClCompile Include="src\BranchGreaterThan.cpp">
-      <Filter>Module\Instruction\I</Filter>
-    </ClCompile>
-    <ClCompile Include="src\BranchLessThan.cpp">
-      <Filter>Module\Instruction\I</Filter>
     </ClCompile>
     <ClCompile Include="src\BranchOnEqual.cpp">
       <Filter>Module\Instruction\I</Filter>
@@ -199,6 +193,9 @@
     </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DumpLogManager.cpp">
+      <Filter>Module\DumpLogManager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
