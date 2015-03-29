@@ -33,7 +33,8 @@ bool Divide::Execution()
 		GlobalDumpLogManager->AddLog("Lo = R[rs] / R[rt]; Hi = R[rs] % R[rt]", true);
 
 		char logBuffer[64] = {0, };
-		sprintf(logBuffer, "Lo = R[%d](0x%x) / R[%d](0x%x) = 0x%x  //  Hi = R[%d](0x%x) % R[%d](0x%x) = 0x%x", _rs, rsData, _rt, rtData, rsData / rtData, _rs, rsData, _rt, rtData, rsData % rtData);
+		sprintf(logBuffer, "Lo = R[%d](0x%x) / R[%d](0x%x) = 0x%x  //  Hi = R[%d](0x%x) %% R[%d](0x%x) = 0x%x",
+								  _rs, rsData, _rt, rtData, rsData / rtData, _rs, rsData, _rt, rtData, rsData % rtData);
 		GlobalDumpLogManager->AddLog(logBuffer, true);
 		GlobalDumpManagerAddLog3NewLine;
 	}
@@ -72,7 +73,7 @@ bool DivideUnsigned::Execution()
 		GlobalDumpLogManager->AddLog("Lo = R[rs] / R[rt]; Hi = R[rs] % R[rt]", true);
 
 		char logBuffer[64] = {0, };
-		sprintf(logBuffer, "Lo = R[%d](0x%x) / R[%d](0x%x) = 0x%x  //  Hi = R[%d](0x%x) % R[%d](0x%x) = 0x%x", _rs, rsData, _rt, rtData, rsData / rtData, _rs, rsData, _rt, rtData, rsData % rtData);
+		sprintf(logBuffer, "Lo = R[%d](0x%x) / R[%d](0x%x) = 0x%x  //  Hi = R[%d](0x%x) %% R[%d](0x%x) = 0x%x", _rs, rsData, _rt, rtData, rsData / rtData, _rs, rsData, _rt, rtData, rsData % rtData);
 		GlobalDumpLogManager->AddLog(logBuffer, true);
 		GlobalDumpManagerAddLog3NewLine;
 	}
