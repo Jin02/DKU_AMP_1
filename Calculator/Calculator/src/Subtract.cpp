@@ -5,7 +5,7 @@
 SubtractUnsigned::SubtractUnsigned(unsigned int rs, unsigned int rt, unsigned int rd)
     : RFormatInstruction(rs, rt, rd)
 {
-	GlobalDumpManagerAddLogClassName;
+	GlobalDumpManagerAddLogClassName(SubtractUnsigned);
 }
 
 SubtractUnsigned::~SubtractUnsigned(void)
@@ -29,7 +29,7 @@ unsigned int SubtractUnsigned::Instruct(unsigned int rsData, unsigned int rtData
 
 Subtract::Subtract(unsigned int rs, unsigned int rt, unsigned int rd) : SubtractUnsigned(rs, rt, rd)
 {
-	GlobalDumpManagerAddLogClassName;
+	GlobalDumpManagerAddLogClassName(Subtract);
 }
 
 Subtract::~Subtract()

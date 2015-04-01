@@ -28,7 +28,7 @@
 
 #include "DumpLogManager.h"
 
-System::System() : _programCounter(0), _hi(0), _lo(0)
+System::System() : _programCounter(0), _hi(0), _lo(0), _cycle(0)
 {
 	std::fill(_processorMemory.begin(), _processorMemory.end(), 0);
 	std::fill(_registers.begin(), _registers.end(), 0);
@@ -95,7 +95,10 @@ void System::Load(const std::string& path)
 void System::Run()
 {
 	while(_programCounter != 0xffffffff)
+    {
+        GlobalDumpLogManager->AddLog("Cycle Num\t| " + std::to_string(_cycle++), true);
 		RunCycle();
+    }
 
 	char buff[128] = {0,};
 	sprintf(buff, "Final Return Value is 0x%x(v0)", _registers[2]);
@@ -107,7 +110,7 @@ void System::RunCycle()
 	static std::string prevState = "System Start";
 	auto StateLog = [&](const std::string& currentState)
 	{
-		GlobalDumpLogManager->AddLog("State Change | " + prevState + " -> " + currentState + " State", true);
+		GlobalDumpLogManager->AddLog("State Change\t| " + prevState + " -> " + currentState + " State", true);
 		prevState = currentState;
 	};
 
@@ -121,14 +124,14 @@ void System::RunCycle()
 			char hexStr[64] = {0, };
 			sprintf(hexStr, "0x%x", value);
 
-			std::string log = tag + " : ";
+			std::string log = tag + "| ";
 			log += hexStr;
 
 			GlobalDumpManagerAddLogNewLine(log);
 		};
 		
-		Log("PC", _programCounter);
-		Log("Instruction", instruction);
+		Log("PC\t\t", _programCounter);
+		Log("Instruction\t", instruction);
 		GlobalDumpManagerAddLogNewLine("");
 	}
 
@@ -158,7 +161,9 @@ unsigned int System::Fetch()
 
 Instruction* System::Decode(unsigned int instruction)
 {
-	unsigned int opCode     = (instruction & 0xFC000000) >> 26;
+    char buff[256] = {0, };
+
+    unsigned int opCode     = (instruction & 0xFC000000) >> 26;
 	unsigned int funct		= (instruction & 0x0000003F);
 	unsigned int immediate  = (instruction & 0x0000ffff);
 
@@ -179,6 +184,9 @@ Instruction* System::Decode(unsigned int instruction)
     
 	if(opCode == 0) // R
 	{
+        sprintf(buff, "R Type\t\t| rd 0x%x / rs 0x%x / rt 0x%x / shamt 0x%x / funct 0x%x", rd, rs, rt, shamt, funct);
+        GlobalDumpLogManager->AddLog(buff, true);
+        
         if(funct == (uint)Funct::Add)
             return new Add(rs, rt, rd);
 		else if(funct == (uint)Funct::AddUnsigned)
@@ -228,8 +236,10 @@ Instruction* System::Decode(unsigned int instruction)
         unsigned int address = instruction & 0x03FFFFFF;
 
         uint pc = GetProgramCounter() + 4;
-        uint jumpAddr = (pc & 0xf0000000) | address << 2;
-        
+        uint jumpAddr = (pc & 0xf0000000) | (address << 2);
+
+        sprintf(buff, "J Type\t\t| opcode 0x%x / address 0x%x", opCode, jumpAddr);
+  
         if(opCode == (uint)Opcode::Jump)
             return new Jump(jumpAddr);
         else if(opCode == (uint)Opcode::JumpAndLink)
@@ -244,6 +254,9 @@ Instruction* System::Decode(unsigned int instruction)
 
 		mask				= FillBit(17, 31, 15);
         uint branchAddr     = FillBit(17, 31, 15) | (immediate << 2);
+        
+        sprintf(buff, "I Type\t\t| opcode 0x%x / signExtImm 0x%x / zeroExtImm 0x%x / branchAddr 0x%x", opCode, signExtImm, zeroExtImm, branchAddr);
+        GlobalDumpLogManager->AddLog(buff, true);
         
         if(opCode == (uint)Opcode::AddImmediate)
             return new AddImmediate(rs, rt, signExtImm);
@@ -280,7 +293,10 @@ Instruction* System::Decode(unsigned int instruction)
         else if(opCode == (uint)Opcode::StoreWord)
             return new StoreWord(rs, rt, zeroExtImm);
 		else if((opCode == (uint)Opcode::Multiply32BitRes) && (funct == (uint)Funct::Multiply32BitRes))
+        {
+            GlobalDumpLogManager->AddLog(" / funct 0x%x", funct);
 			return new Multiply32BitRes(rs, rt, rd);
+        }
         
         else ASSERT_MSG("cant support i foramt this inst");
     }

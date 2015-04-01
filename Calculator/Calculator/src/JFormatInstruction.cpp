@@ -16,7 +16,7 @@ JFormatInstruction::~JFormatInstruction(void)
 /**** Jump Instruction ****/
 Jump::Jump(unsigned int address) : JFormatInstruction(address)
 {
-	GlobalDumpManagerAddLogClassName;
+	GlobalDumpManagerAddLogClassName(Jump);
 }
 Jump::~Jump(){}
 
@@ -41,7 +41,7 @@ bool Jump::Execution()
 
 JumpAndLink::JumpAndLink(unsigned int address) : JFormatInstruction(address)
 {
-	GlobalDumpManagerAddLogClassName;
+	GlobalDumpManagerAddLogClassName(JumpAndLink);
 }
 JumpAndLink::~JumpAndLink()
 {

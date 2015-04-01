@@ -7,7 +7,7 @@
 Multiply32BitRes::Multiply32BitRes(unsigned int rs, unsigned int rt, unsigned int rd)
     : RFormatInstruction(rs, rt, rd)
 {
-	GlobalDumpManagerAddLogClassName;
+	GlobalDumpManagerAddLogClassName(Multiply32BitRes);
 }
 
 Multiply32BitRes::~Multiply32BitRes(void)
@@ -34,7 +34,7 @@ unsigned int Multiply32BitRes::Instruct(unsigned int rsData, unsigned int rtData
 Multiply::Multiply(unsigned int rs, unsigned int rt, unsigned int rd)
     : RFormatInstruction(rs, rt, rd)
 {
-	GlobalDumpManagerAddLogClassName;
+	GlobalDumpManagerAddLogClassName(Multiply);
 }
 
 Multiply::~Multiply(void)
@@ -75,7 +75,7 @@ bool Multiply::Execution()
 MultiplyUnsigned::MultiplyUnsigned(unsigned int rs, unsigned int rt, unsigned int rd)
     : RFormatInstruction(rs, rt, rd)
 {
-	GlobalDumpManagerAddLogClassName;
+	GlobalDumpManagerAddLogClassName(MultiplyUnsigned);
 }
 
 MultiplyUnsigned::~MultiplyUnsigned(void)

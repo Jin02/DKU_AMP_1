@@ -3,7 +3,7 @@
 #include "DumpLogManager.h"
 
 /** Move **/
-Move::Move(unsigned int rs, unsigned int rd) : Instruction(), _rs(rs), _rd(rd){GlobalDumpManagerAddLogClassName;}
+Move::Move(unsigned int rs, unsigned int rd) : Instruction(), _rs(rs), _rd(rd){GlobalDumpManagerAddLogClassName(Move);}
 Move::~Move(){}
 bool Move::Execution()
 {
@@ -24,7 +24,7 @@ bool Move::Execution()
 }
 
 /** MoveFromHi **/
-MoveFromHi::MoveFromHi(unsigned int rd) : Instruction(), _rd(rd){GlobalDumpManagerAddLogClassName;}
+MoveFromHi::MoveFromHi(unsigned int rd) : Instruction(), _rd(rd){GlobalDumpManagerAddLogClassName(MoveFromHi);}
 MoveFromHi::~MoveFromHi(){}
 bool MoveFromHi::Execution()
 {
@@ -45,7 +45,7 @@ bool MoveFromHi::Execution()
 }
 
 /** MoveToHi **/
-MoveToHi::MoveToHi(unsigned int rs) : Instruction(), _rs(rs){GlobalDumpManagerAddLogClassName;}
+MoveToHi::MoveToHi(unsigned int rs) : Instruction(), _rs(rs){GlobalDumpManagerAddLogClassName(MoveToHi);}
 MoveToHi::~MoveToHi(){}
 bool MoveToHi::Execution()
 {
@@ -66,7 +66,7 @@ bool MoveToHi::Execution()
 }
 
 /** MoveFromLo **/
-MoveFromLo::MoveFromLo(unsigned int rd) : Instruction(), _rd(rd){GlobalDumpManagerAddLogClassName;}
+MoveFromLo::MoveFromLo(unsigned int rd) : Instruction(), _rd(rd){GlobalDumpManagerAddLogClassName(MoveFromLo);}
 MoveFromLo::~MoveFromLo(){}
 bool MoveFromLo::Execution()
 {
@@ -87,7 +87,7 @@ bool MoveFromLo::Execution()
 }
 
 /** MoveToLo **/
-MoveToLo::MoveToLo(unsigned int rs) : Instruction(), _rs(rs){GlobalDumpManagerAddLogClassName;}
+MoveToLo::MoveToLo(unsigned int rs) : Instruction(), _rs(rs){GlobalDumpManagerAddLogClassName(MoveToLo);}
 MoveToLo::~MoveToLo(){}
 bool MoveToLo::Execution()
 {

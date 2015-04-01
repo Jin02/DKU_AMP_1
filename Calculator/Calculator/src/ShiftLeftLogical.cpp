@@ -5,7 +5,7 @@
 ShiftLeftLogical::ShiftLeftLogical(unsigned int rs, unsigned int rt, unsigned int rd, unsigned int shamt)
     : RFormatInstruction(rs, rt, rd), _shamt(shamt)
 {
-	GlobalDumpManagerAddLogClassName;
+	GlobalDumpManagerAddLogClassName(ShiftLeftLogical);
 }
 
 ShiftLeftLogical::~ShiftLeftLogical(void)

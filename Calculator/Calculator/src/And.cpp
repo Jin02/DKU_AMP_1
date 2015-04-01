@@ -5,7 +5,7 @@
 And::And(unsigned int rs, unsigned int rt, unsigned int rd)
     : RFormatInstruction(rs, rt, rd)
 {
-	GlobalDumpManagerAddLogClassName;
+	GlobalDumpManagerAddLogClassName(And);
 }
 
 And::~And(void)

@@ -7,7 +7,7 @@
 SetLessThanUnsigned::SetLessThanUnsigned(unsigned int rs, unsigned int rt, unsigned int rd)
     : RFormatInstruction(rs, rt, rd)
 {
-	GlobalDumpManagerAddLogClassName;
+	GlobalDumpManagerAddLogClassName(SetLessThanUnsigned);
 }
 
 SetLessThanUnsigned::~SetLessThanUnsigned(void)
@@ -34,7 +34,7 @@ unsigned int SetLessThanUnsigned::Instruct(unsigned int rsData, unsigned int rtD
 SetLessThan::SetLessThan(unsigned int rs, unsigned int rt, unsigned int rd)
 : RFormatInstruction(rs, rt, rd)
 {
-	GlobalDumpManagerAddLogClassName;
+	GlobalDumpManagerAddLogClassName(SetLessThan);
 }
 
 SetLessThan::~SetLessThan(void)

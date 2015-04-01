@@ -19,6 +19,7 @@ private:
     unsigned int                                    _programCounter;
 
 	unsigned int									_hi, _lo;
+    unsigned int                                    _cycle;
 
 private:
     System(void);

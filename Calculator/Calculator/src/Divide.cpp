@@ -7,7 +7,7 @@
 Divide::Divide(unsigned int rs, unsigned int rt, unsigned int rd)
     : RFormatInstruction(rs, rt, rd)
 {
-	GlobalDumpManagerAddLogClassName;
+	GlobalDumpManagerAddLogClassName(Divide);
 }
 
 Divide::~Divide(void)
@@ -47,7 +47,7 @@ bool Divide::Execution()
 DivideUnsigned::DivideUnsigned(unsigned int rs, unsigned int rt, unsigned int rd)
     : RFormatInstruction(rs, rt, rd)
 {
-	GlobalDumpManagerAddLogClassName;
+	GlobalDumpManagerAddLogClassName(DivideUnsigned);
 }
 
 DivideUnsigned::~DivideUnsigned(void)

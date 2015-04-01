@@ -26,6 +26,7 @@
 		3C34F26E1AC5884500A151C6 /* Move.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C34F26D1AC5884500A151C6 /* Move.cpp */; };
 		3C34F2721AC6F38100A151C6 /* Multiply.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C34F2711AC6F38100A151C6 /* Multiply.cpp */; };
 		3C34F2741AC6F38700A151C6 /* Divide.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C34F2731AC6F38700A151C6 /* Divide.cpp */; };
+		3C60F0611ACBAD200014269B /* DumpLogManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C60F0601ACBAD200014269B /* DumpLogManager.cpp */; };
 		3C617F2A1AB9304C00FC8FBD /* System.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C617F1E1AB9304C00FC8FBD /* System.cpp */; };
 		3CE7A43B1AC40E7A0001E0CE /* Instruction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3CE7A43A1AC40E7A0001E0CE /* Instruction.cpp */; };
 		3CE7A43D1AC40E890001E0CE /* RFormatInstruction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3CE7A43C1AC40E890001E0CE /* RFormatInstruction.cpp */; };
@@ -85,6 +86,8 @@
 		3C34F2711AC6F38100A151C6 /* Multiply.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Multiply.cpp; path = src/Multiply.cpp; sourceTree = "<group>"; };
 		3C34F2731AC6F38700A151C6 /* Divide.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Divide.cpp; path = src/Divide.cpp; sourceTree = "<group>"; };
 		3C34F2751AC6F39300A151C6 /* Divide.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Divide.h; path = inc/Divide.h; sourceTree = "<group>"; };
+		3C60F05F1ACBAD1A0014269B /* DumpLogManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DumpLogManager.h; path = inc/DumpLogManager.h; sourceTree = "<group>"; };
+		3C60F0601ACBAD200014269B /* DumpLogManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DumpLogManager.cpp; path = src/DumpLogManager.cpp; sourceTree = "<group>"; };
 		3C617F081AB9302F00FC8FBD /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Common.h; path = inc/Common.h; sourceTree = "<group>"; };
 		3C617F0F1AB9302F00FC8FBD /* Singleton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Singleton.h; path = inc/Singleton.h; sourceTree = "<group>"; };
 		3C617F111AB9302F00FC8FBD /* System.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = System.h; path = inc/System.h; sourceTree = "<group>"; };
@@ -112,6 +115,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3C60F05E1ACBAD050014269B /* DumpLogManager */ = {
+			isa = PBXGroup;
+			children = (
+				3C60F05F1ACBAD1A0014269B /* DumpLogManager.h */,
+				3C60F0601ACBAD200014269B /* DumpLogManager.cpp */,
+			);
+			name = DumpLogManager;
+			sourceTree = "<group>";
+		};
 		3C617F2C1AB9305900FC8FBD /* Instruction */ = {
 			isa = PBXGroup;
 			children = (
@@ -226,6 +238,7 @@
 		3CF1FB531AB072640064AA2D /* Mips */ = {
 			isa = PBXGroup;
 			children = (
+				3C60F05E1ACBAD050014269B /* DumpLogManager */,
 				3C617F371AB9338A00FC8FBD /* Common */,
 				3C617F2C1AB9305900FC8FBD /* Instruction */,
 				3C617F351AB9324900FC8FBD /* System */,
@@ -305,6 +318,7 @@
 				3C34F2591AC4F69C00A151C6 /* BranchOnNotEqual.cpp in Sources */,
 				3C34F2381AC4471600A151C6 /* And.cpp in Sources */,
 				3C34F2741AC6F38700A151C6 /* Divide.cpp in Sources */,
+				3C60F0611ACBAD200014269B /* DumpLogManager.cpp in Sources */,
 				3C34F2391AC4471600A151C6 /* AndImmediate.cpp in Sources */,
 				3C34F2511AC452F000A151C6 /* ShiftRightLogical.cpp in Sources */,
 				3CE7A4491AC430C50001E0CE /* JFormatInstruction.cpp in Sources */,

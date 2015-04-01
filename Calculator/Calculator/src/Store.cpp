@@ -5,7 +5,7 @@
 /** StoreByte **/
 StoreByte::StoreByte(unsigned int rs, unsigned int rt, unsigned int immediate) : IFormatInstruction(rs, rt, immediate)
 {
-	GlobalDumpManagerAddLogClassName;
+	GlobalDumpManagerAddLogClassName(StoreByte);
 }
 
 StoreByte::~StoreByte()
@@ -56,7 +56,7 @@ bool StoreByte::Execution()
 
 StoreHalfword::StoreHalfword(unsigned int rs, unsigned int rt, unsigned int immediate) : IFormatInstruction(rs, rt, immediate)
 {
-	GlobalDumpManagerAddLogClassName;
+	GlobalDumpManagerAddLogClassName(StoreHalfword);
 }
 
 StoreHalfword::~StoreHalfword()
@@ -90,7 +90,7 @@ bool StoreHalfword::Execution()
 
 StoreWord::StoreWord(unsigned int rs, unsigned int rt, unsigned int immediate) : IFormatInstruction(rs, rt, immediate)
 {
-	GlobalDumpManagerAddLogClassName;
+	GlobalDumpManagerAddLogClassName(StoreWord);
 }
 
 StoreWord::~StoreWord()

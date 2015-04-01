@@ -4,7 +4,7 @@
 
 AddImmediate::AddImmediate(unsigned int rs, unsigned int rt, unsigned int immediate) : AddImmediateUnsigned(rs, rt, immediate)
 {
-	GlobalDumpManagerAddLogClassName;
+	GlobalDumpManagerAddLogClassName(AddImmediate);
 }
 AddImmediate::~AddImmediate()
 {
@@ -13,7 +13,7 @@ AddImmediate::~AddImmediate()
 
 AddImmediateUnsigned::AddImmediateUnsigned(unsigned int rs, unsigned int rt, unsigned int immediate) : IFormatInstruction(rs, rt, immediate)
 {
-    GlobalDumpManagerAddLogClassName;
+    GlobalDumpManagerAddLogClassName(AddImmediateUnsigned);
 }
 
 AddImmediateUnsigned::~AddImmediateUnsigned()

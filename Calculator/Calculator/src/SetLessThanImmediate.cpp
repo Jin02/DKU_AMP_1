@@ -4,7 +4,7 @@
 
 SetLessThanImmediateUnsigned::SetLessThanImmediateUnsigned(unsigned int rs, unsigned int rt, unsigned int immediate) : IFormatInstruction(rs, rt, immediate)
 {
-	GlobalDumpManagerAddLogClassName;
+	GlobalDumpManagerAddLogClassName(SetLessThanImmediateUnsigned);
 }
 
 SetLessThanImmediateUnsigned::~SetLessThanImmediateUnsigned()
@@ -34,7 +34,7 @@ bool SetLessThanImmediateUnsigned::Execution()
 
 SetLessThanImmediate::SetLessThanImmediate(unsigned int rs, unsigned int rt, unsigned int immediate) : IFormatInstruction(rs, rt, immediate)
 {
-	GlobalDumpManagerAddLogClassName;
+	GlobalDumpManagerAddLogClassName(SetLessThanImmediate);
 }
 
 SetLessThanImmediate::~SetLessThanImmediate()

@@ -6,7 +6,7 @@
 
 LoadByteUnsigned::LoadByteUnsigned(unsigned int rs, unsigned int rt, unsigned int immediate) : IFormatInstruction(rs, rt, immediate)
 {
-	GlobalDumpManagerAddLogClassName;
+	GlobalDumpManagerAddLogClassName(LoadByteUnsigned);
 }
 
 LoadByteUnsigned::~LoadByteUnsigned()
@@ -37,7 +37,7 @@ bool LoadByteUnsigned::Execution()
 /** LoadHalfwordUnsigned **/
 LoadHalfwordUnsigned::LoadHalfwordUnsigned(unsigned int rs, unsigned int rt, unsigned int immediate) : IFormatInstruction(rs, rt, immediate)
 {
-	GlobalDumpManagerAddLogClassName;
+	GlobalDumpManagerAddLogClassName(LoadHalfwordUnsigned);
 }
 
 LoadHalfwordUnsigned::~LoadHalfwordUnsigned()
@@ -92,7 +92,7 @@ bool LoadHalfwordUnsigned::Execution()
 
 LoadUpperImmediate::LoadUpperImmediate(unsigned int rs, unsigned int rt, unsigned int immediate) : IFormatInstruction(rs, rt, immediate)
 {
-	GlobalDumpManagerAddLogClassName;
+	GlobalDumpManagerAddLogClassName(LoadUpperImmediate);
 }
 
 LoadUpperImmediate::~LoadUpperImmediate()
@@ -120,7 +120,7 @@ bool LoadUpperImmediate::Execution()
 
 LoadWord::LoadWord(unsigned int rs, unsigned int rt, unsigned int immediate) : IFormatInstruction(rs, rt, immediate)
 {
-	GlobalDumpManagerAddLogClassName;
+	GlobalDumpManagerAddLogClassName(LoadWord);
 }
 
 LoadWord::~LoadWord()
@@ -153,7 +153,7 @@ bool LoadWord::Execution()
 LoadImmediate::LoadImmediate(unsigned int rd, unsigned int immediate)
     : Instruction(), _rd(rd), _immediate(immediate)
 {
-	GlobalDumpManagerAddLogClassName;
+	GlobalDumpManagerAddLogClassName(LoadImmediate);
 }
 
 LoadImmediate::~LoadImmediate()

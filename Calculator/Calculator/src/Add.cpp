@@ -7,7 +7,7 @@
 AddUnsigned::AddUnsigned(unsigned int rs, unsigned int rt, unsigned int rd)
     : RFormatInstruction(rs, rt, rd)
 {
-	GlobalDumpManagerAddLogClassName;
+	GlobalDumpManagerAddLogClassName(AddUnsigned);
 }
 
 AddUnsigned::~AddUnsigned(void)
@@ -31,7 +31,7 @@ unsigned int AddUnsigned::Instruct(unsigned int rsData, unsigned int rtData)
 
 Add::Add(unsigned int rs, unsigned int rt, unsigned int rd) : AddUnsigned(rs, rt, rd)
 {
-	GlobalDumpManagerAddLogClassName;
+	GlobalDumpManagerAddLogClassName(Add);
 }
 Add::~Add()
 {

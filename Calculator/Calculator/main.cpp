@@ -16,7 +16,7 @@ int main(int argc, const char * argv[])
 	GlobalDumpManagerAddLogNewLine("--------- Init ---------");
     System* system = System::GetInstance();
 
-	const std::string fileName = "input2.bin";
+	const std::string fileName = "/Users/jin/Project/DKU_AMP_1/Calculator/Calculator/input2.bin";
 	GlobalDumpManagerAddLogNewLine("Load .bin file : " + fileName);
 	system->Load(fileName);
 	GlobalDumpManagerAddLogNewLine("--------- Done ---------\n\n");
@@ -25,7 +25,7 @@ int main(int argc, const char * argv[])
 	system->Run();
 	GlobalDumpManagerAddLogNewLine("--------- System End ---------");
 
-	GlobalDumpLogManager->WriteFile("out.txt");
-
+	GlobalDumpLogManager->WriteFile("/Users/jin/Project/DKU_AMP_1/Calculator/Calculator/out.txt");
+        
     return 0;
 }
