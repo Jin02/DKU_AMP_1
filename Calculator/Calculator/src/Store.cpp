@@ -17,11 +17,11 @@ bool StoreByte::Execution()
 {
     System* system = System::GetInstance();
     
-    unsigned int toMemRtData = system->GetDataFromRegister(_rt) & 0x0000000f;
+    unsigned int toMemRtData = system->GetDataFromRegister(_rt) & 0x000000ff;
     unsigned int rsData = system->GetDataFromRegister(_rs);
     unsigned int memData = system->GetDataFromMemory(rsData + _immediate);
 
-    memData = (memData & 0xfffffff0) | (toMemRtData);
+    memData = (memData & 0xffffff00) | (toMemRtData);
     system->SetDataToMemory(rsData + _immediate, memData);
 	{
 		GlobalDumpLogManager->AddLog("M[R[rs] + SignExtImm](7:0) = R[rt](7:0)", true);
