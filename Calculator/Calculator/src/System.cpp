@@ -239,7 +239,8 @@ Instruction* System::Decode(unsigned int instruction)
         uint jumpAddr = (pc & 0xf0000000) | (address << 2);
 
         sprintf(buff, "J Type\t\t| opcode 0x%x / address 0x%x", opCode, jumpAddr);
-  
+        GlobalDumpLogManager->AddLog(buff, true);
+
         if(opCode == (uint)Opcode::Jump)
             return new Jump(jumpAddr);
         else if(opCode == (uint)Opcode::JumpAndLink)
