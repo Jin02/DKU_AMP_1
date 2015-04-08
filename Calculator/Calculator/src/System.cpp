@@ -272,8 +272,8 @@ Instruction* System::Decode(unsigned int instruction)
             return new LoadByteUnsigned(rs, rt, signExtImm);
         else if(opCode == (uint)Opcode::LoadHalfwordUnsigned)
             return new LoadHalfwordUnsigned(rs, rt, signExtImm);
-//        else if(opCode == (uint)Opcode::LoadLinked)
-//            return new LoadLinked(rs, rt, signExtImm);
+        else if(opCode == (uint)Opcode::LoadLinked)
+            return new LoadLinked(rs, rt, signExtImm);
         else if(opCode == (uint)Opcode::LoadUpperImmediate)
             return new LoadUpperImmediate(rs, rt, immediate);
         else if(opCode == (uint)Opcode::LoadWord)
@@ -286,8 +286,8 @@ Instruction* System::Decode(unsigned int instruction)
             return new SetLessThanImmediateUnsigned(rs, rt, zeroExtImm);
         else if(opCode == (uint)Opcode::StoreByte)
             return new StoreByte(rs, rt, zeroExtImm);
-//        else if(opCode == (uint)Opcode::StoreConditional)
-//            return new StoreConditional(rs, rt, zeroExtImm);
+        else if(opCode == (uint)Opcode::StoreConditional)
+            return new StoreConditional(rs, rt, zeroExtImm);
         else if(opCode == (uint)Opcode::StoreHalfword)
             return new StoreHalfword(rs, rt, zeroExtImm);
         else if(opCode == (uint)Opcode::StoreWord)

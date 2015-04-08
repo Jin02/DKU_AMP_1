@@ -16,17 +16,17 @@ public:
 };
 
 /** StoreConditional **/
-//class StoreConditional : public IFormatInstruction
-//{
-//private:
-//    
-//public:
-//    StoreConditional(unsigned int rs, unsigned int rt, unsigned int immediate);
-//    virtual ~StoreConditional(void);
-//    
-//public:
-//    virtual bool Execution();
-//};
+class StoreConditional : public IFormatInstruction
+{
+private:
+    
+public:
+    StoreConditional(unsigned int rs, unsigned int rt, unsigned int immediate);
+    virtual ~StoreConditional(void);
+    
+public:
+    virtual bool Execution();
+};
 
 /** StoreHalfword **/
 class StoreHalfword : public IFormatInstruction

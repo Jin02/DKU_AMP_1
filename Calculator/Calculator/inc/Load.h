@@ -29,17 +29,17 @@ public:
 };
 
 /** LoadLinked **/
-//class LoadLinked : public IFormatInstruction
-//{
-//private:
-//    
-//public:
-//    LoadLinked(unsigned int rs, unsigned int rt, unsigned int immediate);
-//    virtual ~LoadLinked(void);
-//    
-//public:
-//    virtual bool Execution();
-//};
+class LoadLinked : public IFormatInstruction
+{
+private:
+    
+public:
+    LoadLinked(unsigned int rs, unsigned int rt, unsigned int immediate);
+    virtual ~LoadLinked(void);
+    
+public:
+    virtual bool Execution();
+};
 
 /** LoadUpperImmediate **/
 class LoadUpperImmediate : public IFormatInstruction

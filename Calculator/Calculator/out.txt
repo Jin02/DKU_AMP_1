@@ -16,7 +16,7 @@ Instruction	| 0x27bdffd8
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x9 / signExtImm 0xffffffd8 / zeroExtImm 0xffd8 / branchAddr 0xffffff60
-Instruction	|AddImmediateUnsigned
+Instruction	| AddImmediateUnsigned
 
 State Change	| Decode -> Execute State
 R[rt] = R[rs] + SignExtImm
@@ -31,7 +31,7 @@ Instruction	| 0xafbf0024
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x2b / signExtImm 0x24 / zeroExtImm 0x24 / branchAddr 0x90
-Instruction	|StoreWord
+Instruction	| StoreWord
 
 State Change	| Decode -> Execute State
 M[R[rs] + SignExtImm] = R[rt]
@@ -46,7 +46,7 @@ Instruction	| 0xafbe0020
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x2b / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
-Instruction	|StoreWord
+Instruction	| StoreWord
 
 State Change	| Decode -> Execute State
 M[R[rs] + SignExtImm] = R[rt]
@@ -61,7 +61,7 @@ Instruction	| 0x3a0f021
 
 State Change	| Fetch -> Decode State
 R Type		| rd 0x1e / rs 0x1d / rt 0x0 / shamt 0x0 / funct 0x21
-Instruction	|AddUnsigned
+Instruction	| AddUnsigned
 
 State Change	| Decode -> Execute State
 R[rd] = R[rs] + R[rt]
@@ -76,7 +76,7 @@ Instruction	| 0xafc00018
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x2b / signExtImm 0x18 / zeroExtImm 0x18 / branchAddr 0x60
-Instruction	|StoreWord
+Instruction	| StoreWord
 
 State Change	| Decode -> Execute State
 M[R[rs] + SignExtImm] = R[rt]
@@ -91,7 +91,7 @@ Instruction	| 0x24040005
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x9 / signExtImm 0x5 / zeroExtImm 0x5 / branchAddr 0x14
-Instruction	|AddImmediateUnsigned
+Instruction	| AddImmediateUnsigned
 
 State Change	| Decode -> Execute State
 R[rt] = R[rs] + SignExtImm
@@ -105,7 +105,7 @@ PC		| 0x18
 Instruction	| 0xc000010
 
 State Change	| Fetch -> Decode State
-Instruction	|JumpAndLink
+Instruction	| JumpAndLink
 
 State Change	| Decode -> Execute State
 R[31] = PC + 8; PC = JumpAddr
@@ -120,7 +120,7 @@ Instruction	| 0x27bdffe0
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x9 / signExtImm 0xffffffe0 / zeroExtImm 0xffe0 / branchAddr 0xffffff80
-Instruction	|AddImmediateUnsigned
+Instruction	| AddImmediateUnsigned
 
 State Change	| Decode -> Execute State
 R[rt] = R[rs] + SignExtImm
@@ -135,7 +135,7 @@ Instruction	| 0xafbf001c
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x2b / signExtImm 0x1c / zeroExtImm 0x1c / branchAddr 0x70
-Instruction	|StoreWord
+Instruction	| StoreWord
 
 State Change	| Decode -> Execute State
 M[R[rs] + SignExtImm] = R[rt]
@@ -150,7 +150,7 @@ Instruction	| 0xafbe0018
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x2b / signExtImm 0x18 / zeroExtImm 0x18 / branchAddr 0x60
-Instruction	|StoreWord
+Instruction	| StoreWord
 
 State Change	| Decode -> Execute State
 M[R[rs] + SignExtImm] = R[rt]
@@ -165,7 +165,7 @@ Instruction	| 0x3a0f021
 
 State Change	| Fetch -> Decode State
 R Type		| rd 0x1e / rs 0x1d / rt 0x0 / shamt 0x0 / funct 0x21
-Instruction	|AddUnsigned
+Instruction	| AddUnsigned
 
 State Change	| Decode -> Execute State
 R[rd] = R[rs] + R[rt]
@@ -180,7 +180,7 @@ Instruction	| 0xafc40020
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x2b / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
-Instruction	|StoreWord
+Instruction	| StoreWord
 
 State Change	| Decode -> Execute State
 M[R[rs] + SignExtImm] = R[rt]
@@ -195,7 +195,7 @@ Instruction	| 0x8fc30020
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x23 / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
-Instruction	|LoadWord
+Instruction	| LoadWord
 
 State Change	| Decode -> Execute State
 R[rt] = M[R[rs] + SignExtImmm]
@@ -210,7 +210,7 @@ Instruction	| 0x24020001
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x9 / signExtImm 0x1 / zeroExtImm 0x1 / branchAddr 0x4
-Instruction	|AddImmediateUnsigned
+Instruction	| AddImmediateUnsigned
 
 State Change	| Decode -> Execute State
 R[rt] = R[rs] + SignExtImm
@@ -225,7 +225,7 @@ Instruction	| 0x14620004
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x5 / signExtImm 0x4 / zeroExtImm 0x4 / branchAddr 0x10
-Instruction	|BranchOnNotEqual
+Instruction	| BranchOnNotEqual
 
 State Change	| Decode -> Execute State
 if(R[rs] != R[rt])	PC = PC + 4 + BranchAddr
@@ -240,7 +240,7 @@ Instruction	| 0x8fc20020
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x23 / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
-Instruction	|LoadWord
+Instruction	| LoadWord
 
 State Change	| Decode -> Execute State
 R[rt] = M[R[rs] + SignExtImmm]
@@ -255,7 +255,7 @@ Instruction	| 0x2442ffff
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x9 / signExtImm 0xffffffff / zeroExtImm 0xffff / branchAddr 0xfffffffc
-Instruction	|AddImmediateUnsigned
+Instruction	| AddImmediateUnsigned
 
 State Change	| Decode -> Execute State
 R[rt] = R[rs] + SignExtImm
@@ -270,7 +270,7 @@ Instruction	| 0x402021
 
 State Change	| Fetch -> Decode State
 R Type		| rd 0x4 / rs 0x2 / rt 0x0 / shamt 0x0 / funct 0x21
-Instruction	|AddUnsigned
+Instruction	| AddUnsigned
 
 State Change	| Decode -> Execute State
 R[rd] = R[rs] + R[rt]
@@ -284,7 +284,7 @@ PC		| 0x7c
 Instruction	| 0xc000010
 
 State Change	| Fetch -> Decode State
-Instruction	|JumpAndLink
+Instruction	| JumpAndLink
 
 State Change	| Decode -> Execute State
 R[31] = PC + 8; PC = JumpAddr
@@ -299,7 +299,7 @@ Instruction	| 0x27bdffe0
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x9 / signExtImm 0xffffffe0 / zeroExtImm 0xffe0 / branchAddr 0xffffff80
-Instruction	|AddImmediateUnsigned
+Instruction	| AddImmediateUnsigned
 
 State Change	| Decode -> Execute State
 R[rt] = R[rs] + SignExtImm
@@ -314,7 +314,7 @@ Instruction	| 0xafbf001c
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x2b / signExtImm 0x1c / zeroExtImm 0x1c / branchAddr 0x70
-Instruction	|StoreWord
+Instruction	| StoreWord
 
 State Change	| Decode -> Execute State
 M[R[rs] + SignExtImm] = R[rt]
@@ -329,7 +329,7 @@ Instruction	| 0xafbe0018
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x2b / signExtImm 0x18 / zeroExtImm 0x18 / branchAddr 0x60
-Instruction	|StoreWord
+Instruction	| StoreWord
 
 State Change	| Decode -> Execute State
 M[R[rs] + SignExtImm] = R[rt]
@@ -344,7 +344,7 @@ Instruction	| 0x3a0f021
 
 State Change	| Fetch -> Decode State
 R Type		| rd 0x1e / rs 0x1d / rt 0x0 / shamt 0x0 / funct 0x21
-Instruction	|AddUnsigned
+Instruction	| AddUnsigned
 
 State Change	| Decode -> Execute State
 R[rd] = R[rs] + R[rt]
@@ -359,7 +359,7 @@ Instruction	| 0xafc40020
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x2b / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
-Instruction	|StoreWord
+Instruction	| StoreWord
 
 State Change	| Decode -> Execute State
 M[R[rs] + SignExtImm] = R[rt]
@@ -374,7 +374,7 @@ Instruction	| 0x8fc30020
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x23 / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
-Instruction	|LoadWord
+Instruction	| LoadWord
 
 State Change	| Decode -> Execute State
 R[rt] = M[R[rs] + SignExtImmm]
@@ -389,7 +389,7 @@ Instruction	| 0x24020001
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x9 / signExtImm 0x1 / zeroExtImm 0x1 / branchAddr 0x4
-Instruction	|AddImmediateUnsigned
+Instruction	| AddImmediateUnsigned
 
 State Change	| Decode -> Execute State
 R[rt] = R[rs] + SignExtImm
@@ -404,7 +404,7 @@ Instruction	| 0x14620004
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x5 / signExtImm 0x4 / zeroExtImm 0x4 / branchAddr 0x10
-Instruction	|BranchOnNotEqual
+Instruction	| BranchOnNotEqual
 
 State Change	| Decode -> Execute State
 if(R[rs] != R[rt])	PC = PC + 4 + BranchAddr
@@ -419,7 +419,7 @@ Instruction	| 0x8fc20020
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x23 / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
-Instruction	|LoadWord
+Instruction	| LoadWord
 
 State Change	| Decode -> Execute State
 R[rt] = M[R[rs] + SignExtImmm]
@@ -434,7 +434,7 @@ Instruction	| 0x2442ffff
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x9 / signExtImm 0xffffffff / zeroExtImm 0xffff / branchAddr 0xfffffffc
-Instruction	|AddImmediateUnsigned
+Instruction	| AddImmediateUnsigned
 
 State Change	| Decode -> Execute State
 R[rt] = R[rs] + SignExtImm
@@ -449,7 +449,7 @@ Instruction	| 0x402021
 
 State Change	| Fetch -> Decode State
 R Type		| rd 0x4 / rs 0x2 / rt 0x0 / shamt 0x0 / funct 0x21
-Instruction	|AddUnsigned
+Instruction	| AddUnsigned
 
 State Change	| Decode -> Execute State
 R[rd] = R[rs] + R[rt]
@@ -463,7 +463,7 @@ PC		| 0x7c
 Instruction	| 0xc000010
 
 State Change	| Fetch -> Decode State
-Instruction	|JumpAndLink
+Instruction	| JumpAndLink
 
 State Change	| Decode -> Execute State
 R[31] = PC + 8; PC = JumpAddr
@@ -478,7 +478,7 @@ Instruction	| 0x27bdffe0
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x9 / signExtImm 0xffffffe0 / zeroExtImm 0xffe0 / branchAddr 0xffffff80
-Instruction	|AddImmediateUnsigned
+Instruction	| AddImmediateUnsigned
 
 State Change	| Decode -> Execute State
 R[rt] = R[rs] + SignExtImm
@@ -493,7 +493,7 @@ Instruction	| 0xafbf001c
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x2b / signExtImm 0x1c / zeroExtImm 0x1c / branchAddr 0x70
-Instruction	|StoreWord
+Instruction	| StoreWord
 
 State Change	| Decode -> Execute State
 M[R[rs] + SignExtImm] = R[rt]
@@ -508,7 +508,7 @@ Instruction	| 0xafbe0018
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x2b / signExtImm 0x18 / zeroExtImm 0x18 / branchAddr 0x60
-Instruction	|StoreWord
+Instruction	| StoreWord
 
 State Change	| Decode -> Execute State
 M[R[rs] + SignExtImm] = R[rt]
@@ -523,7 +523,7 @@ Instruction	| 0x3a0f021
 
 State Change	| Fetch -> Decode State
 R Type		| rd 0x1e / rs 0x1d / rt 0x0 / shamt 0x0 / funct 0x21
-Instruction	|AddUnsigned
+Instruction	| AddUnsigned
 
 State Change	| Decode -> Execute State
 R[rd] = R[rs] + R[rt]
@@ -538,7 +538,7 @@ Instruction	| 0xafc40020
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x2b / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
-Instruction	|StoreWord
+Instruction	| StoreWord
 
 State Change	| Decode -> Execute State
 M[R[rs] + SignExtImm] = R[rt]
@@ -553,7 +553,7 @@ Instruction	| 0x8fc30020
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x23 / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
-Instruction	|LoadWord
+Instruction	| LoadWord
 
 State Change	| Decode -> Execute State
 R[rt] = M[R[rs] + SignExtImmm]
@@ -568,7 +568,7 @@ Instruction	| 0x24020001
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x9 / signExtImm 0x1 / zeroExtImm 0x1 / branchAddr 0x4
-Instruction	|AddImmediateUnsigned
+Instruction	| AddImmediateUnsigned
 
 State Change	| Decode -> Execute State
 R[rt] = R[rs] + SignExtImm
@@ -583,7 +583,7 @@ Instruction	| 0x14620004
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x5 / signExtImm 0x4 / zeroExtImm 0x4 / branchAddr 0x10
-Instruction	|BranchOnNotEqual
+Instruction	| BranchOnNotEqual
 
 State Change	| Decode -> Execute State
 if(R[rs] != R[rt])	PC = PC + 4 + BranchAddr
@@ -598,7 +598,7 @@ Instruction	| 0x8fc20020
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x23 / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
-Instruction	|LoadWord
+Instruction	| LoadWord
 
 State Change	| Decode -> Execute State
 R[rt] = M[R[rs] + SignExtImmm]
@@ -613,7 +613,7 @@ Instruction	| 0x2442ffff
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x9 / signExtImm 0xffffffff / zeroExtImm 0xffff / branchAddr 0xfffffffc
-Instruction	|AddImmediateUnsigned
+Instruction	| AddImmediateUnsigned
 
 State Change	| Decode -> Execute State
 R[rt] = R[rs] + SignExtImm
@@ -628,7 +628,7 @@ Instruction	| 0x402021
 
 State Change	| Fetch -> Decode State
 R Type		| rd 0x4 / rs 0x2 / rt 0x0 / shamt 0x0 / funct 0x21
-Instruction	|AddUnsigned
+Instruction	| AddUnsigned
 
 State Change	| Decode -> Execute State
 R[rd] = R[rs] + R[rt]
@@ -642,7 +642,7 @@ PC		| 0x7c
 Instruction	| 0xc000010
 
 State Change	| Fetch -> Decode State
-Instruction	|JumpAndLink
+Instruction	| JumpAndLink
 
 State Change	| Decode -> Execute State
 R[31] = PC + 8; PC = JumpAddr
@@ -657,7 +657,7 @@ Instruction	| 0x27bdffe0
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x9 / signExtImm 0xffffffe0 / zeroExtImm 0xffe0 / branchAddr 0xffffff80
-Instruction	|AddImmediateUnsigned
+Instruction	| AddImmediateUnsigned
 
 State Change	| Decode -> Execute State
 R[rt] = R[rs] + SignExtImm
@@ -672,7 +672,7 @@ Instruction	| 0xafbf001c
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x2b / signExtImm 0x1c / zeroExtImm 0x1c / branchAddr 0x70
-Instruction	|StoreWord
+Instruction	| StoreWord
 
 State Change	| Decode -> Execute State
 M[R[rs] + SignExtImm] = R[rt]
@@ -687,7 +687,7 @@ Instruction	| 0xafbe0018
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x2b / signExtImm 0x18 / zeroExtImm 0x18 / branchAddr 0x60
-Instruction	|StoreWord
+Instruction	| StoreWord
 
 State Change	| Decode -> Execute State
 M[R[rs] + SignExtImm] = R[rt]
@@ -702,7 +702,7 @@ Instruction	| 0x3a0f021
 
 State Change	| Fetch -> Decode State
 R Type		| rd 0x1e / rs 0x1d / rt 0x0 / shamt 0x0 / funct 0x21
-Instruction	|AddUnsigned
+Instruction	| AddUnsigned
 
 State Change	| Decode -> Execute State
 R[rd] = R[rs] + R[rt]
@@ -717,7 +717,7 @@ Instruction	| 0xafc40020
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x2b / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
-Instruction	|StoreWord
+Instruction	| StoreWord
 
 State Change	| Decode -> Execute State
 M[R[rs] + SignExtImm] = R[rt]
@@ -732,7 +732,7 @@ Instruction	| 0x8fc30020
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x23 / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
-Instruction	|LoadWord
+Instruction	| LoadWord
 
 State Change	| Decode -> Execute State
 R[rt] = M[R[rs] + SignExtImmm]
@@ -747,7 +747,7 @@ Instruction	| 0x24020001
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x9 / signExtImm 0x1 / zeroExtImm 0x1 / branchAddr 0x4
-Instruction	|AddImmediateUnsigned
+Instruction	| AddImmediateUnsigned
 
 State Change	| Decode -> Execute State
 R[rt] = R[rs] + SignExtImm
@@ -762,7 +762,7 @@ Instruction	| 0x14620004
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x5 / signExtImm 0x4 / zeroExtImm 0x4 / branchAddr 0x10
-Instruction	|BranchOnNotEqual
+Instruction	| BranchOnNotEqual
 
 State Change	| Decode -> Execute State
 if(R[rs] != R[rt])	PC = PC + 4 + BranchAddr
@@ -777,7 +777,7 @@ Instruction	| 0x8fc20020
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x23 / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
-Instruction	|LoadWord
+Instruction	| LoadWord
 
 State Change	| Decode -> Execute State
 R[rt] = M[R[rs] + SignExtImmm]
@@ -792,7 +792,7 @@ Instruction	| 0x2442ffff
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x9 / signExtImm 0xffffffff / zeroExtImm 0xffff / branchAddr 0xfffffffc
-Instruction	|AddImmediateUnsigned
+Instruction	| AddImmediateUnsigned
 
 State Change	| Decode -> Execute State
 R[rt] = R[rs] + SignExtImm
@@ -807,7 +807,7 @@ Instruction	| 0x402021
 
 State Change	| Fetch -> Decode State
 R Type		| rd 0x4 / rs 0x2 / rt 0x0 / shamt 0x0 / funct 0x21
-Instruction	|AddUnsigned
+Instruction	| AddUnsigned
 
 State Change	| Decode -> Execute State
 R[rd] = R[rs] + R[rt]
@@ -821,7 +821,7 @@ PC		| 0x7c
 Instruction	| 0xc000010
 
 State Change	| Fetch -> Decode State
-Instruction	|JumpAndLink
+Instruction	| JumpAndLink
 
 State Change	| Decode -> Execute State
 R[31] = PC + 8; PC = JumpAddr
@@ -836,7 +836,7 @@ Instruction	| 0x27bdffe0
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x9 / signExtImm 0xffffffe0 / zeroExtImm 0xffe0 / branchAddr 0xffffff80
-Instruction	|AddImmediateUnsigned
+Instruction	| AddImmediateUnsigned
 
 State Change	| Decode -> Execute State
 R[rt] = R[rs] + SignExtImm
@@ -851,7 +851,7 @@ Instruction	| 0xafbf001c
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x2b / signExtImm 0x1c / zeroExtImm 0x1c / branchAddr 0x70
-Instruction	|StoreWord
+Instruction	| StoreWord
 
 State Change	| Decode -> Execute State
 M[R[rs] + SignExtImm] = R[rt]
@@ -866,7 +866,7 @@ Instruction	| 0xafbe0018
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x2b / signExtImm 0x18 / zeroExtImm 0x18 / branchAddr 0x60
-Instruction	|StoreWord
+Instruction	| StoreWord
 
 State Change	| Decode -> Execute State
 M[R[rs] + SignExtImm] = R[rt]
@@ -881,7 +881,7 @@ Instruction	| 0x3a0f021
 
 State Change	| Fetch -> Decode State
 R Type		| rd 0x1e / rs 0x1d / rt 0x0 / shamt 0x0 / funct 0x21
-Instruction	|AddUnsigned
+Instruction	| AddUnsigned
 
 State Change	| Decode -> Execute State
 R[rd] = R[rs] + R[rt]
@@ -896,7 +896,7 @@ Instruction	| 0xafc40020
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x2b / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
-Instruction	|StoreWord
+Instruction	| StoreWord
 
 State Change	| Decode -> Execute State
 M[R[rs] + SignExtImm] = R[rt]
@@ -911,7 +911,7 @@ Instruction	| 0x8fc30020
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x23 / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
-Instruction	|LoadWord
+Instruction	| LoadWord
 
 State Change	| Decode -> Execute State
 R[rt] = M[R[rs] + SignExtImmm]
@@ -926,7 +926,7 @@ Instruction	| 0x24020001
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x9 / signExtImm 0x1 / zeroExtImm 0x1 / branchAddr 0x4
-Instruction	|AddImmediateUnsigned
+Instruction	| AddImmediateUnsigned
 
 State Change	| Decode -> Execute State
 R[rt] = R[rs] + SignExtImm
@@ -941,7 +941,7 @@ Instruction	| 0x14620004
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x5 / signExtImm 0x4 / zeroExtImm 0x4 / branchAddr 0x10
-Instruction	|BranchOnNotEqual
+Instruction	| BranchOnNotEqual
 
 State Change	| Decode -> Execute State
 if(R[rs] != R[rt])	PC = PC + 4 + BranchAddr
@@ -962,7 +962,7 @@ Instruction	| 0x24020001
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x9 / signExtImm 0x1 / zeroExtImm 0x1 / branchAddr 0x4
-Instruction	|AddImmediateUnsigned
+Instruction	| AddImmediateUnsigned
 
 State Change	| Decode -> Execute State
 R[rt] = R[rs] + SignExtImm
@@ -976,7 +976,7 @@ PC		| 0x68
 Instruction	| 0x8000024
 
 State Change	| Fetch -> Decode State
-Instruction	|Jump
+Instruction	| Jump
 
 State Change	| Decode -> Execute State
 PC = JumpAddr
@@ -991,7 +991,7 @@ Instruction	| 0x3c0e821
 
 State Change	| Fetch -> Decode State
 R Type		| rd 0x1d / rs 0x1e / rt 0x0 / shamt 0x0 / funct 0x21
-Instruction	|AddUnsigned
+Instruction	| AddUnsigned
 
 State Change	| Decode -> Execute State
 R[rd] = R[rs] + R[rt]
@@ -1006,7 +1006,7 @@ Instruction	| 0x8fbf001c
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x23 / signExtImm 0x1c / zeroExtImm 0x1c / branchAddr 0x70
-Instruction	|LoadWord
+Instruction	| LoadWord
 
 State Change	| Decode -> Execute State
 R[rt] = M[R[rs] + SignExtImmm]
@@ -1021,7 +1021,7 @@ Instruction	| 0x8fbe0018
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x23 / signExtImm 0x18 / zeroExtImm 0x18 / branchAddr 0x60
-Instruction	|LoadWord
+Instruction	| LoadWord
 
 State Change	| Decode -> Execute State
 R[rt] = M[R[rs] + SignExtImmm]
@@ -1036,7 +1036,7 @@ Instruction	| 0x27bd0020
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x9 / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
-Instruction	|AddImmediateUnsigned
+Instruction	| AddImmediateUnsigned
 
 State Change	| Decode -> Execute State
 R[rt] = R[rs] + SignExtImm
@@ -1051,7 +1051,7 @@ Instruction	| 0x3e00008
 
 State Change	| Fetch -> Decode State
 R Type		| rd 0x0 / rs 0x1f / rt 0x0 / shamt 0x0 / funct 0x8
-Instruction	|JumpRegister
+Instruction	| JumpRegister
 
 State Change	| Decode -> Execute State
 PC = R[rs]
@@ -1066,7 +1066,7 @@ Instruction	| 0x401821
 
 State Change	| Fetch -> Decode State
 R Type		| rd 0x3 / rs 0x2 / rt 0x0 / shamt 0x0 / funct 0x21
-Instruction	|AddUnsigned
+Instruction	| AddUnsigned
 
 State Change	| Decode -> Execute State
 R[rd] = R[rs] + R[rt]
@@ -1081,7 +1081,7 @@ Instruction	| 0x8fc20020
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x23 / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
-Instruction	|LoadWord
+Instruction	| LoadWord
 
 State Change	| Decode -> Execute State
 R[rt] = M[R[rs] + SignExtImmm]
@@ -1097,11 +1097,11 @@ Instruction	| 0x70621002
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x1c / signExtImm 0x1002 / zeroExtImm 0x1002 / branchAddr 0x4008
  / funct 0x%x
-Instruction	|Multiply32BitRes
+Instruction	| Multiply32BitRes
 
 State Change	| Decode -> Execute State
 R[rd] = R[rs] * R[rt]
-R[2] = R[3](0x1) * R[2](0x2) = 0x3
+R[2] = R[3](0x1) * R[2](0x2) = 0x2
 
 
 
@@ -1112,7 +1112,7 @@ Instruction	| 0x3c0e821
 
 State Change	| Fetch -> Decode State
 R Type		| rd 0x1d / rs 0x1e / rt 0x0 / shamt 0x0 / funct 0x21
-Instruction	|AddUnsigned
+Instruction	| AddUnsigned
 
 State Change	| Decode -> Execute State
 R[rd] = R[rs] + R[rt]
@@ -1127,7 +1127,7 @@ Instruction	| 0x8fbf001c
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x23 / signExtImm 0x1c / zeroExtImm 0x1c / branchAddr 0x70
-Instruction	|LoadWord
+Instruction	| LoadWord
 
 State Change	| Decode -> Execute State
 R[rt] = M[R[rs] + SignExtImmm]
@@ -1142,7 +1142,7 @@ Instruction	| 0x8fbe0018
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x23 / signExtImm 0x18 / zeroExtImm 0x18 / branchAddr 0x60
-Instruction	|LoadWord
+Instruction	| LoadWord
 
 State Change	| Decode -> Execute State
 R[rt] = M[R[rs] + SignExtImmm]
@@ -1157,7 +1157,7 @@ Instruction	| 0x27bd0020
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x9 / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
-Instruction	|AddImmediateUnsigned
+Instruction	| AddImmediateUnsigned
 
 State Change	| Decode -> Execute State
 R[rt] = R[rs] + SignExtImm
@@ -1172,7 +1172,7 @@ Instruction	| 0x3e00008
 
 State Change	| Fetch -> Decode State
 R Type		| rd 0x0 / rs 0x1f / rt 0x0 / shamt 0x0 / funct 0x8
-Instruction	|JumpRegister
+Instruction	| JumpRegister
 
 State Change	| Decode -> Execute State
 PC = R[rs]
@@ -1187,7 +1187,7 @@ Instruction	| 0x401821
 
 State Change	| Fetch -> Decode State
 R Type		| rd 0x3 / rs 0x2 / rt 0x0 / shamt 0x0 / funct 0x21
-Instruction	|AddUnsigned
+Instruction	| AddUnsigned
 
 State Change	| Decode -> Execute State
 R[rd] = R[rs] + R[rt]
@@ -1202,7 +1202,7 @@ Instruction	| 0x8fc20020
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x23 / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
-Instruction	|LoadWord
+Instruction	| LoadWord
 
 State Change	| Decode -> Execute State
 R[rt] = M[R[rs] + SignExtImmm]
@@ -1218,11 +1218,11 @@ Instruction	| 0x70621002
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x1c / signExtImm 0x1002 / zeroExtImm 0x1002 / branchAddr 0x4008
  / funct 0x%x
-Instruction	|Multiply32BitRes
+Instruction	| Multiply32BitRes
 
 State Change	| Decode -> Execute State
 R[rd] = R[rs] * R[rt]
-R[2] = R[3](0x2) * R[2](0x3) = 0x5
+R[2] = R[3](0x2) * R[2](0x3) = 0x6
 
 
 
@@ -1233,7 +1233,7 @@ Instruction	| 0x3c0e821
 
 State Change	| Fetch -> Decode State
 R Type		| rd 0x1d / rs 0x1e / rt 0x0 / shamt 0x0 / funct 0x21
-Instruction	|AddUnsigned
+Instruction	| AddUnsigned
 
 State Change	| Decode -> Execute State
 R[rd] = R[rs] + R[rt]
@@ -1248,7 +1248,7 @@ Instruction	| 0x8fbf001c
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x23 / signExtImm 0x1c / zeroExtImm 0x1c / branchAddr 0x70
-Instruction	|LoadWord
+Instruction	| LoadWord
 
 State Change	| Decode -> Execute State
 R[rt] = M[R[rs] + SignExtImmm]
@@ -1263,7 +1263,7 @@ Instruction	| 0x8fbe0018
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x23 / signExtImm 0x18 / zeroExtImm 0x18 / branchAddr 0x60
-Instruction	|LoadWord
+Instruction	| LoadWord
 
 State Change	| Decode -> Execute State
 R[rt] = M[R[rs] + SignExtImmm]
@@ -1278,7 +1278,7 @@ Instruction	| 0x27bd0020
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x9 / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
-Instruction	|AddImmediateUnsigned
+Instruction	| AddImmediateUnsigned
 
 State Change	| Decode -> Execute State
 R[rt] = R[rs] + SignExtImm
@@ -1293,7 +1293,7 @@ Instruction	| 0x3e00008
 
 State Change	| Fetch -> Decode State
 R Type		| rd 0x0 / rs 0x1f / rt 0x0 / shamt 0x0 / funct 0x8
-Instruction	|JumpRegister
+Instruction	| JumpRegister
 
 State Change	| Decode -> Execute State
 PC = R[rs]
@@ -1308,7 +1308,7 @@ Instruction	| 0x401821
 
 State Change	| Fetch -> Decode State
 R Type		| rd 0x3 / rs 0x2 / rt 0x0 / shamt 0x0 / funct 0x21
-Instruction	|AddUnsigned
+Instruction	| AddUnsigned
 
 State Change	| Decode -> Execute State
 R[rd] = R[rs] + R[rt]
@@ -1323,7 +1323,7 @@ Instruction	| 0x8fc20020
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x23 / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
-Instruction	|LoadWord
+Instruction	| LoadWord
 
 State Change	| Decode -> Execute State
 R[rt] = M[R[rs] + SignExtImmm]
@@ -1339,11 +1339,11 @@ Instruction	| 0x70621002
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x1c / signExtImm 0x1002 / zeroExtImm 0x1002 / branchAddr 0x4008
  / funct 0x%x
-Instruction	|Multiply32BitRes
+Instruction	| Multiply32BitRes
 
 State Change	| Decode -> Execute State
 R[rd] = R[rs] * R[rt]
-R[2] = R[3](0x6) * R[2](0x4) = 0xa
+R[2] = R[3](0x6) * R[2](0x4) = 0x18
 
 
 
@@ -1354,7 +1354,7 @@ Instruction	| 0x3c0e821
 
 State Change	| Fetch -> Decode State
 R Type		| rd 0x1d / rs 0x1e / rt 0x0 / shamt 0x0 / funct 0x21
-Instruction	|AddUnsigned
+Instruction	| AddUnsigned
 
 State Change	| Decode -> Execute State
 R[rd] = R[rs] + R[rt]
@@ -1369,7 +1369,7 @@ Instruction	| 0x8fbf001c
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x23 / signExtImm 0x1c / zeroExtImm 0x1c / branchAddr 0x70
-Instruction	|LoadWord
+Instruction	| LoadWord
 
 State Change	| Decode -> Execute State
 R[rt] = M[R[rs] + SignExtImmm]
@@ -1384,7 +1384,7 @@ Instruction	| 0x8fbe0018
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x23 / signExtImm 0x18 / zeroExtImm 0x18 / branchAddr 0x60
-Instruction	|LoadWord
+Instruction	| LoadWord
 
 State Change	| Decode -> Execute State
 R[rt] = M[R[rs] + SignExtImmm]
@@ -1399,7 +1399,7 @@ Instruction	| 0x27bd0020
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x9 / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
-Instruction	|AddImmediateUnsigned
+Instruction	| AddImmediateUnsigned
 
 State Change	| Decode -> Execute State
 R[rt] = R[rs] + SignExtImm
@@ -1414,7 +1414,7 @@ Instruction	| 0x3e00008
 
 State Change	| Fetch -> Decode State
 R Type		| rd 0x0 / rs 0x1f / rt 0x0 / shamt 0x0 / funct 0x8
-Instruction	|JumpRegister
+Instruction	| JumpRegister
 
 State Change	| Decode -> Execute State
 PC = R[rs]
@@ -1429,7 +1429,7 @@ Instruction	| 0x401821
 
 State Change	| Fetch -> Decode State
 R Type		| rd 0x3 / rs 0x2 / rt 0x0 / shamt 0x0 / funct 0x21
-Instruction	|AddUnsigned
+Instruction	| AddUnsigned
 
 State Change	| Decode -> Execute State
 R[rd] = R[rs] + R[rt]
@@ -1444,7 +1444,7 @@ Instruction	| 0x8fc20020
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x23 / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
-Instruction	|LoadWord
+Instruction	| LoadWord
 
 State Change	| Decode -> Execute State
 R[rt] = M[R[rs] + SignExtImmm]
@@ -1460,11 +1460,11 @@ Instruction	| 0x70621002
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x1c / signExtImm 0x1002 / zeroExtImm 0x1002 / branchAddr 0x4008
  / funct 0x%x
-Instruction	|Multiply32BitRes
+Instruction	| Multiply32BitRes
 
 State Change	| Decode -> Execute State
 R[rd] = R[rs] * R[rt]
-R[2] = R[3](0x18) * R[2](0x5) = 0x1d
+R[2] = R[3](0x18) * R[2](0x5) = 0x78
 
 
 
@@ -1475,7 +1475,7 @@ Instruction	| 0x3c0e821
 
 State Change	| Fetch -> Decode State
 R Type		| rd 0x1d / rs 0x1e / rt 0x0 / shamt 0x0 / funct 0x21
-Instruction	|AddUnsigned
+Instruction	| AddUnsigned
 
 State Change	| Decode -> Execute State
 R[rd] = R[rs] + R[rt]
@@ -1490,7 +1490,7 @@ Instruction	| 0x8fbf001c
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x23 / signExtImm 0x1c / zeroExtImm 0x1c / branchAddr 0x70
-Instruction	|LoadWord
+Instruction	| LoadWord
 
 State Change	| Decode -> Execute State
 R[rt] = M[R[rs] + SignExtImmm]
@@ -1505,7 +1505,7 @@ Instruction	| 0x8fbe0018
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x23 / signExtImm 0x18 / zeroExtImm 0x18 / branchAddr 0x60
-Instruction	|LoadWord
+Instruction	| LoadWord
 
 State Change	| Decode -> Execute State
 R[rt] = M[R[rs] + SignExtImmm]
@@ -1520,7 +1520,7 @@ Instruction	| 0x27bd0020
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x9 / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
-Instruction	|AddImmediateUnsigned
+Instruction	| AddImmediateUnsigned
 
 State Change	| Decode -> Execute State
 R[rt] = R[rs] + SignExtImm
@@ -1535,7 +1535,7 @@ Instruction	| 0x3e00008
 
 State Change	| Fetch -> Decode State
 R Type		| rd 0x0 / rs 0x1f / rt 0x0 / shamt 0x0 / funct 0x8
-Instruction	|JumpRegister
+Instruction	| JumpRegister
 
 State Change	| Decode -> Execute State
 PC = R[rs]
@@ -1550,7 +1550,7 @@ Instruction	| 0xafc20018
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x2b / signExtImm 0x18 / zeroExtImm 0x18 / branchAddr 0x60
-Instruction	|StoreWord
+Instruction	| StoreWord
 
 State Change	| Decode -> Execute State
 M[R[rs] + SignExtImm] = R[rt]
@@ -1565,7 +1565,7 @@ Instruction	| 0x8fc20018
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x23 / signExtImm 0x18 / zeroExtImm 0x18 / branchAddr 0x60
-Instruction	|LoadWord
+Instruction	| LoadWord
 
 State Change	| Decode -> Execute State
 R[rt] = M[R[rs] + SignExtImmm]
@@ -1580,7 +1580,7 @@ Instruction	| 0x3c0e821
 
 State Change	| Fetch -> Decode State
 R Type		| rd 0x1d / rs 0x1e / rt 0x0 / shamt 0x0 / funct 0x21
-Instruction	|AddUnsigned
+Instruction	| AddUnsigned
 
 State Change	| Decode -> Execute State
 R[rd] = R[rs] + R[rt]
@@ -1595,7 +1595,7 @@ Instruction	| 0x8fbf0024
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x23 / signExtImm 0x24 / zeroExtImm 0x24 / branchAddr 0x90
-Instruction	|LoadWord
+Instruction	| LoadWord
 
 State Change	| Decode -> Execute State
 R[rt] = M[R[rs] + SignExtImmm]
@@ -1610,7 +1610,7 @@ Instruction	| 0x8fbe0020
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x23 / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
-Instruction	|LoadWord
+Instruction	| LoadWord
 
 State Change	| Decode -> Execute State
 R[rt] = M[R[rs] + SignExtImmm]
@@ -1625,7 +1625,7 @@ Instruction	| 0x27bd0028
 
 State Change	| Fetch -> Decode State
 I Type		| opcode 0x9 / signExtImm 0x28 / zeroExtImm 0x28 / branchAddr 0xa0
-Instruction	|AddImmediateUnsigned
+Instruction	| AddImmediateUnsigned
 
 State Change	| Decode -> Execute State
 R[rt] = R[rs] + SignExtImm
@@ -1640,7 +1640,7 @@ Instruction	| 0x3e00008
 
 State Change	| Fetch -> Decode State
 R Type		| rd 0x0 / rs 0x1f / rt 0x0 / shamt 0x0 / funct 0x8
-Instruction	|JumpRegister
+Instruction	| JumpRegister
 
 State Change	| Decode -> Execute State
 PC = R[rs]

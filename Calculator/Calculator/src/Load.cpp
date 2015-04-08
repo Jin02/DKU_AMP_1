@@ -67,26 +67,35 @@ bool LoadHalfwordUnsigned::Execution()
 
 
 /** LoadLinked **/
+LoadLinked::LoadLinked(unsigned int rs, unsigned int rt, unsigned int immediate) : IFormatInstruction(rs, rt, immediate)
+{
+    GlobalDumpManagerAddLogClassName(LoadLinked);
+}
 
-//LoadLinked::LoadLinked(unsigned int rs, unsigned int rt, unsigned int immediate) : IFormatInstruction(rs, rt, immediate)
-//{
-//    
-//}
-//
-//LoadLinked::~LoadLinked()
-//{
-//    
-//}
-//
-//void LoadLinked::Execution()
-//{
-//    System* system = System::GetInstance();
-//    
-//    unsigned int rsData = system->GetDataFromRegister(_rs);
-//    unsigned int memData = system->GetDataFromMemory(rsData + _immediate);
-//    
-//    system->SetDataToRegister(_rt, memData);
-//}
+LoadLinked::~LoadLinked()
+{
+    
+}
+
+bool LoadLinked::Execution()
+{
+    System* system = System::GetInstance();
+    
+    unsigned int rsData = system->GetDataFromRegister(_rs);
+    unsigned int memData = system->GetDataFromMemory(rsData + _immediate);
+    
+    system->SetDataToRegister(_rt, memData);
+    {
+        GlobalDumpLogManager->AddLog("R[rt] = M[R[rs] + SignExtImmm]", true);
+        
+        char logBuffer[64] = {0, };
+        sprintf(logBuffer, "R[%d] = M[R[%d](0x%x) + 0x%x] = 0x%x", _rt, _rs, rsData, _immediate, memData);
+        GlobalDumpLogManager->AddLog(logBuffer, true);
+        GlobalDumpManagerAddLog3NewLine;
+    }
+    
+    return true;
+}
 
 /** LoadUpperImmediate **/
 

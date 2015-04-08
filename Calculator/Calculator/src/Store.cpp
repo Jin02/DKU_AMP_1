@@ -38,19 +38,34 @@ bool StoreByte::Execution()
 
 /** StoreConditional **/
 
-//StoreConditional::StoreConditional(unsigned int rs, unsigned int rt, unsigned int immediate) : IFormatInstruction(rs, rt, immediate)
-//{
-//    
-//}
-//
-//StoreConditional::~StoreConditional()
-//{
-//    
-//}
-//
-//void StoreConditional::Execution()
-//{
-//}
+StoreConditional::StoreConditional(unsigned int rs, unsigned int rt, unsigned int immediate) : IFormatInstruction(rs, rt, immediate)
+{
+    GlobalDumpManagerAddLogClassName(StoreConditional);
+}
+
+StoreConditional::~StoreConditional()
+{
+    
+}
+
+bool StoreConditional::Execution()
+{
+    System* system = System::GetInstance();
+    
+    unsigned int toMemRtData = system->GetDataFromRegister(_rt);
+    unsigned int rsData = system->GetDataFromRegister(_rs);
+    system->SetDataToMemory(rsData + _immediate, toMemRtData);
+    {
+        GlobalDumpLogManager->AddLog("M[R[rs] + SignExtImm] = R[rt]", true);
+        
+        char logBuffer[64] = {0, };
+        sprintf(logBuffer, "M[(R[%d](0x%x) + 0x%x) = 0x%x] = R[%d](0x%x)", _rs, rsData, _immediate, rsData + _immediate, _rt, toMemRtData);
+        GlobalDumpLogManager->AddLog(logBuffer, true);
+        GlobalDumpManagerAddLog3NewLine;
+    }
+    
+    return true;
+}
 
 /** StoreUpperImmediate **/
 
