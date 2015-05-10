@@ -6,7 +6,8 @@
 class RFormatInstruction : public Instruction
 {
 protected:
-    unsigned int _rs, _rt, _rd;
+    uint _rsData, _rtData, _rd;
+	uint _executionResult;
     
 public:
     RFormatInstruction(unsigned int rs, unsigned int rt, unsigned int rd);
@@ -17,4 +18,6 @@ protected:
     
 public:
     virtual bool Execution();
+	virtual void Memory();
+	virtual void WriteBuffer();
 };

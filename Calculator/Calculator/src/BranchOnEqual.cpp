@@ -2,7 +2,8 @@
 #include "System.h"
 #include "DumpLogManager.h"
 
-BranchOnEqual::BranchOnEqual(unsigned int rs, unsigned int rt, unsigned int immediate) : IFormatInstruction(rs, rt, immediate)
+BranchOnEqual::BranchOnEqual(unsigned int rs, unsigned int rt, unsigned int immediate)
+	: IFormatInstruction(rs, rt, immediate)
 {
 	GlobalDumpManagerAddLogClassName(BranchOnEqual);
 }

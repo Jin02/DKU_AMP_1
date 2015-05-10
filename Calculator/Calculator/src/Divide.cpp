@@ -5,7 +5,7 @@
 /** Divide **/
 
 Divide::Divide(unsigned int rs, unsigned int rt, unsigned int rd)
-    : RFormatInstruction(rs, rt, rd)
+    : RFormatInstruction(rs, rt, rd), _executionHiResult(0), _executionLoResult(0)
 {
 	GlobalDumpManagerAddLogClassName(Divide);
 }
@@ -24,28 +24,37 @@ bool Divide::Execution()
 {
 	System* system = System::GetInstance();
 
-	int rsData = system->GetDataFromRegister(_rs);
-	int rtData = system->GetDataFromRegister(_rt);
+	int rsData = _rsData;
+	int rtData = _rtData;
 
-	system->SetLoRegister(rsData / rtData);
-	system->SetHiRegister(rsData % rtData);	
+	_executionLoResult = (rsData / rtData);
+	_executionHiResult = (rsData % rtData);
 	{
-		GlobalDumpLogManager->AddLog("Lo = R[rs] / R[rt]; Hi = R[rs] % R[rt]", true);
-
-		char logBuffer[64] = {0, };
-		sprintf(logBuffer, "Lo = R[%d](0x%x) / R[%d](0x%x) = 0x%x  //  Hi = R[%d](0x%x) %% R[%d](0x%x) = 0x%x",
-								  _rs, rsData, _rt, rtData, rsData / rtData, _rs, rsData, _rt, rtData, rsData % rtData);
-		GlobalDumpLogManager->AddLog(logBuffer, true);
-		GlobalDumpManagerAddLog3NewLine;
+		char buff[256] = {0, };	
+		sprintf(buff, "ExecutionHiData = 0x%x / ExecutionLoData = 0x%x", _executionHiResult, _executionLoResult);
+		GlobalDumpLogManager->AddLog(buff, true);
 	}
 
 	return true;
 }
 
+void Divide::WriteBuffer()
+{
+	System* system = System::GetInstance();
+
+	system->SetHiRegister( _executionHiResult );
+	system->SetLoRegister( _executionLoResult );
+	{
+		char buff[256] = {0, };	
+		sprintf(buff, "Hi = 0x%x / Lo = 0x%x", _executionHiResult, _executionLoResult);
+		GlobalDumpLogManager->AddLog(buff, true);
+	}
+}
+
 /** Divide Unsigned **/
 
 DivideUnsigned::DivideUnsigned(unsigned int rs, unsigned int rt, unsigned int rd)
-    : RFormatInstruction(rs, rt, rd)
+    : RFormatInstruction(rs, rt, rd), _executionHiResult(0), _executionLoResult(0)
 {
 	GlobalDumpManagerAddLogClassName(DivideUnsigned);
 }
@@ -64,19 +73,26 @@ bool DivideUnsigned::Execution()
 {
 	System* system = System::GetInstance();
 
-	uint rsData = system->GetDataFromRegister(_rs);
-	uint rtData = system->GetDataFromRegister(_rt);
-
-	system->SetLoRegister(rsData / rtData);
-	system->SetHiRegister(rsData % rtData);
+	_executionLoResult = (_rsData / _rtData);
+	_executionHiResult = (_rsData % _rtData);
 	{
-		GlobalDumpLogManager->AddLog("Lo = R[rs] / R[rt]; Hi = R[rs] % R[rt]", true);
-
-		char logBuffer[64] = {0, };
-		sprintf(logBuffer, "Lo = R[%d](0x%x) / R[%d](0x%x) = 0x%x  //  Hi = R[%d](0x%x) %% R[%d](0x%x) = 0x%x", _rs, rsData, _rt, rtData, rsData / rtData, _rs, rsData, _rt, rtData, rsData % rtData);
-		GlobalDumpLogManager->AddLog(logBuffer, true);
-		GlobalDumpManagerAddLog3NewLine;
+		char buff[256] = {0, };	
+		sprintf(buff, "ExecutionHiData = 0x%x / ExecutionLoData = 0x%x", _executionHiResult, _executionLoResult);
+		GlobalDumpLogManager->AddLog(buff, true);
 	}
 
 	return true;
+}
+
+void DivideUnsigned::WriteBuffer()
+{
+	System* system = System::GetInstance();
+
+	system->SetHiRegister( _executionHiResult );
+	system->SetLoRegister( _executionLoResult );
+	{
+		char buff[256] = {0, };	
+		sprintf(buff, "Hi = 0x%x / Lo = 0x%x", _executionHiResult, _executionLoResult);
+		GlobalDumpLogManager->AddLog(buff, true);
+	}
 }

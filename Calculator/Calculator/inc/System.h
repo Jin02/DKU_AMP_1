@@ -31,7 +31,10 @@ private:
 
 	// if next instruction is nop, return value is true else false.
     bool Execution(Instruction* inst);
-    
+
+	void Memory();
+	void WriteBuffer();
+
 public:
     void Load(const std::string& path);
 

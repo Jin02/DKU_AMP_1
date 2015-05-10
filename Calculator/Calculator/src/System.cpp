@@ -107,50 +107,9 @@ void System::Run()
 
 void System::RunCycle()
 {
-	static std::string prevState = "System Start";
-	auto StateLog = [&](const std::string& currentState)
-	{
-		GlobalDumpLogManager->AddLog("State Change\t| " + prevState + " -> " + currentState + " State", true);
-		prevState = currentState;
-	};
+	uint inst		= Fetch();
+	auto instObj	= Decode(inst);
 
-	bool ableNextPC			= true;
-
-	StateLog("Fetch");
-	uint instruction        = Fetch();
-	{
-		auto Log = [&](const std::string& tag, unsigned int value)
-		{
-			char hexStr[64] = {0, };
-			sprintf(hexStr, "0x%x", value);
-
-			std::string log = tag + "| ";
-			log += hexStr;
-
-			GlobalDumpManagerAddLogNewLine(log);
-		};
-		
-		Log("PC\t\t", _programCounter);
-		Log("Instruction\t", instruction);
-		GlobalDumpManagerAddLogNewLine("");
-	}
-
-	if(instruction != 0)
-	{
-		StateLog("Decode");
-		Instruction* exectable  = Decode(instruction);
-
-		StateLog("Execute");
-		ableNextPC = Execution(exectable);
-	}
-	else
-	{
-		GlobalDumpManagerAddLogNewLine("nop, skip decode, execution");
-		prevState = "NOP";
-	}
-
-	if(ableNextPC)
-		_programCounter += 4;
 }
 
 unsigned int System::Fetch()
@@ -312,6 +271,16 @@ bool System::Execution(Instruction* inst)
     delete inst;
 
 	return ableNextPC;
+}
+
+void System::Memory()
+{
+
+}
+
+void System::WriteBuffer()
+{
+
 }
 
 unsigned int System::GetDataFromMemory(int address)
