@@ -5,7 +5,7 @@
 class IFormatInstruction : public Instruction
 {
 protected:
-    uint    _rsData, _rt, _immediate;
+    uint    _rs, _rsData, _rt, _rtData, _immediate;
 	uint	_executionResult;
     
 public:
