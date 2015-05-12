@@ -20,12 +20,10 @@ RFormatInstruction::~RFormatInstruction(void)
 {
 }
 
-bool RFormatInstruction::Execution()
+void RFormatInstruction::Execution()
 {
 	_executionResult = Instruct(_rsData, _rtData);
 	GlobalDumpManagerAddExecutionLog(_executionResult);
-
-	return true;
 }
 
 void RFormatInstruction::Memory()

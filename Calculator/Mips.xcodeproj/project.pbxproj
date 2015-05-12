@@ -50,24 +50,24 @@
 /* Begin PBXFileReference section */
 		3C34F2251AC4394D00A151C6 /* Add.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Add.h; path = inc/Add.h; sourceTree = "<group>"; };
 		3C34F2261AC4395C00A151C6 /* Add.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Add.cpp; path = src/Add.cpp; sourceTree = "<group>"; };
-		3C34F22E1AC442A100A151C6 /* AddImmediate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AddImmediate.cpp; path = src/AddImmediate.cpp; sourceTree = "<group>"; };
-		3C34F2301AC442A600A151C6 /* AddImmediate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AddImmediate.h; path = inc/AddImmediate.h; sourceTree = "<group>"; };
+		3C34F22E1AC442A100A151C6 /* AddImmediate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; name = AddImmediate.cpp; path = src/AddImmediate.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		3C34F2301AC442A600A151C6 /* AddImmediate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = AddImmediate.h; path = inc/AddImmediate.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		3C34F2331AC445E800A151C6 /* Subtract.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Subtract.h; path = inc/Subtract.h; sourceTree = "<group>"; };
 		3C34F2341AC445FA00A151C6 /* Subtract.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Subtract.cpp; path = src/Subtract.cpp; sourceTree = "<group>"; };
 		3C34F2361AC4471600A151C6 /* And.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = And.cpp; path = src/And.cpp; sourceTree = "<group>"; };
-		3C34F2371AC4471600A151C6 /* AndImmediate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AndImmediate.cpp; path = src/AndImmediate.cpp; sourceTree = "<group>"; };
+		3C34F2371AC4471600A151C6 /* AndImmediate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; name = AndImmediate.cpp; path = src/AndImmediate.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		3C34F23A1AC4473400A151C6 /* And.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = And.h; path = inc/And.h; sourceTree = "<group>"; };
-		3C34F23B1AC4473400A151C6 /* AndImmediate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AndImmediate.h; path = inc/AndImmediate.h; sourceTree = "<group>"; };
+		3C34F23B1AC4473400A151C6 /* AndImmediate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = AndImmediate.h; path = inc/AndImmediate.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		3C34F23D1AC44A5E00A151C6 /* Or.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Or.h; path = inc/Or.h; sourceTree = "<group>"; };
 		3C34F23F1AC44A6C00A151C6 /* Or.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Or.cpp; path = src/Or.cpp; sourceTree = "<group>"; };
-		3C34F2421AC44B2400A151C6 /* OrImmediate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OrImmediate.cpp; path = src/OrImmediate.cpp; sourceTree = "<group>"; };
-		3C34F2441AC44B2F00A151C6 /* OrImmediate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = OrImmediate.h; path = inc/OrImmediate.h; sourceTree = "<group>"; };
+		3C34F2421AC44B2400A151C6 /* OrImmediate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; name = OrImmediate.cpp; path = src/OrImmediate.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		3C34F2441AC44B2F00A151C6 /* OrImmediate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = OrImmediate.h; path = inc/OrImmediate.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		3C34F2451AC44ED100A151C6 /* JumpRegister.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = JumpRegister.h; path = inc/JumpRegister.h; sourceTree = "<group>"; };
 		3C34F2461AC44EDD00A151C6 /* JumpRegister.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = JumpRegister.cpp; path = src/JumpRegister.cpp; sourceTree = "<group>"; };
 		3C34F2481AC44FFC00A151C6 /* SetLessThan.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SetLessThan.h; path = inc/SetLessThan.h; sourceTree = "<group>"; };
 		3C34F2491AC4500600A151C6 /* SetLessThan.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SetLessThan.cpp; path = src/SetLessThan.cpp; sourceTree = "<group>"; };
-		3C34F24B1AC4509300A151C6 /* SetLessThanImmediate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SetLessThanImmediate.h; path = inc/SetLessThanImmediate.h; sourceTree = "<group>"; };
-		3C34F24C1AC450A700A151C6 /* SetLessThanImmediate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SetLessThanImmediate.cpp; path = src/SetLessThanImmediate.cpp; sourceTree = "<group>"; };
+		3C34F24B1AC4509300A151C6 /* SetLessThanImmediate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = SetLessThanImmediate.h; path = inc/SetLessThanImmediate.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		3C34F24C1AC450A700A151C6 /* SetLessThanImmediate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; name = SetLessThanImmediate.cpp; path = src/SetLessThanImmediate.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		3C34F24E1AC452F000A151C6 /* ShiftLeftLogical.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ShiftLeftLogical.cpp; path = src/ShiftLeftLogical.cpp; sourceTree = "<group>"; };
 		3C34F24F1AC452F000A151C6 /* ShiftRightLogical.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ShiftRightLogical.cpp; path = src/ShiftRightLogical.cpp; sourceTree = "<group>"; };
 		3C34F2521AC4531600A151C6 /* ShiftLeftLogical.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ShiftLeftLogical.h; path = inc/ShiftLeftLogical.h; sourceTree = "<group>"; };
@@ -77,25 +77,25 @@
 		3C34F2561AC4F69C00A151C6 /* BranchOnEqual.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BranchOnEqual.cpp; path = src/BranchOnEqual.cpp; sourceTree = "<group>"; };
 		3C34F2571AC4F69C00A151C6 /* BranchOnNotEqual.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BranchOnNotEqual.cpp; path = src/BranchOnNotEqual.cpp; sourceTree = "<group>"; };
 		3C34F25A1AC50A4900A151C6 /* Load.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Load.cpp; path = src/Load.cpp; sourceTree = "<group>"; };
-		3C34F25D1AC50A6600A151C6 /* Load.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Load.h; path = inc/Load.h; sourceTree = "<group>"; };
+		3C34F25D1AC50A6600A151C6 /* Load.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = Load.h; path = inc/Load.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		3C34F25E1AC518E500A151C6 /* Store.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Store.cpp; path = src/Store.cpp; sourceTree = "<group>"; };
-		3C34F2601AC518ED00A151C6 /* Store.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Store.h; path = inc/Store.h; sourceTree = "<group>"; };
-		3C34F26D1AC5884500A151C6 /* Move.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Move.cpp; path = src/Move.cpp; sourceTree = "<group>"; };
-		3C34F26F1AC5885100A151C6 /* Move.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Move.h; path = inc/Move.h; sourceTree = "<group>"; };
-		3C34F2701AC6F37A00A151C6 /* Multiply.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Multiply.h; path = inc/Multiply.h; sourceTree = "<group>"; };
-		3C34F2711AC6F38100A151C6 /* Multiply.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Multiply.cpp; path = src/Multiply.cpp; sourceTree = "<group>"; };
-		3C34F2731AC6F38700A151C6 /* Divide.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Divide.cpp; path = src/Divide.cpp; sourceTree = "<group>"; };
-		3C34F2751AC6F39300A151C6 /* Divide.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Divide.h; path = inc/Divide.h; sourceTree = "<group>"; };
+		3C34F2601AC518ED00A151C6 /* Store.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = Store.h; path = inc/Store.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		3C34F26D1AC5884500A151C6 /* Move.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; name = Move.cpp; path = src/Move.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		3C34F26F1AC5885100A151C6 /* Move.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = Move.h; path = inc/Move.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		3C34F2701AC6F37A00A151C6 /* Multiply.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = Multiply.h; path = inc/Multiply.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		3C34F2711AC6F38100A151C6 /* Multiply.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; name = Multiply.cpp; path = src/Multiply.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		3C34F2731AC6F38700A151C6 /* Divide.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; name = Divide.cpp; path = src/Divide.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		3C34F2751AC6F39300A151C6 /* Divide.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = Divide.h; path = inc/Divide.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		3C60F05F1ACBAD1A0014269B /* DumpLogManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DumpLogManager.h; path = inc/DumpLogManager.h; sourceTree = "<group>"; };
 		3C60F0601ACBAD200014269B /* DumpLogManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DumpLogManager.cpp; path = src/DumpLogManager.cpp; sourceTree = "<group>"; };
 		3C617F081AB9302F00FC8FBD /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Common.h; path = inc/Common.h; sourceTree = "<group>"; };
 		3C617F0F1AB9302F00FC8FBD /* Singleton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Singleton.h; path = inc/Singleton.h; sourceTree = "<group>"; };
-		3C617F111AB9302F00FC8FBD /* System.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = System.h; path = inc/System.h; sourceTree = "<group>"; };
+		3C617F111AB9302F00FC8FBD /* System.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = System.h; path = inc/System.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		3C617F1E1AB9304C00FC8FBD /* System.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = System.cpp; path = src/System.cpp; sourceTree = "<group>"; };
 		3CE7A43A1AC40E7A0001E0CE /* Instruction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Instruction.cpp; path = src/Instruction.cpp; sourceTree = "<group>"; };
-		3CE7A43C1AC40E890001E0CE /* RFormatInstruction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RFormatInstruction.cpp; path = src/RFormatInstruction.cpp; sourceTree = "<group>"; };
-		3CE7A4401AC40F030001E0CE /* RFormatInstruction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RFormatInstruction.h; path = inc/RFormatInstruction.h; sourceTree = "<group>"; };
-		3CE7A4411AC40F030001E0CE /* Instruction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Instruction.h; path = inc/Instruction.h; sourceTree = "<group>"; };
+		3CE7A43C1AC40E890001E0CE /* RFormatInstruction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; name = RFormatInstruction.cpp; path = src/RFormatInstruction.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		3CE7A4401AC40F030001E0CE /* RFormatInstruction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = RFormatInstruction.h; path = inc/RFormatInstruction.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		3CE7A4411AC40F030001E0CE /* Instruction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = Instruction.h; path = inc/Instruction.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		3CE7A4441AC430A90001E0CE /* IFormatInstruction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IFormatInstruction.h; path = inc/IFormatInstruction.h; sourceTree = "<group>"; };
 		3CE7A4451AC430A90001E0CE /* JFormatInstruction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = JFormatInstruction.h; path = inc/JFormatInstruction.h; sourceTree = "<group>"; };
 		3CE7A4461AC430C50001E0CE /* IFormatInstruction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IFormatInstruction.cpp; path = src/IFormatInstruction.cpp; sourceTree = "<group>"; };
@@ -130,8 +130,8 @@
 				3CE7A44A1AC430C80001E0CE /* J */,
 				3CE7A4431AC422E10001E0CE /* I */,
 				3CE7A4421AC422DC0001E0CE /* R */,
-				3CE7A4411AC40F030001E0CE /* Instruction.h */,
 				3CE7A43A1AC40E7A0001E0CE /* Instruction.cpp */,
+				3CE7A4411AC40F030001E0CE /* Instruction.h */,
 			);
 			name = Instruction;
 			sourceTree = "<group>";

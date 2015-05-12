@@ -4,7 +4,7 @@
 
 /** LoadByteUnsigned **/
 
-LoadByteUnsigned::LoadByteUnsigned(unsigned int rs, unsigned int rt, unsigned int immediate) : IFormatInstruction(rs, rt, immediate)
+LoadByteUnsigned::LoadByteUnsigned(unsigned int rs, unsigned int rt, unsigned int immediate) : IFormatInstruction(rs, rt, immediate), _toRegiMemValue(0)
 {
 	GlobalDumpManagerAddLogClassName(LoadByteUnsigned);
 }
@@ -14,30 +14,35 @@ LoadByteUnsigned::~LoadByteUnsigned()
 
 }
 
+void LoadByteUnsigned::Execution()
+{
+    _executionResult = _rsData + _immediate;
+}
+
 void LoadByteUnsigned::Memory()
 {
     System* system = System::GetInstance();
-    unsigned int memData    = system->GetDataFromMemory(_rsData+_immediate);
-    _executionResult = memData & 0x000000ff;
+    unsigned int memData    = system->GetDataFromMemory(_executionResult);
+    _toRegiMemValue = memData & 0x000000ff;
 }
 
 void LoadByteUnsigned::WriteBuffer()
 {
     System* system = System::GetInstance();
     
-    system->SetDataToRegister(_rt, _executionResult);
+    system->SetDataToRegister(_rt, _toRegiMemValue);
     {
         GlobalDumpLogManager->AddLog("R[rt] = {24'b0, M[R[rs] + SignExtImm](7:0)}", true);
         
         char logBuffer[64] = {0, };
-        sprintf(logBuffer, "R[%d] = {0x000000, M[R[%d](0x%x) + 0x%x](7:0)} = 0x%x", _rt, _rs, _rsData, _immediate, _executionResult);
+        sprintf(logBuffer, "R[%d] = {0x000000, M[R[%d](0x%x) + 0x%x](7:0)} = 0x%x", _rt, _rs, _rsData, _immediate, _toRegiMemValue);
         GlobalDumpLogManager->AddLog(logBuffer, true);
         GlobalDumpManagerAddLog3NewLine;
     }
 }
 
 /** LoadHalfwordUnsigned **/
-LoadHalfwordUnsigned::LoadHalfwordUnsigned(unsigned int rs, unsigned int rt, unsigned int immediate) : IFormatInstruction(rs, rt, immediate)
+LoadHalfwordUnsigned::LoadHalfwordUnsigned(unsigned int rs, unsigned int rt, unsigned int immediate) : IFormatInstruction(rs, rt, immediate), _toRegiMemValue(0)
 {
 	GlobalDumpManagerAddLogClassName(LoadHalfwordUnsigned);
 }
@@ -47,22 +52,27 @@ LoadHalfwordUnsigned::~LoadHalfwordUnsigned()
     
 }
 
+void LoadHalfwordUnsigned::Execution()
+{
+    _executionResult = _rsData + _immediate;
+}
+
 void LoadHalfwordUnsigned::Memory()
 {
     System* system = System::GetInstance();
-    unsigned int memData    = system->GetDataFromMemory(_rsData+_immediate);
-    _executionResult = memData & 0x0000ffff;
+    unsigned int memData    = system->GetDataFromMemory(_executionResult);
+    _toRegiMemValue = memData & 0x0000ffff;
 }
 
 void LoadHalfwordUnsigned::WriteBuffer()
 {
     System* system = System::GetInstance();
-    system->SetDataToRegister(_rt, _executionResult);
+    system->SetDataToRegister(_rt, _toRegiMemValue);
     {
         GlobalDumpLogManager->AddLog("R[rt] = {16'b0, M[R[rs] + SignExtImm](15:0)}", true);
         
         char logBuffer[64] = {0, };
-        sprintf(logBuffer, "R[%d] = {0x0000, M[R[%d](0x%x) + 0x%x](15:0)} = 0x%x", _rt, _rs, _rsData, _immediate, _executionResult);
+        sprintf(logBuffer, "R[%d] = {0x0000, M[R[%d](0x%x) + 0x%x](15:0)} = 0x%x", _rt, _rs, _rsData, _immediate, _toRegiMemValue);
         GlobalDumpLogManager->AddLog(logBuffer, true);
         GlobalDumpManagerAddLog3NewLine;
     }
@@ -70,7 +80,7 @@ void LoadHalfwordUnsigned::WriteBuffer()
 }
 
 /** LoadLinked **/
-LoadLinked::LoadLinked(unsigned int rs, unsigned int rt, unsigned int immediate) : IFormatInstruction(rs, rt, immediate)
+LoadLinked::LoadLinked(unsigned int rs, unsigned int rt, unsigned int immediate) : IFormatInstruction(rs, rt, immediate), _toRegiMemValue(0)
 {
     GlobalDumpManagerAddLogClassName(LoadLinked);
 }
@@ -80,21 +90,26 @@ LoadLinked::~LoadLinked()
     
 }
 
+void LoadLinked::Execution()
+{
+    _executionResult = _rsData + _immediate;
+}
+
 void LoadLinked::Memory()
 {
     System* system = System::GetInstance();
-    _executionResult = system->GetDataFromMemory(_rsData + _immediate);
+    _toRegiMemValue = system->GetDataFromMemory(_executionResult);
 }
 
 void LoadLinked::WriteBuffer()
 {
     System* system = System::GetInstance();
-    system->SetDataToRegister(_rt, _executionResult);
+    system->SetDataToRegister(_rt, _toRegiMemValue);
     {
         GlobalDumpLogManager->AddLog("R[rt] = M[R[rs] + SignExtImmm]", true);
         
         char logBuffer[64] = {0, };
-        sprintf(logBuffer, "R[%d] = M[R[%d](0x%x) + 0x%x] = 0x%x", _rt, _rs, _rsData, _immediate, _executionResult);
+        sprintf(logBuffer, "R[%d] = M[R[%d](0x%x) + 0x%x] = 0x%x", _rt, _rs, _rsData, _immediate, _toRegiMemValue);
         GlobalDumpLogManager->AddLog(logBuffer, true);
         GlobalDumpManagerAddLog3NewLine;
     }
@@ -111,6 +126,11 @@ LoadUpperImmediate::~LoadUpperImmediate()
     
 }
 
+void LoadUpperImmediate::Execution()
+{
+    _executionResult = _immediate & 0xffff0000;
+}
+
 void LoadUpperImmediate::Memory()
 {
 }
@@ -118,19 +138,19 @@ void LoadUpperImmediate::Memory()
 void LoadUpperImmediate::WriteBuffer()
 {
     System* system = System::GetInstance();
-    system->SetDataToRegister(_rt, _immediate & 0xffff0000);
+    system->SetDataToRegister(_rt, _executionResult);
     {
         GlobalDumpLogManager->AddLog("R[rt] = {(immediate, 16b'0)}", true);
         
         char logBuffer[64] = {0, };
-        sprintf(logBuffer, "R[%d] = 0x%x", _rt, _immediate & 0xffff0000);
+        sprintf(logBuffer, "R[%d] = 0x%x", _rt, _executionResult);
         GlobalDumpLogManager->AddLog(logBuffer, true);
         GlobalDumpManagerAddLog3NewLine;
     }
 }
 
 /** LoadWord **/
-LoadWord::LoadWord(unsigned int rs, unsigned int rt, unsigned int immediate) : IFormatInstruction(rs, rt, immediate)
+LoadWord::LoadWord(unsigned int rs, unsigned int rt, unsigned int immediate) : IFormatInstruction(rs, rt, immediate), _toRegiMemValue(0)
 {
 	GlobalDumpManagerAddLogClassName(LoadWord);
 }
@@ -140,16 +160,21 @@ LoadWord::~LoadWord()
     
 }
 
+void LoadWord::Execution()
+{
+    _executionResult = _rsData + _immediate;
+}
+
 void LoadWord::Memory()
 {
     System* system = System::GetInstance();
-    _executionResult = system->GetDataFromMemory(_rsData + _immediate);
+    _toRegiMemValue = system->GetDataFromMemory(_executionResult);
 }
 
 void LoadWord::WriteBuffer()
 {
     System* system = System::GetInstance();
-    system->SetDataToRegister(_rt, _executionResult);
+    system->SetDataToRegister(_rt, _toRegiMemValue);
     {
         GlobalDumpLogManager->AddLog("R[rt] = M[R[rs] + SignExtImmm]", true);
         
@@ -168,6 +193,11 @@ LoadImmediate::LoadImmediate(unsigned int rd, unsigned int immediate)
 }
 
 LoadImmediate::~LoadImmediate()
+{
+    
+}
+
+void LoadImmediate::Execution()
 {
     
 }

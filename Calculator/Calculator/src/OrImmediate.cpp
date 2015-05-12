@@ -12,10 +12,8 @@ OrImmediate::~OrImmediate()
     
 }
 
-bool OrImmediate::Execution()
+void OrImmediate::Execution()
 {
 	_executionResult = _rsData | _immediate; 
 	GlobalDumpManagerAddExecutionLog(_executionResult);
-
-	return true;
 }

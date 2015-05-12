@@ -7,5 +7,4 @@ Instruction::Instruction()
 
 Instruction::~Instruction()
 {
-    
 }

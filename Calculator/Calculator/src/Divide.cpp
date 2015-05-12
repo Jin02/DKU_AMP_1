@@ -20,10 +20,8 @@ unsigned int Divide::Instruct(unsigned int rsData, unsigned int rtData)
 	return 0;
 }
 
-bool Divide::Execution()
+void Divide::Execution()
 {
-	System* system = System::GetInstance();
-
 	int rsData = _rsData;
 	int rtData = _rtData;
 
@@ -34,8 +32,6 @@ bool Divide::Execution()
 		sprintf(buff, "ExecutionHiData = 0x%x / ExecutionLoData = 0x%x", _executionHiResult, _executionLoResult);
 		GlobalDumpLogManager->AddLog(buff, true);
 	}
-
-	return true;
 }
 
 void Divide::WriteBuffer()
@@ -69,10 +65,8 @@ unsigned int DivideUnsigned::Instruct(unsigned int rsData, unsigned int rtData)
     return 0;
 }
 
-bool DivideUnsigned::Execution()
+void DivideUnsigned::Execution()
 {
-	System* system = System::GetInstance();
-
 	_executionLoResult = (_rsData / _rtData);
 	_executionHiResult = (_rsData % _rtData);
 	{
@@ -80,8 +74,6 @@ bool DivideUnsigned::Execution()
 		sprintf(buff, "ExecutionHiData = 0x%x / ExecutionLoData = 0x%x", _executionHiResult, _executionLoResult);
 		GlobalDumpLogManager->AddLog(buff, true);
 	}
-
-	return true;
 }
 
 void DivideUnsigned::WriteBuffer()

@@ -12,12 +12,10 @@ SetLessThanImmediateUnsigned::~SetLessThanImmediateUnsigned()
     
 }
 
-bool SetLessThanImmediateUnsigned::Execution()
+void SetLessThanImmediateUnsigned::Execution()
 {
 	_executionResult = _rsData < _immediate; 
 	GlobalDumpManagerAddExecutionLog(_executionResult);
-
-	return true;
 }
 
 
@@ -32,13 +30,11 @@ SetLessThanImmediate::~SetLessThanImmediate()
     
 }
 
-bool SetLessThanImmediate::Execution()
+void SetLessThanImmediate::Execution()
 {
 	int signedRsData = _rsData;
 	int signedImm = _immediate;
 
 	_executionResult = signedRsData < signedImm; 
 	GlobalDumpManagerAddExecutionLog(_executionResult);
-
-	return true;
 }

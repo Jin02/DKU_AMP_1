@@ -11,7 +11,7 @@ public:
     virtual ~AddImmediateUnsigned(void);
     
 public:
-    virtual bool Execution();
+    virtual void Execution();
 };
 
 class AddImmediate : public AddImmediateUnsigned

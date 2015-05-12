@@ -38,14 +38,15 @@ unsigned int Multiply::Instruct(unsigned int rsData, unsigned int rtData)
 	return 0;
 }
 
-bool Multiply::Execution()
+void Multiply::Execution()
 {
-	System* system = System::GetInstance();
+	_multyplyExecutionResult = _rsData * _rtData;
+    {
+        char buff[256] = {0, };
+        sprintf(buff, "ExecutionResult = 0x%llx", _multyplyExecutionResult);
+        GlobalDumpLogManager->AddLog(buff, true);
+    }
 
-	_multyplyExecutionResult = _rsData * _rtData;	
-	GlobalDumpManagerAddExecutionLog(_multyplyExecutionResult);
-
-	return true;
 }
 
 void Multiply::WriteBuffer()
@@ -82,14 +83,14 @@ unsigned int MultiplyUnsigned::Instruct(unsigned int rsData, unsigned int rtData
     return 0;
 }
 
-bool MultiplyUnsigned::Execution()
+void MultiplyUnsigned::Execution()
 {
-	System* system = System::GetInstance();
-
 	_multyplyExecutionResult = _rsData * _rtData;	
-	GlobalDumpManagerAddExecutionLog(_multyplyExecutionResult);
-
-	return true;
+    {
+        char buff[256] = {0, };
+        sprintf(buff, "ExecutionResult = 0x%llx", _multyplyExecutionResult);
+        GlobalDumpLogManager->AddLog(buff, true);
+    }
 }
 
 void MultiplyUnsigned::WriteBuffer()

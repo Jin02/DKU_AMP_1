@@ -23,10 +23,8 @@ AddImmediateUnsigned::~AddImmediateUnsigned()
 
 }
 
-bool AddImmediateUnsigned::Execution()
+void AddImmediateUnsigned::Execution()
 {
 	_executionResult = _rsData + _immediate; 
 	GlobalDumpManagerAddExecutionLog(_executionResult);
-
-	return true;
 }

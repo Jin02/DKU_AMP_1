@@ -2,107 +2,110 @@
 #include "System.h"
 #include "DumpLogManager.h"
 
-/** Move **/
-Move::Move(unsigned int rs, unsigned int rd) : Instruction(), _rs(rs), _rd(rd){GlobalDumpManagerAddLogClassName(Move);}
-Move::~Move(){}
-bool Move::Execution()
+/** MoveFromHi **/
+MoveFromHi::MoveFromHi(unsigned int rd) : Instruction(), _rd(rd)
 {
+    GlobalDumpManagerAddLogClassName(MoveFromHi);
+
     System* system = System::GetInstance();
-    
-    unsigned int rsData = system->GetDataFromRegister(_rs);
-    system->SetDataToRegister(_rd, rsData);
-	{
-		GlobalDumpLogManager->AddLog("R[rd] = R[rs]", true);
-
-		char logBuffer[64] = {0, };
-		sprintf(logBuffer, "R[%d] = R[%d](0x%x)", _rd, _rs, rsData);
-		GlobalDumpLogManager->AddLog(logBuffer, true);
-		GlobalDumpManagerAddLog3NewLine;
-	}
-
-	return true;
+    _hiData = system->GetHiRegister();
 }
 
-/** MoveFromHi **/
-MoveFromHi::MoveFromHi(unsigned int rd) : Instruction(), _rd(rd){GlobalDumpManagerAddLogClassName(MoveFromHi);}
-MoveFromHi::~MoveFromHi(){}
-bool MoveFromHi::Execution()
+MoveFromHi::~MoveFromHi()
+{
+}
+
+void MoveFromHi::WriteBuffer()
 {
     System* system = System::GetInstance();
-    
-	uint hi = system->GetHiRegister();
-	system->SetDataToRegister(_rd, hi);
+	system->SetDataToRegister(_rd, _hiData);
 	{
 		GlobalDumpLogManager->AddLog("R[rd] = Hi", true);
 
 		char logBuffer[64] = {0, };
-		sprintf(logBuffer, "R[%d] = Hi(0x%x)", _rd, hi);
+		sprintf(logBuffer, "R[%d] = Hi(0x%x)", _rd, _hiData);
 		GlobalDumpLogManager->AddLog(logBuffer, true);
 		GlobalDumpManagerAddLog3NewLine;
 	}
-
-	return true;
 }
 
 /** MoveToHi **/
-MoveToHi::MoveToHi(unsigned int rs) : Instruction(), _rs(rs){GlobalDumpManagerAddLogClassName(MoveToHi);}
-MoveToHi::~MoveToHi(){}
-bool MoveToHi::Execution()
+MoveToHi::MoveToHi(unsigned int rs) : Instruction(), _rs(rs)
+{
+    GlobalDumpManagerAddLogClassName(MoveToHi);
+
+    System* system = System::GetInstance();
+    _rsData = system->GetDataFromRegister(_rs);
+}
+
+MoveToHi::~MoveToHi()
+{
+}
+
+void MoveToHi::WriteBuffer()
 {
     System* system = System::GetInstance();
-
-	uint rsData = system->GetDataFromRegister(_rs);
-	system->SetHiRegister(rsData);
+	system->SetHiRegister(_rsData);
 	{
 		GlobalDumpLogManager->AddLog("Hi = R[rs]", true);
 
 		char logBuffer[64] = {0, };
-		sprintf(logBuffer, "Hi = R[%d](0x%x)", _rs, rsData);
+		sprintf(logBuffer, "Hi = R[%d](0x%x)", _rs, _rsData);
 		GlobalDumpLogManager->AddLog(logBuffer, true);
 		GlobalDumpManagerAddLog3NewLine;
 	}
-
-	return true;
 }
 
 /** MoveFromLo **/
-MoveFromLo::MoveFromLo(unsigned int rd) : Instruction(), _rd(rd){GlobalDumpManagerAddLogClassName(MoveFromLo);}
-MoveFromLo::~MoveFromLo(){}
-bool MoveFromLo::Execution()
+MoveFromLo::MoveFromLo(unsigned int rd) : Instruction(), _rd(rd)
+{
+    GlobalDumpManagerAddLogClassName(MoveFromLo);
+    
+    System* system = System::GetInstance();
+    _loData = system->GetLoRegister();;
+}
+
+MoveFromLo::~MoveFromLo()
+{
+}
+
+void MoveFromLo::WriteBuffer()
 {
     System* system = System::GetInstance();
-    
-	uint lo = system->GetLoRegister();
-	system->SetDataToRegister(_rd, lo);
+	system->SetDataToRegister(_rd, _loData);
 	{
 		GlobalDumpLogManager->AddLog("R[rd] = Lo", true);
 
 		char logBuffer[64] = {0, };
-		sprintf(logBuffer, "R[%d] = Lo(0x%x)", _rd, lo);
+		sprintf(logBuffer, "R[%d] = Lo(0x%x)", _rd, _loData);
 		GlobalDumpLogManager->AddLog(logBuffer, true);
 		GlobalDumpManagerAddLog3NewLine;
 	}
-
-	return true;
 }
 
 /** MoveToLo **/
-MoveToLo::MoveToLo(unsigned int rs) : Instruction(), _rs(rs){GlobalDumpManagerAddLogClassName(MoveToLo);}
-MoveToLo::~MoveToLo(){}
-bool MoveToLo::Execution()
+MoveToLo::MoveToLo(unsigned int rs) : Instruction(), _rs(rs)
+{
+    GlobalDumpManagerAddLogClassName(MoveToLo);
+
+    System* system = System::GetInstance();
+    _rsData = system->GetDataFromRegister(_rs);
+}
+
+MoveToLo::~MoveToLo()
+{
+}
+
+void MoveToLo::WriteBuffer()
 {
     System* system = System::GetInstance();
-
-	uint rsData = system->GetDataFromRegister(_rs);
-	system->SetLoRegister(rsData);
+	system->SetLoRegister(_rsData);
 	{
 		GlobalDumpLogManager->AddLog("Lo = R[rs]", true);
 
 		char logBuffer[64] = {0, };
-		sprintf(logBuffer, "Lo = R[%d](0x%x)", _rs, rsData);
+		sprintf(logBuffer, "Lo = R[%d](0x%x)", _rs, _rsData);
 		GlobalDumpLogManager->AddLog(logBuffer, true);
 		GlobalDumpManagerAddLog3NewLine;
 	}
-
-	return true;
 }

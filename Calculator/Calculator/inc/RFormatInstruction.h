@@ -17,7 +17,7 @@ protected:
     virtual unsigned int Instruct(unsigned int rsData, unsigned int rtData) = 0;
     
 public:
-    virtual bool Execution();
+    virtual void Execution();
 	virtual void Memory();
 	virtual void WriteBuffer();
 };

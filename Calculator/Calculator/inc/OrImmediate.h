@@ -11,5 +11,5 @@ public:
     virtual ~OrImmediate(void);
     
 public:
-    virtual bool Execution();
+    virtual void Execution();
 };

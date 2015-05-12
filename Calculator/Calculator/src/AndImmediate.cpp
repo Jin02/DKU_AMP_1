@@ -12,10 +12,8 @@ AndImmediate::~AndImmediate()
 
 }
 
-bool AndImmediate::Execution()
+void AndImmediate::Execution()
 {
 	_executionResult = _rsData & _immediate; 
 	GlobalDumpManagerAddExecutionLog(_executionResult);
-
-	return true;
 }

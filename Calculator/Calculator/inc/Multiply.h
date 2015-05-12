@@ -27,7 +27,7 @@ public:
     
 public:
     virtual unsigned int Instruct(unsigned int rsData, unsigned int rtData);
-    virtual bool Execution();
+    virtual void Execution();
 	virtual void WriteBuffer();
 };
 
@@ -44,6 +44,6 @@ public:
     
 public:
     virtual unsigned int Instruct(unsigned int rsData, unsigned int rtData);
-    virtual bool Execution();
+    virtual void Execution();
 	virtual void WriteBuffer();
 };

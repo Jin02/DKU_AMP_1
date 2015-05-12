@@ -4,9 +4,12 @@
 #include "DumpLogManager.h"
 
 /**** JForamt ****/
-JFormatInstruction::JFormatInstruction(unsigned int address) : _address(address)
+JFormatInstruction::JFormatInstruction(unsigned int address)
+    : Instruction(), _address(address)
 {
-    
+    char buff[256] = {0, };
+    sprintf(buff, "J Type\t\t| address = 0x%x", address);
+    GlobalDumpLogManager->AddLog(buff, true);
 }
 
 JFormatInstruction::~JFormatInstruction(void)
@@ -17,52 +20,43 @@ JFormatInstruction::~JFormatInstruction(void)
 Jump::Jump(unsigned int address) : JFormatInstruction(address)
 {
 	GlobalDumpManagerAddLogClassName(Jump);
-}
-Jump::~Jump(){}
-
-bool Jump::Execution()
-{
+    
     System* system = System::GetInstance();
     system->SetProgramCounter(_address);
-	{
-		GlobalDumpLogManager->AddLog("PC = JumpAddr", true);
-
-		char logBuffer[64] = {0, };
-		sprintf(logBuffer, "PC = 0x%x", _address);
-		GlobalDumpLogManager->AddLog(logBuffer, true);
-		GlobalDumpManagerAddLog3NewLine;
-	}
-
-	return false;
+    {
+        GlobalDumpLogManager->AddLog("PC = JumpAddr", true);
+        
+        char logBuffer[64] = {0, };
+        sprintf(logBuffer, "PC = 0x%x", _address);
+        GlobalDumpLogManager->AddLog(logBuffer, true);
+        GlobalDumpManagerAddLog3NewLine;
+    }
 }
 
+Jump::~Jump(){}
 
 /**** JumpAndLink Instruction ****/
 
 JumpAndLink::JumpAndLink(unsigned int address) : JFormatInstruction(address)
 {
-	GlobalDumpManagerAddLogClassName(JumpAndLink);
-}
-JumpAndLink::~JumpAndLink()
-{
+    GlobalDumpManagerAddLogClassName(JumpAndLink);
 
-}
-
-bool JumpAndLink::Execution()
-{
     System* system = System::GetInstance();
-
+    
     unsigned int currentProgramCounter = system->GetProgramCounter();
     system->SetReturnAddress(currentProgramCounter + 8);
     
     system->SetProgramCounter(_address);
-	{
-		GlobalDumpLogManager->AddLog("R[31] = PC + 8; PC = JumpAddr", true);
+    {
+        GlobalDumpLogManager->AddLog("R[31] = PC + 8; PC = JumpAddr", true);
+        
+        char logBuffer[64] = {0, };
+        sprintf(logBuffer, "R[31] = 0x%x; PC = 0x%x", currentProgramCounter + 8, _address);
+        GlobalDumpLogManager->AddLog(logBuffer, true);
+        GlobalDumpManagerAddLog3NewLine;
+    }
+}
+JumpAndLink::~JumpAndLink()
+{
 
-		char logBuffer[64] = {0, };
-		sprintf(logBuffer, "R[31] = 0x%x; PC = 0x%x", currentProgramCounter + 8, _address);
-		GlobalDumpLogManager->AddLog(logBuffer, true);
-		GlobalDumpManagerAddLog3NewLine;
-	}
-	return false;
 }

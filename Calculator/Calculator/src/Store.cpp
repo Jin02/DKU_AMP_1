@@ -13,6 +13,11 @@ StoreByte::~StoreByte()
     
 }
 
+void StoreByte::Execution()
+{
+    _executionResult = _rsData + _immediate;
+}
+
 void StoreByte::Memory()
 {
     System* system = System::GetInstance();
@@ -21,12 +26,12 @@ void StoreByte::Memory()
     uint memData        = system->GetDataFromMemory(_rsData + _immediate);
     
     memData = (memData & 0xffffff00) | (toMemRtData);
-    system->SetDataToMemory(_rsData + _immediate, memData);
+    system->SetDataToMemory(_executionResult, memData);
     {
         GlobalDumpLogManager->AddLog("M[R[rs] + SignExtImm](7:0) = R[rt](7:0)", true);
         
         char buff[256] = {0, };
-        sprintf(buff, "M[(R[%d](0x%x) + 0x%x) = 0x%x](7:0) = R[%d](0x%x)(7:0)", _rs, _rsData, _immediate, _rsData + _immediate, _rt, toMemRtData);
+        sprintf(buff, "M[(R[%d](0x%x) + 0x%x) = 0x%x](7:0) = R[%d](0x%x)(7:0)", _rs, _rsData, _immediate, _executionResult, _rt, toMemRtData);
         
         GlobalDumpLogManager->AddLog(buff, true);
     }
@@ -45,16 +50,21 @@ StoreConditional::~StoreConditional()
     
 }
 
+void StoreConditional::Execution()
+{
+    _executionResult = _rsData + _immediate;
+}
+
 void StoreConditional::Memory()
 {
     System* system = System::GetInstance();
     
-    system->SetDataToMemory(_rsData + _immediate, _rtData);
+    system->SetDataToMemory(_executionResult, _rtData);
     {
         GlobalDumpLogManager->AddLog("M[R[rs] + SignExtImm] = R[rt]", true);
         
         char logBuffer[64] = {0, };
-        sprintf(logBuffer, "M[(R[%d](0x%x) + 0x%x) = 0x%x] = R[%d](0x%x)", _rs, _rsData, _immediate, _rsData + _immediate, _rt, _rtData);
+        sprintf(logBuffer, "M[(R[%d](0x%x) + 0x%x) = 0x%x] = R[%d](0x%x)", _rs, _rsData, _immediate, _executionResult, _rt, _rtData);
         GlobalDumpLogManager->AddLog(logBuffer, true);
     }
 }
@@ -71,6 +81,11 @@ StoreHalfword::~StoreHalfword()
     
 }
 
+void StoreHalfword::Execution()
+{
+    _executionResult = _rsData + _immediate;
+}
+
 void StoreHalfword::Memory()
 {
     System* system = System::GetInstance();
@@ -80,12 +95,12 @@ void StoreHalfword::Memory()
     unsigned int memData = system->GetDataFromMemory(rsData + _immediate);
     
     memData = (memData & 0xffff0000) | (toMemRtData);
-    system->SetDataToMemory(rsData + _immediate, memData);
+    system->SetDataToMemory(_executionResult, memData);
     {
         GlobalDumpLogManager->AddLog("M[R[rs] + SignExtImm](15:0) = R[rt](15:0)", true);
         
         char logBuffer[64] = {0, };
-        sprintf(logBuffer, "M[(R[%d](0x%x) + 0x%x) = 0x%x](15:0) = R[%d](0x%x)(15:0)", _rs, rsData, _immediate, rsData + _immediate, _rt, toMemRtData);
+        sprintf(logBuffer, "M[(R[%d](0x%x) + 0x%x) = 0x%x](15:0) = R[%d](0x%x)(15:0)", _rs, rsData, _immediate, _executionResult, _rt, toMemRtData);
         GlobalDumpLogManager->AddLog(logBuffer, true);
     }
 }
@@ -102,18 +117,23 @@ StoreWord::~StoreWord()
     
 }
 
+void StoreWord::Execution()
+{
+    _executionResult = _rsData + _immediate;
+}
+
 void StoreWord::Memory()
 {
     System* system = System::GetInstance();
     
     unsigned int toMemRtData = _rtData;
     unsigned int rsData = _rsData;
-    system->SetDataToMemory(rsData + _immediate, toMemRtData);
+    system->SetDataToMemory(_executionResult, toMemRtData);
     {
         GlobalDumpLogManager->AddLog("M[R[rs] + SignExtImm] = R[rt]", true);
         
         char logBuffer[64] = {0, };
-        sprintf(logBuffer, "M[(R[%d](0x%x) + 0x%x) = 0x%x] = R[%d](0x%x)", _rs, rsData, _immediate, rsData + _immediate, _rt, toMemRtData);
+        sprintf(logBuffer, "M[(R[%d](0x%x) + 0x%x) = 0x%x] = R[%d](0x%x)", _rs, rsData, _immediate, _executionResult, _rt, toMemRtData);
         GlobalDumpLogManager->AddLog(logBuffer, true);
         GlobalDumpManagerAddLog3NewLine;
     }
