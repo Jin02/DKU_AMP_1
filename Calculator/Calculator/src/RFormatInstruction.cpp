@@ -4,7 +4,7 @@
 #include "DumpLogManager.h"
 
 RFormatInstruction::RFormatInstruction(unsigned int rs, unsigned int rt, unsigned int rd) 
-	: Instruction(), _rd(rd)
+	: Instruction(), _rd(rd), _rs(rs), _rt(rt)
 {
 	System* system = System::GetInstance();
 
@@ -22,6 +22,9 @@ RFormatInstruction::~RFormatInstruction(void)
 
 void RFormatInstruction::Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
 {
+	Forwarding(prev2stepInst, prev1stepInst, _rsData, _rs);
+	Forwarding(prev2stepInst, prev1stepInst, _rtData, _rt);
+
 	_executionResult = Instruct(_rsData, _rtData);
 	GlobalDumpManagerAddExecutionLog(_executionResult);
 }
@@ -42,7 +45,7 @@ void RFormatInstruction::WriteBack()
 	}
 }
 
-void RFormatInstruction::Forwarding(bool& hasDependency, uint& outRdData, uint compareRegiIdx) const
+void RFormatInstruction::DependencyCheckWithGetTargetData(bool& hasDependency, uint& outRdData, uint compareRegiIdx) const
 {
     hasDependency   = (compareRegiIdx == _rd);
     outRdData       = _executionResult;

@@ -16,5 +16,5 @@ public:
 	virtual void WriteBack();	
 	virtual void Memory(){}
     
-    virtual void Forwarding(bool& hasDependency, uint& outTargetData, uint compareRegiIdx) const;    
+    virtual void DependencyCheckWithGetTargetData(bool& hasDependency, uint& outTargetData, uint compareRegiIdx) const;    
 };

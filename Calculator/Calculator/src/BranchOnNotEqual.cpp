@@ -5,10 +5,21 @@
 BranchOnNotEqual::BranchOnNotEqual(unsigned int rs, unsigned int rt, unsigned int immediate) : IFormatInstruction(rs, rt, immediate)
 {
 	GlobalDumpManagerAddLogClassName(BranchOnNotEqual);
+}
 
+BranchOnNotEqual::~BranchOnNotEqual()
+{
+
+}
+
+void BranchOnNotEqual::Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
+{
     System* system = System::GetInstance();
     
     unsigned int pc = system->GetProgramCounter();
+
+	Forwarding(prev2stepInst, prev1stepInst, _rsData, _rs);
+	Forwarding(prev2stepInst, prev1stepInst, _rtData, _rt);
     
     GlobalDumpLogManager->AddLog("if(R[rs] != R[rt])\tPC = PC + 4 + BranchAddr", true);
     {
@@ -25,12 +36,7 @@ BranchOnNotEqual::BranchOnNotEqual(unsigned int rs, unsigned int rt, unsigned in
     }
 }
 
-BranchOnNotEqual::~BranchOnNotEqual()
-{
-
-}
-
-void BranchOnNotEqual::Forwarding(bool&, uint&, uint ) const
+void BranchOnNotEqual::DependencyCheckWithGetTargetData(bool&, uint&, uint ) const
 {
     
 }

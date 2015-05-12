@@ -40,6 +40,9 @@ unsigned int Multiply::Instruct(unsigned int rsData, unsigned int rtData)
 
 void Multiply::Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
 {
+	Forwarding(prev2stepInst, prev1stepInst, _rsData, _rs);
+	Forwarding(prev2stepInst, prev1stepInst, _rtData, _rt);
+
 	_multyplyExecutionResult = _rsData * _rtData;
     {
         char buff[256] = {0, };
@@ -85,6 +88,9 @@ unsigned int MultiplyUnsigned::Instruct(unsigned int rsData, unsigned int rtData
 
 void MultiplyUnsigned::Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
 {
+	Forwarding(prev2stepInst, prev1stepInst, _rsData, _rs);
+	Forwarding(prev2stepInst, prev1stepInst, _rtData, _rt);
+
 	_multyplyExecutionResult = _rsData * _rtData;	
     {
         char buff[256] = {0, };

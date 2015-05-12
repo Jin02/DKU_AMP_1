@@ -22,6 +22,9 @@ unsigned int Divide::Instruct(unsigned int rsData, unsigned int rtData)
 
 void Divide::Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
 {
+	Forwarding(prev2stepInst, prev1stepInst, _rsData, _rs);
+	Forwarding(prev2stepInst, prev1stepInst, _rtData, _rt);
+
 	int rsData = _rsData;
 	int rtData = _rtData;
 
@@ -67,6 +70,9 @@ unsigned int DivideUnsigned::Instruct(unsigned int rsData, unsigned int rtData)
 
 void DivideUnsigned::Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
 {
+	Forwarding(prev2stepInst, prev1stepInst, _rsData, _rs);
+	Forwarding(prev2stepInst, prev1stepInst, _rtData, _rt);
+
 	_executionLoResult = (_rsData / _rtData);
 	_executionHiResult = (_rsData % _rtData);
 	{

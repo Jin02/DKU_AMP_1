@@ -16,7 +16,7 @@ JFormatInstruction::~JFormatInstruction(void)
 {
 }
 
-void JFormatInstruction::Forwarding(bool&, uint&, uint) const
+void JFormatInstruction::DependencyCheckWithGetTargetData(bool&, uint&, uint) const
 {
 }
 
@@ -24,7 +24,12 @@ void JFormatInstruction::Forwarding(bool&, uint&, uint) const
 Jump::Jump(unsigned int address) : JFormatInstruction(address)
 {
 	GlobalDumpManagerAddLogClassName(Jump);
-    
+}
+
+Jump::~Jump(){}
+
+void Jump::Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
+{
     System* system = System::GetInstance();
     system->SetProgramCounter(_address);
     {
@@ -37,18 +42,23 @@ Jump::Jump(unsigned int address) : JFormatInstruction(address)
     }
 }
 
-Jump::~Jump(){}
-
 /**** JumpAndLink Instruction ****/
 
-JumpAndLink::JumpAndLink(unsigned int address) : JFormatInstruction(address)
+JumpAndLink::JumpAndLink(unsigned int address) : JFormatInstruction(address), _executionResult(0)
 {
     GlobalDumpManagerAddLogClassName(JumpAndLink);
+}
 
-    System* system = System::GetInstance();
-    
+JumpAndLink::~JumpAndLink()
+{
+
+}
+
+void JumpAndLink::Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
+{
+	System* system = System::GetInstance();
     unsigned int currentProgramCounter = system->GetProgramCounter();
-    system->SetReturnAddress(currentProgramCounter + 8);
+    _executionResult = currentProgramCounter + 8;
     
     system->SetProgramCounter(_address);
     {
@@ -60,7 +70,14 @@ JumpAndLink::JumpAndLink(unsigned int address) : JFormatInstruction(address)
         GlobalDumpManagerAddLog3NewLine;
     }
 }
-JumpAndLink::~JumpAndLink()
+
+void JumpAndLink::Memory()
 {
 
+}
+
+void JumpAndLink::WriteBack()
+{
+	System* system = System::GetInstance();
+	system->SetReturnAddress(_executionResult);
 }

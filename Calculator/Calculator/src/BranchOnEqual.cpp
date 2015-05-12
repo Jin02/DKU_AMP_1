@@ -7,8 +7,26 @@ BranchOnEqual::BranchOnEqual(unsigned int rs, unsigned int rt, unsigned int imme
 {
 	GlobalDumpManagerAddLogClassName(BranchOnEqual);
 
+
+}
+
+BranchOnEqual::~BranchOnEqual()
+{
+
+}
+
+void BranchOnEqual::DependencyCheckWithGetTargetData(bool&, uint&, uint ) const
+{
+    
+}
+
+void BranchOnEqual::Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
+{
     System* system = System::GetInstance();
     uint pc = system->GetProgramCounter();
+
+	Forwarding(prev2stepInst, prev1stepInst, _rsData, _rs);
+	Forwarding(prev2stepInst, prev1stepInst, _rtData, _rt);
 
     GlobalDumpLogManager->AddLog("if(R[rs] == R[rt])\tPC = PC + 4 + BranchAddr", true);
     {
@@ -23,14 +41,4 @@ BranchOnEqual::BranchOnEqual(unsigned int rs, unsigned int rt, unsigned int imme
         _isBranchSuccess = true;
         system->SetProgramCounter(pc + 4 + _immediate);
     }
-}
-
-BranchOnEqual::~BranchOnEqual()
-{
-
-}
-
-void BranchOnEqual::Forwarding(bool&, uint&, uint ) const
-{
-    
 }

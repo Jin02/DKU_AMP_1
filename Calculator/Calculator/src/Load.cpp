@@ -16,6 +16,8 @@ LoadByteUnsigned::~LoadByteUnsigned()
 
 void LoadByteUnsigned::Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
 {
+	Forwarding(prev2stepInst, prev1stepInst, _rsData, _rs);
+
     _executionResult = _rsData + _immediate;
 }
 
@@ -53,7 +55,9 @@ LoadHalfwordUnsigned::~LoadHalfwordUnsigned()
 }
 
 void LoadHalfwordUnsigned::Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
-{
+{	
+	Forwarding(prev2stepInst, prev1stepInst, _rsData, _rs);
+
     _executionResult = _rsData + _immediate;
 }
 
@@ -92,7 +96,8 @@ LoadLinked::~LoadLinked()
 
 void LoadLinked::Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
 {
-    _executionResult = _rsData + _immediate;
+	Forwarding(prev2stepInst, prev1stepInst, _rsData, _rs);
+	_executionResult = _rsData + _immediate;
 }
 
 void LoadLinked::Memory()
@@ -162,6 +167,7 @@ LoadWord::~LoadWord()
 
 void LoadWord::Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
 {
+	Forwarding(prev2stepInst, prev1stepInst, _rsData, _rs);
     _executionResult = _rsData + _immediate;
 }
 

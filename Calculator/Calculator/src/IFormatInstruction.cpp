@@ -31,7 +31,7 @@ void IFormatInstruction::WriteBack()
 	}
 }
 
-void IFormatInstruction::Forwarding(bool& hasDependency, uint& outRdData, uint compareRegiIdx) const
+void IFormatInstruction::DependencyCheckWithGetTargetData(bool& hasDependency, uint& outRdData, uint compareRegiIdx) const
 {
     hasDependency   = (compareRegiIdx == _rt);
     outRdData       = _executionResult;

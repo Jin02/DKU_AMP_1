@@ -6,6 +6,8 @@
 //  Copyright (c) 2015년 __Jin__. All rights reserved.
 //
 
+#pragma warning(disable : 4996)
+
 #include <stdio.h>
 #include <string>
 #include "System.h"

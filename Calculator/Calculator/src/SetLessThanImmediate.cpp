@@ -32,6 +32,8 @@ SetLessThanImmediate::~SetLessThanImmediate()
 
 void SetLessThanImmediate::Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
 {
+	Forwarding(prev2stepInst, prev1stepInst, _rsData, _rs);
+
 	int signedRsData = _rsData;
 	int signedImm = _immediate;
 
