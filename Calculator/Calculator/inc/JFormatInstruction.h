@@ -10,6 +10,9 @@ protected:
 public:
     JFormatInstruction(unsigned int address);
     virtual ~JFormatInstruction(void);
+    
+public:
+    virtual void Forwarding(bool&, uint&, uint ) const;
 };
 
 class Jump : public JFormatInstruction

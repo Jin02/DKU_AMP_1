@@ -13,6 +13,8 @@ public:
     virtual ~IFormatInstruction(void);
 
 public:
-	virtual void WriteBuffer();	
+	virtual void WriteBack();	
 	virtual void Memory(){}
+    
+    virtual void Forwarding(bool& hasDependency, uint& outTargetData, uint compareRegiIdx) const;    
 };

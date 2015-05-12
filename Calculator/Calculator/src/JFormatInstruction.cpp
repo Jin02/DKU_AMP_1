@@ -16,6 +16,10 @@ JFormatInstruction::~JFormatInstruction(void)
 {
 }
 
+void JFormatInstruction::Forwarding(bool&, uint&, uint) const
+{
+}
+
 /**** Jump Instruction ****/
 Jump::Jump(unsigned int address) : JFormatInstruction(address)
 {

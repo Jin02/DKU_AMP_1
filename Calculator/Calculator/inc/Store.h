@@ -12,7 +12,7 @@ public:
     virtual ~StoreByte(void);
     
 public:
-    virtual void Execution();
+    virtual void Execution(const ForwardingFuncType& prev2stepInst, const ForwardingFuncType& prev1stepInst);
     virtual void Memory();
 };
 
@@ -26,7 +26,7 @@ public:
     virtual ~StoreConditional(void);
     
 public:
-    virtual void Execution();
+    virtual void Execution(const ForwardingFuncType& prev2stepInst, const ForwardingFuncType& prev1stepInst);
     virtual void Memory();
 };
 
@@ -40,7 +40,7 @@ public:
     virtual ~StoreHalfword(void);
     
 public:
-    virtual void Execution();
+    virtual void Execution(const ForwardingFuncType& prev2stepInst, const ForwardingFuncType& prev1stepInst);
     virtual void Memory();
 };
 
@@ -54,6 +54,6 @@ public:
     virtual ~StoreWord(void);
     
 public:
-    virtual void Execution();    
+    virtual void Execution(const ForwardingFuncType& prev2stepInst, const ForwardingFuncType& prev1stepInst);    
     virtual void Memory();
 };

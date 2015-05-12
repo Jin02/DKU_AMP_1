@@ -23,7 +23,7 @@ AddImmediateUnsigned::~AddImmediateUnsigned()
 
 }
 
-void AddImmediateUnsigned::Execution()
+void AddImmediateUnsigned::Execution(const ForwardingFuncType& prev2stepInst, const ForwardingFuncType& prev1stepInst)
 {
 	_executionResult = _rsData + _immediate; 
 	GlobalDumpManagerAddExecutionLog(_executionResult);

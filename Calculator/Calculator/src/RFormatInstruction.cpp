@@ -20,7 +20,7 @@ RFormatInstruction::~RFormatInstruction(void)
 {
 }
 
-void RFormatInstruction::Execution()
+void RFormatInstruction::Execution(const ForwardingFuncType& prev2stepInst, const ForwardingFuncType& prev1stepInst)
 {
 	_executionResult = Instruct(_rsData, _rtData);
 	GlobalDumpManagerAddExecutionLog(_executionResult);
@@ -31,7 +31,7 @@ void RFormatInstruction::Memory()
 	//null
 }
 
-void RFormatInstruction::WriteBuffer()
+void RFormatInstruction::WriteBack()
 {
 	System* system = System::GetInstance();
 	system->SetDataToRegister(_rd, _executionResult);
@@ -40,4 +40,10 @@ void RFormatInstruction::WriteBuffer()
 		sprintf(buff, "R[rd=0x%x] = 0x%x", _rd, _executionResult);
 		GlobalDumpLogManager->AddLog(buff, true);
 	}
+}
+
+void RFormatInstruction::Forwarding(bool& hasDependency, uint& outRdData, uint compareRegiIdx) const
+{
+    hasDependency   = (compareRegiIdx == _rd);
+    outRdData       = _executionResult;
 }

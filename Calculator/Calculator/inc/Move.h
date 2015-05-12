@@ -12,7 +12,7 @@ public:
     virtual ~MoveFromHi(void);
     
 public:
-    virtual void WriteBuffer();
+    virtual void WriteBack();
 };
 
 
@@ -26,7 +26,7 @@ public:
     virtual ~MoveToHi(void);
     
 public:
-    virtual void WriteBuffer();
+    virtual void WriteBack();
 };
 
 
@@ -40,7 +40,7 @@ public:
     virtual ~MoveFromLo(void);
     
 public:
-    virtual void WriteBuffer();
+    virtual void WriteBack();
 };
 
 class MoveToLo : public Instruction
@@ -53,5 +53,5 @@ public:
     virtual ~MoveToLo(void);
     
 public:
-    virtual void WriteBuffer();
+    virtual void WriteBack();
 };

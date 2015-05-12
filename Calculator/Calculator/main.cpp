@@ -26,6 +26,11 @@ int main(int argc, const char * argv[])
 	GlobalDumpManagerAddLogNewLine("--------- System End ---------");
 
 	GlobalDumpLogManager->WriteFile("/Users/jin/Project/DKU_AMP_1/Calculator/Calculator/out.txt");
-        
+    
+//    auto test = [](const std::function<void(bool& hasDependency, uint& outWriteTargetData, uint registerIdx)>& prev2stepInst, )
+//    {
+//        
+//    };
+//        
     return 0;
 }

@@ -12,4 +12,5 @@ public:
     
 public:
     virtual unsigned int Instruct(unsigned int rsData, unsigned int rtData);
+    virtual void Forwarding(bool& hasDependency, uint& outTargetData, uint compareRegiIdx) const;
 };

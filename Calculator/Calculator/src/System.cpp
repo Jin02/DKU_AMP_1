@@ -275,7 +275,7 @@ void System::Memory()
 
 }
 
-void System::WriteBuffer()
+void System::WriteBack()
 {
 
 }

@@ -14,7 +14,7 @@ LoadByteUnsigned::~LoadByteUnsigned()
 
 }
 
-void LoadByteUnsigned::Execution()
+void LoadByteUnsigned::Execution(const ForwardingFuncType& prev2stepInst, const ForwardingFuncType& prev1stepInst)
 {
     _executionResult = _rsData + _immediate;
 }
@@ -26,7 +26,7 @@ void LoadByteUnsigned::Memory()
     _toRegiMemValue = memData & 0x000000ff;
 }
 
-void LoadByteUnsigned::WriteBuffer()
+void LoadByteUnsigned::WriteBack()
 {
     System* system = System::GetInstance();
     
@@ -52,7 +52,7 @@ LoadHalfwordUnsigned::~LoadHalfwordUnsigned()
     
 }
 
-void LoadHalfwordUnsigned::Execution()
+void LoadHalfwordUnsigned::Execution(const ForwardingFuncType& prev2stepInst, const ForwardingFuncType& prev1stepInst)
 {
     _executionResult = _rsData + _immediate;
 }
@@ -64,7 +64,7 @@ void LoadHalfwordUnsigned::Memory()
     _toRegiMemValue = memData & 0x0000ffff;
 }
 
-void LoadHalfwordUnsigned::WriteBuffer()
+void LoadHalfwordUnsigned::WriteBack()
 {
     System* system = System::GetInstance();
     system->SetDataToRegister(_rt, _toRegiMemValue);
@@ -90,7 +90,7 @@ LoadLinked::~LoadLinked()
     
 }
 
-void LoadLinked::Execution()
+void LoadLinked::Execution(const ForwardingFuncType& prev2stepInst, const ForwardingFuncType& prev1stepInst)
 {
     _executionResult = _rsData + _immediate;
 }
@@ -101,7 +101,7 @@ void LoadLinked::Memory()
     _toRegiMemValue = system->GetDataFromMemory(_executionResult);
 }
 
-void LoadLinked::WriteBuffer()
+void LoadLinked::WriteBack()
 {
     System* system = System::GetInstance();
     system->SetDataToRegister(_rt, _toRegiMemValue);
@@ -126,7 +126,7 @@ LoadUpperImmediate::~LoadUpperImmediate()
     
 }
 
-void LoadUpperImmediate::Execution()
+void LoadUpperImmediate::Execution(const ForwardingFuncType& prev2stepInst, const ForwardingFuncType& prev1stepInst)
 {
     _executionResult = _immediate & 0xffff0000;
 }
@@ -135,7 +135,7 @@ void LoadUpperImmediate::Memory()
 {
 }
 
-void LoadUpperImmediate::WriteBuffer()
+void LoadUpperImmediate::WriteBack()
 {
     System* system = System::GetInstance();
     system->SetDataToRegister(_rt, _executionResult);
@@ -160,7 +160,7 @@ LoadWord::~LoadWord()
     
 }
 
-void LoadWord::Execution()
+void LoadWord::Execution(const ForwardingFuncType& prev2stepInst, const ForwardingFuncType& prev1stepInst)
 {
     _executionResult = _rsData + _immediate;
 }
@@ -171,7 +171,7 @@ void LoadWord::Memory()
     _toRegiMemValue = system->GetDataFromMemory(_executionResult);
 }
 
-void LoadWord::WriteBuffer()
+void LoadWord::WriteBack()
 {
     System* system = System::GetInstance();
     system->SetDataToRegister(_rt, _toRegiMemValue);
@@ -197,7 +197,7 @@ LoadImmediate::~LoadImmediate()
     
 }
 
-void LoadImmediate::Execution()
+void LoadImmediate::Execution(const ForwardingFuncType& prev2stepInst, const ForwardingFuncType& prev1stepInst)
 {
     
 }
@@ -206,7 +206,7 @@ void LoadImmediate::Memory()
 {
 }
 
-void LoadImmediate::WriteBuffer()
+void LoadImmediate::WriteBack()
 {
     System* system = System::GetInstance();
     system->SetDataToRegister(_rd, _immediate);

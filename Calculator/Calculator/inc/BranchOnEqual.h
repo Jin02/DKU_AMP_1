@@ -12,5 +12,8 @@ public:
     virtual ~BranchOnEqual(void);
     
 public:
+    virtual void Forwarding(bool&, uint&, uint ) const;
+    
+public:
     GET_ACCESSOR(IsBranchSuccess, bool, _isBranchSuccess);
 };

@@ -28,3 +28,9 @@ unsigned int JumpRegister::Instruct(unsigned int rsData, unsigned int rtData)
 {
     return 0;
 }
+
+void JumpRegister::Forwarding(bool& hasDependency, uint& outTargetData, uint compareRegiIdx) const
+{
+    hasDependency = false;
+    outTargetData = -1;
+}

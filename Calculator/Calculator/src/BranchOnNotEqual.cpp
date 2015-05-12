@@ -29,3 +29,8 @@ BranchOnNotEqual::~BranchOnNotEqual()
 {
 
 }
+
+void BranchOnNotEqual::Forwarding(bool&, uint&, uint ) const
+{
+    
+}

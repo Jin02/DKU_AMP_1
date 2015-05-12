@@ -2,6 +2,7 @@
 
 #include <vector>
 #include "Common.h"
+#include <functional>
 
 class Instruction
 {
@@ -9,8 +10,11 @@ public:
     Instruction();
     virtual ~Instruction(void);
     
+    
 public:
-	//true라면 pc값이 변경되고, false라면 변경 안됨
-	//거의 뭐; j랑 branch때문에 쓴다고 보면 됨
-    virtual void Execution() = 0;
+    typedef std::function<void(bool& hasDependency, uint& outWriteTargetData, uint registerIdx)> ForwardingFuncType;
+    
+public:
+    virtual void Execution(const ForwardingFuncType& prev2stepInst, const ForwardingFuncType& prev1stepInst) = 0;
+    virtual void Forwarding(bool& hasDependency, uint& outTargetData, uint compareRegiIdx) const = 0;
 };

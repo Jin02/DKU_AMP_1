@@ -15,7 +15,7 @@ MoveFromHi::~MoveFromHi()
 {
 }
 
-void MoveFromHi::WriteBuffer()
+void MoveFromHi::WriteBack()
 {
     System* system = System::GetInstance();
 	system->SetDataToRegister(_rd, _hiData);
@@ -42,7 +42,7 @@ MoveToHi::~MoveToHi()
 {
 }
 
-void MoveToHi::WriteBuffer()
+void MoveToHi::WriteBack()
 {
     System* system = System::GetInstance();
 	system->SetHiRegister(_rsData);
@@ -69,7 +69,7 @@ MoveFromLo::~MoveFromLo()
 {
 }
 
-void MoveFromLo::WriteBuffer()
+void MoveFromLo::WriteBack()
 {
     System* system = System::GetInstance();
 	system->SetDataToRegister(_rd, _loData);
@@ -96,7 +96,7 @@ MoveToLo::~MoveToLo()
 {
 }
 
-void MoveToLo::WriteBuffer()
+void MoveToLo::WriteBack()
 {
     System* system = System::GetInstance();
 	system->SetLoRegister(_rsData);

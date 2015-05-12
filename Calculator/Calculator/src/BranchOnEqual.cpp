@@ -29,3 +29,8 @@ BranchOnEqual::~BranchOnEqual()
 {
 
 }
+
+void BranchOnEqual::Forwarding(bool&, uint&, uint ) const
+{
+    
+}

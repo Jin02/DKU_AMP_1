@@ -12,7 +12,7 @@ OrImmediate::~OrImmediate()
     
 }
 
-void OrImmediate::Execution()
+void OrImmediate::Execution(const ForwardingFuncType& prev2stepInst, const ForwardingFuncType& prev1stepInst)
 {
 	_executionResult = _rsData | _immediate; 
 	GlobalDumpManagerAddExecutionLog(_executionResult);

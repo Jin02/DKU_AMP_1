@@ -33,7 +33,7 @@ private:
     bool Execution(Instruction* inst);
 
 	void Memory();
-	void WriteBuffer();
+	void WriteBack();
 
 public:
     void Load(const std::string& path);

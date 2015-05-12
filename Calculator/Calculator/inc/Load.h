@@ -13,9 +13,9 @@ public:
     virtual ~LoadByteUnsigned(void);
     
 public:
-    virtual void Execution();
+    virtual void Execution(const ForwardingFuncType& prev2stepInst, const ForwardingFuncType& prev1stepInst);
     virtual void Memory();
-    virtual void WriteBuffer();
+    virtual void WriteBack();
 };
 
 /** LoadHalfwordUnsigned **/
@@ -29,10 +29,10 @@ public:
     virtual ~LoadHalfwordUnsigned(void);
     
 public:
-    virtual void Execution();
+    virtual void Execution(const ForwardingFuncType& prev2stepInst, const ForwardingFuncType& prev1stepInst);
     
     virtual void Memory();
-    virtual void WriteBuffer();
+    virtual void WriteBack();
 };
 
 /** LoadLinked **/
@@ -46,9 +46,9 @@ public:
     virtual ~LoadLinked(void);
     
 public:
-    virtual void Execution();
+    virtual void Execution(const ForwardingFuncType& prev2stepInst, const ForwardingFuncType& prev1stepInst);
     virtual void Memory();
-    virtual void WriteBuffer();
+    virtual void WriteBack();
 };
 
 /** LoadUpperImmediate **/
@@ -59,9 +59,9 @@ public:
     virtual ~LoadUpperImmediate(void);
     
 public:
-    virtual void Execution();
+    virtual void Execution(const ForwardingFuncType& prev2stepInst, const ForwardingFuncType& prev1stepInst);
     virtual void Memory();
-    virtual void WriteBuffer();
+    virtual void WriteBack();
 };
 
 
@@ -77,9 +77,9 @@ public:
     virtual ~LoadWord(void);
     
 public:
-    virtual void Execution();
+    virtual void Execution(const ForwardingFuncType& prev2stepInst, const ForwardingFuncType& prev1stepInst);
     virtual void Memory();
-    virtual void WriteBuffer();
+    virtual void WriteBack();
 };
 
 /** LoadImmediate **/
@@ -93,7 +93,7 @@ public:
     virtual ~LoadImmediate(void);
     
 public:
-    virtual void Execution();
+    virtual void Execution(const ForwardingFuncType& prev2stepInst, const ForwardingFuncType& prev1stepInst);
     virtual void Memory();
-    virtual void WriteBuffer();
+    virtual void WriteBack();
 };

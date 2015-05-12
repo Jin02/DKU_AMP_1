@@ -27,8 +27,8 @@ public:
     
 public:
     virtual unsigned int Instruct(unsigned int rsData, unsigned int rtData);
-    virtual void Execution();
-	virtual void WriteBuffer();
+    virtual void Execution(const ForwardingFuncType& prev2stepInst, const ForwardingFuncType& prev1stepInst);
+	virtual void WriteBack();
 };
 
 
@@ -44,6 +44,6 @@ public:
     
 public:
     virtual unsigned int Instruct(unsigned int rsData, unsigned int rtData);
-    virtual void Execution();
-	virtual void WriteBuffer();
+    virtual void Execution(const ForwardingFuncType& prev2stepInst, const ForwardingFuncType& prev1stepInst);
+	virtual void WriteBack();
 };

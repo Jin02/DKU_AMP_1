@@ -20,7 +20,7 @@ unsigned int Divide::Instruct(unsigned int rsData, unsigned int rtData)
 	return 0;
 }
 
-void Divide::Execution()
+void Divide::Execution(const ForwardingFuncType& prev2stepInst, const ForwardingFuncType& prev1stepInst)
 {
 	int rsData = _rsData;
 	int rtData = _rtData;
@@ -34,7 +34,7 @@ void Divide::Execution()
 	}
 }
 
-void Divide::WriteBuffer()
+void Divide::WriteBack()
 {
 	System* system = System::GetInstance();
 
@@ -65,7 +65,7 @@ unsigned int DivideUnsigned::Instruct(unsigned int rsData, unsigned int rtData)
     return 0;
 }
 
-void DivideUnsigned::Execution()
+void DivideUnsigned::Execution(const ForwardingFuncType& prev2stepInst, const ForwardingFuncType& prev1stepInst)
 {
 	_executionLoResult = (_rsData / _rtData);
 	_executionHiResult = (_rsData % _rtData);
@@ -76,7 +76,7 @@ void DivideUnsigned::Execution()
 	}
 }
 
-void DivideUnsigned::WriteBuffer()
+void DivideUnsigned::WriteBack()
 {
 	System* system = System::GetInstance();
 

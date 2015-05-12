@@ -17,7 +17,10 @@ protected:
     virtual unsigned int Instruct(unsigned int rsData, unsigned int rtData) = 0;
     
 public:
-    virtual void Execution();
+    virtual void Forwarding(bool& hasDependency, uint& outTargetData, uint compareRegiIdx) const;
+
+public:
+    virtual void Execution(const ForwardingFuncType& prev2stepInst, const ForwardingFuncType& prev1stepInst);
 	virtual void Memory();
-	virtual void WriteBuffer();
+	virtual void WriteBack();
 };

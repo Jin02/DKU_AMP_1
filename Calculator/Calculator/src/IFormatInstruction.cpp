@@ -20,7 +20,7 @@ IFormatInstruction::~IFormatInstruction(void)
 {
 }
 
-void IFormatInstruction::WriteBuffer()
+void IFormatInstruction::WriteBack()
 {
 	System* system = System::GetInstance();
 	system->SetDataToRegister(_rt, _executionResult);
@@ -29,4 +29,10 @@ void IFormatInstruction::WriteBuffer()
 		sprintf(buff, "R[rt=0x%x] = 0x%x", _rt, _executionResult);
 		GlobalDumpLogManager->AddLog(buff, true);
 	}
+}
+
+void IFormatInstruction::Forwarding(bool& hasDependency, uint& outRdData, uint compareRegiIdx) const
+{
+    hasDependency   = (compareRegiIdx == _rt);
+    outRdData       = _executionResult;
 }

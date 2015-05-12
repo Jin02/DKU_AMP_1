@@ -38,7 +38,7 @@ unsigned int Multiply::Instruct(unsigned int rsData, unsigned int rtData)
 	return 0;
 }
 
-void Multiply::Execution()
+void Multiply::Execution(const ForwardingFuncType& prev2stepInst, const ForwardingFuncType& prev1stepInst)
 {
 	_multyplyExecutionResult = _rsData * _rtData;
     {
@@ -49,7 +49,7 @@ void Multiply::Execution()
 
 }
 
-void Multiply::WriteBuffer()
+void Multiply::WriteBack()
 {
 	System* system = System::GetInstance();
 	
@@ -83,7 +83,7 @@ unsigned int MultiplyUnsigned::Instruct(unsigned int rsData, unsigned int rtData
     return 0;
 }
 
-void MultiplyUnsigned::Execution()
+void MultiplyUnsigned::Execution(const ForwardingFuncType& prev2stepInst, const ForwardingFuncType& prev1stepInst)
 {
 	_multyplyExecutionResult = _rsData * _rtData;	
     {
@@ -93,7 +93,7 @@ void MultiplyUnsigned::Execution()
     }
 }
 
-void MultiplyUnsigned::WriteBuffer()
+void MultiplyUnsigned::WriteBack()
 {
 	System* system = System::GetInstance();
 	
