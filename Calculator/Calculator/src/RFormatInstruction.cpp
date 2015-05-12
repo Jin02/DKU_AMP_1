@@ -20,7 +20,7 @@ RFormatInstruction::~RFormatInstruction(void)
 {
 }
 
-void RFormatInstruction::Execution(const ForwardingFuncType& prev2stepInst, const ForwardingFuncType& prev1stepInst)
+void RFormatInstruction::Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
 {
 	_executionResult = Instruct(_rsData, _rtData);
 	GlobalDumpManagerAddExecutionLog(_executionResult);

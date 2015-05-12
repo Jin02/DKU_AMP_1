@@ -14,7 +14,7 @@ LoadByteUnsigned::~LoadByteUnsigned()
 
 }
 
-void LoadByteUnsigned::Execution(const ForwardingFuncType& prev2stepInst, const ForwardingFuncType& prev1stepInst)
+void LoadByteUnsigned::Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
 {
     _executionResult = _rsData + _immediate;
 }
@@ -52,7 +52,7 @@ LoadHalfwordUnsigned::~LoadHalfwordUnsigned()
     
 }
 
-void LoadHalfwordUnsigned::Execution(const ForwardingFuncType& prev2stepInst, const ForwardingFuncType& prev1stepInst)
+void LoadHalfwordUnsigned::Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
 {
     _executionResult = _rsData + _immediate;
 }
@@ -90,7 +90,7 @@ LoadLinked::~LoadLinked()
     
 }
 
-void LoadLinked::Execution(const ForwardingFuncType& prev2stepInst, const ForwardingFuncType& prev1stepInst)
+void LoadLinked::Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
 {
     _executionResult = _rsData + _immediate;
 }
@@ -126,7 +126,7 @@ LoadUpperImmediate::~LoadUpperImmediate()
     
 }
 
-void LoadUpperImmediate::Execution(const ForwardingFuncType& prev2stepInst, const ForwardingFuncType& prev1stepInst)
+void LoadUpperImmediate::Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
 {
     _executionResult = _immediate & 0xffff0000;
 }
@@ -160,7 +160,7 @@ LoadWord::~LoadWord()
     
 }
 
-void LoadWord::Execution(const ForwardingFuncType& prev2stepInst, const ForwardingFuncType& prev1stepInst)
+void LoadWord::Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
 {
     _executionResult = _rsData + _immediate;
 }
@@ -197,7 +197,7 @@ LoadImmediate::~LoadImmediate()
     
 }
 
-void LoadImmediate::Execution(const ForwardingFuncType& prev2stepInst, const ForwardingFuncType& prev1stepInst)
+void LoadImmediate::Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
 {
     
 }

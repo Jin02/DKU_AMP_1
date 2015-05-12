@@ -13,7 +13,7 @@ public:
     virtual ~LoadByteUnsigned(void);
     
 public:
-    virtual void Execution(const ForwardingFuncType& prev2stepInst, const ForwardingFuncType& prev1stepInst);
+    virtual void Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst);
     virtual void Memory();
     virtual void WriteBack();
 };
@@ -29,7 +29,7 @@ public:
     virtual ~LoadHalfwordUnsigned(void);
     
 public:
-    virtual void Execution(const ForwardingFuncType& prev2stepInst, const ForwardingFuncType& prev1stepInst);
+    virtual void Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst);
     
     virtual void Memory();
     virtual void WriteBack();
@@ -46,7 +46,7 @@ public:
     virtual ~LoadLinked(void);
     
 public:
-    virtual void Execution(const ForwardingFuncType& prev2stepInst, const ForwardingFuncType& prev1stepInst);
+    virtual void Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst);
     virtual void Memory();
     virtual void WriteBack();
 };
@@ -59,7 +59,7 @@ public:
     virtual ~LoadUpperImmediate(void);
     
 public:
-    virtual void Execution(const ForwardingFuncType& prev2stepInst, const ForwardingFuncType& prev1stepInst);
+    virtual void Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst);
     virtual void Memory();
     virtual void WriteBack();
 };
@@ -77,7 +77,7 @@ public:
     virtual ~LoadWord(void);
     
 public:
-    virtual void Execution(const ForwardingFuncType& prev2stepInst, const ForwardingFuncType& prev1stepInst);
+    virtual void Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst);
     virtual void Memory();
     virtual void WriteBack();
 };
@@ -93,7 +93,7 @@ public:
     virtual ~LoadImmediate(void);
     
 public:
-    virtual void Execution(const ForwardingFuncType& prev2stepInst, const ForwardingFuncType& prev1stepInst);
+    virtual void Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst);
     virtual void Memory();
     virtual void WriteBack();
 };

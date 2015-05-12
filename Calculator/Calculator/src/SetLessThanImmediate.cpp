@@ -12,7 +12,7 @@ SetLessThanImmediateUnsigned::~SetLessThanImmediateUnsigned()
     
 }
 
-void SetLessThanImmediateUnsigned::Execution(const ForwardingFuncType& prev2stepInst, const ForwardingFuncType& prev1stepInst)
+void SetLessThanImmediateUnsigned::Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
 {
 	_executionResult = _rsData < _immediate; 
 	GlobalDumpManagerAddExecutionLog(_executionResult);
@@ -30,7 +30,7 @@ SetLessThanImmediate::~SetLessThanImmediate()
     
 }
 
-void SetLessThanImmediate::Execution(const ForwardingFuncType& prev2stepInst, const ForwardingFuncType& prev1stepInst)
+void SetLessThanImmediate::Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
 {
 	int signedRsData = _rsData;
 	int signedImm = _immediate;

@@ -11,12 +11,14 @@
 #include "System.h"
 #include "DumpLogManager.h"
 
+#include "Add.h"
+
 int main(int argc, const char * argv[])
 {
 	GlobalDumpManagerAddLogNewLine("--------- Init ---------");
     System* system = System::GetInstance();
 
-	const std::string fileName = "/Users/jin/Project/DKU_AMP_1/Calculator/Calculator/input2.bin";
+    const std::string fileName = "/Users/jin/Project/DKU_AMP_1/Calculator/Calculator/input2.bin";
 	GlobalDumpManagerAddLogNewLine("Load .bin file : " + fileName);
 	system->Load(fileName);
 	GlobalDumpManagerAddLogNewLine("--------- Done ---------\n\n");
@@ -27,10 +29,6 @@ int main(int argc, const char * argv[])
 
 	GlobalDumpLogManager->WriteFile("/Users/jin/Project/DKU_AMP_1/Calculator/Calculator/out.txt");
     
-//    auto test = [](const std::function<void(bool& hasDependency, uint& outWriteTargetData, uint registerIdx)>& prev2stepInst, )
-//    {
-//        
-//    };
-//        
+
     return 0;
 }

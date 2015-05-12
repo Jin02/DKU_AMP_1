@@ -12,7 +12,7 @@ AndImmediate::~AndImmediate()
 
 }
 
-void AndImmediate::Execution(const ForwardingFuncType& prev2stepInst, const ForwardingFuncType& prev1stepInst)
+void AndImmediate::Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
 {
 	_executionResult = _rsData & _immediate; 
 	GlobalDumpManagerAddExecutionLog(_executionResult);

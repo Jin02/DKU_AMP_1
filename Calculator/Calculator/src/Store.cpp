@@ -13,7 +13,7 @@ StoreByte::~StoreByte()
     
 }
 
-void StoreByte::Execution(const ForwardingFuncType& prev2stepInst, const ForwardingFuncType& prev1stepInst)
+void StoreByte::Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
 {
     _executionResult = _rsData + _immediate;
 }
@@ -50,7 +50,7 @@ StoreConditional::~StoreConditional()
     
 }
 
-void StoreConditional::Execution(const ForwardingFuncType& prev2stepInst, const ForwardingFuncType& prev1stepInst)
+void StoreConditional::Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
 {
     _executionResult = _rsData + _immediate;
 }
@@ -81,7 +81,7 @@ StoreHalfword::~StoreHalfword()
     
 }
 
-void StoreHalfword::Execution(const ForwardingFuncType& prev2stepInst, const ForwardingFuncType& prev1stepInst)
+void StoreHalfword::Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
 {
     _executionResult = _rsData + _immediate;
 }
@@ -117,7 +117,7 @@ StoreWord::~StoreWord()
     
 }
 
-void StoreWord::Execution(const ForwardingFuncType& prev2stepInst, const ForwardingFuncType& prev1stepInst)
+void StoreWord::Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
 {
     _executionResult = _rsData + _immediate;
 }
