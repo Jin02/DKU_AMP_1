@@ -6,8 +6,7 @@ BranchOnEqual::BranchOnEqual(unsigned int rs, unsigned int rt, unsigned int imme
 	: IFormatInstruction(rs, rt, immediate)
 {
 	GlobalDumpManagerAddLogClassName(BranchOnEqual);
-
-
+    _type = Type::Branch;
 }
 
 BranchOnEqual::~BranchOnEqual()

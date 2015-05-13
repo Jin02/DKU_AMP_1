@@ -10,6 +10,7 @@ JFormatInstruction::JFormatInstruction(unsigned int address)
     char buff[256] = {0, };
     sprintf(buff, "J Type\t\t| address = 0x%x", address);
     GlobalDumpLogManager->AddLog(buff, true);
+    _type = Type::Jump;
 }
 
 JFormatInstruction::~JFormatInstruction(void)

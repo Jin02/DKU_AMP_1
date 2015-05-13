@@ -6,6 +6,7 @@ JumpRegister::JumpRegister(unsigned int rs, unsigned int rt, unsigned int rd)
     : RFormatInstruction(rs, rt, rd)
 {
 	GlobalDumpManagerAddLogClassName(JumpRegister);
+    _type = Type::Jump;
 }
 
 JumpRegister::~JumpRegister(void)

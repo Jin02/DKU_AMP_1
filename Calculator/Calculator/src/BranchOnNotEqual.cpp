@@ -5,6 +5,7 @@
 BranchOnNotEqual::BranchOnNotEqual(unsigned int rs, unsigned int rt, unsigned int immediate) : IFormatInstruction(rs, rt, immediate)
 {
 	GlobalDumpManagerAddLogClassName(BranchOnNotEqual);
+    _type = Type::Branch;
 }
 
 BranchOnNotEqual::~BranchOnNotEqual()

@@ -6,6 +6,17 @@
 class Instruction
 {
 public:
+    enum class Type
+    {
+        Common,
+        Jump,
+        Branch
+    };
+    
+protected:
+    Type _type;
+    
+public:
     Instruction();
     virtual ~Instruction(void);
     
@@ -16,4 +27,7 @@ public:
 
 	virtual void DependencyCheckWithGetTargetData(bool& hasDependency, uint& outTargetData, uint compareRegiIdx) const = 0;
 	bool Forwarding(const Instruction* prev2stepInst, const Instruction* prev1stepInst, uint& outRegiData, uint regiIdx);
+    
+public:
+    GET_ACCESSOR(Type, Type, _type);
 };

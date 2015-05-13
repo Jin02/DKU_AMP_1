@@ -7,6 +7,7 @@
 #include "Singleton.h"
 
 #include "Instruction.h"
+#include "PipelineStage.h"
 
 //8192 = 0x8000 / 4
 #define MAX_PROCESSOR_MEMORY 8192
@@ -24,16 +25,6 @@ private:
 private:
     System(void);
     ~System(void);
-    
-private:
-    unsigned int Fetch();
-    Instruction* Decode(unsigned int instruction);
-
-	// if next instruction is nop, return value is true else false.
-    bool Execution(Instruction* inst);
-
-	void Memory();
-	void WriteBack();
 
 public:
     void Load(const std::string& path);
