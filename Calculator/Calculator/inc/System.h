@@ -8,6 +8,8 @@
 
 #include "Instruction.h"
 #include "PipelineStage.h"
+
+#include <hash_map>
 #include <queue>
 
 //8192 = 0x8000 / 4
@@ -23,7 +25,8 @@ private:
 	unsigned int									_hi, _lo;
     unsigned int                                    _cycle;
     
-    std::queue<PipelineStage>                       _queue;
+	std::hash_map<uint, PipelineStage*>				_hashMap;
+	std::queue<PipelineStage>						_queue;
 
 private:
     System(void);

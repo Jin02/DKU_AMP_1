@@ -15,15 +15,15 @@ private:
     State           _state;
     uint            _pc;
 
-    Instruction*    _instruction;
-
-    Instruction*    _prev2stepInst;
-    Instruction*    _prev1stepInst;
-    
+    Instruction*    _instruction;    
     uint            _instructionValue;
 
+	PipelineStage*	_prev1StepPip;
+	PipelineStage*	_prev2StepPip;
+
 public:
-    PipelineStage() : _instruction(nullptr), _instructionValue(0),_prev2stepInst(nullptr), _prev1stepInst(nullptr)
+    PipelineStage() : _instruction(nullptr), _instructionValue(0),
+		_prev1StepPip(nullptr), _prev2StepPip(nullptr)
     {
         _state = State::Fetch;
     }
@@ -43,6 +43,15 @@ public:
     {
         _state = State::Stall;
     }
+
+	void Clear()
+	{
+		_state = State::Fetch;
+		_pc = 0;
+		SAFE_DELETE(_instruction);
+		_instructionValue = 0;
+		_prev1StepPip = _prev2StepPip = nullptr;
+	}
     
 private:
     uint            Fetch();
@@ -57,7 +66,8 @@ public:
 public:
     GET_ACCESSOR(State, State, _state);
     GET_ACCESSOR(Instruction, Instruction*, _instruction);
+	GET_ACCESSOR(ProgramCounter,  uint, _pc);
 
-    GET_SET_ACCESSOR(Prev2StepInst, Instruction*, _prev2stepInst);
-    GET_SET_ACCESSOR(Prev1StepInst, Instruction*, _prev1stepInst);
+	SET_ACCESSOR(Prev2StepPip, PipelineStage*, _prev2StepPip);
+	SET_ACCESSOR(Prev1StepPip, PipelineStage*, _prev1StepPip);
 };

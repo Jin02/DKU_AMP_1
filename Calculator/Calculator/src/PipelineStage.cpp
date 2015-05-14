@@ -29,7 +29,9 @@ uint PipelineStage::Fetch()
 {
     _pc = System::GetInstance()->GetProgramCounter();
     ASSERT_COND_MSG( (_pc % 4) == 0, "Error, pc must has word multiplier" );
-    
+	
+	System::GetInstance()->SetProgramCounter(_pc + 4);
+
     return System::GetInstance()->GetDataFromMemory(_pc);
 }
 
@@ -180,7 +182,10 @@ void PipelineStage::Decode(uint instruction)
 
 void PipelineStage::Execution(const PipelineStage* prev2step, const PipelineStage* prev1step)
 {
-    _instruction->Execution(prev2step->GetInstruction(), prev1step->GetInstruction());
+	Instruction* prev2StepInst = prev2step ? prev2step->GetInstruction() : nullptr;	
+	Instruction* prev1StepInst = prev1step ? prev1step->GetInstruction() : nullptr;
+
+	_instruction->Execution(prev2StepInst, prev1StepInst);
 }
 
 void PipelineStage::Memory()
@@ -200,11 +205,12 @@ void PipelineStage::RunStage()
     else if(_state == State::Decode)
         Decode(_instructionValue);
     else if(_state == State::Execution)
-        Execution(prev2step, prev1step);
+	{
+		Execution(_prev2StepPip, _prev1StepPip);
+		_prev1StepPip = _prev2StepPip = nullptr;
+	}
     else if(_state == State::Memory)
         Memory();
     else if(_state == State::WriteBack)
         WriteBack();
-    
-    NextState();
 }

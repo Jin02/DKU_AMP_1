@@ -72,15 +72,15 @@ void System::Load(const std::string& path)
 
 void System::Run()
 {
-    for(int i=0; i<4; ++i)
-        _queue.push( PipelineStage() );
-    
 	while(_programCounter != 0xffffffff)
     {
         GlobalDumpLogManager->AddLog("Cycle Num\t| " + std::to_string(_cycle++), true);
 
-        for(int i=0; i<_queue.size(); ++i)
-            RunCycle();
+		if(_queue.size() < 5)
+			_queue.push(PipelineStage());
+
+		for(int i=0; i<_queue.size(); ++i)
+			RunCycle();
     }
 
 	char buff[128] = {0,};
@@ -90,22 +90,48 @@ void System::Run()
 
 void System::RunCycle()
 {
-    PipelineStage& front = _queue.front();
-    
-    if(front.GetState() != PipelineStage::State::Stall)
-    {
-        
-    }
-//    if(pip)
-//    {
-//
-//        if(pip->GetState() != PipelineStage::State::Stall)
-//            pip->RunStage(prev2step, prev1step);
-//
-//        _queue.push(pip);
-//    }
+	PipelineStage&			front	= _queue.front();
+	PipelineStage::State	state	= front.GetState();
 
-    _queue.pop();
+	if(state == PipelineStage::State::Fetch)
+	{
+		_hashMap.insert( std::make_pair(_programCounter, &front) );
+	}
+	else if(state == PipelineStage::State::Execution)
+	{
+		auto FindObjectFromHashMap = [&](uint key)
+		{
+			auto findIter = _hashMap.find(key);
+			PipelineStage* ret = nullptr;
+
+			if(findIter != _hashMap.end()) //found!
+				ret = findIter->second;
+
+			return ret;
+		};
+
+		PipelineStage* prev1Step = FindObjectFromHashMap( front.GetProgramCounter() - 4 );
+		PipelineStage* prev2Step = FindObjectFromHashMap( front.GetProgramCounter() - 8 );
+
+		front.SetPrev1StepPip(prev1Step);
+		front.SetPrev2StepPip(prev2Step);
+	}
+
+
+	front.RunStage();
+
+	front.NextState();
+	_queue.pop();
+
+	if(front.GetState() == PipelineStage::State::Stall)
+	{
+		auto iter = _hashMap.find(front.GetProgramCounter());
+		_hashMap.erase(iter);
+
+		front.Clear();
+	}
+
+	_queue.push(front);
 }
 
 unsigned int System::GetDataFromMemory(int address)

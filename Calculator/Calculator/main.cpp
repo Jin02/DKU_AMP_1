@@ -20,7 +20,7 @@ int main(int argc, const char * argv[])
 	GlobalDumpManagerAddLogNewLine("--------- Init ---------");
     System* system = System::GetInstance();
 
-    const std::string fileName = "/Users/jin/Project/MipsEmulator/Calculator/Calculator/input2.bin";
+    const std::string fileName = "D:/Dropbox/input2 (2)/input2.bin";
 	GlobalDumpManagerAddLogNewLine("Load .bin file : " + fileName);
 	system->Load(fileName);
 	GlobalDumpManagerAddLogNewLine("--------- Done ---------\n\n");
