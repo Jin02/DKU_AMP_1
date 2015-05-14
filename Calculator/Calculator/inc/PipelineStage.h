@@ -16,10 +16,14 @@ private:
     uint            _pc;
 
     Instruction*    _instruction;
+
+    Instruction*    _prev2stepInst;
+    Instruction*    _prev1stepInst;
+    
     uint            _instructionValue;
 
 public:
-    PipelineStage() : _instruction(nullptr), _instructionValue(0)
+    PipelineStage() : _instruction(nullptr), _instructionValue(0),_prev2stepInst(nullptr), _prev1stepInst(nullptr)
     {
         _state = State::Fetch;
     }
@@ -48,9 +52,12 @@ private:
     void            WriteBack();
     
 public:
-    void            RunStage(const PipelineStage* prev2step, const PipelineStage* prev1step);
+    void            RunStage();
     
 public:
     GET_ACCESSOR(State, State, _state);
     GET_ACCESSOR(Instruction, Instruction*, _instruction);
+
+    GET_SET_ACCESSOR(Prev2StepInst, Instruction*, _prev2stepInst);
+    GET_SET_ACCESSOR(Prev1StepInst, Instruction*, _prev1stepInst);
 };

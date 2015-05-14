@@ -176,8 +176,6 @@ void PipelineStage::Decode(uint instruction)
         
         else ASSERT_MSG("cant support i foramt this inst");
     }
-    
-    ASSERT_MSG("Error!, not found inst");
 }
 
 void PipelineStage::Execution(const PipelineStage* prev2step, const PipelineStage* prev1step)
@@ -195,7 +193,7 @@ void PipelineStage::WriteBack()
     _instruction->WriteBack();
 }
 
-void PipelineStage::RunStage(const PipelineStage* prev2step, const PipelineStage* prev1step)
+void PipelineStage::RunStage()
 {
     if(_state == State::Fetch)
         _instructionValue = Fetch();

@@ -72,20 +72,40 @@ void System::Load(const std::string& path)
 
 void System::Run()
 {
-//	while(_programCounter != 0xffffffff)
-//    {
-//        GlobalDumpLogManager->AddLog("Cycle Num\t| " + std::to_string(_cycle++), true);
-//		RunCycle();
-//    }
-//
-//	char buff[128] = {0,};
-//	sprintf(buff, "Final Return Value is 0x%x(v0)", _registers[2]);
-//	GlobalDumpLogManager->AddLog(buff, true);
+    for(int i=0; i<4; ++i)
+        _queue.push( PipelineStage() );
+    
+	while(_programCounter != 0xffffffff)
+    {
+        GlobalDumpLogManager->AddLog("Cycle Num\t| " + std::to_string(_cycle++), true);
+
+        for(int i=0; i<_queue.size(); ++i)
+            RunCycle();
+    }
+
+	char buff[128] = {0,};
+	sprintf(buff, "Final Return Value is 0x%x(v0)", _registers[2]);
+	GlobalDumpLogManager->AddLog(buff, true);
 }
 
 void System::RunCycle()
 {
+    PipelineStage& front = _queue.front();
     
+    if(front.GetState() != PipelineStage::State::Stall)
+    {
+        
+    }
+//    if(pip)
+//    {
+//
+//        if(pip->GetState() != PipelineStage::State::Stall)
+//            pip->RunStage(prev2step, prev1step);
+//
+//        _queue.push(pip);
+//    }
+
+    _queue.pop();
 }
 
 unsigned int System::GetDataFromMemory(int address)

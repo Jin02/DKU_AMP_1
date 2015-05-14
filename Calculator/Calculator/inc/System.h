@@ -8,6 +8,7 @@
 
 #include "Instruction.h"
 #include "PipelineStage.h"
+#include <queue>
 
 //8192 = 0x8000 / 4
 #define MAX_PROCESSOR_MEMORY 8192
@@ -21,6 +22,8 @@ private:
 
 	unsigned int									_hi, _lo;
     unsigned int                                    _cycle;
+    
+    std::queue<PipelineStage>                       _queue;
 
 private:
     System(void);
