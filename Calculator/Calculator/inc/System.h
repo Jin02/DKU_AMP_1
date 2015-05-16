@@ -10,7 +10,7 @@
 #include "PipelineStage.h"
 
 #include <hash_map>
-#include <queue>
+#include <deque>
 
 //8192 = 0x8000 / 4
 #define MAX_PROCESSOR_MEMORY 8192
@@ -26,7 +26,9 @@ private:
     unsigned int                                    _cycle;
     
 	std::hash_map<uint, PipelineStage*>				_hashMap;
-	std::queue<PipelineStage>						_queue;
+
+	std::deque<PipelineStage*>						_queue;
+	uint											_removeHashKey;
 
 private:
     System(void);

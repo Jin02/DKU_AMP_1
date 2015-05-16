@@ -21,11 +21,13 @@ private:
 	PipelineStage*	_prev1StepPip;
 	PipelineStage*	_prev2StepPip;
 
+	bool			_isDummyStall;
+
 public:
-    PipelineStage() : _instruction(nullptr), _instructionValue(0),
-		_prev1StepPip(nullptr), _prev2StepPip(nullptr)
+    PipelineStage(bool dummyStall = false) : _instruction(nullptr), _instructionValue(0),
+		_prev1StepPip(nullptr), _prev2StepPip(nullptr), _isDummyStall(dummyStall)
     {
-        _state = State::Fetch;
+		_state = dummyStall ? State::Stall : State::Fetch;
     }
     
     ~PipelineStage()
@@ -70,4 +72,6 @@ public:
 
 	SET_ACCESSOR(Prev2StepPip, PipelineStage*, _prev2StepPip);
 	SET_ACCESSOR(Prev1StepPip, PipelineStage*, _prev1StepPip);
+
+	GET_ACCESSOR(IsDummyStall, bool, _isDummyStall);
 };

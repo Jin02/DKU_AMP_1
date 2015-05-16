@@ -6,7 +6,7 @@
 
 #include "DumpLogManager.h"
 
-System::System() : _programCounter(0), _hi(0), _lo(0), _cycle(0)
+System::System() : _programCounter(0), _hi(0), _lo(0), _cycle(0), _removeHashKey(-1)
 {
 	std::fill(_processorMemory.begin(), _processorMemory.end(), 0);
 	std::fill(_registers.begin(), _registers.end(), 0);
@@ -76,11 +76,19 @@ void System::Run()
     {
         GlobalDumpLogManager->AddLog("Cycle Num\t| " + std::to_string(_cycle++), true);
 
-		if(_queue.size() < 5)
-			_queue.push(PipelineStage());
+		if(_queue.size() < 4)
+			_queue.push_back(new PipelineStage);
 
 		for(int i=0; i<_queue.size(); ++i)
 			RunCycle();
+
+		if( _removeHashKey != -1 )
+		{
+			auto iter = _hashMap.find(_removeHashKey);
+			iter->second->Clear();
+
+			_hashMap.erase(iter);
+		}
     }
 
 	char buff[128] = {0,};
@@ -90,12 +98,12 @@ void System::Run()
 
 void System::RunCycle()
 {
-	PipelineStage&			front	= _queue.front();
-	PipelineStage::State	state	= front.GetState();
+	PipelineStage*			front	= _queue.front();
+	PipelineStage::State	state	= front->GetState();
 
 	if(state == PipelineStage::State::Fetch)
 	{
-		_hashMap.insert( std::make_pair(_programCounter, &front) );
+		_hashMap.insert( std::make_pair(_programCounter, front) );
 	}
 	else if(state == PipelineStage::State::Execution)
 	{
@@ -110,28 +118,54 @@ void System::RunCycle()
 			return ret;
 		};
 
-		PipelineStage* prev1Step = FindObjectFromHashMap( front.GetProgramCounter() - 4 );
-		PipelineStage* prev2Step = FindObjectFromHashMap( front.GetProgramCounter() - 8 );
+		uint pc = front->GetProgramCounter();
+		PipelineStage* prev1Step = FindObjectFromHashMap( pc - 4 );
+		PipelineStage* prev2Step = FindObjectFromHashMap( pc - 8 );
 
-		front.SetPrev1StepPip(prev1Step);
-		front.SetPrev2StepPip(prev2Step);
+		front->SetPrev1StepPip(prev1Step);
+		front->SetPrev2StepPip(prev2Step);
 	}
 
 
-	front.RunStage();
+	front->RunStage();
 
-	front.NextState();
-	_queue.pop();
-
-	if(front.GetState() == PipelineStage::State::Stall)
+	if(state == PipelineStage::State::Execution)
 	{
-		auto iter = _hashMap.find(front.GetProgramCounter());
-		_hashMap.erase(iter);
-
-		front.Clear();
+		Instruction::Type instType = front->GetInstruction()->GetType();
+		if(instType == Instruction::Type::Jump)
+		{
+			_queue.push_front(new PipelineStage(true));
+			_queue.push_front(new PipelineStage(true));
+			_queue.push_front(new PipelineStage(true)); //한개는, 아래서 처리할 pop_front 처리용
+			//결론은 jump시, stall 2번 하도록 구성함
+		}
+		else if(instType == Instruction::Type::Branch)
+		{
+			int a = 3;
+			a = 5;
+		}
 	}
 
-	_queue.push(front);
+	front->NextState();
+
+	if(_queue.front()->GetIsDummyStall())
+		SAFE_DELETE(_queue.front());
+	_queue.pop_front();
+
+	if(front->GetState() == PipelineStage::State::Stall)
+	{
+		if(front->GetIsDummyStall())
+		{
+			SAFE_DELETE(front);
+			return;
+		}
+		else
+		{
+			_removeHashKey = front->GetProgramCounter();
+		}
+	}
+
+	_queue.push_back(front);
 }
 
 unsigned int System::GetDataFromMemory(int address)
