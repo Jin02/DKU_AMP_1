@@ -5,7 +5,8 @@
 class BranchOnEqual : public IFormatInstruction
 {
 private:
-    bool _isBranchSuccess;
+    bool        _isBranchSuccess;
+    uint        _pc;
     
 public:
     BranchOnEqual(unsigned int rs, unsigned int rt, unsigned int immediate);
@@ -17,4 +18,5 @@ public:
     
 public:
     GET_ACCESSOR(IsBranchSuccess, bool, _isBranchSuccess);
+    SET_ACCESSOR(PC, uint, _pc);
 };

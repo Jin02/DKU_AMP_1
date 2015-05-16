@@ -6,7 +6,7 @@
 
 #include "DumpLogManager.h"
 
-System::System() : _programCounter(0), _hi(0), _lo(0), _cycle(0), _removeHashKey(-1)
+System::System() : _programCounter(0), _hi(0), _lo(0), _cycle(0)
 {
 	std::fill(_processorMemory.begin(), _processorMemory.end(), 0);
 	std::fill(_registers.begin(), _registers.end(), 0);
@@ -76,19 +76,24 @@ void System::Run()
     {
         GlobalDumpLogManager->AddLog("Cycle Num\t| " + std::to_string(_cycle++), true);
 
-		if(_queue.size() < 4)
-			_queue.push_back(new PipelineStage);
+		if(_pipelineDeque.size() < 4)
+			_pipelineDeque.push_back(new PipelineStage);
 
-		for(int i=0; i<_queue.size(); ++i)
+		for(int i=0; i<_pipelineDeque.size(); ++i)
 			RunCycle();
 
-		if( _removeHashKey != -1 )
-		{
-			auto iter = _hashMap.find(_removeHashKey);
-			iter->second->Clear();
-
-			_hashMap.erase(iter);
-		}
+        if( _removePipelineKeys.size() > 2 )
+        {
+            uint key = _removePipelineKeys.front();
+            auto findIter = _hashMap.find(key);
+            if(findIter != _hashMap.end())
+            {
+                SAFE_DELETE(findIter->second);
+                _hashMap.erase(findIter);
+            }
+            
+            _removePipelineKeys.pop();
+        }
     }
 
 	char buff[128] = {0,};
@@ -98,12 +103,17 @@ void System::Run()
 
 void System::RunCycle()
 {
-	PipelineStage*			front	= _queue.front();
+	PipelineStage*			front	= _pipelineDeque.front();
 	PipelineStage::State	state	= front->GetState();
 
 	if(state == PipelineStage::State::Fetch)
 	{
-		_hashMap.insert( std::make_pair(_programCounter, front) );
+        uint key = _programCounter;
+        
+        if(front->GetIsDummyStall())
+            key = front->GetProgramCounter();
+            
+		_hashMap.insert( std::make_pair(key, front) );
 	}
 	else if(state == PipelineStage::State::Execution)
 	{
@@ -126,46 +136,47 @@ void System::RunCycle()
 		front->SetPrev2StepPip(prev2Step);
 	}
 
+    static uint count = 0;
+    if(++count == 38)
+    {
+        int a = 4;
+        a = 3;
+    }
 
 	front->RunStage();
 
+    bool notWorkCycle = false;
 	if(state == PipelineStage::State::Execution)
 	{
 		Instruction::Type instType = front->GetInstruction()->GetType();
 		if(instType == Instruction::Type::Jump)
 		{
-			_queue.push_front(new PipelineStage(true));
-			_queue.push_front(new PipelineStage(true));
-			_queue.push_front(new PipelineStage(true)); //한개는, 아래서 처리할 pop_front 처리용
-			//결론은 jump시, stall 2번 하도록 구성함
-		}
-		else if(instType == Instruction::Type::Branch)
-		{
-			int a = 3;
-			a = 5;
+            
+            notWorkCycle = true;
+        }
+		else if(instType == Instruction::Type::Branch) //temp
+        {
+//            _pipelineDeque.push_front(new PipelineStage(true));
+            
+            notWorkCycle = true;
 		}
 	}
 
 	front->NextState();
 
-	if(_queue.front()->GetIsDummyStall())
-		SAFE_DELETE(_queue.front());
-	_queue.pop_front();
+    if(notWorkCycle == false)
+    {
+        _pipelineDeque.pop_front();
 
-	if(front->GetState() == PipelineStage::State::Stall)
-	{
-		if(front->GetIsDummyStall())
-		{
-			SAFE_DELETE(front);
-			return;
-		}
-		else
-		{
-			_removeHashKey = front->GetProgramCounter();
-		}
-	}
-
-	_queue.push_back(front);
+        if(front->GetState() == PipelineStage::State::Stall)
+        {
+            _removePipelineKeys.push(front->GetProgramCounter());
+        }
+        else
+        {
+            _pipelineDeque.push_back(front);
+        }
+    }
 }
 
 unsigned int System::GetDataFromMemory(int address)

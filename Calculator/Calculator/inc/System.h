@@ -9,8 +9,9 @@
 #include "Instruction.h"
 #include "PipelineStage.h"
 
-#include <hash_map>
+#include "SOCHashMap.h"
 #include <deque>
+#include <queue>
 
 //8192 = 0x8000 / 4
 #define MAX_PROCESSOR_MEMORY 8192
@@ -25,10 +26,10 @@ private:
 	unsigned int									_hi, _lo;
     unsigned int                                    _cycle;
     
-	std::hash_map<uint, PipelineStage*>				_hashMap;
+	SOCHashMap<uint, PipelineStage*>				_hashMap;
 
-	std::deque<PipelineStage*>						_queue;
-	uint											_removeHashKey;
+	std::deque<PipelineStage*>						_pipelineDeque;
+    std::queue<uint>                                _removePipelineKeys;
 
 private:
     System(void);

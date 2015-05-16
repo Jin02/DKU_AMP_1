@@ -25,6 +25,43 @@
 
 #include "DumpLogManager.h"
 
+
+PipelineStage::PipelineStage(bool dummyStall) : _instruction(nullptr), _instructionValue(0), _prev1StepPip(nullptr), _prev2StepPip(nullptr), _isDummyStall(dummyStall)
+{
+    _state = State::Fetch;
+    if(dummyStall)
+    {
+        static uint tempKey = -1;
+        _pc = (tempKey--);
+    }
+}
+
+PipelineStage::~PipelineStage()
+{
+    
+}
+
+void PipelineStage::NextState()
+{
+    _state = (State)((uint)_state + 1);
+    if(_state > State::Stall)
+        _state = State::Stall;
+}
+
+void PipelineStage::Cancel()
+{
+    _state = State::Stall;
+}
+
+void PipelineStage::Clear()
+{
+    _state = State::Fetch;
+    _pc = 0;
+    SAFE_DELETE(_instruction);
+    _instructionValue = 0;
+    _prev1StepPip = _prev2StepPip = nullptr;
+}
+
 uint PipelineStage::Fetch()
 {
     _pc = System::GetInstance()->GetProgramCounter();
@@ -121,7 +158,10 @@ void PipelineStage::Decode(uint instruction)
         if(opCode == (uint)Opcode::Jump)
             _instruction = new Jump(jumpAddr);
         else if(opCode == (uint)Opcode::JumpAndLink)
+        {
             _instruction = new JumpAndLink(jumpAddr);
+            ((JumpAndLink*)_instruction)->SetPC(_pc);
+        }
         else ASSERT_MSG("cant support j foramt this instruction");
     }
     else // I
@@ -143,9 +183,15 @@ void PipelineStage::Decode(uint instruction)
         else if(opCode == (uint)Opcode::AndImmediate)
             _instruction = new AndImmediate(rs, rt, zeroExtImm);
         else if(opCode == (uint)Opcode::BranchOnEqual)
+        {
             _instruction = new BranchOnEqual(rs, rt, branchAddr);
+            ((BranchOnEqual*)_instruction)->SetPC(_pc);
+        }
         else if(opCode == (uint)Opcode::BranchOnNotEqual)
+        {
             _instruction = new BranchOnNotEqual(rs, rt, branchAddr);
+            ((BranchOnNotEqual*)_instruction)->SetPC(_pc);
+        }
         else if(opCode == (uint)Opcode::LoadByteUnsigned)
             _instruction = new LoadByteUnsigned(rs, rt, signExtImm);
         else if(opCode == (uint)Opcode::LoadHalfwordUnsigned)
@@ -200,6 +246,9 @@ void PipelineStage::WriteBack()
 
 void PipelineStage::RunStage()
 {
+    if(_isDummyStall)
+        return;
+    
     if(_state == State::Fetch)
         _instructionValue = Fetch();
     else if(_state == State::Decode)

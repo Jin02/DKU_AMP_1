@@ -6,6 +6,7 @@ class BranchOnNotEqual : public IFormatInstruction
 {
 private:
     bool _isBranchSuccess;
+    uint _pc;
     
 public:
     BranchOnNotEqual(unsigned int rs, unsigned int rt, unsigned int immediate);
@@ -16,5 +17,6 @@ public:
     virtual void DependencyCheckWithGetTargetData(bool&, uint&, uint ) const;
     
 public:
-    GET_ACCESSOR(IsBranchSuccess, bool, _isBranchSuccess);    
+    GET_ACCESSOR(IsBranchSuccess, bool, _isBranchSuccess);
+    SET_ACCESSOR(PC, uint, _pc);
 };

@@ -31,6 +31,7 @@ class JumpAndLink : public JFormatInstruction
 {
 private:
 	uint _executionResult;
+    uint _pc;
 
 public:
     JumpAndLink(unsigned int address);
@@ -40,4 +41,7 @@ public:
 	virtual void Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst);
 	virtual void Memory();
 	virtual void WriteBack();
+    
+public:
+    SET_ACCESSOR(PC, uint, _pc);
 };

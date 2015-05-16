@@ -45,7 +45,8 @@ void Jump::Execution(const Instruction* prev2stepInst, const Instruction* prev1s
 
 /**** JumpAndLink Instruction ****/
 
-JumpAndLink::JumpAndLink(unsigned int address) : JFormatInstruction(address), _executionResult(0)
+JumpAndLink::JumpAndLink(unsigned int address)
+    : JFormatInstruction(address), _executionResult(0)
 {
     GlobalDumpManagerAddLogClassName(JumpAndLink);
 }
@@ -58,15 +59,14 @@ JumpAndLink::~JumpAndLink()
 void JumpAndLink::Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
 {
 	System* system = System::GetInstance();
-    unsigned int currentProgramCounter = system->GetProgramCounter();
-    _executionResult = currentProgramCounter + 8;
+    _executionResult = _pc + 8;
     
     system->SetProgramCounter(_address);
     {
         GlobalDumpLogManager->AddLog("R[31] = PC + 8; PC = JumpAddr", true);
         
         char logBuffer[64] = {0, };
-        sprintf(logBuffer, "R[31] = 0x%x; PC = 0x%x", currentProgramCounter + 8, _address);
+        sprintf(logBuffer, "R[31] = 0x%x; PC = 0x%x", _pc + 8, _address);
         GlobalDumpLogManager->AddLog(logBuffer, true);
         GlobalDumpManagerAddLog3NewLine;
     }

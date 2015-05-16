@@ -49,6 +49,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3C0B5FAA1B073DE700CE3683 /* SOCHashMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SOCHashMap.h; path = inc/SOCHashMap.h; sourceTree = "<group>"; };
 		3C34F2251AC4394D00A151C6 /* Add.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Add.h; path = inc/Add.h; sourceTree = "<group>"; };
 		3C34F2261AC4395C00A151C6 /* Add.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Add.cpp; path = src/Add.cpp; sourceTree = "<group>"; };
 		3C34F22E1AC442A100A151C6 /* AddImmediate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; name = AddImmediate.cpp; path = src/AddImmediate.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
@@ -142,6 +143,7 @@
 		3C617F351AB9324900FC8FBD /* System */ = {
 			isa = PBXGroup;
 			children = (
+				3C0B5FAA1B073DE700CE3683 /* SOCHashMap.h */,
 				3C3BD90E1B030ACA00499142 /* PipelineStage.cpp */,
 				3C3BD90D1B030AC100499142 /* PipelineStage.h */,
 				3C617F1E1AB9304C00FC8FBD /* System.cpp */,

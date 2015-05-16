@@ -24,36 +24,13 @@ private:
 	bool			_isDummyStall;
 
 public:
-    PipelineStage(bool dummyStall = false) : _instruction(nullptr), _instructionValue(0),
-		_prev1StepPip(nullptr), _prev2StepPip(nullptr), _isDummyStall(dummyStall)
-    {
-		_state = dummyStall ? State::Stall : State::Fetch;
-    }
-    
-    ~PipelineStage()
-    {
-        
-    }
+    PipelineStage(bool dummyStall = false);
+    ~PipelineStage();
     
 public:
-    void NextState()
-    {
-        _state = (State)((uint)_state + 1);
-    }
-    
-    void Cancel()
-    {
-        _state = State::Stall;
-    }
-
-	void Clear()
-	{
-		_state = State::Fetch;
-		_pc = 0;
-		SAFE_DELETE(_instruction);
-		_instructionValue = 0;
-		_prev1StepPip = _prev2StepPip = nullptr;
-	}
+    void NextState();
+    void Cancel();
+    void Clear();
     
 private:
     uint            Fetch();
