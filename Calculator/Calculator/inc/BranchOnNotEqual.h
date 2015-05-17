@@ -1,22 +1,13 @@
 #pragma once
 
-#include "IFormatInstruction.h"
+#include "BranchBase.h"
 
-class BranchOnNotEqual : public IFormatInstruction
-{
-private:
-    bool _isBranchSuccess;
-    uint _pc;
-    
+class BranchOnNotEqual : public BranchBase
+{    
 public:
     BranchOnNotEqual(unsigned int rs, unsigned int rt, unsigned int immediate);
     virtual ~BranchOnNotEqual(void);
     
 public:
     virtual void Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst);
-    virtual void DependencyCheckWithGetTargetData(bool&, uint&, uint ) const;
-    
-public:
-    GET_ACCESSOR(IsBranchSuccess, bool, _isBranchSuccess);
-    SET_ACCESSOR(PC, uint, _pc);
 };

@@ -21,10 +21,10 @@ private:
 	PipelineStage*	_prev1StepPip;
 	PipelineStage*	_prev2StepPip;
 
-	bool			_isDummyStall;
+	bool			_isCancel;
 
 public:
-    PipelineStage(bool dummyStall = false);
+    PipelineStage();
     ~PipelineStage();
     
 public:
@@ -50,5 +50,5 @@ public:
 	SET_ACCESSOR(Prev2StepPip, PipelineStage*, _prev2StepPip);
 	SET_ACCESSOR(Prev1StepPip, PipelineStage*, _prev1StepPip);
 
-	GET_ACCESSOR(IsDummyStall, bool, _isDummyStall);
+	GET_ACCESSOR(IsCancel, bool, _isCancel);
 };

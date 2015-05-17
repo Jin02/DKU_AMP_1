@@ -26,14 +26,9 @@
 #include "DumpLogManager.h"
 
 
-PipelineStage::PipelineStage(bool dummyStall) : _instruction(nullptr), _instructionValue(0), _prev1StepPip(nullptr), _prev2StepPip(nullptr), _isDummyStall(dummyStall)
+PipelineStage::PipelineStage() : _instruction(nullptr), _instructionValue(0), _prev1StepPip(nullptr), _prev2StepPip(nullptr), _isCancel(false)
 {
     _state = State::Fetch;
-    if(dummyStall)
-    {
-        static uint tempKey = -1;
-        _pc = (tempKey--);
-    }
 }
 
 PipelineStage::~PipelineStage()
@@ -50,7 +45,7 @@ void PipelineStage::NextState()
 
 void PipelineStage::Cancel()
 {
-    _state = State::Stall;
+    _isCancel = true;
 }
 
 void PipelineStage::Clear()
@@ -75,6 +70,12 @@ uint PipelineStage::Fetch()
 
 void PipelineStage::Decode(uint instruction)
 {
+	if(instruction == 0x00) //nop
+	{
+		_isCancel = true;
+		return;
+	}
+
     char buff[256] = {0, };
     
     unsigned int opCode     = (instruction & 0xFC000000) >> 26;
@@ -231,22 +232,25 @@ void PipelineStage::Execution(const PipelineStage* prev2step, const PipelineStag
 	Instruction* prev2StepInst = prev2step ? prev2step->GetInstruction() : nullptr;	
 	Instruction* prev1StepInst = prev1step ? prev1step->GetInstruction() : nullptr;
 
-	_instruction->Execution(prev2StepInst, prev1StepInst);
+	if(_instruction)
+		_instruction->Execution(prev2StepInst, prev1StepInst);
 }
 
 void PipelineStage::Memory()
 {
-    _instruction->Memory();
+	if(_instruction)
+		_instruction->Memory();
 }
 
 void PipelineStage::WriteBack()
 {
-    _instruction->WriteBack();
+	if(_instruction)
+		_instruction->WriteBack();
 }
 
 void PipelineStage::RunStage()
 {
-    if(_isDummyStall)
+    if(_isCancel)
         return;
     
     if(_state == State::Fetch)

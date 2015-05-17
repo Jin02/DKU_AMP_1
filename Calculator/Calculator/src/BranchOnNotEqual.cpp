@@ -2,10 +2,10 @@
 #include "System.h"
 #include "DumpLogManager.h"
 
-BranchOnNotEqual::BranchOnNotEqual(unsigned int rs, unsigned int rt, unsigned int immediate) : IFormatInstruction(rs, rt, immediate)
+BranchOnNotEqual::BranchOnNotEqual(unsigned int rs, unsigned int rt, unsigned int immediate) 
+	: BranchBase(rs, rt, immediate)
 {
 	GlobalDumpManagerAddLogClassName(BranchOnNotEqual);
-    _type = Type::Branch;
 }
 
 BranchOnNotEqual::~BranchOnNotEqual()
@@ -33,9 +33,4 @@ void BranchOnNotEqual::Execution(const Instruction* prev2stepInst, const Instruc
         _isBranchSuccess = true;
         system->SetProgramCounter(_pc + 4 + _immediate);
     }
-}
-
-void BranchOnNotEqual::DependencyCheckWithGetTargetData(bool&, uint&, uint ) const
-{
-    
 }

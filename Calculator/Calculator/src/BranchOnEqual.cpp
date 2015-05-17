@@ -3,20 +3,14 @@
 #include "DumpLogManager.h"
 
 BranchOnEqual::BranchOnEqual(unsigned int rs, unsigned int rt, unsigned int immediate)
-	: IFormatInstruction(rs, rt, immediate)
+	: BranchBase(rs, rt, immediate)
 {
 	GlobalDumpManagerAddLogClassName(BranchOnEqual);
-    _type = Type::Branch;
 }
 
 BranchOnEqual::~BranchOnEqual()
 {
 
-}
-
-void BranchOnEqual::DependencyCheckWithGetTargetData(bool&, uint&, uint ) const
-{
-    
 }
 
 void BranchOnEqual::Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst)

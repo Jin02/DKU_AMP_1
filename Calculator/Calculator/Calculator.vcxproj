@@ -15,6 +15,7 @@
     <ClInclude Include="inc\AddImmediate.h" />
     <ClInclude Include="inc\And.h" />
     <ClInclude Include="inc\AndImmediate.h" />
+    <ClInclude Include="inc\BranchBase.h" />
     <ClInclude Include="inc\BranchOnEqual.h" />
     <ClInclude Include="inc\BranchOnNotEqual.h" />
     <ClInclude Include="inc\Common.h" />
@@ -50,6 +51,7 @@
     <ClCompile Include="src\AddImmediate.cpp" />
     <ClCompile Include="src\And.cpp" />
     <ClCompile Include="src\AndImmediate.cpp" />
+    <ClCompile Include="src\BranchBase.cpp" />
     <ClCompile Include="src\BranchOnEqual.cpp" />
     <ClCompile Include="src\BranchOnNotEqual.cpp" />
     <ClCompile Include="src\Divide.cpp">
