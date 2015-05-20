@@ -12,9 +12,11 @@
 #include "SOCHashMap.h"
 #include <deque>
 #include <queue>
+#include <list>
 
 //8192 = 0x8000 / 4
-#define MAX_PROCESSOR_MEMORY 8192
+#define MAX_PROCESSOR_MEMORY			8192
+#define MAX_BRANCH_PREDICTION_CANCEL	2
 
 class System : public Singleton<System>
 {
@@ -28,17 +30,29 @@ private:
     
 	SOCHashMap<uint, PipelineStage*>				_hashMap;
 
-	std::deque<PipelineStage*>						_pipelineDeque;
+	//first value is cycle
+	struct PipelineStageInfo
+	{
+		uint			 cycle;
+		PipelineStage	*pip;
+		PipelineStageInfo() : cycle(0), pip(nullptr) {}
+		~PipelineStageInfo() {}
+	};
+	std::list<PipelineStageInfo>					_insts;
     std::queue<uint>                                _removePipelineKeys;
 
 private:
     System(void);
     ~System(void);
 
+private:
+	//cancel prev stages.
+	void CancelPipelineStage(uint currentCycle);
+
 public:
     void Load(const std::string& path);
 
-	void RunCycle();
+	void RunCycle(const PipelineStageInfo& stage);
     void Run();
 
     inline unsigned int GetDataFromRegister(int index) { return _registers[index]; }

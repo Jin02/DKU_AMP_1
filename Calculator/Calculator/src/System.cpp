@@ -77,11 +77,27 @@ void System::Run()
     {
         GlobalDumpLogManager->AddLog("Cycle Num\t| " + std::to_string(_cycle++), true);
 
-		if(_pipelineDeque.size() < 5)
-			_pipelineDeque.push_back(new PipelineStage);
+		if(_insts.size() < 5)
+		{
+			PipelineStageInfo info;
+			info.cycle = _cycle;
+			info.pip = new PipelineStage;
 
-		for(int i=0; i<_pipelineDeque.size(); ++i)
-			RunCycle();
+			_insts.push_front(info); 
+		}
+
+		//auto instSort = [](const PipelineStageInfo& first, const PipelineStageInfo& second)
+		//{
+		//	return first.pip->GetState() < second.pip->GetState();
+		//};
+
+		//_insts.sort(instSort);
+
+		for(auto inst : _insts)
+			RunCycle(inst);
+
+		if(_insts.size() == 5)
+			_insts.pop_back();
 
         if( _removePipelineKeys.size() > 2 )
         {
@@ -102,26 +118,18 @@ void System::Run()
 	GlobalDumpLogManager->AddLog(buff, true);
 }
 
-void System::RunCycle()
+void System::RunCycle(const PipelineStageInfo& stage)
 {
-	PipelineStage*			front	= _pipelineDeque.front();
-	PipelineStage::State	state	= front->GetState();
-
+	PipelineStage* pip = stage.pip;
+	PipelineStage::State	state	= pip->GetState();
 	
-	static int count = 0;
-	if(++count == 0x41)
-	{
-		int a = 4;
-		a = 3;
-	}
-
-	bool isCancelPip = front->GetIsCancel();
+	bool isCancelPip = pip->GetIsCancel();
 	if(isCancelPip == false)
 	{
 		if(state == PipelineStage::State::Fetch)
 		{
 			uint key = _programCounter;
-			_hashMap.insert( std::make_pair(key, front) );
+			_hashMap.insert( std::make_pair(key, pip) );
 		}
 		else if(state == PipelineStage::State::Execution)
 		{
@@ -136,12 +144,12 @@ void System::RunCycle()
 				return ret;
 			};
 
-			uint pc = front->GetProgramCounter();
+			uint pc = pip->GetProgramCounter();
 			PipelineStage* prev1Step = FindObjectFromHashMap( pc - 4 );
 			PipelineStage* prev2Step = FindObjectFromHashMap( pc - 8 );
 
-			front->SetPrev1StepPip(prev1Step);
-			front->SetPrev2StepPip(prev2Step);
+			pip->SetPrev1StepPip(prev1Step);
+			pip->SetPrev2StepPip(prev2Step);
 		}
 	}
 
@@ -149,43 +157,33 @@ void System::RunCycle()
 		(front->GetProgramCounter() == 0x6c) || 
 		(front->GetProgramCounter() == 0x58) || 
 		(front->GetProgramCounter() == 0xac) ||*/
-		(front->GetProgramCounter() == 0x50) )
+		(pip->GetProgramCounter() == 0x50) )
 	{
 		int a = 5;
 		a=3;
 	}
-	front->RunStage();
+	pip->RunStage();
 
     bool isJumpSuccess = false;
 	if(state == PipelineStage::State::Execution && (isCancelPip == false))
 	{
-		Instruction::Type instType = front->GetInstruction()->GetType();
+		Instruction::Type instType = pip->GetInstruction()->GetType();
 		if(instType == Instruction::Type::Jump)
             isJumpSuccess = true;
 		else if(instType == Instruction::Type::Branch)
 		{
-			BranchBase* branchInst = dynamic_cast<BranchBase*>(front->GetInstruction());
+			BranchBase* branchInst = dynamic_cast<BranchBase*>(pip->GetInstruction());
 			isJumpSuccess = branchInst->GetIsBranchSuccess();
         }
 
 		if(isJumpSuccess)
-		{
-			_pipelineDeque[3]->Cancel();
-			_pipelineDeque[4]->Cancel();
-		}
+			CancelPipelineStage(stage.cycle);
 	}
 
-	front->NextState();
+	pip->NextState();
 
-	_pipelineDeque.pop_front();
-	if(front->GetState() == PipelineStage::State::Stall)
-	{
-		_removePipelineKeys.push(front->GetProgramCounter());
-	}
-	else
-	{
-		_pipelineDeque.push_back(front);
-	}    
+	if(pip->GetState() == PipelineStage::State::Stall)
+		_removePipelineKeys.push(pip->GetProgramCounter());
 }
 
 unsigned int System::GetDataFromMemory(int address)
@@ -198,4 +196,16 @@ void System::SetDataToMemory(int address, unsigned int data)
 {
     ASSERT_COND_MSG((address % 4) == 0, "strange address");
     _processorMemory[address/4] = data;
+}
+
+void System::CancelPipelineStage(uint currentCycle)
+{
+	for(auto info : _insts)
+	{
+		for(int i = 0; i < MAX_BRANCH_PREDICTION_CANCEL; ++i)
+		{
+			if( (info.cycle - i) == currentCycle )
+				info.pip->Cancel();
+		}
+	}
 }
