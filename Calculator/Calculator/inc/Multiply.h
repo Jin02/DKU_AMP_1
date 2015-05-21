@@ -19,6 +19,7 @@ public:
 class Multiply : public RFormatInstruction
 {
 private:
+	long long _multyplyExecutionResult;
     
 public:
     Multiply(unsigned int rs, unsigned int rt, unsigned int rd);
@@ -26,7 +27,8 @@ public:
     
 public:
     virtual unsigned int Instruct(unsigned int rsData, unsigned int rtData);
-    virtual bool Execution();
+    virtual void Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst);
+	virtual void WriteBack();
 };
 
 
@@ -34,12 +36,14 @@ public:
 class MultiplyUnsigned : public RFormatInstruction
 {
 private:
-    
+	unsigned long long _multyplyExecutionResult;
+
 public:
     MultiplyUnsigned(unsigned int rs, unsigned int rt, unsigned int rd);
     virtual ~MultiplyUnsigned(void);
     
 public:
     virtual unsigned int Instruct(unsigned int rsData, unsigned int rtData);
-    virtual bool Execution();
+    virtual void Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst);
+	virtual void WriteBack();
 };

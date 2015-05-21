@@ -4,31 +4,10 @@
 #include <fstream>
 #include <string>
 
-#include "JFormatInstruction.h"
-#include "Move.h"
-#include "ShiftLeftLogical.h"
-#include "ShiftRightLogical.h"
-#include "SetLessThan.h"
-#include "JumpRegister.h"
-#include "Or.h"
-#include "And.h"
-#include "Subtract.h"
-#include "Add.h"
-#include "Multiply.h"
-#include "Divide.h"
-
-#include "Store.h"
-#include "Load.h"
-#include "BranchOnEqual.h"
-#include "BranchOnNotEqual.h"
-#include "SetLessThanImmediate.h"
-#include "OrImmediate.h"
-#include "AndImmediate.h"
-#include "AddImmediate.h"
-
 #include "DumpLogManager.h"
+#include "BranchBase.h"
 
-System::System() : _programCounter(0), _hi(0), _lo(0), _cycle(0)
+System::System() : _programCounter(0), _hi(0), _lo(0), _cycle(0), _addStallCount(0)
 {
 	std::fill(_processorMemory.begin(), _processorMemory.end(), 0);
 	std::fill(_registers.begin(), _registers.end(), 0);
@@ -94,224 +73,112 @@ void System::Load(const std::string& path)
 
 void System::Run()
 {
-	while(_programCounter != 0xffffffff)
+	while(_programCounter != 0xffffffff || (_insts.empty() == false) )
     {
+		bool end = (_programCounter == 0xffffffff);
         GlobalDumpLogManager->AddLog("Cycle Num\t| " + std::to_string(_cycle++), true);
-		RunCycle();
+
+		if(_insts.size() < 5 && (end == false))
+		{
+			PipelineStageInfo info;
+			info.cycle = _cycle;
+			info.pip = new PipelineStage;
+
+			if(_addStallCount)
+			{
+				info.pip->Cancel();
+				_addStallCount--;
+			}
+
+			_insts.push_front(info); 
+		}
+
+		for(auto iter = _insts.rbegin(); iter != _insts.rend(); ++iter)
+			RunCycle((*iter));
+
+		if((_insts.size() == 5) || end)
+			_insts.pop_back();
+
+        if( _removePipelineKeys.size() > 2 )
+        {
+            uint key = _removePipelineKeys.front();
+            auto findIter = _hashMap.find(key);
+            if(findIter != _hashMap.end())
+            {
+                SAFE_DELETE(findIter->second);
+                _hashMap.erase(findIter);
+            }
+            
+            _removePipelineKeys.pop();
+        }
     }
 
 	char buff[128] = {0,};
 	sprintf(buff, "Final Return Value is 0x%x(v0)", _registers[2]);
-	GlobalDumpLogManager->AddLog(buff, true); 
+	GlobalDumpLogManager->AddLog(buff, true);
 }
 
-void System::RunCycle()
+void System::RunCycle(const PipelineStageInfo& stage)
 {
-	static std::string prevState = "System Start";
-	auto StateLog = [&](const std::string& currentState)
+	PipelineStage* pip = stage.pip;
+	PipelineStage::State	state	= pip->GetState();
+	
+	bool isCancelPip = pip->GetIsCancel();
+	if(isCancelPip == false)
 	{
-		GlobalDumpLogManager->AddLog("State Change\t| " + prevState + " -> " + currentState + " State", true);
-		prevState = currentState;
-	};
-
-	bool ableNextPC			= true;
-
-	StateLog("Fetch");
-	uint instruction        = Fetch();
-	{
-		auto Log = [&](const std::string& tag, unsigned int value)
+		if(state == PipelineStage::State::Fetch)
 		{
-			char hexStr[64] = {0, };
-			sprintf(hexStr, "0x%x", value);
+			uint key = _programCounter;
+			_hashMap.insert( std::make_pair(key, pip) );
+		}
+		else if(state == PipelineStage::State::Execution)
+		{
+			auto FindObjectFromHashMap = [&](uint key)
+			{
+				auto findIter = _hashMap.find(key);
+				PipelineStage* ret = nullptr;
 
-			std::string log = tag + "| ";
-			log += hexStr;
+				if(findIter != _hashMap.end()) //found!
+					ret = findIter->second;
 
-			GlobalDumpManagerAddLogNewLine(log);
-		};
-		
-		Log("PC\t\t", _programCounter);
-		Log("Instruction\t", instruction);
-		GlobalDumpManagerAddLogNewLine("");
+				return ret;
+			};
+
+			uint pc = pip->GetProgramCounter();
+			PipelineStage* prev1Step = FindObjectFromHashMap( pc - 4 );
+			PipelineStage* prev2Step = FindObjectFromHashMap( pc - 8 );
+
+			pip->SetPrev1StepPip(prev1Step);
+			pip->SetPrev2StepPip(prev2Step);
+		}
 	}
 
-	if(instruction != 0)
+	if((pip->GetProgramCounter() == 0x18))
 	{
-		StateLog("Decode");
-		Instruction* exectable  = Decode(instruction);
-
-		StateLog("Execute");
-		ableNextPC = Execution(exectable);
+		int a = 5;
+		a=3;
 	}
-	else
+	pip->RunStage();
+
+	if(state == PipelineStage::State::Execution && (isCancelPip == false))
 	{
-		GlobalDumpManagerAddLogNewLine("nop, skip decode, execution");
-		prevState = "NOP";
+		Instruction::Type instType = pip->GetInstruction()->GetType();
+		if(instType == Instruction::Type::Jump)
+		{
+			_addStallCount = 2;
+		}
+		else if(instType == Instruction::Type::Branch)
+		{
+			BranchBase* branchInst = dynamic_cast<BranchBase*>(pip->GetInstruction());
+			if(branchInst->GetIsBranchSuccess())
+				CancelPipelineStage(stage.cycle);
+        }			
 	}
 
-	if(ableNextPC)
-		_programCounter += 4;
-}
+	pip->NextState();
 
-unsigned int System::Fetch()
-{
-    ASSERT_COND_MSG( (_programCounter % 4) == 0, "Error, pc must has word multiplier" );
-    return _processorMemory[_programCounter / 4];
-}
-
-Instruction* System::Decode(unsigned int instruction)
-{
-    char buff[256] = {0, };
-
-    unsigned int opCode     = (instruction & 0xFC000000) >> 26;
-	unsigned int funct		= (instruction & 0x0000003F);
-	unsigned int immediate  = (instruction & 0x0000ffff);
-
-	uint rd		= (instruction & 0x0000f800) >> 11;
-	uint rs		= (instruction & 0x03e00000) >> 21;
-    uint rt		= (instruction & 0x001f0000) >> 16;    
-    uint shamt  = (instruction & 0x000007c0) >> 6;
-
-    auto FillBit = [&](unsigned int from, unsigned int to, unsigned int pos)
-    {
-        bool setBit = (1 << pos) & immediate;
-        unsigned int ret = 0x00000000;
-        for(unsigned int i = from; i <= to; ++i)
-            ret |= (uint)setBit << i;
-        
-        return ret;
-    };
-    
-	if(opCode == 0) // R
-	{
-        sprintf(buff, "R Type\t\t| rd 0x%x / rs 0x%x / rt 0x%x / shamt 0x%x / funct 0x%x", rd, rs, rt, shamt, funct);
-        GlobalDumpLogManager->AddLog(buff, true);
-        
-        if(funct == (uint)Funct::Add)
-            return new Add(rs, rt, rd);
-		else if(funct == (uint)Funct::AddUnsigned)
-            return new AddUnsigned(rs, rt, rd);
-		else if(funct == (uint)Funct::And)
-            return new And(rs, rt, rd);
-		else if(funct == (uint)Funct::JumpRegister)
-            return new JumpRegister(rs, rt, rd);
-		else if(funct == (uint)Funct::Nor)
-            return new Nor(rs, rt, rd);
-		else if(funct == (uint)Funct::Or)
-            return new Or(rs, rt, rd);
-		else if(funct == (uint)Funct::SetLessThan)
-            return new SetLessThan(rs, rt, rd);
-		else if(funct == (uint)Funct::SetLessThanUnsigned)
-            return new SetLessThanUnsigned(rs, rt, rd);
-		else if(funct == (uint)Funct::ShiftLeftLogical)
-            return new ShiftLeftLogical(rs, rt, rd, shamt);
-		else if(funct == (uint)Funct::ShiftRightLogical)
-            return new ShiftRightLogical(rs,rt, rd, shamt);
-		else if(funct == (uint)Funct::Subtract)
-            return new Subtract(rs, rt, rd);
-		else if(funct == (uint)Funct::SubtractUnsigned)
-            return new SubtractUnsigned(rs, rt, rd);
-		else if(funct == (uint)Funct::Multiply)
-			return new Multiply(rs,rt, rd);
-		else if(funct == (uint)Funct::MultiplyUnsigned)
-			return new MultiplyUnsigned(rs, rt, rd);
-		else if(funct == (uint)Funct::Divide)
-			return new Divide(rs, rt, rd);
-		else if(funct == (uint)Funct::DivideUnsigned)
-			return new DivideUnsigned(rs, rt, rd);
-		else if(funct == (uint)Funct::MoveFromHi)
-			return new MoveFromHi(rd);
-		else if(funct == (uint)Funct::MoveToHi)
-			return new MoveToHi(rs);
-		else if(funct == (uint)Funct::MoveFromLo)
-			return new MoveFromLo(rd);
-		else if(funct == (uint)Funct::MoveToLo)
-			return new MoveToLo(rs);
-
-
-		else ASSERT_MSG("can not support r format this instruction");
-	}
-	else if(opCode == (uint)Opcode::Jump || opCode == (uint)Opcode::JumpAndLink) // J
-	{
-        unsigned int address = instruction & 0x03FFFFFF;
-
-        uint pc = GetProgramCounter() + 4;
-        uint jumpAddr = (pc & 0xf0000000) | (address << 2);
-
-        sprintf(buff, "J Type\t\t| opcode 0x%x / address 0x%x", opCode, jumpAddr);
-        GlobalDumpLogManager->AddLog(buff, true);
-
-        if(opCode == (uint)Opcode::Jump)
-            return new Jump(jumpAddr);
-        else if(opCode == (uint)Opcode::JumpAndLink)
-            return new JumpAndLink(jumpAddr);
-        else ASSERT_MSG("cant support j foramt this instruction");
-	}
-	else // I
-	{
-        uint mask           = FillBit(15, 31, 15);
-        uint signExtImm     = mask | immediate;
-        uint zeroExtImm     = immediate;
-
-		mask				= FillBit(17, 31, 15);
-        uint branchAddr     = FillBit(17, 31, 15) | (immediate << 2);
-        
-        sprintf(buff, "I Type\t\t| opcode 0x%x / signExtImm 0x%x / zeroExtImm 0x%x / branchAddr 0x%x", opCode, signExtImm, zeroExtImm, branchAddr);
-        GlobalDumpLogManager->AddLog(buff, true);
-        
-        if(opCode == (uint)Opcode::AddImmediate)
-            return new AddImmediate(rs, rt, signExtImm);
-        else if(opCode == (uint)Opcode::AddImmediateUnsigned)
-            return new AddImmediateUnsigned(rs, rt, signExtImm);
-        else if(opCode == (uint)Opcode::AndImmediate)
-            return new AndImmediate(rs, rt, zeroExtImm);
-        else if(opCode == (uint)Opcode::BranchOnEqual)
-            return new BranchOnEqual(rs, rt, branchAddr);
-        else if(opCode == (uint)Opcode::BranchOnNotEqual)
-            return new BranchOnNotEqual(rs, rt, branchAddr);
-        else if(opCode == (uint)Opcode::LoadByteUnsigned)
-            return new LoadByteUnsigned(rs, rt, signExtImm);
-        else if(opCode == (uint)Opcode::LoadHalfwordUnsigned)
-            return new LoadHalfwordUnsigned(rs, rt, signExtImm);
-        else if(opCode == (uint)Opcode::LoadLinked)
-            return new LoadLinked(rs, rt, signExtImm);
-        else if(opCode == (uint)Opcode::LoadUpperImmediate)
-            return new LoadUpperImmediate(rs, rt, immediate);
-        else if(opCode == (uint)Opcode::LoadWord)
-            return new LoadWord(rs, rt, signExtImm);
-        else if(opCode == (uint)Opcode::OrImmediate)
-            return new OrImmediate(rs, rt, zeroExtImm);
-        else if(opCode == (uint)Opcode::SetLessThanImmediate)
-            return new SetLessThanImmediate(rs, rt, zeroExtImm);
-        else if(opCode == (uint)Opcode::SetLessThanImmediateUnsigned)
-            return new SetLessThanImmediateUnsigned(rs, rt, zeroExtImm);
-        else if(opCode == (uint)Opcode::StoreByte)
-            return new StoreByte(rs, rt, zeroExtImm);
-        else if(opCode == (uint)Opcode::StoreConditional)
-            return new StoreConditional(rs, rt, zeroExtImm);
-        else if(opCode == (uint)Opcode::StoreHalfword)
-            return new StoreHalfword(rs, rt, zeroExtImm);
-        else if(opCode == (uint)Opcode::StoreWord)
-            return new StoreWord(rs, rt, zeroExtImm);
-		else if((opCode == (uint)Opcode::Multiply32BitRes) && (funct == (uint)Funct::Multiply32BitRes))
-        {
-            GlobalDumpLogManager->AddLog(" / funct 0x%x", funct);
-			return new Multiply32BitRes(rs, rt, rd);
-        }
-        
-        else ASSERT_MSG("cant support i foramt this inst");
-    }
-
-    ASSERT_MSG("Error!, not found inst");
-    return nullptr;
-}
-
-bool System::Execution(Instruction* inst)
-{
-    bool ableNextPC = inst->Execution();
-    delete inst;
-
-	return ableNextPC;
+	if(pip->GetState() == PipelineStage::State::Stall)
+		_removePipelineKeys.push(pip->GetProgramCounter());
 }
 
 unsigned int System::GetDataFromMemory(int address)
@@ -324,4 +191,16 @@ void System::SetDataToMemory(int address, unsigned int data)
 {
     ASSERT_COND_MSG((address % 4) == 0, "strange address");
     _processorMemory[address/4] = data;
+}
+
+void System::CancelPipelineStage(uint currentCycle)
+{
+	for(auto info : _insts)
+	{
+		for(int i = 0; i < MAX_BRANCH_PREDICTION_CANCEL; ++i)
+		{
+			if( (info.cycle - i) == currentCycle )
+				info.pip->Cancel();
+		}
+	}
 }

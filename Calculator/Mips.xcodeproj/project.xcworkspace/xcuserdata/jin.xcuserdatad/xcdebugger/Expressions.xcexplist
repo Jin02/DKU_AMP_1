@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "System::RunCycle():System.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "state">
+            </PersistentString>
+            <PersistentString
+               value = "front-&gt;GetState()">
+            </PersistentString>
+            <PersistentString
+               value = "front-&gt;GetProgramCounter()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "JumpAndLink::Execution(Instruction const*, Instruction const*):JFormatInstruction.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "_pc">
+            </PersistentString>
+            <PersistentString
+               value = "_address">
+            </PersistentString>
+            <PersistentString
+               value = "_executionResult">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "PipelineStage::Fetch():PipelineStage.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "_pc">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "PipelineStage::RunStage():PipelineStage.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "_instructionValue">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "System::Run():System.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "_pipelineDeque">
+            </PersistentString>
+            <PersistentString
+               value = "_cycle">
+            </PersistentString>
+            <PersistentString
+               value = "_removePipelineKeys">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "StoreWord::Execution(Instruction const*, Instruction const*):Store.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "_rsData">
+            </PersistentString>
+            <PersistentString
+               value = "_rsData + _immediate">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

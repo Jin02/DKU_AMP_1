@@ -12,5 +12,9 @@ public:
     
 public:
     virtual unsigned int Instruct(unsigned int rsData, unsigned int rtData);
-    virtual bool Execution();
+	
+	virtual void Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst);
+	virtual void WriteBack();
+
+    virtual void DependencyCheckWithGetTargetData(bool& hasDependency, uint& outTargetData, uint compareRegiIdx) const;
 };

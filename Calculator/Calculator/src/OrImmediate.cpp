@@ -12,20 +12,10 @@ OrImmediate::~OrImmediate()
     
 }
 
-bool OrImmediate::Execution()
+void OrImmediate::Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
 {
-    System* system = System::GetInstance();
-    unsigned int rsData = system->GetDataFromRegister(_rs);
+	Forwarding(prev2stepInst, prev1stepInst, _rsData, _rs);
 
-    system->SetDataToRegister(_rt, rsData | _immediate);
-	{
-		GlobalDumpLogManager->AddLog("R[rt] = R[rs] | ZeroExtImm", true);
-
-		char logBuffer[64] = {0, };
-		sprintf(logBuffer, "R[%d] = R[%d](0x%x) | 0x%x", _rt, _rs, rsData, _immediate);
-		GlobalDumpLogManager->AddLog(logBuffer, true);
-		GlobalDumpManagerAddLog3NewLine;
-	}
-
-	return true;
+	_executionResult = _rsData | _immediate; 
+	GlobalDumpManagerAddExecutionLog(_executionResult);
 }

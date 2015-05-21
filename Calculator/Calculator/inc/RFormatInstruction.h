@@ -6,7 +6,8 @@
 class RFormatInstruction : public Instruction
 {
 protected:
-    unsigned int _rs, _rt, _rd;
+    uint _rsData, _rtData, _rd, _rs, _rt;
+	uint _executionResult;
     
 public:
     RFormatInstruction(unsigned int rs, unsigned int rt, unsigned int rd);
@@ -16,5 +17,10 @@ protected:
     virtual unsigned int Instruct(unsigned int rsData, unsigned int rtData) = 0;
     
 public:
-    virtual bool Execution();
+    virtual void DependencyCheckWithGetTargetData(bool& hasDependency, uint& outTargetData, uint compareRegiIdx) const;
+
+public:
+    virtual void Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst);
+	virtual void Memory();
+	virtual void WriteBack();
 };

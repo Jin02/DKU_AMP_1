@@ -1,70 +1,73 @@
-#pragma once
-
-#include "Instruction.h"
-
-class Move : public Instruction
-{
-private:
-    unsigned int _rs, _rd;
-    
-public:
-    Move(unsigned int rs, unsigned int rd);
-    virtual ~Move(void);
-    
-public:
-    virtual bool Execution();
-};
-
-class MoveFromHi : public Instruction
-{
-private:
-    unsigned int _rd;
-    
-public:
-    MoveFromHi(unsigned int rd);
-    virtual ~MoveFromHi(void);
-    
-public:
-    virtual bool Execution();
-};
-
-
-class MoveToHi : public Instruction
-{
-private:
-    unsigned int _rs;
-    
-public:
-    MoveToHi(unsigned int rs);
-    virtual ~MoveToHi(void);
-    
-public:
-    virtual bool Execution();
-};
-
-
-class MoveFromLo : public Instruction
-{
-private:
-    unsigned int _rd;
-    
-public:
-    MoveFromLo(unsigned int rd);
-    virtual ~MoveFromLo(void);
-    
-public:
-    virtual bool Execution();
-};
-
-class MoveToLo : public Instruction
-{
-private:
-    unsigned int _rs;
-    
-public:
-    MoveToLo(unsigned int rs);
-    virtual ~MoveToLo(void);
-    
-public:
-    virtual bool Execution();
-};
+//#pragma once
+//
+//#include "Instruction.h"
+//
+//class MoveFromHi : public Instruction
+//{
+//private:
+//    unsigned int _rd, _hiData;
+//    
+//public:
+//    MoveFromHi(unsigned int rd);
+//    virtual ~MoveFromHi(void);
+//    
+//public:
+//    virtual void Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst);
+//    virtual void Memory(){}
+//    virtual void WriteBack();
+//
+//    virtual void DependencyCheckWithGetTargetData(bool& hasDependency, uint& outTargetData, uint compareRegiIdx) const;
+//};
+//
+//
+//class MoveToHi : public Instruction
+//{
+//private:
+//    unsigned int _rs, _rsData;
+//    
+//public:
+//    MoveToHi(unsigned int rs);
+//    virtual ~MoveToHi(void);
+//    
+//public:
+//    virtual void Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst);
+//    virtual void Memory(){}
+//    virtual void WriteBack();
+//
+//    virtual void DependencyCheckWithGetTargetData(bool& hasDependency, uint& outTargetData, uint compareRegiIdx) const;
+//};
+//
+//
+//class MoveFromLo : public Instruction
+//{
+//private:
+//    unsigned int _rd, _loData;
+//    
+//public:
+//    MoveFromLo(unsigned int rd);
+//    virtual ~MoveFromLo(void);
+//    
+//public:
+//    virtual void Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst);
+//    virtual void Memory(){}
+//    virtual void WriteBack();
+//
+//    virtual void DependencyCheckWithGetTargetData(bool& hasDependency, uint& outTargetData, uint compareRegiIdx) const;
+//};
+//
+//class MoveToLo : public Instruction
+//{
+//private:
+//    unsigned int _rs, _rsData;
+//    
+//public:
+//    MoveToLo(unsigned int rs);
+//    virtual ~MoveToLo(void);
+//    
+//public:
+//    virtual void Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst);
+//    virtual void Memory(){}    
+//    virtual void WriteBack();
+//
+//    virtual void DependencyCheckWithGetTargetData(bool& hasDependency, uint& outTargetData, uint compareRegiIdx) const;
+//};

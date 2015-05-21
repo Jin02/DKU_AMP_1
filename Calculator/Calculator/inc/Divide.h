@@ -2,30 +2,36 @@
 
 #include "RFormatInstruction.h"
 
-class Divide : public RFormatInstruction
-{
-private:
-    
-public:
-    Divide(unsigned int rs, unsigned int rt, unsigned int rd);
-    virtual ~Divide(void);
-    
-public:
-    virtual unsigned int Instruct(unsigned int rsData, unsigned int rtData);
-    virtual bool Execution();
-};
-
-
-
 class DivideUnsigned : public RFormatInstruction
 {
 private:
-    
+	uint _executionHiResult;
+	uint _executionLoResult;
+
 public:
     DivideUnsigned(unsigned int rs, unsigned int rt, unsigned int rd);
     virtual ~DivideUnsigned(void);
     
 public:
     virtual unsigned int Instruct(unsigned int rsData, unsigned int rtData);
-    virtual bool Execution();
+    virtual void Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst);
+	virtual void WriteBack();
 };
+
+
+class Divide : public RFormatInstruction
+{
+private:
+   	int _executionHiResult;
+	int _executionLoResult;
+
+public:
+    Divide(unsigned int rs, unsigned int rt, unsigned int rd);
+    virtual ~Divide(void);
+    
+public:
+    virtual unsigned int Instruct(unsigned int rsData, unsigned int rtData);
+    virtual void Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst);
+	virtual void WriteBack();
+};
+

@@ -12,23 +12,11 @@ SetLessThanImmediateUnsigned::~SetLessThanImmediateUnsigned()
     
 }
 
-bool SetLessThanImmediateUnsigned::Execution()
+void SetLessThanImmediateUnsigned::Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
 {
-    System* system = System::GetInstance();
-    unsigned int rsData = system->GetDataFromRegister(_rs);
-    system->SetDataToRegister(_rt, rsData < _immediate);
-	{
-		GlobalDumpLogManager->AddLog("R[rt] = (R[rs] < SignExtImm) ? 1 : 0", true);
-
-		char logBuffer[64] = {0, };
-		sprintf(logBuffer, "R[%d] = (R[%d](0x%x) < 0x%x) ? 1 :0 = %d", _rt, _rs, rsData, _immediate, rsData < _immediate);
-		GlobalDumpLogManager->AddLog(logBuffer, true);
-		GlobalDumpManagerAddLog3NewLine;
-	}
-
-	return true;
+	_executionResult = _rsData < _immediate; 
+	GlobalDumpManagerAddExecutionLog(_executionResult);
 }
-
 
 
 
@@ -42,26 +30,13 @@ SetLessThanImmediate::~SetLessThanImmediate()
     
 }
 
-bool SetLessThanImmediate::Execution()
+void SetLessThanImmediate::Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
 {
-    System* system = System::GetInstance();
-    
-    int     signedRsData      = system->GetDataFromRegister(_rs);
-    int     signedImm         = _immediate;
-    
-    system->SetDataToRegister(_rt, signedRsData < signedImm);
-	{
-		GlobalDumpLogManager->AddLog("R[rt] = (R[rs] < SignExtImm) ? 1 : 0", true);
+	Forwarding(prev2stepInst, prev1stepInst, _rsData, _rs);
 
-		char logBuffer[64] = {0, };
-		sprintf(logBuffer, "R[%d] = (R[%d](0x%x) < 0x%x) ? 1 :0 = %d", _rt, _rs, signedRsData, _immediate, signedRsData < signedImm);
-		GlobalDumpLogManager->AddLog(logBuffer, true);
-		GlobalDumpManagerAddLog3NewLine;
-	}
+	int signedRsData = _rsData;
+	int signedImm = _immediate;
 
-
-	return true;
+	_executionResult = signedRsData < signedImm; 
+	GlobalDumpManagerAddExecutionLog(_executionResult);
 }
-
-
-

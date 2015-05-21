@@ -5,10 +5,16 @@
 class IFormatInstruction : public Instruction
 {
 protected:
-    unsigned int    _rs, _rt;
-    unsigned int    _immediate;
+    uint    _rs, _rsData, _rt, _rtData, _immediate;
+	uint	_executionResult;
     
 public:
     IFormatInstruction(unsigned int rs, unsigned int rt, unsigned int immediate);
     virtual ~IFormatInstruction(void);
+
+public:
+	virtual void WriteBack();	
+	virtual void Memory(){}
+    
+    virtual void DependencyCheckWithGetTargetData(bool& hasDependency, uint& outTargetData, uint compareRegiIdx) const;    
 };

@@ -117,6 +117,12 @@
     <ClInclude Include="inc\DumpLogManager.h">
       <Filter>Module\DumpLogManager</Filter>
     </ClInclude>
+    <ClInclude Include="inc\PipelineStage.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\BranchBase.h">
+      <Filter>Module\Instruction</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\System.cpp">
@@ -196,6 +202,12 @@
     </ClCompile>
     <ClCompile Include="src\DumpLogManager.cpp">
       <Filter>Module\DumpLogManager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PipelineStage.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BranchBase.cpp">
+      <Filter>Module\Instruction</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

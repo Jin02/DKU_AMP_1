@@ -7,9 +7,16 @@
 #include "Singleton.h"
 
 #include "Instruction.h"
+#include "PipelineStage.h"
+
+#include "SOCHashMap.h"
+#include <deque>
+#include <queue>
+#include <list>
 
 //8192 = 0x8000 / 4
-#define MAX_PROCESSOR_MEMORY 8192
+#define MAX_PROCESSOR_MEMORY			8192
+#define MAX_BRANCH_PREDICTION_CANCEL	2
 
 class System : public Singleton<System>
 {
@@ -20,22 +27,33 @@ private:
 
 	unsigned int									_hi, _lo;
     unsigned int                                    _cycle;
+    
+	SOCHashMap<uint, PipelineStage*>				_hashMap;
+
+	//first value is cycle
+	struct PipelineStageInfo
+	{
+		uint			 cycle;
+		PipelineStage	*pip;
+		PipelineStageInfo() : cycle(0), pip(nullptr) {}
+		~PipelineStageInfo() {}
+	};
+	std::list<PipelineStageInfo>					_insts;
+    std::queue<uint>                                _removePipelineKeys;
+	unsigned int									_addStallCount;
 
 private:
     System(void);
     ~System(void);
-    
-private:
-    unsigned int Fetch();
-    Instruction* Decode(unsigned int instruction);
 
-	// if next instruction is nop, return value is true else false.
-    bool Execution(Instruction* inst);
-    
+private:
+	//cancel prev stages.
+	void CancelPipelineStage(uint currentCycle);
+
 public:
     void Load(const std::string& path);
 
-	void RunCycle();
+	void RunCycle(const PipelineStageInfo& stage);
     void Run();
 
     inline unsigned int GetDataFromRegister(int index) { return _registers[index]; }

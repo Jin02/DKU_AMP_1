@@ -1,15 +1,33 @@
 #pragma once
 
 #include <vector>
+#include "Common.h"
 
 class Instruction
 {
+public:
+    enum class Type
+    {
+        Common,
+        Jump,
+        Branch
+    };
+    
+protected:
+    Type _type;
+    
 public:
     Instruction();
     virtual ~Instruction(void);
     
 public:
-	//true라면 pc값이 변경되고, false라면 변경 안됨
-	//거의 뭐; j랑 branch때문에 쓴다고 보면 됨
-    virtual bool Execution() = 0;
+	virtual void Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst) = 0;
+    virtual void Memory() = 0;
+    virtual void WriteBack() = 0;
+
+	virtual void DependencyCheckWithGetTargetData(bool& hasDependency, uint& outTargetData, uint compareRegiIdx) const = 0;
+	bool Forwarding(const Instruction* prev2stepInst, const Instruction* prev1stepInst, uint& outRegiData, uint regiIdx);
+    
+public:
+    GET_ACCESSOR(Type, Type, _type);
 };

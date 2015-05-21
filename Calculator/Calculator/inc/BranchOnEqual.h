@@ -1,15 +1,17 @@
 #pragma once
 
-#include "IFormatInstruction.h"
+#include "BranchBase.h"
 
-class BranchOnEqual : public IFormatInstruction
+class BranchOnEqual : public BranchBase
 {
 private:
+    bool        _isBranchSuccess;
+    uint        _pc;
     
 public:
     BranchOnEqual(unsigned int rs, unsigned int rt, unsigned int immediate);
     virtual ~BranchOnEqual(void);
     
 public:
-    virtual bool Execution();
+    virtual void Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst);
 };

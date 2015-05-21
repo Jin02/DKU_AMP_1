@@ -6,52 +6,66 @@
 class LoadByteUnsigned : public IFormatInstruction
 {
 private:
+    uint _toRegiMemValue;
     
 public:
     LoadByteUnsigned(unsigned int rs, unsigned int rt, unsigned int immediate);
     virtual ~LoadByteUnsigned(void);
     
 public:
-    virtual bool Execution();
+    virtual void Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst);
+    virtual void Memory();
+    virtual void WriteBack();
+	virtual void DependencyCheckWithGetTargetData(bool& hasDependency, uint& outRdData, uint compareRegiIdx) const;
 };
 
 /** LoadHalfwordUnsigned **/
 class LoadHalfwordUnsigned : public IFormatInstruction
 {
 private:
+    uint _toRegiMemValue;
     
 public:
     LoadHalfwordUnsigned(unsigned int rs, unsigned int rt, unsigned int immediate);
     virtual ~LoadHalfwordUnsigned(void);
     
 public:
-    virtual bool Execution();
+    virtual void Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst);
+    
+    virtual void Memory();
+    virtual void WriteBack();
+	virtual void DependencyCheckWithGetTargetData(bool& hasDependency, uint& outRdData, uint compareRegiIdx) const;
 };
 
 /** LoadLinked **/
 class LoadLinked : public IFormatInstruction
 {
 private:
+    uint _toRegiMemValue;
     
 public:
     LoadLinked(unsigned int rs, unsigned int rt, unsigned int immediate);
     virtual ~LoadLinked(void);
     
 public:
-    virtual bool Execution();
+    virtual void Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst);
+    virtual void Memory();
+    virtual void WriteBack();
+	virtual void DependencyCheckWithGetTargetData(bool& hasDependency, uint& outRdData, uint compareRegiIdx) const;
 };
 
 /** LoadUpperImmediate **/
 class LoadUpperImmediate : public IFormatInstruction
 {
-private:
-    
 public:
     LoadUpperImmediate(unsigned int rs, unsigned int rt, unsigned int immediate);
     virtual ~LoadUpperImmediate(void);
     
 public:
-    virtual bool Execution();
+    virtual void Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst);
+    virtual void Memory();
+    virtual void WriteBack();
+	virtual void DependencyCheckWithGetTargetData(bool& hasDependency, uint& outRdData, uint compareRegiIdx) const;
 };
 
 
@@ -59,13 +73,18 @@ public:
 class LoadWord : public IFormatInstruction
 {
 private:
+    uint _toRegiMemValue;
+
     
 public:
     LoadWord(unsigned int rs, unsigned int rt, unsigned int immediate);
     virtual ~LoadWord(void);
     
 public:
-    virtual bool Execution();
+    virtual void Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst);
+    virtual void Memory();
+    virtual void WriteBack();
+	virtual void DependencyCheckWithGetTargetData(bool& hasDependency, uint& outRdData, uint compareRegiIdx) const;
 };
 
 /** LoadImmediate **/
@@ -79,5 +98,8 @@ public:
     virtual ~LoadImmediate(void);
     
 public:
-    virtual bool Execution();
+    virtual void Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst);
+    virtual void Memory();
+    virtual void WriteBack();
+	virtual void DependencyCheckWithGetTargetData(bool& hasDependency, uint& outRdData, uint compareRegiIdx) const;
 };

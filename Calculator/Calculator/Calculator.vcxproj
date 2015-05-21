@@ -15,6 +15,7 @@
     <ClInclude Include="inc\AddImmediate.h" />
     <ClInclude Include="inc\And.h" />
     <ClInclude Include="inc\AndImmediate.h" />
+    <ClInclude Include="inc\BranchBase.h" />
     <ClInclude Include="inc\BranchOnEqual.h" />
     <ClInclude Include="inc\BranchOnNotEqual.h" />
     <ClInclude Include="inc\Common.h" />
@@ -33,6 +34,7 @@
     </ClInclude>
     <ClInclude Include="inc\Or.h" />
     <ClInclude Include="inc\OrImmediate.h" />
+    <ClInclude Include="inc\PipelineStage.h" />
     <ClInclude Include="inc\RFormatInstruction.h" />
     <ClInclude Include="inc\SetLessThan.h" />
     <ClInclude Include="inc\SetLessThanImmediate.h" />
@@ -49,6 +51,7 @@
     <ClCompile Include="src\AddImmediate.cpp" />
     <ClCompile Include="src\And.cpp" />
     <ClCompile Include="src\AndImmediate.cpp" />
+    <ClCompile Include="src\BranchBase.cpp" />
     <ClCompile Include="src\BranchOnEqual.cpp" />
     <ClCompile Include="src\BranchOnNotEqual.cpp" />
     <ClCompile Include="src\Divide.cpp">
@@ -66,6 +69,7 @@
     </ClCompile>
     <ClCompile Include="src\Or.cpp" />
     <ClCompile Include="src\OrImmediate.cpp" />
+    <ClCompile Include="src\PipelineStage.cpp" />
     <ClCompile Include="src\RFormatInstruction.cpp" />
     <ClCompile Include="src\SetLessThan.cpp" />
     <ClCompile Include="src\SetLessThanImmediate.cpp" />
