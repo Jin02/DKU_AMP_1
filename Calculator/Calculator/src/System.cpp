@@ -162,7 +162,6 @@ void System::RunCycle(const PipelineStageInfo& stage)
 	}
 	pip->RunStage();
 
-    bool isJumpSuccess = false;
 	if(state == PipelineStage::State::Execution && (isCancelPip == false))
 	{
 		Instruction::Type instType = pip->GetInstruction()->GetType();
@@ -173,11 +172,9 @@ void System::RunCycle(const PipelineStageInfo& stage)
 		else if(instType == Instruction::Type::Branch)
 		{
 			BranchBase* branchInst = dynamic_cast<BranchBase*>(pip->GetInstruction());
-			isJumpSuccess = branchInst->GetIsBranchSuccess();
-        }
-
-		if(isJumpSuccess)
-			CancelPipelineStage(stage.cycle);
+			if(branchInst->GetIsBranchSuccess())
+				CancelPipelineStage(stage.cycle);
+        }			
 	}
 
 	pip->NextState();
