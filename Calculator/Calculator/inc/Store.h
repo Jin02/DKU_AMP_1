@@ -15,6 +15,7 @@ public:
     virtual void Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst);
     virtual void Memory();
 	virtual void WriteBack(){}
+	virtual void DependencyCheckWithGetTargetData(bool& hasDependency, uint& outRdData, uint compareRegiIdx) const;
 };
 
 /** StoreConditional **/
@@ -30,6 +31,7 @@ public:
     virtual void Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst);
     virtual void Memory();
 	virtual void WriteBack(){}
+	virtual void DependencyCheckWithGetTargetData(bool& hasDependency, uint& outRdData, uint compareRegiIdx) const;
 };
 
 /** StoreHalfword **/
@@ -45,6 +47,7 @@ public:
     virtual void Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst);
     virtual void Memory();
 	virtual void WriteBack(){}
+	virtual void DependencyCheckWithGetTargetData(bool& hasDependency, uint& outRdData, uint compareRegiIdx) const;
 };
 
 /** StoreWord **/
@@ -60,4 +63,5 @@ public:
     virtual void Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst);    
     virtual void Memory();
 	virtual void WriteBack(){}
+	virtual void DependencyCheckWithGetTargetData(bool& hasDependency, uint& outRdData, uint compareRegiIdx) const;
 };

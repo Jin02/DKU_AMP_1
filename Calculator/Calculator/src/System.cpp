@@ -153,9 +153,7 @@ void System::RunCycle(const PipelineStageInfo& stage)
 		}
 	}
 
-	if( (pip->GetProgramCounter() == 0x3c) || 
-		(pip->GetProgramCounter() == 0x8c) ||
-		(pip->GetProgramCounter() == 28))
+	if((pip->GetProgramCounter() == 0x18))
 	{
 		int a = 5;
 		a=3;

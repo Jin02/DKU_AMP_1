@@ -39,6 +39,10 @@ void StoreByte::Memory()
     }
 }
 
+void StoreByte::DependencyCheckWithGetTargetData(bool& hasDependency, uint& outRdData, uint compareRegiIdx) const
+{
+	hasDependency = false;
+}
 
 /** StoreConditional **/
 
@@ -71,6 +75,11 @@ void StoreConditional::Memory()
         sprintf(logBuffer, "M[(R[%d](0x%x) + 0x%x) = 0x%x] = R[%d](0x%x)", _rs, _rsData, _immediate, _executionResult, _rt, _rtData);
         GlobalDumpLogManager->AddLog(logBuffer, true);
     }
+}
+
+void StoreConditional::DependencyCheckWithGetTargetData(bool& hasDependency, uint& outRdData, uint compareRegiIdx) const
+{
+	hasDependency = false;
 }
 
 /** StoreUpperImmediate **/
@@ -111,6 +120,12 @@ void StoreHalfword::Memory()
     }
 }
 
+void StoreHalfword::DependencyCheckWithGetTargetData(bool& hasDependency, uint& outRdData, uint compareRegiIdx) const
+{
+	hasDependency = false;
+}
+
+
 /** StoreWord **/
 
 StoreWord::StoreWord(unsigned int rs, unsigned int rt, unsigned int immediate) : IFormatInstruction(rs, rt, immediate)
@@ -145,4 +160,9 @@ void StoreWord::Memory()
         GlobalDumpLogManager->AddLog(logBuffer, true);
         GlobalDumpManagerAddLog3NewLine;
     }
+}
+
+void StoreWord::DependencyCheckWithGetTargetData(bool& hasDependency, uint& outRdData, uint compareRegiIdx) const
+{
+	hasDependency = false;
 }
