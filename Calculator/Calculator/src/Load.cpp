@@ -43,6 +43,12 @@ void LoadByteUnsigned::WriteBack()
     }
 }
 
+void LoadByteUnsigned::DependencyCheckWithGetTargetData(bool& hasDependency, uint& outRdData, uint compareRegiIdx) const
+{
+    hasDependency   = (compareRegiIdx == _rt);
+    outRdData       = _toRegiMemValue;
+}
+
 /** LoadHalfwordUnsigned **/
 LoadHalfwordUnsigned::LoadHalfwordUnsigned(unsigned int rs, unsigned int rt, unsigned int immediate) : IFormatInstruction(rs, rt, immediate), _toRegiMemValue(0)
 {
@@ -83,6 +89,12 @@ void LoadHalfwordUnsigned::WriteBack()
 
 }
 
+void LoadHalfwordUnsigned::DependencyCheckWithGetTargetData(bool& hasDependency, uint& outRdData, uint compareRegiIdx) const
+{
+    hasDependency   = (compareRegiIdx == _rt);
+    outRdData       = _toRegiMemValue;
+}
+
 /** LoadLinked **/
 LoadLinked::LoadLinked(unsigned int rs, unsigned int rt, unsigned int immediate) : IFormatInstruction(rs, rt, immediate), _toRegiMemValue(0)
 {
@@ -120,6 +132,12 @@ void LoadLinked::WriteBack()
     }
 }
 
+void LoadLinked::DependencyCheckWithGetTargetData(bool& hasDependency, uint& outRdData, uint compareRegiIdx) const
+{
+    hasDependency   = (compareRegiIdx == _rt);
+    outRdData       = _toRegiMemValue;
+}
+
 /** LoadUpperImmediate **/
 LoadUpperImmediate::LoadUpperImmediate(unsigned int rs, unsigned int rt, unsigned int immediate) : IFormatInstruction(rs, rt, immediate)
 {
@@ -153,6 +171,13 @@ void LoadUpperImmediate::WriteBack()
         GlobalDumpManagerAddLog3NewLine;
     }
 }
+
+void LoadUpperImmediate::DependencyCheckWithGetTargetData(bool& hasDependency, uint& outRdData, uint compareRegiIdx) const
+{
+    hasDependency   = (compareRegiIdx == _rt);
+    outRdData       = _executionResult;
+}
+
 
 /** LoadWord **/
 LoadWord::LoadWord(unsigned int rs, unsigned int rt, unsigned int immediate) : IFormatInstruction(rs, rt, immediate), _toRegiMemValue(0)
@@ -191,6 +216,12 @@ void LoadWord::WriteBack()
     }
 }
 
+void LoadWord::DependencyCheckWithGetTargetData(bool& hasDependency, uint& outRdData, uint compareRegiIdx) const
+{
+    hasDependency   = (compareRegiIdx == _rt);
+    outRdData       = _toRegiMemValue;
+}
+
 /** LoadImmediate **/
 LoadImmediate::LoadImmediate(unsigned int rd, unsigned int immediate)
     : Instruction(), _rd(rd), _immediate(immediate)
@@ -224,4 +255,10 @@ void LoadImmediate::WriteBack()
         GlobalDumpLogManager->AddLog(logBuffer, true);
         GlobalDumpManagerAddLog3NewLine;
     }
+}
+
+void LoadImmediate::DependencyCheckWithGetTargetData(bool& hasDependency, uint& outRdData, uint compareRegiIdx) const
+{
+    hasDependency   = (compareRegiIdx == _rd);
+    outRdData       = _immediate;
 }

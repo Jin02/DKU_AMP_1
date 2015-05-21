@@ -40,6 +40,7 @@ private:
 	};
 	std::list<PipelineStageInfo>					_insts;
     std::queue<uint>                                _removePipelineKeys;
+	unsigned int									_addStallCount;
 
 private:
     System(void);

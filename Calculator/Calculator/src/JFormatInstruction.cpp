@@ -32,7 +32,7 @@ Jump::~Jump(){}
 void Jump::Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
 {
     System* system = System::GetInstance();
-    system->SetProgramCounter(_address+4);
+    system->SetProgramCounter(_address + 4);
     {
         GlobalDumpLogManager->AddLog("PC = JumpAddr", true);
         
@@ -61,7 +61,7 @@ void JumpAndLink::Execution(const Instruction* prev2stepInst, const Instruction*
 	System* system = System::GetInstance();
     _executionResult = _pc + 8;
     
-    system->SetProgramCounter(_address+4);
+    system->SetProgramCounter(_address + 4);
     {
         GlobalDumpLogManager->AddLog("R[31] = PC + 8; PC = JumpAddr", true);
         

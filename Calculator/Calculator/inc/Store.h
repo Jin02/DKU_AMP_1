@@ -14,6 +14,7 @@ public:
 public:
     virtual void Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst);
     virtual void Memory();
+	virtual void WriteBack(){}
 };
 
 /** StoreConditional **/
@@ -28,6 +29,7 @@ public:
 public:
     virtual void Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst);
     virtual void Memory();
+	virtual void WriteBack(){}
 };
 
 /** StoreHalfword **/
@@ -42,6 +44,7 @@ public:
 public:
     virtual void Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst);
     virtual void Memory();
+	virtual void WriteBack(){}
 };
 
 /** StoreWord **/
@@ -56,4 +59,5 @@ public:
 public:
     virtual void Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst);    
     virtual void Memory();
+	virtual void WriteBack(){}
 };

@@ -16,6 +16,7 @@ public:
     virtual void Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst);
     virtual void Memory();
     virtual void WriteBack();
+	virtual void DependencyCheckWithGetTargetData(bool& hasDependency, uint& outRdData, uint compareRegiIdx) const;
 };
 
 /** LoadHalfwordUnsigned **/
@@ -33,6 +34,7 @@ public:
     
     virtual void Memory();
     virtual void WriteBack();
+	virtual void DependencyCheckWithGetTargetData(bool& hasDependency, uint& outRdData, uint compareRegiIdx) const;
 };
 
 /** LoadLinked **/
@@ -49,6 +51,7 @@ public:
     virtual void Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst);
     virtual void Memory();
     virtual void WriteBack();
+	virtual void DependencyCheckWithGetTargetData(bool& hasDependency, uint& outRdData, uint compareRegiIdx) const;
 };
 
 /** LoadUpperImmediate **/
@@ -62,6 +65,7 @@ public:
     virtual void Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst);
     virtual void Memory();
     virtual void WriteBack();
+	virtual void DependencyCheckWithGetTargetData(bool& hasDependency, uint& outRdData, uint compareRegiIdx) const;
 };
 
 
@@ -80,6 +84,7 @@ public:
     virtual void Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst);
     virtual void Memory();
     virtual void WriteBack();
+	virtual void DependencyCheckWithGetTargetData(bool& hasDependency, uint& outRdData, uint compareRegiIdx) const;
 };
 
 /** LoadImmediate **/
@@ -96,4 +101,5 @@ public:
     virtual void Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst);
     virtual void Memory();
     virtual void WriteBack();
+	virtual void DependencyCheckWithGetTargetData(bool& hasDependency, uint& outRdData, uint compareRegiIdx) const;
 };

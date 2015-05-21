@@ -60,6 +60,12 @@ void PipelineStage::Clear()
 uint PipelineStage::Fetch()
 {
     _pc = System::GetInstance()->GetProgramCounter();
+	if(_pc == 0xffffffff)
+	{
+		return 0;
+		_isCancel = true;
+	}
+
     ASSERT_COND_MSG( (_pc % 4) == 0, "Error, pc must has word multiplier" );
 	
 	System::GetInstance()->SetProgramCounter(_pc + 4);

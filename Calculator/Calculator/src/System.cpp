@@ -7,7 +7,7 @@
 #include "DumpLogManager.h"
 #include "BranchBase.h"
 
-System::System() : _programCounter(0), _hi(0), _lo(0), _cycle(0)
+System::System() : _programCounter(0), _hi(0), _lo(0), _cycle(0), _addStallCount(0)
 {
 	std::fill(_processorMemory.begin(), _processorMemory.end(), 0);
 	std::fill(_registers.begin(), _registers.end(), 0);
@@ -73,30 +73,30 @@ void System::Load(const std::string& path)
 
 void System::Run()
 {
-	while(_programCounter != 0xffffffff)
+	while(_programCounter != 0xffffffff || (_insts.empty() == false) )
     {
+		bool end = (_programCounter == 0xffffffff);
         GlobalDumpLogManager->AddLog("Cycle Num\t| " + std::to_string(_cycle++), true);
 
-		if(_insts.size() < 5)
+		if(_insts.size() < 5 && (end == false))
 		{
 			PipelineStageInfo info;
 			info.cycle = _cycle;
 			info.pip = new PipelineStage;
 
+			if(_addStallCount)
+			{
+				info.pip->Cancel();
+				_addStallCount--;
+			}
+
 			_insts.push_front(info); 
 		}
 
-		//auto instSort = [](const PipelineStageInfo& first, const PipelineStageInfo& second)
-		//{
-		//	return first.pip->GetState() < second.pip->GetState();
-		//};
+		for(auto iter = _insts.rbegin(); iter != _insts.rend(); ++iter)
+			RunCycle((*iter));
 
-		//_insts.sort(instSort);
-
-		for(auto inst : _insts)
-			RunCycle(inst);
-
-		if(_insts.size() == 5)
+		if((_insts.size() == 5) || end)
 			_insts.pop_back();
 
         if( _removePipelineKeys.size() > 2 )
@@ -153,11 +153,9 @@ void System::RunCycle(const PipelineStageInfo& stage)
 		}
 	}
 
-	if( /*(front->GetProgramCounter() == 0x60) || 
-		(front->GetProgramCounter() == 0x6c) || 
-		(front->GetProgramCounter() == 0x58) || 
-		(front->GetProgramCounter() == 0xac) ||*/
-		(pip->GetProgramCounter() == 0x50) )
+	if( (pip->GetProgramCounter() == 0x3c) || 
+		(pip->GetProgramCounter() == 0x8c) ||
+		(pip->GetProgramCounter() == 28))
 	{
 		int a = 5;
 		a=3;
@@ -169,7 +167,9 @@ void System::RunCycle(const PipelineStageInfo& stage)
 	{
 		Instruction::Type instType = pip->GetInstruction()->GetType();
 		if(instType == Instruction::Type::Jump)
-            isJumpSuccess = true;
+		{
+			_addStallCount = 2;
+		}
 		else if(instType == Instruction::Type::Branch)
 		{
 			BranchBase* branchInst = dynamic_cast<BranchBase*>(pip->GetInstruction());
