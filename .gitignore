@@ -27,10 +27,22 @@
 *.out
 *.app
 
-Debug
+Calculator/Debug
+Calculator/Calculator/Debug
+SOCEngine/SOCEngine/Debug/
+SOCEngine/Output/
+
 *.sdf
 *.opensdf
 *.ipch
 *.v11.suo
 
+
 Calculator/*.xcodeproj/project.xcworkspace/xcuserdata/*.xcuserdatad/UserInterfaceState.xcuserstate
+
+SOCTestProject/Debug/
+SOCTestProject/SOCTestProject/Debug/
+
+EngineShaderFactory.hpp
+ShaderFactory.hpp
+*.metadata
