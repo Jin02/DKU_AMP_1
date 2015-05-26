@@ -10,4 +10,6 @@ public:
     
 public:
     virtual void Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst);
+	virtual void Memory(){}
+	virtual void WriteBack(){}
 };

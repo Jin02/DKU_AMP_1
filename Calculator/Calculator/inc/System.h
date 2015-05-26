@@ -58,7 +58,8 @@ public:
     void Load(const std::string& path);
 
 	void RunCycle(const PipelineStageInfo& stage);
-    void Run(const std::function<void(const PipelineStageInfo& stageInfo, uint indexInList)>& visualizationFunc);
+    void Run(	const std::function<void(const PipelineStageInfo& stageInfo, uint indexInList)>& boxUIUpdateFunc, 
+				const std::function<void()>& registerTextUpdateFunc);
 
     inline unsigned int GetDataFromRegister(int index) { return _registers[index]; }
     inline void SetDataToRegister(int index, unsigned int value) { _registers[index] = value; }

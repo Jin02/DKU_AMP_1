@@ -75,7 +75,7 @@ void System::Load(const std::string& path)
 	}
 }
 
-void System::Run(const std::function<void(const PipelineStageInfo& stageInfo, uint indexInList)>& visualizationFunc)
+void System::Run(const std::function<void(const PipelineStageInfo& stageInfo, uint indexInList)>& boxUIUpdateFunc, const std::function<void()>& registerTextUpdateFunc)
 {
 	//while(_programCounter != 0xffffffff || (_insts.empty() == false) )
     {
@@ -97,7 +97,7 @@ void System::Run(const std::function<void(const PipelineStageInfo& stageInfo, ui
 		{
 			uint index = 0;
 			for(const auto& iter : _insts)
-				visualizationFunc(iter, index++);
+				boxUIUpdateFunc(iter, index++);
 		}
 
  		for(auto iter = _insts.rbegin(); iter != _insts.rend(); ++iter)
@@ -120,6 +120,7 @@ void System::Run(const std::function<void(const PipelineStageInfo& stageInfo, ui
         }
     }
 
+	registerTextUpdateFunc();
 	//char buff[128] = {0,};
 	//sprintf(buff, "Final Return Value is 0x%x(v0)", _registers[2]);
 	//GlobalDumpLogManager->AddLog(buff, true);

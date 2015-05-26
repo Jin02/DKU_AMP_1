@@ -41,6 +41,10 @@ private:
 	std::array<UI::SimpleText2D*, 5>			_linePC;
 	std::array<StageVisual, 5>					_lineStage;
 
+	std::array<UI::SimpleText2D*, 32>			_registerText;
+
+	bool										_nextWork;
+
 public:
 	TestScene(void);
 	~TestScene(void);

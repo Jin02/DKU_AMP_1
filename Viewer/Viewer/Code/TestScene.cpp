@@ -12,7 +12,7 @@ using namespace Rendering;
 using namespace UI;
 using namespace Device;
 
-TestScene::TestScene(void) : _mipsEmulator(nullptr), _pipelineStageNames(nullptr)
+TestScene::TestScene(void) : _mipsEmulator(nullptr), _pipelineStageNames(nullptr), _nextWork(false)
 {
 
 }
@@ -40,11 +40,11 @@ void TestScene::OnInitialize()
 	_background = CreateSimpleImage2D("Background", "Background", "Resources/Background.png", Director::GetInstance()->GetWindowSize());
 	
 	_pipelineStageNames = CreateSimpleImage2D("TopPipelineStageNames", "TopPipelineStageNames", "Resources/TopMenu.png", Math::Size<uint>(502, 100));
-	_pipelineStageNames->GetTransform()->UpdatePosition(Math::Vector3(-32, 300, 0));
+	_pipelineStageNames->GetTransform()->UpdatePosition(Math::Vector3(36, 300, 0));
 
 	for(int i=0; i<_lineBack.size(); ++i)
 	{
-		_lineBack[i] = CreateSimpleImage2D("PipelineBackground_" + std::to_string(i), "PipelineBackground", "Resources/PipelineBackground.png", Math::Size<uint>(768, 104));
+		_lineBack[i] = CreateSimpleImage2D("PipelineBackground_" + std::to_string(i), "PipelineBackground", "Resources/PipelineBackground.png", Math::Size<uint>(632, 104));
 		_lineBack[i]->GetTransform()->UpdatePosition(Math::Vector3(0, (i - 2) * 100, 0));
 	}
 
@@ -61,7 +61,7 @@ void TestScene::OnInitialize()
 	{
 		std::string nameWithKey = "LinePC_" + std::to_string(i);
 		_linePC[i] = CreateSimpleText2D(nameWithKey, nameWithKey, 10, "");
-		_linePC[i]->GetTransform()->UpdatePosition(Math::Vector3(-330, -((i - 2) * 100) - 5, 0));
+		_linePC[i]->GetTransform()->UpdatePosition(Math::Vector3(-270, -((i - 2) * 100) - 5, 0));
 		_linePC[i]->GetTransform()->UpdateScale(Math::Vector3(1.5f, 1.5f, 0.0f));
 	}
 
@@ -74,7 +74,7 @@ void TestScene::OnInitialize()
 	{
 		for(int j=0; j<_lineStage[i].stageImgs.size(); ++j)
 		{
-			Math::Vector3 pos = Math::Vector3( (j - 2) * 100 - 32, -((i - 2) * 100), 0);
+			Math::Vector3 pos = Math::Vector3( (j - 2) * 100 + 36, -((i - 2) * 100), 0);
 
 			std::string name = "StageOffIcon_" + std::to_string(i) + "_" + std::to_string(j);
 			_lineStage[i].stageImgs[j].off	= CreateSimpleImage2D(name, "StageOffIcon", "Resources/" + iconNames[j] + "Off.png", size);
@@ -92,6 +92,14 @@ void TestScene::OnInitialize()
 			for(int k=0; k<4; ++k)
 				_lineStage[i].stageImgs[j].icons[k]->GetTransform()->UpdatePosition(pos);
 		}
+	}
+
+	for(int i=0; i<32; ++i)
+	{
+		std::string nameKey = "Register_" + std::to_string(i);
+		_registerText[i] = CreateSimpleText2D(nameKey, nameKey, 50, "register[" + std::to_string(i) + "] = 0x00");
+		_registerText[i]->GetTransform()->UpdatePosition(Math::Vector3(-450, -((i - 16) * 20), 0));
+		_registerText[i]->GetTransform()->UpdateScale(Math::Vector3(1.5f, 1.5f, 1.0f));
 	}
 }
 
@@ -157,19 +165,34 @@ void TestScene::RunOneCycle()
 		}
 	};
 
-	_mipsEmulator->Run(UpdateUI);
+	auto RegisterTextUpdate = [&]()
+	{
+		for(int i=0; i<32; ++i)
+		{
+			std::stringstream stream;
+			stream << std::hex << _mipsEmulator->GetDataFromRegister(i);
+			std::string regValueText(stream.str());
+
+			_registerText[i]->UpdateText( "register[" + std::to_string(i) + "] = 0x" + regValueText );
+		}
+	};
+
+	_mipsEmulator->Run(UpdateUI, RegisterTextUpdate);
 }
 
 void TestScene::OnInput(const Device::Win32::Mouse& mouse, const  Device::Win32::Keyboard& keyboard)
 {
 	if(keyboard.states[VK_SPACE] == KEYBOARD::Type::Up)
-	{
-		RunOneCycle();
-	}
+		_nextWork = true;
 }
 
 void TestScene::OnUpdate(float dt)
 {
+	if(_nextWork)
+	{
+		RunOneCycle();
+		_nextWork = false;
+	}
 }
 
 void TestScene::OnRenderPost()
@@ -179,6 +202,10 @@ void TestScene::OnRenderPost()
 
 void TestScene::OnDestroy()
 {
+	HWND handle = Director::GetInstance()->GetWin()->GetHandle();
+	std::string resultText = "Result Value is " + std::to_string(_mipsEmulator->GetDataFromRegister(2));
+	MessageBox(handle, resultText.c_str(), "Result", MB_OK);
+
 	for(int i=0; i<5; ++i)
 	{
 		SAFE_DELETE(_lineBack[i]);
@@ -196,7 +223,12 @@ void TestScene::OnDestroy()
 		}
 	}
 
+	for(int i=0; i<32; ++i)
+		SAFE_DELETE(_registerText[i]);
+
 	SAFE_DELETE(_pipelineStageNames);
 	SAFE_DELETE(_background);
 	_mipsEmulator->Destroy();
+
+	Director::GetInstance()->Exit();
 }

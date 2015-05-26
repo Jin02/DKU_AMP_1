@@ -7,7 +7,7 @@
 
 INT WINAPI wWinMain( HINSTANCE hInst, HINSTANCE, LPWSTR, INT )
 {
-	Device::Director::GetInstance()->Initialize(Math::Rect<unsigned int>(0, 0, 800, 800), hInst, "Test", true, false, 0);
+	Device::Director::GetInstance()->Initialize(Math::Rect<unsigned int>(0, 0, 1400, 800), hInst, "Test", true, false, 0);
 	Device::Director::GetInstance()->SetCurrentScene(new TestScene);
 	Device::Director::GetInstance()->Run();
 	Device::Director::GetInstance()->Destroy();
