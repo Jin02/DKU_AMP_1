@@ -60,17 +60,9 @@ void TestScene::OnInitialize()
 	for(int i=0; i<_linePC.size(); ++i)
 	{
 		std::string nameWithKey = "LinePC_" + std::to_string(i);
-		_linePC[i] = CreateSimpleText2D(nameWithKey, nameWithKey, 20, "");
+		_linePC[i] = CreateSimpleText2D(nameWithKey, nameWithKey, 10, "");
 		_linePC[i]->GetTransform()->UpdatePosition(Math::Vector3(-330, -((i - 2) * 100) - 5, 0));
 		_linePC[i]->GetTransform()->UpdateScale(Math::Vector3(1.5f, 1.5f, 0.0f));
-	}
-
-	for(int i=0; i<_lineDescribeInst.size(); ++i)
-	{
-		std::string nameWithKey = "LineDescribe_" + std::to_string(i);
-		_lineDescribeInst[i] = CreateSimpleText2D(nameWithKey, nameWithKey, 40, "");
-		_lineDescribeInst[i]->GetTransform()->UpdatePosition(Math::Vector3(250, -((i - 2) * 100) - 5, 0));
-		_lineDescribeInst[i]->GetTransform()->UpdateScale(Math::Vector3(1.5f, 1.5f, 1.5f));
 	}
 
 	std::string iconNames[] =
@@ -82,14 +74,14 @@ void TestScene::OnInitialize()
 	{
 		for(int j=0; j<_lineStage[i].stageImgs.size(); ++j)
 		{
-			std::string name = "StageOnIcon_" + std::to_string(i) + "_" + std::to_string(j);
-			_lineStage[i].stageImgs[j].on	= CreateSimpleImage2D(name, "StageOnIcon", "Resources/" + iconNames[j] + "On.png", size);
-			_lineStage[i].stageImgs[j].on->SetUse(false);
-
 			Math::Vector3 pos = Math::Vector3( (j - 2) * 100 - 32, -((i - 2) * 100), 0);
 
-			name = "StageOffIcon_" + std::to_string(i) + "_" + std::to_string(j);
+			std::string name = "StageOffIcon_" + std::to_string(i) + "_" + std::to_string(j);
 			_lineStage[i].stageImgs[j].off	= CreateSimpleImage2D(name, "StageOffIcon", "Resources/" + iconNames[j] + "Off.png", size);
+
+			name = "StageOnIcon_" + std::to_string(i) + "_" + std::to_string(j);
+			_lineStage[i].stageImgs[j].on	= CreateSimpleImage2D(name, "StageOnIcon", "Resources/" + iconNames[j] + "On.png", size);
+			_lineStage[i].stageImgs[j].on->SetUse(false);
 
 			_lineStage[i].stageImgs[j].cancel = CreateSimpleImage2D(name, "StageCancelIcon", "Resources/Cancel.png", size);
 			_lineStage[i].stageImgs[j].cancel->SetUse(false);
@@ -110,7 +102,7 @@ void TestScene::OnRenderPreview()
 void TestScene::RunOneCycle()
 {
 	const uint pc = _mipsEmulator->GetProgramCounter();
-	if(pc == 0xffffffff && _mipsEmulator->GetIsPipelineEmpty())
+	if(_mipsEmulator->CheckAllEndInst())
 	{
 		NextState();
 		return;
@@ -118,12 +110,50 @@ void TestScene::RunOneCycle()
 
 	auto UpdateUI = [&](const System::PipelineStageInfo& stageInfo, uint indexInList)
 	{
-		uint pc = stageInfo.pip->GetProgramCounter();
+		// Box Icons
 		{
-			std::stringstream stream;
-			stream << std::hex << pc;
-			std::string result( stream.str() );
-			_linePC[indexInList]->UpdateText(result);
+			auto& line = _lineStage[indexInList];
+			for(int i=0; i<5; ++i)
+			{
+				line.stageImgs[i].on->SetUse(false);
+				line.stageImgs[i].cancel->SetUse(false);
+			}
+
+			if(stageInfo.isEnd == false)
+			{
+				if( stageInfo.pip->GetIsCancel() == false )
+				{
+					line.stageImgs[ (uint)stageInfo.pip->GetState() ].on->SetUse(true);
+				}
+				else
+				{
+					for(int i=0; i<5; ++i)
+						line.stageImgs[i].cancel->SetUse(true);
+				}
+			}
+		}
+
+		if(stageInfo.isEnd == false)
+		{
+			if( stageInfo.pip->GetIsCancel() )
+			{
+				_linePC[indexInList]->UpdateText("Stall");
+			}
+			else
+			{
+				uint pc = stageInfo.pip->GetProgramCounter();
+				{
+					std::stringstream stream;
+					stream << std::hex << pc;
+					std::string result( stream.str() );
+					result.insert(0, "0x");
+					_linePC[indexInList]->UpdateText(result);
+				}
+			}
+		}
+		else
+		{
+			_linePC[indexInList]->UpdateText("None");
 		}
 	};
 
@@ -153,7 +183,6 @@ void TestScene::OnDestroy()
 	{
 		SAFE_DELETE(_lineBack[i]);
 		SAFE_DELETE(_linePC[i]);
-		SAFE_DELETE(_lineDescribeInst[i]);
 	}
 
 	for(int i=0; i<5; ++i)

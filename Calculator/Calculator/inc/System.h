@@ -27,7 +27,8 @@ public:
 	{
 		uint			 cycle;
 		PipelineStage	*pip;
-		PipelineStageInfo() : cycle(0), pip(nullptr) {}
+		bool			isEnd;
+		PipelineStageInfo() : cycle(0), pip(nullptr), isEnd(false) {}
 		~PipelineStageInfo() {}
 	};
 
@@ -44,7 +45,6 @@ private:
 	std::list<PipelineStageInfo>					_insts;
 
 	std::queue<uint>                                _removePipelineKeys;
-	unsigned int									_addStallCount;
 
 private:
     System(void);
@@ -65,6 +65,7 @@ public:
     
     unsigned int GetDataFromMemory(int address);
     void SetDataToMemory(int address, unsigned int data);
+	bool CheckAllEndInst();
     
 public:
 	GET_SET_ACCESSOR(HiRegister, unsigned int, _hi);

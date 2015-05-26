@@ -7,7 +7,7 @@
 #include "DumpLogManager.h"
 #include "BranchBase.h"
 
-System::System() : _programCounter(0), _hi(0), _lo(0), _cycle(0), _addStallCount(0)
+System::System() : _programCounter(0), _hi(0), _lo(0), _cycle(0)
 {
 	std::fill(_processorMemory.begin(), _processorMemory.end(), 0);
 	std::fill(_registers.begin(), _registers.end(), 0);
@@ -28,6 +28,10 @@ System::System() : _programCounter(0), _hi(0), _lo(0), _cycle(0), _addStallCount
 
 System::~System()
 {
+	for(auto iter : _insts)
+		SAFE_DELETE(iter.pip);
+
+	_insts.clear();
 }
 
 void System::Load(const std::string& path)
@@ -78,21 +82,16 @@ void System::Run(const std::function<void(const PipelineStageInfo& stageInfo, ui
 		bool end = (_programCounter == 0xffffffff);
         GlobalDumpLogManager->AddLog("Cycle Num\t| " + std::to_string(_cycle++), true);
 
-		if(_insts.size() < 5 && (end == false))
+		PipelineStageInfo info;
 		{
-			PipelineStageInfo info;
 			info.cycle = _cycle;
 			info.pip = new PipelineStage;
-
-			if(_addStallCount)
-			{
+			info.pip->SetProgramCounter(_programCounter); //just.. using visualization. this line code is nothing.
+			info.isEnd = end;
+			if(end)
 				info.pip->Cancel();
-				_addStallCount--;
-			}
-
-			info.pip->SetProgramCounter(_programCounter);
-			_insts.push_front(info); 
 		}
+		_insts.push_front(info); 
 
 		// Work Visualization
 		{
@@ -101,7 +100,7 @@ void System::Run(const std::function<void(const PipelineStageInfo& stageInfo, ui
 				visualizationFunc(iter, index++);
 		}
 
-		for(auto iter = _insts.rbegin(); iter != _insts.rend(); ++iter)
+ 		for(auto iter = _insts.rbegin(); iter != _insts.rend(); ++iter)
 			RunCycle((*iter));
 
 		if((_insts.size() == 5) || end)
@@ -161,11 +160,6 @@ void System::RunCycle(const PipelineStageInfo& stage)
 		}
 	}
 
-	if((pip->GetProgramCounter() == 0x18))
-	{
-		int a = 5;
-		a=3;
-	}
 	pip->RunStage();
 
 	if(state == PipelineStage::State::Execution && (isCancelPip == false))
@@ -173,7 +167,8 @@ void System::RunCycle(const PipelineStageInfo& stage)
 		Instruction::Type instType = pip->GetInstruction()->GetType();
 		if(instType == Instruction::Type::Jump)
 		{
-			_addStallCount = 2;
+//			_addStallCount = 2;
+			CancelPipelineStage(stage.cycle);
 		}
 		else if(instType == Instruction::Type::Branch)
 		{
@@ -205,10 +200,26 @@ void System::CancelPipelineStage(uint currentCycle)
 {
 	for(auto info : _insts)
 	{
-		for(int i = 0; i < MAX_BRANCH_PREDICTION_CANCEL; ++i)
+		for(int i = 1; i <= MAX_BRANCH_PREDICTION_CANCEL; ++i)
 		{
 			if( (info.cycle - i) == currentCycle )
+			{
 				info.pip->Cancel();
+			}
 		}
 	}
+}
+
+bool System::CheckAllEndInst()
+{
+	if(_insts.size() == 0)
+		return false;
+
+	for(auto iter : _insts)
+	{
+		if(iter.isEnd == false)
+			return false;
+	}
+
+	return true;
 }

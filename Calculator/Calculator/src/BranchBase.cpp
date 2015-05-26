@@ -2,7 +2,7 @@
 #include "DumpLogManager.h"
 
 BranchBase::BranchBase(unsigned int rs, unsigned int rt, unsigned int immediate)
-	: IFormatInstruction(rs, rt, immediate)
+	: IFormatInstruction(rs, rt, immediate), _isBranchSuccess(false)
 {
     _type = Type::Branch;
 }

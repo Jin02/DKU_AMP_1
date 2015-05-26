@@ -39,7 +39,6 @@ private:
 	UI::SimpleImage2D*							_pipelineStageNames;
 	std::array<UI::SimpleImage2D*, 5>			_lineBack;
 	std::array<UI::SimpleText2D*, 5>			_linePC;
-	std::array<UI::SimpleText2D*, 5>			_lineDescribeInst;
 	std::array<StageVisual, 5>					_lineStage;
 
 public:
