@@ -2,15 +2,20 @@
 
 #include "Scene.h"
 #include "ShaderFactory.hpp"
+
 #include "SimpleSoundPlayer.h"
 #include "SimpleText2D.h"
+
+#include "System.h"
 
 class TestScene : public Core::Scene
 {
 private:
-	UI::SimpleImage2D* img;
-	std::auto_ptr<Sound::SimpleSoundPlayer> sound;
-	UI::SimpleText2D* text;
+	System*						_mipsEmulator;
+
+private:
+	UI::SimpleImage2D*			_background;
+
 
 public:
 	TestScene(void);

@@ -1,36 +1,40 @@
 #pragma once
 
-template< class T >
-class Singleton
+namespace Mips
 {
-protected:
-	static T* _instance;
 
-protected:
-	Singleton(){}
-	virtual ~Singleton(){}
-
-private:
-	Singleton(const Singleton&){}
-	void operator=(Singleton const&){}
-
-public:
-	static T* GetInstance()
+	template< class T >
+	class Singleton
 	{
-		if(_instance == nullptr)
-			_instance = new T();
+	protected:
+		static T* _instance;
 
-		return _instance;
-	}
+	protected:
+		Singleton(){}
+		virtual ~Singleton(){}
 
-	static void Destroy()
-	{
-		if(_instance != nullptr)
+	private:
+		Singleton(const Singleton&){}
+		void operator=(Singleton const&){}
+
+	public:
+		static T* GetInstance()
 		{
-			delete _instance;
-			_instance = nullptr;
-		}
-	}
-};
+			if(_instance == nullptr)
+				_instance = new T();
 
-template< class T > T* Singleton<T>::_instance = nullptr;
+			return _instance;
+		}
+
+		static void Destroy()
+		{
+			if(_instance != nullptr)
+			{
+				delete _instance;
+				_instance = nullptr;
+			}
+		}
+	};
+
+	template< class T > T* Singleton<T>::_instance = nullptr;
+}

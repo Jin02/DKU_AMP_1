@@ -73,7 +73,7 @@ void System::Load(const std::string& path)
 
 void System::Run()
 {
-	while(_programCounter != 0xffffffff || (_insts.empty() == false) )
+	//while(_programCounter != 0xffffffff || (_insts.empty() == false) )
     {
 		bool end = (_programCounter == 0xffffffff);
         GlobalDumpLogManager->AddLog("Cycle Num\t| " + std::to_string(_cycle++), true);
@@ -113,9 +113,9 @@ void System::Run()
         }
     }
 
-	char buff[128] = {0,};
-	sprintf(buff, "Final Return Value is 0x%x(v0)", _registers[2]);
-	GlobalDumpLogManager->AddLog(buff, true);
+	//char buff[128] = {0,};
+	//sprintf(buff, "Final Return Value is 0x%x(v0)", _registers[2]);
+	//GlobalDumpLogManager->AddLog(buff, true);
 }
 
 void System::RunCycle(const PipelineStageInfo& stage)

@@ -40,8 +40,8 @@ SOCEngine/Output/
 
 Calculator/*.xcodeproj/project.xcworkspace/xcuserdata/*.xcuserdatad/UserInterfaceState.xcuserstate
 
-SOCTestProject/Debug/
-SOCTestProject/SOCTestProject/Debug/
+Viewer/Debug/
+Viewer/Viewer/Debug/
 
 EngineShaderFactory.hpp
 ShaderFactory.hpp

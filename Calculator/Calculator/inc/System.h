@@ -18,8 +18,18 @@
 #define MAX_PROCESSOR_MEMORY			8192
 #define MAX_BRANCH_PREDICTION_CANCEL	2
 
-class System : public Singleton<System>
+class System : public Mips::Singleton<System>
 {
+public:
+	//first value is cycle
+	struct PipelineStageInfo
+	{
+		uint			 cycle;
+		PipelineStage	*pip;
+		PipelineStageInfo() : cycle(0), pip(nullptr) {}
+		~PipelineStageInfo() {}
+	};
+
 private:
     std::array<unsigned int, MAX_PROCESSOR_MEMORY>	_processorMemory;
 	std::array<unsigned int, 32>					_registers;
@@ -30,14 +40,6 @@ private:
     
 	SOCHashMap<uint, PipelineStage*>				_hashMap;
 
-	//first value is cycle
-	struct PipelineStageInfo
-	{
-		uint			 cycle;
-		PipelineStage	*pip;
-		PipelineStageInfo() : cycle(0), pip(nullptr) {}
-		~PipelineStageInfo() {}
-	};
 	std::list<PipelineStageInfo>					_insts;
     std::queue<uint>                                _removePipelineKeys;
 	unsigned int									_addStallCount;
@@ -61,6 +63,7 @@ public:
     
     unsigned int GetDataFromMemory(int address);
     void SetDataToMemory(int address, unsigned int data);
+
     
 public:
 	GET_SET_ACCESSOR(HiRegister, unsigned int, _hi);
@@ -72,8 +75,8 @@ public:
 	GET_SET_ACCESSOR(GlobalPointer, unsigned int, _registers[28]);
     
     GET_SET_ACCESSOR(ProgramCounter, unsigned int, _programCounter);
-    
-    
 
-    friend class Singleton<System>;
+	GET_ACCESSOR(IsPipelineEmpty, bool, _insts.empty());
+
+    friend class Mips::Singleton<System>;
 };

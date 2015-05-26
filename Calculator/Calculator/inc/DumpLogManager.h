@@ -6,7 +6,7 @@
 #include <string>
 #include <typeinfo>
 
-class DumpLogManager : public Singleton<DumpLogManager>
+class DumpLogManager : public Mips::Singleton<DumpLogManager>
 {
 private:
     std::string         _buffer;
@@ -23,7 +23,7 @@ public:
 public:
     GET_ACCESSOR(Buffer, const std::string&, _buffer);
     
-    friend class Singleton<DumpLogManager>;
+    friend class Mips::Singleton<DumpLogManager>;
 };
 
 #define GlobalDumpLogManager							DumpLogManager::GetInstance()
