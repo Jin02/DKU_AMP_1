@@ -42,6 +42,7 @@ private:
 	std::array<StageVisual, 5>					_lineStage;
 
 	std::array<UI::SimpleText2D*, 32>			_registerText;
+	std::auto_ptr<Sound::SimpleSoundPlayer>		_effectSound;
 
 	bool										_nextWork;
 
