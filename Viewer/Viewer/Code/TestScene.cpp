@@ -14,7 +14,6 @@ using namespace Device;
 
 TestScene::TestScene(void) : _mipsEmulator(nullptr), _pipelineStageNames(nullptr), _nextWork(false)
 {
-
 }
 
 TestScene::~TestScene(void)
@@ -97,7 +96,7 @@ void TestScene::OnInitialize()
 	for(int i=0; i<32; ++i)
 	{
 		std::string nameKey = "Register_" + std::to_string(i);
-		_registerText[i] = CreateSimpleText2D(nameKey, nameKey, 50, "register[" + std::to_string(i) + "] = 0x00");
+		_registerText[i] = CreateSimpleText2D(nameKey, nameKey, 50, "");
 		_registerText[i]->GetTransform()->UpdatePosition(Math::Vector3(-450, -((i - 16) * 20), 0));
 		_registerText[i]->GetTransform()->UpdateScale(Math::Vector3(1.5f, 1.5f, 1.0f));
 	}
@@ -197,7 +196,6 @@ void TestScene::OnUpdate(float dt)
 
 void TestScene::OnRenderPost()
 {
-
 }
 
 void TestScene::OnDestroy()
