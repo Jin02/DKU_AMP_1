@@ -46,6 +46,9 @@ public:
 	TestScene(void);
 	~TestScene(void);
 
+private:
+	void RunOneCycle();
+
 public:
 	virtual void OnInitialize();
 	virtual void OnRenderPreview();

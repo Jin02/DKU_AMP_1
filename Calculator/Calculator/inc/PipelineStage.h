@@ -45,7 +45,7 @@ public:
 public:
     GET_ACCESSOR(State, State, _state);
     GET_ACCESSOR(Instruction, Instruction*, _instruction);
-	GET_ACCESSOR(ProgramCounter,  uint, _pc);
+	GET_SET_ACCESSOR(ProgramCounter,  uint, _pc);
 
 	SET_ACCESSOR(Prev2StepPip, PipelineStage*, _prev2StepPip);
 	SET_ACCESSOR(Prev1StepPip, PipelineStage*, _prev1StepPip);

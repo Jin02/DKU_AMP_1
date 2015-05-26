@@ -6,6 +6,8 @@
 
 #include "Director.h"
 
+#include <sstream>
+
 using namespace Rendering;
 using namespace UI;
 using namespace Device;
@@ -59,7 +61,7 @@ void TestScene::OnInitialize()
 	{
 		std::string nameWithKey = "LinePC_" + std::to_string(i);
 		_linePC[i] = CreateSimpleText2D(nameWithKey, nameWithKey, 20, "");
-		_linePC[i]->GetTransform()->UpdatePosition(Math::Vector3(-330, (i - 2) * 100 - 5, 0));
+		_linePC[i]->GetTransform()->UpdatePosition(Math::Vector3(-330, -((i - 2) * 100) - 5, 0));
 		_linePC[i]->GetTransform()->UpdateScale(Math::Vector3(1.5f, 1.5f, 0.0f));
 	}
 
@@ -67,7 +69,7 @@ void TestScene::OnInitialize()
 	{
 		std::string nameWithKey = "LineDescribe_" + std::to_string(i);
 		_lineDescribeInst[i] = CreateSimpleText2D(nameWithKey, nameWithKey, 40, "");
-		_lineDescribeInst[i]->GetTransform()->UpdatePosition(Math::Vector3(250, (i - 2) * 100 - 5, 0));
+		_lineDescribeInst[i]->GetTransform()->UpdatePosition(Math::Vector3(250, -((i - 2) * 100) - 5, 0));
 		_lineDescribeInst[i]->GetTransform()->UpdateScale(Math::Vector3(1.5f, 1.5f, 1.5f));
 	}
 
@@ -84,7 +86,7 @@ void TestScene::OnInitialize()
 			_lineStage[i].stageImgs[j].on	= CreateSimpleImage2D(name, "StageOnIcon", "Resources/" + iconNames[j] + "On.png", size);
 			_lineStage[i].stageImgs[j].on->SetUse(false);
 
-			Math::Vector3 pos = Math::Vector3( (j - 2) * 100 - 32, (i - 2) * 100, 0);
+			Math::Vector3 pos = Math::Vector3( (j - 2) * 100 - 32, -((i - 2) * 100), 0);
 
 			name = "StageOffIcon_" + std::to_string(i) + "_" + std::to_string(j);
 			_lineStage[i].stageImgs[j].off	= CreateSimpleImage2D(name, "StageOffIcon", "Resources/" + iconNames[j] + "Off.png", size);
@@ -105,18 +107,34 @@ void TestScene::OnRenderPreview()
 {
 }
 
+void TestScene::RunOneCycle()
+{
+	const uint pc = _mipsEmulator->GetProgramCounter();
+	if(pc == 0xffffffff && _mipsEmulator->GetIsPipelineEmpty())
+	{
+		NextState();
+		return;
+	}
+
+	auto UpdateUI = [&](const System::PipelineStageInfo& stageInfo, uint indexInList)
+	{
+		uint pc = stageInfo.pip->GetProgramCounter();
+		{
+			std::stringstream stream;
+			stream << std::hex << pc;
+			std::string result( stream.str() );
+			_linePC[indexInList]->UpdateText(result);
+		}
+	};
+
+	_mipsEmulator->Run(UpdateUI);
+}
+
 void TestScene::OnInput(const Device::Win32::Mouse& mouse, const  Device::Win32::Keyboard& keyboard)
 {
 	if(keyboard.states[VK_SPACE] == KEYBOARD::Type::Up)
 	{
-		const uint pc = _mipsEmulator->GetProgramCounter();
-		if(pc == 0xffffffff && _mipsEmulator->GetIsPipelineEmpty())
-		{
-			NextState();
-			return;
-		}
-
-		_mipsEmulator->Run();
+		RunOneCycle();
 	}
 }
 

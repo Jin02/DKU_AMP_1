@@ -13,6 +13,7 @@
 #include <deque>
 #include <queue>
 #include <list>
+#include <functional>
 
 //8192 = 0x8000 / 4
 #define MAX_PROCESSOR_MEMORY			8192
@@ -41,7 +42,8 @@ private:
 	SOCHashMap<uint, PipelineStage*>				_hashMap;
 
 	std::list<PipelineStageInfo>					_insts;
-    std::queue<uint>                                _removePipelineKeys;
+
+	std::queue<uint>                                _removePipelineKeys;
 	unsigned int									_addStallCount;
 
 private:
@@ -56,14 +58,13 @@ public:
     void Load(const std::string& path);
 
 	void RunCycle(const PipelineStageInfo& stage);
-    void Run();
+    void Run(const std::function<void(const PipelineStageInfo& stageInfo, uint indexInList)>& visualizationFunc);
 
     inline unsigned int GetDataFromRegister(int index) { return _registers[index]; }
     inline void SetDataToRegister(int index, unsigned int value) { _registers[index] = value; }
     
     unsigned int GetDataFromMemory(int address);
     void SetDataToMemory(int address, unsigned int data);
-
     
 public:
 	GET_SET_ACCESSOR(HiRegister, unsigned int, _hi);

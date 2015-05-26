@@ -127,3 +127,9 @@ Core::Object* Scene::AddObject(Core::Object* object, bool clone)
 {
 	return _rootObjects.Add(object->GetName(), object, clone);
 }
+
+void Scene::Input(const Device::Win32::Mouse& mouse, const  Device::Win32::Keyboard& keyboard)
+{
+	if(_state == State::Loop)
+		OnInput(mouse, keyboard);
+}

@@ -71,7 +71,7 @@ void System::Load(const std::string& path)
 	}
 }
 
-void System::Run()
+void System::Run(const std::function<void(const PipelineStageInfo& stageInfo, uint indexInList)>& visualizationFunc)
 {
 	//while(_programCounter != 0xffffffff || (_insts.empty() == false) )
     {
@@ -90,7 +90,15 @@ void System::Run()
 				_addStallCount--;
 			}
 
+			info.pip->SetProgramCounter(_programCounter);
 			_insts.push_front(info); 
+		}
+
+		// Work Visualization
+		{
+			uint index = 0;
+			for(const auto& iter : _insts)
+				visualizationFunc(iter, index++);
 		}
 
 		for(auto iter = _insts.rbegin(); iter != _insts.rend(); ++iter)
