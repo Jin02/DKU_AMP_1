@@ -46,7 +46,7 @@ void SimpleImage2D::Initialize(const Math::Size<uint>& size, Rendering::Material
 		1, 3, 2
 	};
 
-	Mesh::MeshFilter::CreateFuncArguments meshCreateArgs("UI", "SimpleImage2D");
+	Mesh::MeshFilter::CreateFuncArguments meshCreateArgs("UI:SimpleImage2D", _name);
 	{
 		meshCreateArgs.vertex.data		= rectVertex;
 		meshCreateArgs.vertex.count		= 4;
@@ -147,6 +147,7 @@ void SimpleImage2D::Render(ID3D11DeviceContext* context, const Math::Matrix& vie
 
 			Texture::Texture* tex = nullptr;
 			_material->GetVariable<Texture::Texture*>(tex, "main");
+			Math::Size<uint> size = tex->FetchSize();
 
 			type.second = tex;
 

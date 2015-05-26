@@ -70,7 +70,7 @@ void SimpleText2D::Initialize(uint maxLength, Rendering::Material* material)
 //			std::copy(boxIndices.begin(), boxIndices.end(), indices.begin() + (i * boxIndices.size()));
 	}
 
-	Mesh::MeshFilter::CreateFuncArguments meshCreateArgs("UI", "Font");
+	Mesh::MeshFilter::CreateFuncArguments meshCreateArgs("UI:Font", _name);
 	{
 		meshCreateArgs.vertex.data		= emptyVertices.data();
 		meshCreateArgs.vertex.count		= emptyVertices.size();
@@ -152,7 +152,7 @@ void SimpleText2D::UpdateText(const std::string& text)
 
 	//중점으로 맞춤
 	{
-		for(auto iter : vertices)
+		for(auto& iter : vertices)
 			iter.position.x -= (offsetX / 2.0f);
 	}
 

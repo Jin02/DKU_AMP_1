@@ -11,11 +11,26 @@
 class TestScene : public Core::Scene
 {
 private:
+	struct StageOnOffImage
+	{
+		UI::SimpleImage2D* onImg;
+		UI::SimpleImage2D* offImg;
+	};
+	struct StageVisual
+	{
+		std::array<StageOnOffImage, 5> stageImgs;
+	};
+
+private:
 	System*						_mipsEmulator;
 
 private:
-	UI::SimpleImage2D*			_background;
-
+	UI::SimpleImage2D*							_background;
+	UI::SimpleImage2D*							_pipelineStageNames;
+	std::array<UI::SimpleImage2D*, 5>			_lineBack;
+	std::array<UI::SimpleText2D*, 5>			_linePC;
+	std::array<UI::SimpleText2D*, 5>			_lineDescribeInst;
+	std::array<StageVisual, 5>					_lineStage;		
 
 public:
 	TestScene(void);
