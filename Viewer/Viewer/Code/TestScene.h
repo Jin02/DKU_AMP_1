@@ -13,8 +13,18 @@ class TestScene : public Core::Scene
 private:
 	struct StageOnOffImage
 	{
-		UI::SimpleImage2D* onImg;
-		UI::SimpleImage2D* offImg;
+		union
+		{
+			struct
+			{
+				UI::SimpleImage2D* on;
+				UI::SimpleImage2D* off;
+				UI::SimpleImage2D* stall;
+				UI::SimpleImage2D* cancel;
+			};
+
+			UI::SimpleImage2D* icons[4];
+		};
 	};
 	struct StageVisual
 	{
@@ -30,7 +40,7 @@ private:
 	std::array<UI::SimpleImage2D*, 5>			_lineBack;
 	std::array<UI::SimpleText2D*, 5>			_linePC;
 	std::array<UI::SimpleText2D*, 5>			_lineDescribeInst;
-	std::array<StageVisual, 5>					_lineStage;		
+	std::array<StageVisual, 5>					_lineStage;
 
 public:
 	TestScene(void);

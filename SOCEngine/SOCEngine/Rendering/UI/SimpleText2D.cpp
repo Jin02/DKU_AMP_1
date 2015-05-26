@@ -21,7 +21,7 @@ SimpleText2D::~SimpleText2D()
 	SAFE_DELETE(_meshFilter);
 }
 
-void SimpleText2D::Initialize(uint maxLength, Rendering::Material* material)
+void SimpleText2D::Initialize(uint maxLength, const std::string& sharedVerticesKey, Rendering::Material* material)
 {
 	const Device::Director* director	= Device::Director::GetInstance();
 	const Device::DirectX* dx			= director->GetDirectX();
@@ -70,7 +70,7 @@ void SimpleText2D::Initialize(uint maxLength, Rendering::Material* material)
 //			std::copy(boxIndices.begin(), boxIndices.end(), indices.begin() + (i * boxIndices.size()));
 	}
 
-	Mesh::MeshFilter::CreateFuncArguments meshCreateArgs("UI:Font", _name);
+	Mesh::MeshFilter::CreateFuncArguments meshCreateArgs("UI:Font", sharedVerticesKey);
 	{
 		meshCreateArgs.vertex.data		= emptyVertices.data();
 		meshCreateArgs.vertex.count		= emptyVertices.size();

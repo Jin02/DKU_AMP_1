@@ -24,10 +24,10 @@ void TestScene::OnInitialize()
 	_mipsEmulator = System::GetInstance();
 	_mipsEmulator->Load("./MipsBinFiles/factorial.bin");
 
-	auto CreateSimpleImage2D = [&](const std::string& name, const std::string& texturePath, const Math::Size<uint>& size)
+	auto CreateSimpleImage2D = [&](const std::string& name, const std::string& shardVertexKey, const std::string& texturePath, const Math::Size<uint>& size)
 	{
 		SimpleImage2D* sim2d = new SimpleImage2D(name);
-		sim2d->Initialize(size);
+		sim2d->Initialize(size, shardVertexKey);
 
 		Texture::Texture* texture 
 			= _textureMgr->LoadTextureFromFile(texturePath, false);
@@ -35,21 +35,21 @@ void TestScene::OnInitialize()
 		return sim2d;
 	};
 
-	_background = CreateSimpleImage2D("Background", "Resources/Background.png", Director::GetInstance()->GetWindowSize());
+	_background = CreateSimpleImage2D("Background", "Background", "Resources/Background.png", Director::GetInstance()->GetWindowSize());
 	
-	_pipelineStageNames = CreateSimpleImage2D("TopPipelineStageNames", "Resources/TopMenu.png", Math::Size<uint>(502, 100));
+	_pipelineStageNames = CreateSimpleImage2D("TopPipelineStageNames", "TopPipelineStageNames", "Resources/TopMenu.png", Math::Size<uint>(502, 100));
 	_pipelineStageNames->GetTransform()->UpdatePosition(Math::Vector3(-32, 300, 0));
 
 	for(int i=0; i<_lineBack.size(); ++i)
 	{
-		_lineBack[i] = CreateSimpleImage2D("PipelineBackground_" + std::to_string(i), "Resources/PipelineBackground.png", Math::Size<uint>(768, 104));
+		_lineBack[i] = CreateSimpleImage2D("PipelineBackground_" + std::to_string(i), "PipelineBackground", "Resources/PipelineBackground.png", Math::Size<uint>(768, 104));
 		_lineBack[i]->GetTransform()->UpdatePosition(Math::Vector3(0, (i - 2) * 100, 0));
 	}
 
-	auto CreateSimpleText2D = [&](const std::string& name, unsigned int length, const std::string& initText)
+	auto CreateSimpleText2D = [&](const std::string& name, const std::string& sharedVertexKey, unsigned int length, const std::string& initText)
 	{
 		SimpleText2D* text = new SimpleText2D(name);
-		text->Initialize(length);
+		text->Initialize(length, sharedVertexKey);
 		text->UpdateText(initText);
 
 		return text;
@@ -57,14 +57,16 @@ void TestScene::OnInitialize()
 
 	for(int i=0; i<_linePC.size(); ++i)
 	{
-		_linePC[i] = CreateSimpleText2D("LinePC_" + std::to_string(i), 20, "");
+		std::string nameWithKey = "LinePC_" + std::to_string(i);
+		_linePC[i] = CreateSimpleText2D(nameWithKey, nameWithKey, 20, "");
 		_linePC[i]->GetTransform()->UpdatePosition(Math::Vector3(-330, (i - 2) * 100 - 5, 0));
 		_linePC[i]->GetTransform()->UpdateScale(Math::Vector3(1.5f, 1.5f, 0.0f));
 	}
 
 	for(int i=0; i<_lineDescribeInst.size(); ++i)
 	{
-		_lineDescribeInst[i] = CreateSimpleText2D("LineDescribe_" + std::to_string(i), 40, "");
+		std::string nameWithKey = "LineDescribe_" + std::to_string(i);
+		_lineDescribeInst[i] = CreateSimpleText2D(nameWithKey, nameWithKey, 40, "");
 		_lineDescribeInst[i]->GetTransform()->UpdatePosition(Math::Vector3(250, (i - 2) * 100 - 5, 0));
 		_lineDescribeInst[i]->GetTransform()->UpdateScale(Math::Vector3(1.5f, 1.5f, 1.5f));
 	}
@@ -73,18 +75,28 @@ void TestScene::OnInitialize()
 	{
 		"Fetch", "Decode", "Execute", "Memory", "Write"
 	};
+	Math::Size<uint> size(96, 96);
 	for(int i=0; i<_lineStage.size(); ++i)
 	{
 		for(int j=0; j<_lineStage[i].stageImgs.size(); ++j)
 		{
 			std::string name = "StageOnIcon_" + std::to_string(i) + "_" + std::to_string(j);
-			_lineStage[i].stageImgs[j].onImg	= CreateSimpleImage2D(name, "Resources/" + iconNames[j] + "On.png", Math::Size<uint>(96, 96));
-			SimpleImage2D* on = _lineStage[i].stageImgs[j].onImg;
-			on->GetTransform()->UpdatePosition(Math::Vector3( (j - 2) * 100 - 32, (i - 2) * 100, 0));
+			_lineStage[i].stageImgs[j].on	= CreateSimpleImage2D(name, "StageOnIcon", "Resources/" + iconNames[j] + "On.png", size);
+			_lineStage[i].stageImgs[j].on->SetUse(false);
 
-			//name = "StageOffIcon_" + std::to_string(i) + "_" + std::to_string(j);
-			//_lineStage[i].stageImgs[j].offImg	= CreateSimpleImage2D(name, "Resources/" + iconNames[j] + "Off.png", Math::Size<uint>(100, 100));
-			//SimpleImage2D* off = _lineStage[i].stageImgs[j].offImg;
+			Math::Vector3 pos = Math::Vector3( (j - 2) * 100 - 32, (i - 2) * 100, 0);
+
+			name = "StageOffIcon_" + std::to_string(i) + "_" + std::to_string(j);
+			_lineStage[i].stageImgs[j].off	= CreateSimpleImage2D(name, "StageOffIcon", "Resources/" + iconNames[j] + "Off.png", size);
+
+			_lineStage[i].stageImgs[j].cancel = CreateSimpleImage2D(name, "StageCancelIcon", "Resources/Cancel.png", size);
+			_lineStage[i].stageImgs[j].cancel->SetUse(false);
+
+			_lineStage[i].stageImgs[j].stall = CreateSimpleImage2D(name, "StageStallIcon", "Resources/Stall.png", size);
+			_lineStage[i].stageImgs[j].stall->SetUse(false);
+
+			for(int k=0; k<4; ++k)
+				_lineStage[i].stageImgs[j].icons[k]->GetTransform()->UpdatePosition(pos);
 		}
 	}
 }
@@ -119,6 +131,24 @@ void TestScene::OnRenderPost()
 
 void TestScene::OnDestroy()
 {
+	for(int i=0; i<5; ++i)
+	{
+		SAFE_DELETE(_lineBack[i]);
+		SAFE_DELETE(_linePC[i]);
+		SAFE_DELETE(_lineDescribeInst[i]);
+	}
+
+	for(int i=0; i<5; ++i)
+	{
+		for(int j=0; j<5; ++j)
+		{
+			for(int k=0; k<4; ++k)
+			{
+				SAFE_DELETE(_lineStage[i].stageImgs[j].icons[k]);
+			}
+		}
+	}
+
 	SAFE_DELETE(_pipelineStageNames);
 	SAFE_DELETE(_background);
 	_mipsEmulator->Destroy();
