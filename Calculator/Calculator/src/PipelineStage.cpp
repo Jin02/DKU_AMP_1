@@ -46,6 +46,8 @@ void PipelineStage::NextState()
 void PipelineStage::Cancel()
 {
     _isCancel = true;
+	_instructionValue = 0;
+	_pc = 0;
 }
 
 void PipelineStage::Clear()
@@ -63,7 +65,6 @@ uint PipelineStage::Fetch()
 	if(_pc == 0xffffffff)
 	{
 		return 0;
-		_isCancel = true;
 	}
 
     ASSERT_COND_MSG( (_pc % 4) == 0, "Error, pc must has word multiplier" );
