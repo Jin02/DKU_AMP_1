@@ -104,6 +104,21 @@ void TestScene::OnInitialize()
 		_registerText[i]->GetTransform()->UpdatePosition(Math::Vector3(-450, -((i - 16) * 20), 0));
 		_registerText[i]->GetTransform()->UpdateScale(Math::Vector3(1.5f, 1.5f, 1.0f));
 	}
+
+	for(int i=0; i<50; ++i)
+	{
+		std::string nameKey = "Disassam_" + std::to_string(i);
+
+		std::string disCode = "";
+		if( i < disasamCodes.size() )
+		{
+			disCode = disasamCodes[i];
+
+			_disassamText[i] = CreateSimpleText2D(nameKey, nameKey, 50, disCode);
+			_disassamText[i]->GetTransform()->UpdatePosition(Math::Vector3(500, -((i - 16) * 17) + 50, 0));
+			_disassamText[i]->GetTransform()->UpdateScale(Math::Vector3(0.9f, 0.9f, 1.0f));
+		}
+	}
 }
 
 void TestScene::OnRenderPreview()
