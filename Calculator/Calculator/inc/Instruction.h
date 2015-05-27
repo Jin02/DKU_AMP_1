@@ -2,6 +2,7 @@
 
 #include <vector>
 #include "Common.h"
+#include <string>
 
 class Instruction
 {
@@ -15,6 +16,7 @@ public:
     
 protected:
     Type _type;
+	std::string _name;
     
 public:
     Instruction();
@@ -30,4 +32,5 @@ public:
     
 public:
     GET_ACCESSOR(Type, Type, _type);
+	GET_ACCESSOR(Name, const std::string&, _name);
 };

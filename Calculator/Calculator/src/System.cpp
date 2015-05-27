@@ -34,7 +34,7 @@ System::~System()
 	_insts.clear();
 }
 
-void System::Load(const std::string& path)
+void System::Load(const std::string& path, std::vector<std::string>& outDisassamCodes)
 {
 	std::ifstream file(path, std::ios::in | std::ios::binary | std::ios::ate);
     ASSERT_COND_MSG(file.is_open() && file.good(), "Error, strange file");
@@ -72,6 +72,18 @@ void System::Load(const std::string& path)
 
 		for(int i=0; i<length / 4; ++i)
 			_processorMemory[i] = LittleEndianToBigEndian(_processorMemory[i]);
+	}
+
+	for(int i=0; i<length / 4; ++i)
+	{
+		uint instValue = _processorMemory[i];
+		PipelineStage* temp = new PipelineStage;
+
+		std::string code;
+		temp->Decode(instValue, &code, i * 4);
+		outDisassamCodes.push_back(code);
+
+		delete temp;
 	}
 }
 

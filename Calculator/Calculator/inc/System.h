@@ -55,7 +55,7 @@ private:
 	void CancelPipelineStage(uint currentCycle);
 
 public:
-    void Load(const std::string& path);
+	void Load(const std::string& path, std::vector<std::string>& outDisassamCodes);
 
 	void RunCycle(const PipelineStageInfo& stage);
     void Run(	const std::function<void(const PipelineStageInfo& stageInfo, uint indexInList)>& boxUIUpdateFunc, 

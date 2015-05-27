@@ -29,6 +29,6 @@ public:
 #define GlobalDumpLogManager							DumpLogManager::GetInstance()
 #define GlobalDumpManagerAddLogNewLine(log)	GlobalDumpLogManager->AddLog(log, true)
 
-#define GlobalDumpManagerAddLogClassName(N) { std::string name = #N; GlobalDumpLogManager->AddLog("Instruction\t| " + name + "\n", true); }
+#define GlobalDumpManagerAddLogClassName(N) { _name = #N; std::string name = #N; GlobalDumpLogManager->AddLog("Instruction\t| " + name + "\n", true); }
 #define GlobalDumpManagerAddLog3NewLine {	GlobalDumpLogManager->AddLog("\n\n", true); }
 #define GlobalDumpManagerAddExecutionLog(Value){char buff[256] = {0, };sprintf(buff, "ExecutionResult = 0x%x", Value);GlobalDumpLogManager->AddLog(buff, true);}

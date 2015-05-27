@@ -32,9 +32,9 @@ public:
     void Cancel();
     void Clear();
     
-private:
+public:
     uint            Fetch();
-    void            Decode(uint instValue);
+	void            Decode(uint instValue, std::string* outCode = nullptr, uint pc = 0);
     void            Execution(const PipelineStage* prev2step, const PipelineStage* prev1step);
     void            Memory();
     void            WriteBack();

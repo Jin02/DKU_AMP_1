@@ -25,7 +25,9 @@ void TestScene::OnInitialize()
 	_effectSound = Sound::SimpleSoundPlayer::Create("Resources/next.mp3");
 
 	_mipsEmulator = System::GetInstance();
-	_mipsEmulator->Load("./MipsBinFiles/factorial.bin");
+
+	std::vector<std::string> disasamCodes;
+	_mipsEmulator->Load("./MipsBinFiles/factorial.bin", disasamCodes);
 
 	auto CreateSimpleImage2D = [&](const std::string& name, const std::string& shardVertexKey, const std::string& texturePath, const Math::Size<uint>& size)
 	{

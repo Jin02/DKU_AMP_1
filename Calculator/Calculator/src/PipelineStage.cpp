@@ -25,6 +25,7 @@
 
 #include "DumpLogManager.h"
 
+#include <sstream>
 
 PipelineStage::PipelineStage() : _instruction(nullptr), _instructionValue(0), _prev1StepPip(nullptr), _prev2StepPip(nullptr), _isCancel(false)
 {
@@ -75,12 +76,31 @@ uint PipelineStage::Fetch()
 }
 
 
-void PipelineStage::Decode(uint instruction)
+void PipelineStage::Decode(uint instruction, std::string* outCode, uint tempPC)
 {
 	if(instruction == 0x00) //nop
 	{
 		_isCancel = true;
 		return;
+	}
+
+	std::string disassam;
+	{
+		std::string instHexCode;
+		{
+			std::stringstream stream;
+			stream << std::hex << instruction;
+			instHexCode = stream.str();
+		}
+
+		std::string pcHexCode;
+		{
+			std::stringstream stream;
+			stream << std::hex << tempPC;
+			pcHexCode = stream.str();
+		}
+
+		disassam = pcHexCode + ": " + instHexCode + "  ";
 	}
 
     char buff[256] = {0, };
@@ -109,6 +129,8 @@ void PipelineStage::Decode(uint instruction)
         sprintf(buff, "R Type\t\t| rd 0x%x / rs 0x%x / rt 0x%x / shamt 0x%x / funct 0x%x", rd, rs, rt, shamt, funct);
         GlobalDumpLogManager->AddLog(buff, true);
         
+		std::string backCode = " $" + std::to_string(rd) + ", $" + std::to_string(rs) + ", $" + std::to_string(rt);
+
         if(funct == (uint)Funct::Add)
             _instruction = new Add(rs, rt, rd);
         else if(funct == (uint)Funct::AddUnsigned)
@@ -152,14 +174,17 @@ void PipelineStage::Decode(uint instruction)
         
         
         else ASSERT_MSG("can not support r format this instruction");
+		backCode.insert(0, _instruction->GetName());
+		disassam += backCode;
     }
     else if(opCode == (uint)Opcode::Jump || opCode == (uint)Opcode::JumpAndLink) // J
     {
         unsigned int address = instruction & 0x03FFFFFF;
-        
+   
         uint pc = _pc + 4;
         uint jumpAddr = (pc & 0xf0000000) | (address << 2);
-        
+		std::string backCode = " " + std::to_string(jumpAddr);
+
         sprintf(buff, "J Type\t\t| opcode 0x%x / address 0x%x", opCode, jumpAddr);
         GlobalDumpLogManager->AddLog(buff, true);
         
@@ -171,6 +196,8 @@ void PipelineStage::Decode(uint instruction)
             ((JumpAndLink*)_instruction)->SetPC(_pc);
         }
         else ASSERT_MSG("cant support j foramt this instruction");
+		backCode.insert(0, _instruction->GetName());
+		disassam += backCode;
     }
     else // I
     {
@@ -184,6 +211,8 @@ void PipelineStage::Decode(uint instruction)
         sprintf(buff, "I Type\t\t| opcode 0x%x / signExtImm 0x%x / zeroExtImm 0x%x / branchAddr 0x%x", opCode, signExtImm, zeroExtImm, branchAddr);
         GlobalDumpLogManager->AddLog(buff, true);
         
+		std::string backCode = " $" + std::to_string(rt) + ", $" + std::to_string(rs) + ", " + std::to_string((short)immediate);
+
         if(opCode == (uint)Opcode::AddImmediate)
             _instruction = new AddImmediate(rs, rt, signExtImm);
         else if(opCode == (uint)Opcode::AddImmediateUnsigned)
@@ -231,7 +260,12 @@ void PipelineStage::Decode(uint instruction)
         }
         
         else ASSERT_MSG("cant support i foramt this inst");
+		backCode.insert(0, _instruction->GetName());
+		disassam += backCode;
     }
+
+	if(outCode)
+		(*outCode) = disassam;
 }
 
 void PipelineStage::Execution(const PipelineStage* prev2step, const PipelineStage* prev1step)
