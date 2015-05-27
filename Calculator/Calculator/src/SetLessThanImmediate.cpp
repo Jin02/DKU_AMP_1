@@ -14,7 +14,7 @@ SetLessThanImmediateUnsigned::~SetLessThanImmediateUnsigned()
 
 void SetLessThanImmediateUnsigned::Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
 {
-	_executionResult = _rsData < _immediate; 
+	_executionResult = (_rsData < _immediate) ? 1 : 0; 
 	GlobalDumpManagerAddExecutionLog(_executionResult);
 }
 
@@ -37,6 +37,6 @@ void SetLessThanImmediate::Execution(const Instruction* prev2stepInst, const Ins
 	int signedRsData = _rsData;
 	int signedImm = _immediate;
 
-	_executionResult = signedRsData < signedImm; 
+	_executionResult = (signedRsData < signedImm) ? 1 : 0; 
 	GlobalDumpManagerAddExecutionLog(_executionResult);
 }

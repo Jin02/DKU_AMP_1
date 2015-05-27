@@ -140,6 +140,12 @@ void System::Run(const std::function<void(const PipelineStageInfo& stageInfo, ui
 
 void System::RunCycle(const PipelineStageInfo& stage)
 {
+	if(stage.pip->GetProgramCounter() == 0x64)
+	{
+		int a = 5;
+		a=3;
+	}
+
 	PipelineStage* pip = stage.pip;
 	PipelineStage::State	state	= pip->GetState();
 	

@@ -221,13 +221,15 @@ void PipelineStage::Decode(uint instruction, std::string* outCode, uint tempPC)
             _instruction = new AndImmediate(rs, rt, zeroExtImm);
         else if(opCode == (uint)Opcode::BranchOnEqual)
         {
-            _instruction = new BranchOnEqual(rs, rt, branchAddr);
-            ((BranchOnEqual*)_instruction)->SetPC(_pc);
+			_instruction = new BranchOnEqual(rs, rt, branchAddr);
+			BranchOnEqual* branch = dynamic_cast<BranchOnEqual*>(_instruction);//->SetPC(_pc);
+			branch->SetPC(_pc);
         }
         else if(opCode == (uint)Opcode::BranchOnNotEqual)
         {
-            _instruction = new BranchOnNotEqual(rs, rt, branchAddr);
-            ((BranchOnNotEqual*)_instruction)->SetPC(_pc);
+			_instruction = new BranchOnEqual(rs, rt, branchAddr);
+			BranchOnEqual* branch = dynamic_cast<BranchOnEqual*>(_instruction);//->SetPC(_pc);
+			branch->SetPC(_pc);
         }
         else if(opCode == (uint)Opcode::LoadByteUnsigned)
             _instruction = new LoadByteUnsigned(rs, rt, signExtImm);

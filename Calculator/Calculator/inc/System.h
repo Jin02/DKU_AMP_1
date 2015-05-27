@@ -77,7 +77,11 @@ public:
 	GET_SET_ACCESSOR(StackPointer,	unsigned int, _registers[29]);
 	GET_SET_ACCESSOR(GlobalPointer, unsigned int, _registers[28]);
     
-    GET_SET_ACCESSOR(ProgramCounter, unsigned int, _programCounter);
+	GET_ACCESSOR(ProgramCounter, uint, _programCounter);
+	void SetProgramCounter(uint v)
+	{
+		_programCounter = v;
+	}
 
 	GET_ACCESSOR(IsPipelineEmpty, bool, _insts.empty());
 
