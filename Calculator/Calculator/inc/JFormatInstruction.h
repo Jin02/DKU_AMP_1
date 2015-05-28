@@ -12,7 +12,7 @@ public:
     virtual ~JFormatInstruction(void);
     
 public:
-    virtual void DependencyCheckWithGetTargetData(bool&, uint&, uint ) const;
+    virtual void DependencyCheckWithGetTargetData(bool& c, uint&, uint ) const;
 };
 
 class Jump : public JFormatInstruction

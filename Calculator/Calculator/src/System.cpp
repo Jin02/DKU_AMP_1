@@ -89,28 +89,31 @@ void System::Load(const std::string& path, std::vector<std::string>& outDisassam
 
 void System::Run(const std::function<void(const PipelineStageInfo& stageInfo, uint indexInList)>& boxUIUpdateFunc, const std::function<void()>& registerTextUpdateFunc)
 {
-	//while(_programCounter != 0xffffffff || (_insts.empty() == false) )
+	while((_programCounter != 0xffffffff) || (_insts.empty() == false))
     {
 		bool end = (_programCounter == 0xffffffff);
         GlobalDumpLogManager->AddLog("Cycle Num\t| " + std::to_string(_cycle++), true);
 
-		PipelineStageInfo info;
+		if(end == false)
 		{
-			info.cycle = _cycle;
-			info.pip = new PipelineStage;
-			info.pip->SetProgramCounter(_programCounter); //just.. using visualization. this line code is nothing.
-			info.isEnd = end;
-			if(end)
-				info.pip->Cancel();
+			PipelineStageInfo info;
+			{
+				info.cycle = _cycle;
+				info.pip = new PipelineStage;
+				info.pip->SetProgramCounter(_programCounter); //just.. using visualization. this line code is nothing.
+				info.isEnd = end;
+				if(end)
+					info.pip->Cancel();
+			}
+			_insts.push_front(info); 
 		}
-		_insts.push_front(info); 
 
-		// Work Visualization
-		{
-			uint index = 0;
-			for(const auto& iter : _insts)
-				boxUIUpdateFunc(iter, index++);
-		}
+		//// Work Visualization
+		//{
+		//	uint index = 0;
+		//	for(const auto& iter : _insts)
+		//		boxUIUpdateFunc(iter, index++);
+		//}
 
  		for(auto iter = _insts.rbegin(); iter != _insts.rend(); ++iter)
 			RunCycle((*iter));

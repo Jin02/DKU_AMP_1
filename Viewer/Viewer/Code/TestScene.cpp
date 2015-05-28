@@ -27,7 +27,7 @@ void TestScene::OnInitialize()
 	_mipsEmulator = System::GetInstance();
 
 	std::vector<std::string> disasamCodes;
-	_mipsEmulator->Load("./MipsBinFiles/input3.bin", disasamCodes);
+	_mipsEmulator->Load("./MipsBinFiles/input.bin", disasamCodes);
 
 	auto CreateSimpleImage2D = [&](const std::string& name, const std::string& shardVertexKey, const std::string& texturePath, const Math::Size<uint>& size)
 	{

@@ -13,7 +13,7 @@ public:
     virtual ~BranchBase(void);
     
 public:
-     virtual void DependencyCheckWithGetTargetData(bool&, uint&, uint ) const;
+     virtual void DependencyCheckWithGetTargetData(bool& c, uint&, uint ) const;
     
 public:
     GET_ACCESSOR(IsBranchSuccess, bool, _isBranchSuccess);

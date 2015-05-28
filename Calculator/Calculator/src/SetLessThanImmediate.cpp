@@ -14,6 +14,8 @@ SetLessThanImmediateUnsigned::~SetLessThanImmediateUnsigned()
 
 void SetLessThanImmediateUnsigned::Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
 {
+	Forwarding(prev2stepInst, prev1stepInst, _rsData, _rs);
+
 	_executionResult = (_rsData < _immediate) ? 1 : 0; 
 	GlobalDumpManagerAddExecutionLog(_executionResult);
 }

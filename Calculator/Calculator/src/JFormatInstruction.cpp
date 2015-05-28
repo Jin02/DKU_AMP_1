@@ -17,8 +17,9 @@ JFormatInstruction::~JFormatInstruction(void)
 {
 }
 
-void JFormatInstruction::DependencyCheckWithGetTargetData(bool&, uint&, uint) const
+void JFormatInstruction::DependencyCheckWithGetTargetData(bool& c, uint&, uint) const
 {
+	c = false;
 }
 
 /**** Jump Instruction ****/

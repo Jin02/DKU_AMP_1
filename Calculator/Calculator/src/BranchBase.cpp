@@ -15,7 +15,7 @@ BranchBase::~BranchBase()
 
 }
 
-void BranchBase::DependencyCheckWithGetTargetData(bool&, uint&, uint ) const
+void BranchBase::DependencyCheckWithGetTargetData(bool& c, uint&, uint ) const
 {
-    
+    c = false;
 }

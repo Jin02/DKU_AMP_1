@@ -227,8 +227,8 @@ void PipelineStage::Decode(uint instruction, std::string* outCode, uint tempPC)
         }
         else if(opCode == (uint)Opcode::BranchOnNotEqual)
         {
-			_instruction = new BranchOnEqual(rs, rt, branchAddr);
-			BranchOnEqual* branch = dynamic_cast<BranchOnEqual*>(_instruction);//->SetPC(_pc);
+			_instruction = new BranchOnNotEqual(rs, rt, branchAddr);
+			BranchOnNotEqual* branch = dynamic_cast<BranchOnNotEqual*>(_instruction);//->SetPC(_pc);
 			branch->SetPC(_pc);
         }
         else if(opCode == (uint)Opcode::LoadByteUnsigned)
