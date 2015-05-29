@@ -141,6 +141,7 @@ StoreWord::~StoreWord()
 void StoreWord::Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
 {
 	Forwarding(prev2stepInst, prev1stepInst, _rsData, _rs);
+	Forwarding(prev2stepInst, prev1stepInst, _rtData, _rt);
 
     _executionResult = _rsData + _immediate;
 }
