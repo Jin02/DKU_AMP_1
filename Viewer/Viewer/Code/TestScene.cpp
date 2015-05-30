@@ -12,7 +12,7 @@ using namespace Rendering;
 using namespace UI;
 using namespace Device;
 
-TestScene::TestScene(void) : _mipsEmulator(nullptr), _pipelineStageNames(nullptr), _nextWork(false), _effectSound(nullptr)
+TestScene::TestScene(void) : _mipsEmulator(nullptr), _pipelineStageNames(nullptr), _nextWork(false)
 {
 }
 
@@ -22,8 +22,6 @@ TestScene::~TestScene(void)
 
 void TestScene::OnInitialize()
 {
-	_effectSound = Sound::SimpleSoundPlayer::Create("Resources/next.mp3");
-
 	_mipsEmulator = System::GetInstance();
 
 	std::vector<std::string> disasamCodes;
@@ -204,11 +202,6 @@ void TestScene::OnInput(const Device::Win32::Mouse& mouse, const  Device::Win32:
 	if(keyboard.states[VK_SPACE] == KEYBOARD::Type::Down)
 	{
 		_nextWork = true;
-
-		//if(_effectSound->GetIsPlay())
-		//	_effectSound->Stop();
-
-		//_effectSound->Play(false);
 	}
 }
 
@@ -217,7 +210,7 @@ void TestScene::OnUpdate(float dt)
 	if(_nextWork)
 	{
 		RunOneCycle();
-		//_nextWork = false;
+		_nextWork = false;
 	}
 }
 
@@ -254,8 +247,6 @@ void TestScene::OnDestroy()
 	SAFE_DELETE(_pipelineStageNames);
 	SAFE_DELETE(_background);
 	_mipsEmulator->Destroy();
-
-	_effectSound.release();
 
 	Director::GetInstance()->Exit();
 }

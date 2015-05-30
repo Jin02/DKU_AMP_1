@@ -24,7 +24,7 @@ public:
 public:
 	virtual void Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst);
 	virtual void WriteBack(){}
-	virtual void Memory(){}
+	virtual void Memory(const Instruction* prev2stepInst, const Instruction* prev1stepInst){}
 };
 
 class JumpAndLink : public JFormatInstruction
@@ -39,7 +39,7 @@ public:
 
 public:
 	virtual void Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst);
-	virtual void Memory();
+	virtual void Memory(const Instruction* prev2stepInst, const Instruction* prev1stepInst);
 	virtual void WriteBack();
     
 public:

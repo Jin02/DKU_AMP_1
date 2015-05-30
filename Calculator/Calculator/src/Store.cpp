@@ -20,9 +20,10 @@ void StoreByte::Execution(const Instruction* prev2stepInst, const Instruction* p
     _executionResult = _rsData + _immediate;
 }
 
-void StoreByte::Memory()
+void StoreByte::Memory(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
 {
-    System* system = System::GetInstance();
+	Forwarding(prev2stepInst, prev1stepInst, _rtData, _rt);
+	System* system = System::GetInstance();
     
     uint toMemRtData    = _rtData & 0x000000ff;
     uint memData        = system->GetDataFromMemory(_rsData + _immediate);
@@ -63,9 +64,10 @@ void StoreConditional::Execution(const Instruction* prev2stepInst, const Instruc
     _executionResult = _rsData + _immediate;
 }
 
-void StoreConditional::Memory()
+void StoreConditional::Memory(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
 {
-    System* system = System::GetInstance();
+ 	Forwarding(prev2stepInst, prev1stepInst, _rtData, _rt);
+	System* system = System::GetInstance();
     
     system->SetDataToMemory(_executionResult, _rtData);
     {
@@ -101,8 +103,9 @@ void StoreHalfword::Execution(const Instruction* prev2stepInst, const Instructio
     _executionResult = _rsData + _immediate;
 }
 
-void StoreHalfword::Memory()
+void StoreHalfword::Memory(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
 {
+	Forwarding(prev2stepInst, prev1stepInst, _rtData, _rt);
     System* system = System::GetInstance();
     
     unsigned int toMemRtData = _rtData & 0x0000ffff;
@@ -141,14 +144,15 @@ StoreWord::~StoreWord()
 void StoreWord::Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
 {
 	Forwarding(prev2stepInst, prev1stepInst, _rsData, _rs);
-	Forwarding(prev2stepInst, prev1stepInst, _rtData, _rt);
 
     _executionResult = _rsData + _immediate;
 }
 
-void StoreWord::Memory()
+void StoreWord::Memory(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
 {
-    System* system = System::GetInstance();
+	Forwarding(prev2stepInst, prev1stepInst, _rtData, _rt);
+
+	System* system = System::GetInstance();
     
     unsigned int toMemRtData = _rtData;
     unsigned int rsData = _rsData;

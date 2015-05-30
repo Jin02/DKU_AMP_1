@@ -44,8 +44,6 @@ private:
 	std::array<UI::SimpleText2D*, 32>			_registerText;
 	std::array<UI::SimpleText2D*, 50>			_disassamText;
 
-	std::auto_ptr<Sound::SimpleSoundPlayer>		_effectSound;
-
 	bool										_nextWork;
 
 public:

@@ -29,7 +29,7 @@ void RFormatInstruction::Execution(const Instruction* prev2stepInst, const Instr
 	GlobalDumpManagerAddExecutionLog(_executionResult);
 }
 
-void RFormatInstruction::Memory()
+void RFormatInstruction::Memory(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
 {
 	//null
 }

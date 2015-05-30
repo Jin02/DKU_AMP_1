@@ -21,7 +21,7 @@ void LoadByteUnsigned::Execution(const Instruction* prev2stepInst, const Instruc
     _executionResult = _rsData + _immediate;
 }
 
-void LoadByteUnsigned::Memory()
+void LoadByteUnsigned::Memory(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
 {
     System* system = System::GetInstance();
     unsigned int memData    = system->GetDataFromMemory(_executionResult);
@@ -67,7 +67,7 @@ void LoadHalfwordUnsigned::Execution(const Instruction* prev2stepInst, const Ins
     _executionResult = _rsData + _immediate;
 }
 
-void LoadHalfwordUnsigned::Memory()
+void LoadHalfwordUnsigned::Memory(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
 {
     System* system = System::GetInstance();
     unsigned int memData    = system->GetDataFromMemory(_executionResult);
@@ -112,7 +112,7 @@ void LoadLinked::Execution(const Instruction* prev2stepInst, const Instruction* 
 	_executionResult = _rsData + _immediate;
 }
 
-void LoadLinked::Memory()
+void LoadLinked::Memory(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
 {
     System* system = System::GetInstance();
     _toRegiMemValue = system->GetDataFromMemory(_executionResult);
@@ -154,7 +154,7 @@ void LoadUpperImmediate::Execution(const Instruction* prev2stepInst, const Instr
     _executionResult = _immediate & 0xffff0000;
 }
 
-void LoadUpperImmediate::Memory()
+void LoadUpperImmediate::Memory(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
 {
 }
 
@@ -196,7 +196,7 @@ void LoadWord::Execution(const Instruction* prev2stepInst, const Instruction* pr
     _executionResult = _rsData + _immediate;
 }
 
-void LoadWord::Memory()
+void LoadWord::Memory(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
 {
     System* system = System::GetInstance();
     _toRegiMemValue = system->GetDataFromMemory(_executionResult);
@@ -239,7 +239,7 @@ void LoadImmediate::Execution(const Instruction* prev2stepInst, const Instructio
     
 }
 
-void LoadImmediate::Memory()
+void LoadImmediate::Memory(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
 {
 }
 

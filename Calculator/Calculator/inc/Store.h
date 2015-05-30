@@ -13,7 +13,7 @@ public:
     
 public:
     virtual void Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst);
-    virtual void Memory();
+    virtual void Memory(const Instruction* prev2stepInst, const Instruction* prev1stepInst);
 	virtual void WriteBack(){}
 	virtual void DependencyCheckWithGetTargetData(bool& hasDependency, uint& outRdData, uint compareRegiIdx) const;
 };
@@ -29,7 +29,7 @@ public:
     
 public:
     virtual void Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst);
-    virtual void Memory();
+    virtual void Memory(const Instruction* prev2stepInst, const Instruction* prev1stepInst);
 	virtual void WriteBack(){}
 	virtual void DependencyCheckWithGetTargetData(bool& hasDependency, uint& outRdData, uint compareRegiIdx) const;
 };
@@ -45,7 +45,7 @@ public:
     
 public:
     virtual void Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst);
-    virtual void Memory();
+    virtual void Memory(const Instruction* prev2stepInst, const Instruction* prev1stepInst);
 	virtual void WriteBack(){}
 	virtual void DependencyCheckWithGetTargetData(bool& hasDependency, uint& outRdData, uint compareRegiIdx) const;
 };
@@ -61,7 +61,7 @@ public:
     
 public:
     virtual void Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst);    
-    virtual void Memory();
+    virtual void Memory(const Instruction* prev2stepInst, const Instruction* prev1stepInst);
 	virtual void WriteBack(){}
 	virtual void DependencyCheckWithGetTargetData(bool& hasDependency, uint& outRdData, uint compareRegiIdx) const;
 };

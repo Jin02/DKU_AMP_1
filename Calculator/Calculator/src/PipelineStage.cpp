@@ -163,14 +163,6 @@ void PipelineStage::Decode(uint instruction, std::string* outCode, uint tempPC)
             _instruction = new Divide(rs, rt, rd);
         else if(funct == (uint)Funct::DivideUnsigned)
             _instruction = new DivideUnsigned(rs, rt, rd);
-        //		else if(funct == (uint)Funct::MoveFromHi)
-        //			_instruction =  MoveFromHi(rd);
-        //		else if(funct == (uint)Funct::MoveToHi)
-        //			_instruction =  MoveToHi(rs);
-        //		else if(funct == (uint)Funct::MoveFromLo)
-        //			_instruction =  MoveFromLo(rd);
-        //		else if(funct == (uint)Funct::MoveToLo)
-        //			_instruction =  MoveToLo(rs);
         
         
         else ASSERT_MSG("can not support r format this instruction");
@@ -279,10 +271,13 @@ void PipelineStage::Execution(const PipelineStage* prev2step, const PipelineStag
 		_instruction->Execution(prev2StepInst, prev1StepInst);
 }
 
-void PipelineStage::Memory()
+void PipelineStage::Memory(const PipelineStage* prev2step, const PipelineStage* prev1step)
 {
+	Instruction* prev2StepInst = prev2step ? prev2step->GetInstruction() : nullptr;	
+	Instruction* prev1StepInst = prev1step ? prev1step->GetInstruction() : nullptr;
+
 	if(_instruction)
-		_instruction->Memory();
+		_instruction->Memory(prev2StepInst, prev1StepInst);
 }
 
 void PipelineStage::WriteBack()
@@ -301,12 +296,9 @@ void PipelineStage::RunStage()
     else if(_state == State::Decode)
         Decode(_instructionValue);
     else if(_state == State::Execution)
-	{
 		Execution(_prev2StepPip, _prev1StepPip);
-		_prev1StepPip = _prev2StepPip = nullptr;
-	}
     else if(_state == State::Memory)
-        Memory();
+        Memory(_prev2StepPip, _prev1StepPip);
     else if(_state == State::WriteBack)
         WriteBack();
 }

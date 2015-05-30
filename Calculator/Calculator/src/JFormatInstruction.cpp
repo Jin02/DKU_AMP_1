@@ -73,7 +73,7 @@ void JumpAndLink::Execution(const Instruction* prev2stepInst, const Instruction*
     }
 }
 
-void JumpAndLink::Memory()
+void JumpAndLink::Memory(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
 {
 
 }

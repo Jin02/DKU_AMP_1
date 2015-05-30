@@ -36,7 +36,7 @@ public:
     uint            Fetch();
 	void            Decode(uint instValue, std::string* outCode = nullptr, uint pc = 0);
     void            Execution(const PipelineStage* prev2step, const PipelineStage* prev1step);
-    void            Memory();
+    void            Memory(const PipelineStage* prev2step, const PipelineStage* prev1step);
     void            WriteBack();
     
 public:

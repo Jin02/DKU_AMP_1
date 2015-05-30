@@ -108,12 +108,12 @@ void System::Run(const std::function<void(const PipelineStageInfo& stageInfo, ui
 			_insts.push_front(info); 
 		}
 
-		//// Work Visualization
-		//{
-		//	uint index = 0;
-		//	for(const auto& iter : _insts)
-		//		boxUIUpdateFunc(iter, index++);
-		//}
+		// Work Visualization
+		{
+			uint index = 0;
+			for(const auto& iter : _insts)
+				boxUIUpdateFunc(iter, index++);
+		}
 
  		for(auto iter = _insts.rbegin(); iter != _insts.rend(); ++iter)
 			RunCycle((*iter));
@@ -143,12 +143,6 @@ void System::Run(const std::function<void(const PipelineStageInfo& stageInfo, ui
 
 void System::RunCycle(const PipelineStageInfo& stage)
 {
-	if(stage.pip->GetProgramCounter() == 0x64)
-	{
-		int a = 5;
-		a=3;
-	}
-
 	PipelineStage* pip = stage.pip;
 	PipelineStage::State	state	= pip->GetState();
 	
@@ -189,7 +183,6 @@ void System::RunCycle(const PipelineStageInfo& stage)
 		Instruction::Type instType = pip->GetInstruction()->GetType();
 		if(instType == Instruction::Type::Jump)
 		{
-//			_addStallCount = 2;
 			CancelPipelineStage(stage.cycle);
 		}
 		else if(instType == Instruction::Type::Branch)

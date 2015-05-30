@@ -24,7 +24,7 @@ public:
     
 public:
 	virtual void Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst) = 0;
-    virtual void Memory() = 0;
+    virtual void Memory(const Instruction* prev2stepInst, const Instruction* prev1stepInst) = 0;
     virtual void WriteBack() = 0;
 
 	virtual void DependencyCheckWithGetTargetData(bool& hasDependency, uint& outTargetData, uint compareRegiIdx) const = 0;
