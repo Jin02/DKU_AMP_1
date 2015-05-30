@@ -1,4 +1,4 @@
-#include "PipelineStage.h"
+#include "InstructionController.h"
 #include "System.h"
 
 #include "JFormatInstruction.h"
@@ -27,31 +27,31 @@
 
 #include <sstream>
 
-PipelineStage::PipelineStage() : _instruction(nullptr), _instructionValue(0), _prev1StepPip(nullptr), _prev2StepPip(nullptr), _isCancel(false)
+InstructionController::InstructionController() : _instruction(nullptr), _instructionValue(0), _prev1StepPip(nullptr), _prev2StepPip(nullptr), _isCancel(false)
 {
     _state = State::Fetch;
 }
 
-PipelineStage::~PipelineStage()
+InstructionController::~InstructionController()
 {
     
 }
 
-void PipelineStage::NextState()
+void InstructionController::NextState()
 {
     _state = (State)((uint)_state + 1);
     if(_state > State::Stall)
         _state = State::Stall;
 }
 
-void PipelineStage::Cancel()
+void InstructionController::Cancel()
 {
     _isCancel = true;
 	_instructionValue = 0;
 	_pc = 0;
 }
 
-void PipelineStage::Clear()
+void InstructionController::Clear()
 {
     _state = State::Fetch;
     _pc = 0;
@@ -60,7 +60,7 @@ void PipelineStage::Clear()
     _prev1StepPip = _prev2StepPip = nullptr;
 }
 
-uint PipelineStage::Fetch()
+uint InstructionController::Fetch()
 {
     _pc = System::GetInstance()->GetProgramCounter();
 	if(_pc == 0xffffffff)
@@ -76,7 +76,7 @@ uint PipelineStage::Fetch()
 }
 
 
-void PipelineStage::Decode(uint instruction)
+void InstructionController::Decode(uint instruction)
 {
 	if(instruction == 0x00) //nop
 	{
@@ -234,7 +234,7 @@ void PipelineStage::Decode(uint instruction)
     }
 }
 
-void PipelineStage::Execution(const PipelineStage* prev2step, const PipelineStage* prev1step)
+void InstructionController::Execution(const InstructionController* prev2step, const InstructionController* prev1step)
 {
 	Instruction* prev2StepInst = prev2step ? prev2step->GetInstruction() : nullptr;	
 	Instruction* prev1StepInst = prev1step ? prev1step->GetInstruction() : nullptr;
@@ -243,7 +243,7 @@ void PipelineStage::Execution(const PipelineStage* prev2step, const PipelineStag
 		_instruction->Execution(prev2StepInst, prev1StepInst);
 }
 
-void PipelineStage::Memory(const PipelineStage* prev2step, const PipelineStage* prev1step)
+void InstructionController::Memory(const InstructionController* prev2step, const InstructionController* prev1step)
 {
 	Instruction* prev2StepInst = prev2step ? prev2step->GetInstruction() : nullptr;	
 	Instruction* prev1StepInst = prev1step ? prev1step->GetInstruction() : nullptr;
@@ -252,13 +252,13 @@ void PipelineStage::Memory(const PipelineStage* prev2step, const PipelineStage* 
 		_instruction->Memory(prev2StepInst, prev1StepInst);
 }
 
-void PipelineStage::WriteBack()
+void InstructionController::WriteBack()
 {
 	if(_instruction)
 		_instruction->WriteBack();
 }
 
-void PipelineStage::RunStage()
+void InstructionController::RunStage()
 {
     if(_isCancel)
         return;

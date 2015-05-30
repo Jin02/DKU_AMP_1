@@ -86,10 +86,10 @@ void System::Run()
 
 			if(end == false)
 			{
-				PipelineStageInfo info;
+				InstructionControllerInfo info;
 				{
 					info.cycle = _cycle;
-					info.pip = new PipelineStage;
+					info.pip = new InstructionController;
 					info.pip->SetProgramCounter(_programCounter); //just.. using visualization. this line code is nothing.
 					info.isEnd = end;
 					if(end)
@@ -125,25 +125,25 @@ void System::Run()
 	GlobalDumpLogManager->AddLog(buff, true);
 }
 
-void System::RunCycle(const PipelineStageInfo& stage)
+void System::RunCycle(const InstructionControllerInfo& stage)
 {
-	PipelineStage* pip = stage.pip;
-	PipelineStage::State	state	= pip->GetState();
+	InstructionController* pip = stage.pip;
+	InstructionController::State	state	= pip->GetState();
 	
 	bool isCancelPip = pip->GetIsCancel();
 	if(isCancelPip == false)
 	{
-		if(state == PipelineStage::State::Fetch)
+		if(state == InstructionController::State::Fetch)
 		{
 			uint key = _programCounter;
 			_hashMap.insert( std::make_pair(key, pip) );
 		}
-		else if(state == PipelineStage::State::Execution)
+		else if(state == InstructionController::State::Execution)
 		{
 			auto FindObjectFromHashMap = [&](uint key)
 			{
 				auto findIter = _hashMap.find(key);
-				PipelineStage* ret = nullptr;
+				InstructionController* ret = nullptr;
 
 				if(findIter != _hashMap.end()) //found!
 					ret = findIter->second;
@@ -152,8 +152,8 @@ void System::RunCycle(const PipelineStageInfo& stage)
 			};
 
 			uint pc = pip->GetProgramCounter();
-			PipelineStage* prev1Step = FindObjectFromHashMap( pc - 4 );
-			PipelineStage* prev2Step = FindObjectFromHashMap( pc - 8 );
+			InstructionController* prev1Step = FindObjectFromHashMap( pc - 4 );
+			InstructionController* prev2Step = FindObjectFromHashMap( pc - 8 );
 
 			pip->SetPrev1StepPip(prev1Step);
 			pip->SetPrev2StepPip(prev2Step);
@@ -162,24 +162,24 @@ void System::RunCycle(const PipelineStageInfo& stage)
 
 	pip->RunStage();
 
-	if(state == PipelineStage::State::Execution && (isCancelPip == false))
+	if(state == InstructionController::State::Execution && (isCancelPip == false))
 	{
 		Instruction::Type instType = pip->GetInstruction()->GetType();
 		if(instType == Instruction::Type::Jump)
 		{
-			CancelPipelineStage(stage.cycle);
+			CancelInstructionController(stage.cycle);
 		}
 		else if(instType == Instruction::Type::Branch)
 		{
 			BranchBase* branchInst = dynamic_cast<BranchBase*>(pip->GetInstruction());
 			if(branchInst->GetIsBranchSuccess())
-				CancelPipelineStage(stage.cycle);
+				CancelInstructionController(stage.cycle);
         }			
 	}
 
 	pip->NextState();
 
-	if(pip->GetState() == PipelineStage::State::Stall)
+	if(pip->GetState() == InstructionController::State::Stall)
 		_removePipelineKeys.push(pip->GetProgramCounter());
 }
 
@@ -195,7 +195,7 @@ void System::SetDataToMemory(int address, unsigned int data)
     _processorMemory[address/4] = data;
 }
 
-void System::CancelPipelineStage(uint currentCycle)
+void System::CancelInstructionController(uint currentCycle)
 {
 	for(auto info : _insts)
 	{

@@ -7,7 +7,7 @@
 #include "Singleton.h"
 
 #include "Instruction.h"
-#include "PipelineStage.h"
+#include "InstructionController.h"
 
 #include "SOCHashMap.h"
 #include <deque>
@@ -23,13 +23,13 @@ class System : public Mips::Singleton<System>
 {
 public:
 	//first value is cycle
-	struct PipelineStageInfo
+	struct InstructionControllerInfo
 	{
 		uint			 cycle;
-		PipelineStage	*pip;
+		InstructionController	*pip;
 		bool			isEnd;
-		PipelineStageInfo() : cycle(0), pip(nullptr), isEnd(false) {}
-		~PipelineStageInfo() {}
+		InstructionControllerInfo() : cycle(0), pip(nullptr), isEnd(false) {}
+		~InstructionControllerInfo() {}
 	};
 
 private:
@@ -40,9 +40,9 @@ private:
 	unsigned int									_hi, _lo;
     unsigned int                                    _cycle;
     
-	SOCHashMap<uint, PipelineStage*>				_hashMap;
+	SOCHashMap<uint, InstructionController*>				_hashMap;
 
-	std::list<PipelineStageInfo>					_insts;
+	std::list<InstructionControllerInfo>					_insts;
 
 	std::queue<uint>                                _removePipelineKeys;
 
@@ -52,12 +52,12 @@ private:
 
 private:
 	//cancel prev stages.
-	void CancelPipelineStage(uint currentCycle);
+	void CancelInstructionController(uint currentCycle);
 
 public:
 	void Load(const std::string& path);
 
-	void RunCycle(const PipelineStageInfo& stage);
+	void RunCycle(const InstructionControllerInfo& stage);
     void Run();
 
     inline unsigned int GetDataFromRegister(int index) { return _registers[index]; }
