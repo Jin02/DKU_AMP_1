@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C17B4271B19EB7A0063FEBB /* BranchBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C17B4261B19EB7A0063FEBB /* BranchBase.cpp */; };
 		3C34F2271AC4395C00A151C6 /* Add.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C34F2261AC4395C00A151C6 /* Add.cpp */; };
 		3C34F22F1AC442A100A151C6 /* AddImmediate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C34F22E1AC442A100A151C6 /* AddImmediate.cpp */; };
 		3C34F2351AC445FA00A151C6 /* Subtract.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C34F2341AC445FA00A151C6 /* Subtract.cpp */; };
@@ -50,6 +51,8 @@
 
 /* Begin PBXFileReference section */
 		3C0B5FAA1B073DE700CE3683 /* SOCHashMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SOCHashMap.h; path = inc/SOCHashMap.h; sourceTree = "<group>"; };
+		3C17B4251B19EB740063FEBB /* BranchBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BranchBase.h; path = inc/BranchBase.h; sourceTree = "<group>"; };
+		3C17B4261B19EB7A0063FEBB /* BranchBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BranchBase.cpp; path = src/BranchBase.cpp; sourceTree = "<group>"; };
 		3C34F2251AC4394D00A151C6 /* Add.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Add.h; path = inc/Add.h; sourceTree = "<group>"; };
 		3C34F2261AC4395C00A151C6 /* Add.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Add.cpp; path = src/Add.cpp; sourceTree = "<group>"; };
 		3C34F22E1AC442A100A151C6 /* AddImmediate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; name = AddImmediate.cpp; path = src/AddImmediate.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
@@ -212,6 +215,8 @@
 				3C34F22E1AC442A100A151C6 /* AddImmediate.cpp */,
 				3C34F2301AC442A600A151C6 /* AddImmediate.h */,
 				3CE7A4461AC430C50001E0CE /* IFormatInstruction.cpp */,
+				3C17B4261B19EB7A0063FEBB /* BranchBase.cpp */,
+				3C17B4251B19EB740063FEBB /* BranchBase.h */,
 				3CE7A4441AC430A90001E0CE /* IFormatInstruction.h */,
 			);
 			name = I;
@@ -319,6 +324,7 @@
 				3C34F2431AC44B2400A151C6 /* OrImmediate.cpp in Sources */,
 				3C34F26E1AC5884500A151C6 /* Move.cpp in Sources */,
 				3C34F22F1AC442A100A151C6 /* AddImmediate.cpp in Sources */,
+				3C17B4271B19EB7A0063FEBB /* BranchBase.cpp in Sources */,
 				3C34F2271AC4395C00A151C6 /* Add.cpp in Sources */,
 				3C617F2A1AB9304C00FC8FBD /* System.cpp in Sources */,
 				3C34F24D1AC450A700A151C6 /* SetLessThanImmediate.cpp in Sources */,
