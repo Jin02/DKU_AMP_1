@@ -76,31 +76,12 @@ uint PipelineStage::Fetch()
 }
 
 
-void PipelineStage::Decode(uint instruction, std::string* outCode, uint tempPC)
+void PipelineStage::Decode(uint instruction)
 {
 	if(instruction == 0x00) //nop
 	{
 		_isCancel = true;
 		return;
-	}
-
-	std::string disassam;
-	{
-		std::string instHexCode;
-		{
-			std::stringstream stream;
-			stream << std::hex << instruction;
-			instHexCode = stream.str();
-		}
-
-		std::string pcHexCode;
-		{
-			std::stringstream stream;
-			stream << std::hex << tempPC;
-			pcHexCode = stream.str();
-		}
-
-		disassam = pcHexCode + ": " + instHexCode + "  ";
 	}
 
     char buff[256] = {0, };
@@ -129,8 +110,6 @@ void PipelineStage::Decode(uint instruction, std::string* outCode, uint tempPC)
         sprintf(buff, "R Type\t\t| rd 0x%x / rs 0x%x / rt 0x%x / shamt 0x%x / funct 0x%x", rd, rs, rt, shamt, funct);
         GlobalDumpLogManager->AddLog(buff, true);
         
-		std::string backCode = " $" + std::to_string(rd) + ", $" + std::to_string(rs) + ", $" + std::to_string(rt);
-
         if(funct == (uint)Funct::Add)
             _instruction = new Add(rs, rt, rd);
         else if(funct == (uint)Funct::AddUnsigned)
@@ -166,8 +145,6 @@ void PipelineStage::Decode(uint instruction, std::string* outCode, uint tempPC)
         
         
         else ASSERT_MSG("can not support r format this instruction");
-		backCode.insert(0, _instruction->GetName());
-		disassam += backCode;
     }
     else if(opCode == (uint)Opcode::Jump || opCode == (uint)Opcode::JumpAndLink) // J
     {
@@ -189,7 +166,6 @@ void PipelineStage::Decode(uint instruction, std::string* outCode, uint tempPC)
         }
         else ASSERT_MSG("cant support j foramt this instruction");
 		backCode.insert(0, _instruction->GetName());
-		disassam += backCode;
     }
     else // I
     {
@@ -255,11 +231,7 @@ void PipelineStage::Decode(uint instruction, std::string* outCode, uint tempPC)
         
         else ASSERT_MSG("cant support i foramt this inst");
 		backCode.insert(0, _instruction->GetName());
-		disassam += backCode;
     }
-
-	if(outCode)
-		(*outCode) = disassam;
 }
 
 void PipelineStage::Execution(const PipelineStage* prev2step, const PipelineStage* prev1step)
@@ -292,13 +264,31 @@ void PipelineStage::RunStage()
         return;
     
     if(_state == State::Fetch)
+	{
         _instructionValue = Fetch();
+		GlobalDumpLogManager->AddLog("Fetch State\t| instruction Value is 0x" + GlobalDumpLogManager->UIntToHexString(_instructionValue), true);
+	}
     else if(_state == State::Decode)
-        Decode(_instructionValue);
+	{
+		GlobalDumpLogManager->AddLog("Decode State\t| instruction Value is 0x" + GlobalDumpLogManager->UIntToHexString(_instructionValue), true);
+		Decode(_instructionValue);
+	}
     else if(_state == State::Execution)
+	{
+		GlobalDumpLogManager->AddLog("Execution State\t| instruction is " + _instruction->GetName(), true);
 		Execution(_prev2StepPip, _prev1StepPip);
+		GlobalDumpLogManager->AddLog("\n");
+	}
     else if(_state == State::Memory)
-        Memory(_prev2StepPip, _prev1StepPip);
+	{		
+		GlobalDumpLogManager->AddLog("Memory State\t| instruction is " + _instruction->GetName(), true);
+		Memory(_prev2StepPip, _prev1StepPip);
+		GlobalDumpLogManager->AddLog("\n");
+	}
     else if(_state == State::WriteBack)
-        WriteBack();
+	{
+		GlobalDumpLogManager->AddLog("WriteBack State\t| instruction is " + _instruction->GetName(), true);
+		WriteBack();
+		GlobalDumpLogManager->AddLog("\n");
+	}
 }

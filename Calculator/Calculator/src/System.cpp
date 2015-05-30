@@ -34,7 +34,7 @@ System::~System()
 	_insts.clear();
 }
 
-void System::Load(const std::string& path, std::vector<std::string>& outDisassamCodes)
+void System::Load(const std::string& path)
 {
 	std::ifstream file(path, std::ios::in | std::ios::binary | std::ios::ate);
     ASSERT_COND_MSG(file.is_open() && file.good(), "Error, strange file");
@@ -73,72 +73,56 @@ void System::Load(const std::string& path, std::vector<std::string>& outDisassam
 		for(int i=0; i<length / 4; ++i)
 			_processorMemory[i] = LittleEndianToBigEndian(_processorMemory[i]);
 	}
-
-	for(int i=0; i<length / 4; ++i)
-	{
-		uint instValue = _processorMemory[i];
-		PipelineStage* temp = new PipelineStage;
-
-		std::string code;
-		temp->Decode(instValue, &code, i * 4);
-		outDisassamCodes.push_back(code);
-
-		delete temp;
-	}
 }
 
-void System::Run(const std::function<void(const PipelineStageInfo& stageInfo, uint indexInList)>& boxUIUpdateFunc, const std::function<void()>& registerTextUpdateFunc)
+void System::Run()
 {
 	while((_programCounter != 0xffffffff) || (_insts.empty() == false))
     {
-		bool end = (_programCounter == 0xffffffff);
-        GlobalDumpLogManager->AddLog("Cycle Num\t| " + std::to_string(_cycle++), true);
-
-		if(end == false)
+		GlobalDumpLogManager->AddLog("-----------------------------------------------", true);
 		{
-			PipelineStageInfo info;
+			bool end = (_programCounter == 0xffffffff);
+			GlobalDumpLogManager->AddLog("Cycle Num\t| " + std::to_string(_cycle++), true);
+
+			if(end == false)
 			{
-				info.cycle = _cycle;
-				info.pip = new PipelineStage;
-				info.pip->SetProgramCounter(_programCounter); //just.. using visualization. this line code is nothing.
-				info.isEnd = end;
-				if(end)
-					info.pip->Cancel();
+				PipelineStageInfo info;
+				{
+					info.cycle = _cycle;
+					info.pip = new PipelineStage;
+					info.pip->SetProgramCounter(_programCounter); //just.. using visualization. this line code is nothing.
+					info.isEnd = end;
+					if(end)
+						info.pip->Cancel();
+				}
+				_insts.push_front(info); 
 			}
-			_insts.push_front(info); 
-		}
 
-		// Work Visualization
-		{
-			uint index = 0;
-			for(const auto& iter : _insts)
-				boxUIUpdateFunc(iter, index++);
-		}
+ 			for(auto iter = _insts.rbegin(); iter != _insts.rend(); ++iter)
+				RunCycle((*iter));
 
- 		for(auto iter = _insts.rbegin(); iter != _insts.rend(); ++iter)
-			RunCycle((*iter));
+			if((_insts.size() == 5) || end)
+				_insts.pop_back();
 
-		if((_insts.size() == 5) || end)
-			_insts.pop_back();
-
-        if( _removePipelineKeys.size() > 2 )
-        {
-            uint key = _removePipelineKeys.front();
-            auto findIter = _hashMap.find(key);
-            if(findIter != _hashMap.end())
-            {
-                SAFE_DELETE(findIter->second);
-                _hashMap.erase(findIter);
-            }
+			if( _removePipelineKeys.size() > 2 )
+			{
+				uint key = _removePipelineKeys.front();
+				auto findIter = _hashMap.find(key);
+				if(findIter != _hashMap.end())
+				{
+					SAFE_DELETE(findIter->second);
+					_hashMap.erase(findIter);
+				}
             
-            _removePipelineKeys.pop();
-        }
+				_removePipelineKeys.pop();
+			}
+		}
+		GlobalDumpLogManager->AddLog("-----------------------------------------------", true);
     }
 
-	registerTextUpdateFunc();
-	//char buff[128] = {0,};
-	//sprintf(buff, "Final Return Value is 0x%x(v0)", _registers[2]);
-	//GlobalDumpLogManager->AddLog(buff, true);
+	char buff[128] = {0,};
+	sprintf(buff, "Final Return Value is 0x%x(v0)", _registers[2]);
+	GlobalDumpLogManager->AddLog(buff, true);
 }
 
 void System::RunCycle(const PipelineStageInfo& stage)

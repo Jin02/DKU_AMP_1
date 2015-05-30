@@ -19,6 +19,7 @@ void LoadByteUnsigned::Execution(const Instruction* prev2stepInst, const Instruc
 	Forwarding(prev2stepInst, prev1stepInst, _rsData, _rs);
 
     _executionResult = _rsData + _immediate;
+	GlobalDumpManagerAddExecutionLog(_executionResult);
 }
 
 void LoadByteUnsigned::Memory(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
@@ -65,6 +66,7 @@ void LoadHalfwordUnsigned::Execution(const Instruction* prev2stepInst, const Ins
 	Forwarding(prev2stepInst, prev1stepInst, _rsData, _rs);
 
     _executionResult = _rsData + _immediate;
+	GlobalDumpManagerAddExecutionLog(_executionResult);
 }
 
 void LoadHalfwordUnsigned::Memory(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
@@ -110,6 +112,7 @@ void LoadLinked::Execution(const Instruction* prev2stepInst, const Instruction* 
 {
 	Forwarding(prev2stepInst, prev1stepInst, _rsData, _rs);
 	_executionResult = _rsData + _immediate;
+	GlobalDumpManagerAddExecutionLog(_executionResult);
 }
 
 void LoadLinked::Memory(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
@@ -152,6 +155,7 @@ LoadUpperImmediate::~LoadUpperImmediate()
 void LoadUpperImmediate::Execution(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
 {
     _executionResult = _immediate & 0xffff0000;
+	GlobalDumpManagerAddExecutionLog(_executionResult);
 }
 
 void LoadUpperImmediate::Memory(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
@@ -194,6 +198,7 @@ void LoadWord::Execution(const Instruction* prev2stepInst, const Instruction* pr
 {
 	Forwarding(prev2stepInst, prev1stepInst, _rsData, _rs);
     _executionResult = _rsData + _immediate;
+	GlobalDumpManagerAddExecutionLog(_executionResult);
 }
 
 void LoadWord::Memory(const Instruction* prev2stepInst, const Instruction* prev1stepInst)

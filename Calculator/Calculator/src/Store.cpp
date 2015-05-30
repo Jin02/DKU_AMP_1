@@ -18,6 +18,7 @@ void StoreByte::Execution(const Instruction* prev2stepInst, const Instruction* p
 	Forwarding(prev2stepInst, prev1stepInst, _rsData, _rs);
 
     _executionResult = _rsData + _immediate;
+	GlobalDumpManagerAddExecutionLog(_executionResult);
 }
 
 void StoreByte::Memory(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
@@ -62,6 +63,7 @@ void StoreConditional::Execution(const Instruction* prev2stepInst, const Instruc
 	Forwarding(prev2stepInst, prev1stepInst, _rsData, _rs);
 
     _executionResult = _rsData + _immediate;
+	GlobalDumpManagerAddExecutionLog(_executionResult);
 }
 
 void StoreConditional::Memory(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
@@ -101,6 +103,7 @@ void StoreHalfword::Execution(const Instruction* prev2stepInst, const Instructio
 	Forwarding(prev2stepInst, prev1stepInst, _rsData, _rs);
 
     _executionResult = _rsData + _immediate;
+	GlobalDumpManagerAddExecutionLog(_executionResult);
 }
 
 void StoreHalfword::Memory(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
@@ -146,6 +149,7 @@ void StoreWord::Execution(const Instruction* prev2stepInst, const Instruction* p
 	Forwarding(prev2stepInst, prev1stepInst, _rsData, _rs);
 
     _executionResult = _rsData + _immediate;
+	GlobalDumpManagerAddExecutionLog(_executionResult);
 }
 
 void StoreWord::Memory(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
