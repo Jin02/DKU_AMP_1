@@ -27,6 +27,11 @@ class SOCHashMap : public __gnu_cxx::hash_map<key, value> {};
 template <typename key, typename value>
 class SOCHashMap : public std::unordered_map<key, value> {};
 #endif
+
+#else
+#include <ext/hash_map>
+template <typename key, typename value>
+class SOCHashMap : public __gnu_cxx::hash_map<key, value> {};
 #endif
 
 #endif
