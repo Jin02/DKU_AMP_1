@@ -18,7 +18,11 @@ void StoreByte::Execution(const Instruction* prev2stepInst, const Instruction* p
 	Forwarding(prev2stepInst, prev1stepInst, _rsData, _rs);
 
     _executionResult = _rsData + _immediate;
-	GlobalDumpManagerAddExecutionLog(_executionResult);
+    
+    std::string equ = "R[rs] + SignExtImm";
+    char buff[256] = {0, };
+    sprintf(buff, "ExecutionResult = 0x%x / ExecutionResult = ", _executionResult);
+    GlobalDumpLogManager->AddLog(buff+equ, true);
 }
 
 void StoreByte::Memory(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
@@ -63,7 +67,11 @@ void StoreConditional::Execution(const Instruction* prev2stepInst, const Instruc
 	Forwarding(prev2stepInst, prev1stepInst, _rsData, _rs);
 
     _executionResult = _rsData + _immediate;
-	GlobalDumpManagerAddExecutionLog(_executionResult);
+
+    std::string equ = "R[rs] + SignExtImm";
+    char buff[256] = {0, };
+    sprintf(buff, "ExecutionResult = 0x%x / ExecutionResult = ", _executionResult);
+    GlobalDumpLogManager->AddLog(buff+equ, true);
 }
 
 void StoreConditional::Memory(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
@@ -103,7 +111,11 @@ void StoreHalfword::Execution(const Instruction* prev2stepInst, const Instructio
 	Forwarding(prev2stepInst, prev1stepInst, _rsData, _rs);
 
     _executionResult = _rsData + _immediate;
-	GlobalDumpManagerAddExecutionLog(_executionResult);
+
+    std::string equ = "R[rs] + SignExtImm";
+    char buff[256] = {0, };
+    sprintf(buff, "ExecutionResult = 0x%x / ExecutionResult = ", _executionResult);
+    GlobalDumpLogManager->AddLog(buff+equ, true);
 }
 
 void StoreHalfword::Memory(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
@@ -149,7 +161,11 @@ void StoreWord::Execution(const Instruction* prev2stepInst, const Instruction* p
 	Forwarding(prev2stepInst, prev1stepInst, _rsData, _rs);
 
     _executionResult = _rsData + _immediate;
-	GlobalDumpManagerAddExecutionLog(_executionResult);
+    
+    std::string equ = "R[rs] + SignExtImm";
+    char buff[256] = {0, };
+    sprintf(buff, "ExecutionResult = 0x%x / ExecutionResult = ", _executionResult);
+    GlobalDumpLogManager->AddLog(buff+equ, true);
 }
 
 void StoreWord::Memory(const Instruction* prev2stepInst, const Instruction* prev1stepInst)

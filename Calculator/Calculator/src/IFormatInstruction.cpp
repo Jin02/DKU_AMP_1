@@ -26,7 +26,7 @@ void IFormatInstruction::WriteBack()
 	system->SetDataToRegister(_rt, _executionResult);
 	{
 		char buff[256] = {0, };	
-		sprintf(buff, "R[rt=0x%x] = 0x%x", _rt, _executionResult);
+		sprintf(buff, "R[rt=0x%x] = 0x%x / ExecutionResult ", _rt, _executionResult);
 		GlobalDumpLogManager->AddLog(buff, true);
 	}
 }

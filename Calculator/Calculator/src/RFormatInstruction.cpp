@@ -26,7 +26,6 @@ void RFormatInstruction::Execution(const Instruction* prev2stepInst, const Instr
 	Forwarding(prev2stepInst, prev1stepInst, _rtData, _rt);
 
 	_executionResult = Instruct(_rsData, _rtData);
-	GlobalDumpManagerAddExecutionLog(_executionResult);
 }
 
 void RFormatInstruction::Memory(const Instruction* prev2stepInst, const Instruction* prev1stepInst)
