@@ -25,6 +25,7 @@
     <ClInclude Include="inc\DumpLogManager.h" />
     <ClInclude Include="inc\IFormatInstruction.h" />
     <ClInclude Include="inc\Instruction.h" />
+    <ClInclude Include="inc\InstructionController.h" />
     <ClInclude Include="inc\JFormatInstruction.h" />
     <ClInclude Include="inc\JumpRegister.h" />
     <ClInclude Include="inc\Load.h" />
@@ -32,9 +33,9 @@
     <ClInclude Include="inc\Multiply.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="inc\NSetCache.h" />
     <ClInclude Include="inc\Or.h" />
     <ClInclude Include="inc\OrImmediate.h" />
-    <ClInclude Include="inc\PipelineStage.h" />
     <ClInclude Include="inc\RFormatInstruction.h" />
     <ClInclude Include="inc\SetLessThan.h" />
     <ClInclude Include="inc\SetLessThanImmediate.h" />
@@ -60,6 +61,7 @@
     <ClCompile Include="src\DumpLogManager.cpp" />
     <ClCompile Include="src\IFormatInstruction.cpp" />
     <ClCompile Include="src\Instruction.cpp" />
+    <ClCompile Include="src\InstructionController.cpp" />
     <ClCompile Include="src\JFormatInstruction.cpp" />
     <ClCompile Include="src\JumpRegister.cpp" />
     <ClCompile Include="src\Load.cpp" />
@@ -67,9 +69,9 @@
     <ClCompile Include="src\Multiply.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="src\NSetCache.cpp" />
     <ClCompile Include="src\Or.cpp" />
     <ClCompile Include="src\OrImmediate.cpp" />
-    <ClCompile Include="src\PipelineStage.cpp" />
     <ClCompile Include="src\RFormatInstruction.cpp" />
     <ClCompile Include="src\SetLessThan.cpp" />
     <ClCompile Include="src\SetLessThanImmediate.cpp" />

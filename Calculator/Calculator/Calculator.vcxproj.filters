@@ -117,11 +117,14 @@
     <ClInclude Include="inc\DumpLogManager.h">
       <Filter>Module\DumpLogManager</Filter>
     </ClInclude>
-    <ClInclude Include="inc\PipelineStage.h">
-      <Filter>소스 파일</Filter>
-    </ClInclude>
     <ClInclude Include="inc\BranchBase.h">
       <Filter>Module\Instruction</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\NSetCache.h">
+      <Filter>Module\System</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\InstructionController.h">
+      <Filter>Module\System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -203,11 +206,14 @@
     <ClCompile Include="src\DumpLogManager.cpp">
       <Filter>Module\DumpLogManager</Filter>
     </ClCompile>
-    <ClCompile Include="src\PipelineStage.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="src\BranchBase.cpp">
       <Filter>Module\Instruction</Filter>
+    </ClCompile>
+    <ClCompile Include="src\NSetCache.cpp">
+      <Filter>Module\System</Filter>
+    </ClCompile>
+    <ClCompile Include="src\InstructionController.cpp">
+      <Filter>Module\System</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
