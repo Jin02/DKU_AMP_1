@@ -7,7 +7,8 @@
 #include "DumpLogManager.h"
 #include "BranchBase.h"
 
-System::System() : _programCounter(0), _hi(0), _lo(0), _cycle(0)
+System::System()
+    : _programCounter(0), _hi(0), _lo(0), _cycle(0), _cache(nullptr)
 {
 	std::fill(_processorMemory.begin(), _processorMemory.end(), 0);
 	std::fill(_registers.begin(), _registers.end(), 0);
@@ -183,13 +184,18 @@ void System::RunCycle(const InstructionControllerInfo& stage)
 		_removePipelineKeys.push(pip->GetProgramCounter());
 }
 
-unsigned int System::GetDataFromMemory(int address)
+unsigned int System::GetDataFromMemory(uint address)
 {
     ASSERT_COND_MSG((address % 4) == 0, "strange address");
-    return _processorMemory[address/4];
+    
+    ASSERT_COND_MSG(_cache, "Where is your cache");
+    uint data = _cache->FetchData(address);
+    
+    return data;
+    //return _processorMemory[address/4];
 }
 
-void System::SetDataToMemory(int address, unsigned int data)
+void System::SetDataToMemory(uint address, unsigned int data)
 {
     ASSERT_COND_MSG((address % 4) == 0, "strange address");
     _processorMemory[address/4] = data;
@@ -221,4 +227,9 @@ bool System::CheckAllEndInst()
 	}
 
 	return true;
+}
+
+void System::CreateCache(uint cacheSize, uint cacheBlockSize, uint nWay)
+{
+    _cache = new NSetCache(cacheSize, cacheBlockSize, nWay, _processorMemory.data());
 }

@@ -28,6 +28,7 @@
 		3C34F2721AC6F38100A151C6 /* Multiply.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C34F2711AC6F38100A151C6 /* Multiply.cpp */; };
 		3C34F2741AC6F38700A151C6 /* Divide.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C34F2731AC6F38700A151C6 /* Divide.cpp */; };
 		3C3BD90F1B030ACA00499142 /* InstructionController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C3BD90E1B030ACA00499142 /* InstructionController.cpp */; };
+		3C3F0C421B1EB61E0000F51C /* NSetCache.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C3F0C411B1EB61E0000F51C /* NSetCache.cpp */; };
 		3C60F0611ACBAD200014269B /* DumpLogManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C60F0601ACBAD200014269B /* DumpLogManager.cpp */; };
 		3C617F2A1AB9304C00FC8FBD /* System.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C617F1E1AB9304C00FC8FBD /* System.cpp */; };
 		3CE7A43B1AC40E7A0001E0CE /* Instruction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3CE7A43A1AC40E7A0001E0CE /* Instruction.cpp */; };
@@ -93,6 +94,8 @@
 		3C34F2751AC6F39300A151C6 /* Divide.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = Divide.h; path = inc/Divide.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		3C3BD90D1B030AC100499142 /* InstructionController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = InstructionController.h; path = inc/InstructionController.h; sourceTree = "<group>"; };
 		3C3BD90E1B030ACA00499142 /* InstructionController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = InstructionController.cpp; path = src/InstructionController.cpp; sourceTree = "<group>"; };
+		3C3F0C401B1EB6140000F51C /* NSetCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = NSetCache.h; path = inc/NSetCache.h; sourceTree = "<group>"; };
+		3C3F0C411B1EB61E0000F51C /* NSetCache.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NSetCache.cpp; path = src/NSetCache.cpp; sourceTree = "<group>"; };
 		3C60F05F1ACBAD1A0014269B /* DumpLogManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DumpLogManager.h; path = inc/DumpLogManager.h; sourceTree = "<group>"; };
 		3C60F0601ACBAD200014269B /* DumpLogManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DumpLogManager.cpp; path = src/DumpLogManager.cpp; sourceTree = "<group>"; };
 		3C617F081AB9302F00FC8FBD /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Common.h; path = inc/Common.h; sourceTree = "<group>"; };
@@ -146,6 +149,8 @@
 		3C617F351AB9324900FC8FBD /* System */ = {
 			isa = PBXGroup;
 			children = (
+				3C3F0C411B1EB61E0000F51C /* NSetCache.cpp */,
+				3C3F0C401B1EB6140000F51C /* NSetCache.h */,
 				3C0B5FAA1B073DE700CE3683 /* SOCHashMap.h */,
 				3C3BD90E1B030ACA00499142 /* InstructionController.cpp */,
 				3C3BD90D1B030AC100499142 /* InstructionController.h */,
@@ -343,6 +348,7 @@
 				3CE7A43B1AC40E7A0001E0CE /* Instruction.cpp in Sources */,
 				3C34F25F1AC518E500A151C6 /* Store.cpp in Sources */,
 				3C34F2581AC4F69C00A151C6 /* BranchOnEqual.cpp in Sources */,
+				3C3F0C421B1EB61E0000F51C /* NSetCache.cpp in Sources */,
 				3C34F24A1AC4500600A151C6 /* SetLessThan.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

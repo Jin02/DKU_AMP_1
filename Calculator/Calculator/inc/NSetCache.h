@@ -31,9 +31,11 @@ private:
 	uint						_cacheSetCount;
 	uint						_hitCount;
 	uint						_missCount;
+    uint*                       _systemMemory;
+    
 
 public:
-	NSetCache(uint cacheSize, uint cacheBlockSize, uint nWay) : _nWay(nWay)
+	NSetCache(uint cacheSize, uint cacheBlockSize, uint nWay, uint* systemMemory) : _nWay(nWay), _systemMemory(systemMemory)
 	{
 		CacheLine line;
 		line.offset = log(cacheBlockSize);
@@ -54,12 +56,7 @@ public:
 	}
 
 public:
-	void Init()
-	{
-
-	}
-
-	inline const CacheEntry& GetCacheData(uint index, uint wayIdx)
+	inline const CacheEntry& GetEntry(uint index, uint wayIdx)
 	{
 		return _cacheDatas[index * _cacheSetCount + wayIdx];
 	}
@@ -70,7 +67,7 @@ public:
 			uint result = 0;
 
 			for(uint i = from; i <= to; ++i)
-				result |= (1 << i + from);
+				result |= (1 << (i + from));
 			result <<= from;
 			return result;
 		};     
@@ -84,53 +81,74 @@ public:
 
 		return line;
 	}
-	void Write(const CacheLine& command)
-	{
-		for(uint i=0;  i<_nWay; ++i)
-		{
-			CacheEntry& entry = _cacheDatas[command.index * _cacheSetCount + i];
-			if(entry.isEmpty)
-			{
-				entry.tag = command.tag;
-				// do.. something?
-				entry.isEmpty = false;
-			}
-		}
-	}
 
-	bool IsValid(const CacheLine& command)
+	bool IsValid(const CacheLine& command, const CacheEntry* outEntry = nullptr)
 	{
 		for(uint i=0; i<_nWay; ++i)
 		{
-			const CacheEntry& entry = GetCacheData(command.index, i);
+			const CacheEntry& entry = GetEntry(command.index, i);
 			if(entry.isEmpty == false)
+            {
+                outEntry = &entry;
 				return true;
+            }
 		}
 
 		return false;
 	}
-	bool IsTagMatch(const CacheLine& command)
+	bool IsTagMatch(const CacheLine& command, const CacheEntry* outEntry = nullptr)
 	{
 		for(uint i=0; i<_nWay; ++i)
 		{
-			const CacheEntry& entry = GetCacheData(command.index, i);
+			const CacheEntry& entry = GetEntry(command.index, i);
 			if(entry.tag == command.tag)
+            {
+                outEntry = &entry;
 				return true;
+            }
 		}
 
 		return false;
 	}
-	void Test_Check(uint address)
+	uint FetchData(uint address)
 	{
+        uint result = 0;
 		CacheLine command = MakeCacheLineCommand(address);
 
-		bool isHit = IsValid(command) && IsTagMatch(command);
-		if(isHit)
+        CacheEntry* entry = nullptr;
+		bool isHit = IsValid(command) && IsTagMatch(command, entry);
+		if(isHit) //딱히 더 손볼건 없는듯
+        {
 			_hitCount++;
+            ASSERT_COND_MSG(entry, "Error, what the");
+            result = entry->data;
+        }
 		else
 		{
 			_missCount++;
-
+            ASSERT_MSG("not woooooorkkkkkkinnnnggg yeeeeeet");
+            
+            ASSERT_COND_MSG((address % 4) != 0, "Error, invalid memory address");
+            uint memData = _systemMemory[address / 4];
+            
+            //가져올때 주변 얘들 다 긁어야하지 않나?
+            //Locality 있잖아.
+            
+            for(uint i=0;  i<_nWay; ++i)
+            {
+                CacheEntry& entry = _cacheDatas[command.index * _cacheSetCount + i];
+                if(entry.isEmpty)
+                {
+                    entry.tag = command.tag;
+                    entry.isEmpty = false;
+                    entry.data = memData;
+                    break;
+                }
+            }
+    
+            result = memData;
 		}
+        
+        return result;
 	}
 };
