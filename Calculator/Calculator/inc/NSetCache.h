@@ -13,21 +13,33 @@ public:
 		uint index;
 		uint offset;
 	};
-
+    
 	struct CacheEntry
 	{
 		uint tag;
 		uint data;
 		bool isEmpty;
-
+        
 		CacheEntry() : tag(0), data(0), isEmpty(true) {}
 		~CacheEntry() {}
 	};
+    
+    struct CacheEntryGroup
+    {
+        time_t          timeStamp;
+        CacheEntry*     entrys;
+        bool            isRequiredUpdate;
+
+        CacheEntryGroup() : timeStamp(0), entrys(nullptr) {}
+        ~CacheEntryGroup() {}
+    };
+    
 
 private:
 	CacheLine                   _lineInfo;
-	std::vector<CacheEntry>		_cacheDatas;
+	CacheEntryGroup**           _cacheDatas;
 	uint						_nWay;
+    uint                        _blockSize;
 	uint						_cacheSetCount;
 	uint						_hitCount;
 	uint						_missCount;
@@ -35,31 +47,44 @@ private:
     
 
 public:
-	NSetCache(uint cacheSize, uint cacheBlockSize, uint nWay, uint* systemMemory) : _nWay(nWay), _systemMemory(systemMemory)
+	NSetCache(uint cacheSize, uint cacheBlockSize, uint nWay, uint* systemMemory) : _nWay(nWay), _systemMemory(systemMemory), _blockSize(cacheBlockSize/4)
 	{
 		CacheLine line;
-		line.offset = log(cacheBlockSize);
+		line.offset = log(_blockSize);
 
-		_cacheSetCount = (cacheSize / cacheBlockSize) / nWay;
+		_cacheSetCount = (cacheSize / _blockSize) / nWay;
 		line.index = log(_cacheSetCount);
 
 		line.tag = 32 - (line.index - line.offset);
 
 		_lineInfo = line;
 
-		_cacheDatas.reserve(_cacheSetCount * nWay);
-	}
-
+        _cacheDatas = new CacheEntryGroup*[line.index];
+        for(uint i=0; i<line.index; ++i)
+        {
+            _cacheDatas[i] = new CacheEntryGroup[nWay];
+            for(uint j=0; j<nWay; ++j)
+            {
+                _cacheDatas[i][j].entrys = new CacheEntry[line.offset];
+                for(uint k=0; k<line.offset; ++k)
+                {
+                    CacheEntry& entry = _cacheDatas[i][j].entrys[k];
+                    entry.tag = 0;
+                    entry.isEmpty = true;
+                    entry.data = 0;
+                }
+                
+                _cacheDatas[i][j].timeStamp = 0;
+                _cacheDatas[i][j].isRequiredUpdate = false;
+            }
+        }
+    }
+    
 	~NSetCache()
 	{
-
 	}
 
 public:
-	inline const CacheEntry& GetEntry(uint index, uint wayIdx)
-	{
-		return _cacheDatas[index * _cacheSetCount + wayIdx];
-	}
 	CacheLine MakeCacheLineCommand(uint address)
 	{
 		auto FillBit = [](unsigned int from, unsigned int to)
@@ -82,41 +107,111 @@ public:
 		return line;
 	}
 
-	bool IsValid(const CacheLine& command, const CacheEntry* outEntry = nullptr)
+	bool IsValid(const CacheLine& command, CacheEntry** outEntry = nullptr, CacheEntryGroup** outEntryGroup = nullptr)
 	{
 		for(uint i=0; i<_nWay; ++i)
 		{
-			const CacheEntry& entry = GetEntry(command.index, i);
+            CacheEntry& entry = _cacheDatas[command.index][i].entrys[command.offset];
 			if(entry.isEmpty == false)
             {
-                outEntry = &entry;
+                if(outEntry)
+                    (*outEntry) = &entry;
+                if(outEntryGroup)
+                    (*outEntryGroup) = &_cacheDatas[command.index][i];
 				return true;
             }
 		}
 
 		return false;
 	}
-	bool IsTagMatch(const CacheLine& command, const CacheEntry* outEntry = nullptr)
+	bool IsTagMatch(const CacheLine& command, CacheEntry** outEntry = nullptr, CacheEntryGroup** outEntryGroup = nullptr)
 	{
 		for(uint i=0; i<_nWay; ++i)
 		{
-			const CacheEntry& entry = GetEntry(command.index, i);
+            CacheEntry& entry = _cacheDatas[command.index][i].entrys[command.offset];
+
 			if(entry.tag == command.tag)
             {
-                outEntry = &entry;
+                if(outEntry)
+                    (*outEntry) = &entry;
+                if(outEntryGroup)
+                    (*outEntryGroup) = &_cacheDatas[command.index][i];
 				return true;
             }
 		}
 
 		return false;
 	}
+    bool LoadCache(uint address)
+    {
+        CacheLine command = MakeCacheLineCommand(address);
+        ASSERT_COND_MSG((address % 4) != 0, "Error, invalid memory address");
+        uint offset = ((address / 4) / _blockSize) * _blockSize;
+
+        bool success = false;
+        for(uint wayIdx = 0; wayIdx < _nWay; ++wayIdx)
+        {
+            CacheEntry& firstEntry = _cacheDatas[command.index][wayIdx].entrys[0];
+            if(firstEntry.isEmpty)
+            {
+                for(uint i=offset; i<offset + _blockSize; ++i)
+                {
+                    CacheEntry& entry = _cacheDatas[command.index][wayIdx].entrys[i - offset];
+
+                    entry.data = _systemMemory[i];
+                    entry.tag = command.tag;
+                    entry.isEmpty = false;
+                    success = true;
+                }
+                
+                success = true;
+            }
+
+            if(success) break;
+        }
+        
+        return success;
+    }
+    
+    void Replace(uint address)
+    {
+        //maybe.., i think that write lru algo.
+        CacheLine command = MakeCacheLineCommand(address);
+        
+        //first valus is wayIdx
+        std::vector<std::pair<uint, time_t>> timeStamps;
+        for(uint wayIdx = 0; wayIdx < _nWay; ++wayIdx)
+        {
+            timeStamps.push_back(std::make_pair(wayIdx, _cacheDatas[command.index][wayIdx].timeStamp));
+        }
+        
+        auto sortFunc = [](const std::pair<uint, time_t>& left, std::pair<uint, time_t>& right)
+        {
+            return left.second < right.second;
+        };
+        
+        std::sort(timeStamps.begin(), timeStamps.end(), sortFunc);
+        const std::pair<uint, time_t>& replaceTarget = timeStamps[0];
+        
+        uint offset = ((address / 4) / _blockSize) * _blockSize;
+        for(uint i=offset; i<offset + _blockSize; ++i)
+        {
+            CacheEntry& entry = _cacheDatas[command.index][replaceTarget.first].entrys[i - offset];
+            
+            entry.data = _systemMemory[i];
+            entry.tag = command.tag;
+            entry.isEmpty = false;
+        }
+    }
+    
 	uint FetchData(uint address)
 	{
         uint result = 0;
 		CacheLine command = MakeCacheLineCommand(address);
 
+        CacheEntryGroup* entryGroup = nullptr;
         CacheEntry* entry = nullptr;
-		bool isHit = IsValid(command) && IsTagMatch(command, entry);
+		bool isHit = IsValid(command) && IsTagMatch(command, &entry, &entryGroup);
 		if(isHit) //딱히 더 손볼건 없는듯
         {
 			_hitCount++;
@@ -126,29 +221,24 @@ public:
 		else
 		{
 			_missCount++;
-            ASSERT_MSG("not woooooorkkkkkkinnnnggg yeeeeeet");
             
-            ASSERT_COND_MSG((address % 4) != 0, "Error, invalid memory address");
-            uint memData = _systemMemory[address / 4];
+            if( LoadCache(address) == false )
+                Replace(address);
             
-            //가져올때 주변 얘들 다 긁어야하지 않나?
-            //Locality 있잖아.
-            
-            for(uint i=0;  i<_nWay; ++i)
-            {
-                CacheEntry& entry = _cacheDatas[command.index * _cacheSetCount + i];
-                if(entry.isEmpty)
-                {
-                    entry.tag = command.tag;
-                    entry.isEmpty = false;
-                    entry.data = memData;
-                    break;
-                }
-            }
-    
-            result = memData;
+            isHit = IsValid(command) && IsTagMatch(command, &entry, &entryGroup);
+            ASSERT_COND_MSG(isHit, "Error, what the hell");
+            result = entry->data;
 		}
         
+        entryGroup->timeStamp = time(nullptr);
         return result;
 	}
+    
+    void InputData(uint address, uint data)
+    {
+        //캐시 쓰기 정책이란게 걸릴거야 좀.
+        //흠 -_-; 쓰거나 접근할 때 timeStamp 업데이틑 해줬어? 아니. 아직
+        
+        
+    }
 };
