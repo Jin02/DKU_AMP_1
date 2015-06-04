@@ -3,6 +3,7 @@
 #include "Common.h"
 #include <math.h>
 #include <vector>
+#include <time.h>
 
 class NSetCache
 {
@@ -193,10 +194,24 @@ public:
         std::sort(timeStamps.begin(), timeStamps.end(), sortFunc);
         const std::pair<uint, time_t>& replaceTarget = timeStamps[0];
         
+		CacheEntryGroup& group = _cacheDatas[command.index][replaceTarget.first];
+
+		if(group.isRequiredUpdate)
+		{
+			for(uint i=0; i<_blockSize; ++i)
+			{
+				CacheEntry& entry = group.entrys[i];
+
+			}
+
+			group.timeStamp = 0;
+			group.isRequiredUpdate = false;
+		}
+
         uint offset = ((address / 4) / _blockSize) * _blockSize;
         for(uint i=offset; i<offset + _blockSize; ++i)
-        {
-            CacheEntry& entry = _cacheDatas[command.index][replaceTarget.first].entrys[i - offset];
+        {			
+            CacheEntry& entry = group.entrys[i - offset];
             
             entry.data = _systemMemory[i];
             entry.tag = command.tag;
@@ -238,7 +253,25 @@ public:
     {
         //캐시 쓰기 정책이란게 걸릴거야 좀.
         //흠 -_-; 쓰거나 접근할 때 timeStamp 업데이틑 해줬어? 아니. 아직
-        
-        
+        //해볼까? ㅇㅇ 시작해보자
+		//순서를 작성해보자면? 일단, 일단.. 캐시에 접근해봐
+
+		CacheLine command = MakeCacheLineCommand(address);
+
+		CacheEntryGroup* entryGroup = nullptr;
+        CacheEntry* entry = nullptr;
+		bool isHit = IsValid(command) && IsTagMatch(command, &entry, &entryGroup);
+		//힛이라면, 해당 블럭만 변경해주면 될걸? 힛이 아니라면.. 검사를 좀 해봐야지
+		if(isHit)
+		{
+			entry->data = data;
+			entryGroup->isRequiredUpdate = true;
+		}
+		else
+		{
+			//힛이 안되면 메모리를 다시 부르긴 해야해. 변경할 때, 메모리 등록을 해주긴 해야하고
+            if( LoadCache(address) == false )
+                Replace(address);			
+		}
     }
 };
