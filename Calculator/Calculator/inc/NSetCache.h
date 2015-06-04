@@ -5,6 +5,7 @@
 #include <vector>
 #include <time.h>
 
+
 class NSetCache
 {
 public:
@@ -28,11 +29,11 @@ public:
     struct CacheEntryGroup
     {
         time_t          timeStamp;
-        CacheEntry*     entrys;
+        CacheEntry      entry;
         bool            isRequiredUpdate;
         uint            memAddress;
 
-        CacheEntryGroup() : timeStamp(0), entrys(nullptr), isRequiredUpdate(false), memAddress(-1) {}
+        CacheEntryGroup() : timeStamp(0), isRequiredUpdate(false), memAddress(-1) {}
         ~CacheEntryGroup() {}
     };
     
@@ -49,37 +50,25 @@ private:
     
 
 public:
-	NSetCache(uint cacheSize, uint cacheBlockSize, uint nWay, uint* systemMemory) : _nWay(nWay), _systemMemory(systemMemory), _blockSize(cacheBlockSize/4)
+	NSetCache(uint cacheSize, uint cacheBlockSize, uint nWay, uint* systemMemory) : _nWay(nWay), _systemMemory(systemMemory), _blockSize(cacheBlockSize), _hitCount(0), _missCount(0)
 	{
+		auto log2 = [](double n)
+		{
+			return log( n ) / log( 2 );
+		};
 		CacheLine line;
-		line.offset = log(_blockSize);
+		line.offset = log2(_blockSize);
 
 		_cacheSetCount = (cacheSize / _blockSize) / nWay;
-		line.index = log(_cacheSetCount);
+		line.index = log2(_cacheSetCount);
 
-		line.tag = 32 - (line.index - line.offset);
+		line.tag = 32 - (line.index + line.offset);
 
 		_lineInfo = line;
 
-        _cacheDatas = new CacheEntryGroup*[line.index];
+        _cacheDatas = new CacheEntryGroup*[_cacheSetCount + 1];
         for(uint i=0; i<line.index; ++i)
-        {
             _cacheDatas[i] = new CacheEntryGroup[nWay];
-            for(uint j=0; j<nWay; ++j)
-            {
-                _cacheDatas[i][j].entrys = new CacheEntry[line.offset];
-                for(uint k=0; k<line.offset; ++k)
-                {
-                    CacheEntry& entry = _cacheDatas[i][j].entrys[k];
-                    entry.tag = 0;
-                    entry.isEmpty = true;
-                    entry.data = 0;
-                }
-                
-                _cacheDatas[i][j].timeStamp = 0;
-                _cacheDatas[i][j].isRequiredUpdate = false;
-            }
-        }
     }
     
 	~NSetCache()
@@ -99,6 +88,7 @@ public:
 			return result;
 		};     
    
+		ASSERT_COND_MSG((address % 4) == 0, "Error, Invalid address");
 		uint offset = 32 - _lineInfo.tag;
 
 		CacheLine line;
@@ -113,7 +103,7 @@ public:
 	{
 		for(uint i=0; i<_nWay; ++i)
 		{
-            CacheEntry& entry = _cacheDatas[command.index][i].entrys[command.offset];
+            CacheEntry& entry = _cacheDatas[command.index][i].entry;
 			if(entry.isEmpty == false)
             {
                 if(outEntry)
@@ -130,7 +120,7 @@ public:
 	{
 		for(uint i=0; i<_nWay; ++i)
 		{
-            CacheEntry& entry = _cacheDatas[command.index][i].entrys[command.offset];
+            CacheEntry& entry = _cacheDatas[command.index][i].entry;
 
 			if(entry.tag == command.tag)
             {
@@ -147,29 +137,22 @@ public:
     bool LoadCache(uint address)
     {
         CacheLine command = MakeCacheLineCommand(address);
-        ASSERT_COND_MSG((address % 4) != 0, "Error, invalid memory address");
-        uint offset = ((address / 4) / _blockSize) * _blockSize;
+        ASSERT_COND_MSG((address % 4) == 0, "Error, invalid memory address");
+        uint offset = (address / _blockSize) * _blockSize;
 
         bool success = false;
         for(uint wayIdx = 0; wayIdx < _nWay; ++wayIdx)
         {
-            CacheEntry& firstEntry = _cacheDatas[command.index][wayIdx].entrys[0];
-            if(firstEntry.isEmpty)
-            {
-                for(uint i=offset; i<offset + _blockSize; ++i)
-                {
-                    CacheEntry& entry = _cacheDatas[command.index][wayIdx].entrys[i - offset];
+			CacheEntry& entry = _cacheDatas[command.index][wayIdx].entry;
+			if(entry.isEmpty)
+			{
+				entry.data = _systemMemory[0];
+				entry.tag = command.tag;
+				entry.isEmpty = false;
+				success = true;
 
-                    entry.data = _systemMemory[i];
-                    entry.tag = command.tag;
-                    entry.isEmpty = false;
-                    success = true;
-                }
-                
-                success = true;
-            }
-
-            if(success) break;
+				break;
+			}
         }
         
         return success;
@@ -201,7 +184,7 @@ public:
 		{
 			for(uint i=0; i<_blockSize; ++i)
 			{
-				CacheEntry& entry = group.entrys[i];
+				CacheEntry& entry = group.entry;
                 _systemMemory[group.memAddress + i] = entry.data;
 			}
 
@@ -212,7 +195,7 @@ public:
         uint offset = ((address / 4) / _blockSize) * _blockSize;
         for(uint i=offset; i<offset + _blockSize; ++i)
         {
-            CacheEntry& entry = group.entrys[i - offset];
+            CacheEntry& entry = group.entry;
             
             entry.data = _systemMemory[i];
             entry.tag = command.tag;
