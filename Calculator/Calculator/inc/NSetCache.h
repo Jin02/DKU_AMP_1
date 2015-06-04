@@ -30,8 +30,9 @@ public:
         time_t          timeStamp;
         CacheEntry*     entrys;
         bool            isRequiredUpdate;
+        uint            memAddress;
 
-        CacheEntryGroup() : timeStamp(0), entrys(nullptr) {}
+        CacheEntryGroup() : timeStamp(0), entrys(nullptr), isRequiredUpdate(false), memAddress(-1) {}
         ~CacheEntryGroup() {}
     };
     
@@ -201,7 +202,7 @@ public:
 			for(uint i=0; i<_blockSize; ++i)
 			{
 				CacheEntry& entry = group.entrys[i];
-
+                _systemMemory[group.memAddress + i] = entry.data;
 			}
 
 			group.timeStamp = 0;
@@ -210,13 +211,14 @@ public:
 
         uint offset = ((address / 4) / _blockSize) * _blockSize;
         for(uint i=offset; i<offset + _blockSize; ++i)
-        {			
+        {
             CacheEntry& entry = group.entrys[i - offset];
             
             entry.data = _systemMemory[i];
             entry.tag = command.tag;
             entry.isEmpty = false;
         }
+        group.memAddress = offset * 4;
     }
     
 	uint FetchData(uint address)
@@ -251,17 +253,12 @@ public:
     
     void InputData(uint address, uint data)
     {
-        //캐시 쓰기 정책이란게 걸릴거야 좀.
-        //흠 -_-; 쓰거나 접근할 때 timeStamp 업데이틑 해줬어? 아니. 아직
-        //해볼까? ㅇㅇ 시작해보자
-		//순서를 작성해보자면? 일단, 일단.. 캐시에 접근해봐
-
 		CacheLine command = MakeCacheLineCommand(address);
 
 		CacheEntryGroup* entryGroup = nullptr;
         CacheEntry* entry = nullptr;
 		bool isHit = IsValid(command) && IsTagMatch(command, &entry, &entryGroup);
-		//힛이라면, 해당 블럭만 변경해주면 될걸? 힛이 아니라면.. 검사를 좀 해봐야지
+
 		if(isHit)
 		{
 			entry->data = data;
@@ -269,9 +266,14 @@ public:
 		}
 		else
 		{
-			//힛이 안되면 메모리를 다시 부르긴 해야해. 변경할 때, 메모리 등록을 해주긴 해야하고
             if( LoadCache(address) == false )
-                Replace(address);			
+                Replace(address);
+            
+            isHit = IsValid(command) && IsTagMatch(command, &entry, &entryGroup);
+            ASSERT_COND_MSG(isHit, "Error, what the hell");
+            entry->data = data;
 		}
+        
+        entryGroup->timeStamp = time(nullptr);
     }
 };
