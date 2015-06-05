@@ -4,6 +4,7 @@
 #include <math.h>
 #include <vector>
 #include <time.h>
+#include <memory.h>
 
 
 class NSetCache
@@ -18,27 +19,27 @@ public:
 
 	struct CacheEntry
 	{
-		uint 		tag;
-		uint* 		datas;
-		bool 		isEmpty;
+		uint            tag;
+		uint*           datas;
+		bool            isEmpty;
 		time_t          timeStamp;
 		bool            isRequiredUpdate;
 		uint            memAddress;
 
-		CacheEntry() : tag(0), data(0), isEmpty(true), timeStamp(0), isRequiredUpdate(false), memAddress(-1) {}
+		CacheEntry() : tag(0), datas(0), isEmpty(true), timeStamp(0), isRequiredUpdate(false), memAddress(-1) {}
 		~CacheEntry() {}
 	};
 
 
 private:
 	CacheLine			_lineInfo;
-	CacheEntryGroup**		_cacheDatas;
+	CacheEntry**		_cacheDatas;
 	uint				_nWay;
 	uint				_blockSize;
 	uint				_cacheSetCount;
 	uint				_hitCount;
 	uint				_missCount;
-	uint*       			_systemMemory;
+	uint*       		_systemMemory;
 
 
 public:
@@ -63,8 +64,11 @@ public:
 		for (uint i = 0; i < _cacheSetCount + 1; ++i)
 		{
 			_cacheDatas[i] = new CacheEntry[nWay];
-			_cacheData[i].datas = new uint[_blockSize];
-			mmemset(_cacheData[i].datas, 0, sizeof(uint) * _blockSize);
+            for(uint wayIdx = 0; wayIdx < nWay; ++wayIdx)
+            {
+                _cacheDatas[i][wayIdx].datas = new uint[_blockSize];
+                memset(_cacheDatas[i][wayIdx].datas, 0, sizeof(uint) * _blockSize);
+            }
 		}
 	}
 
@@ -75,23 +79,29 @@ public:
 public:
 	CacheLine MakeCacheLineCommand(uint address)
 	{
-		auto FillBit = [](unsigned int from, unsigned int to)
+		auto FillBit = [](unsigned int offset, unsigned int length)
 		{
-			uint result = 0;
+			uint result = 1;
 
-			for (uint i = from; i <= to; ++i)
-				result |= (1 << (i + from));
-			result <<= from;
-			return result;
+			for (uint i = 0; i < length; ++i)
+				result |= (1 << i);
+			
+            result <<= offset;
+            return result;
 		};
 
 		ASSERT_COND_MSG((address % 4) == 0, "Error, Invalid address");
 		uint offset = 32 - _lineInfo.tag;
 
 		CacheLine line;
-		line.tag = (address & FillBit(_lineInfo.tag, offset)) >> offset;
-		line.index = (address & FillBit(_lineInfo.index, _lineInfo.offset)) >> _lineInfo.offset;
-		line.offset = (address & FillBit(_lineInfo.offset, 0));
+        uint mask = FillBit(offset, _lineInfo.tag);
+		line.tag = (address & mask) >> offset;
+        
+        mask = FillBit(_lineInfo.offset, _lineInfo.index);
+		line.index = (address & mask) >> _lineInfo.offset;
+
+        mask = FillBit(0, _lineInfo.offset);
+        line.offset = (address & mask);
 
 		return line;
 	}
@@ -145,11 +155,11 @@ public:
 			{
 				entry.tag = command.tag;
 				entry.isEmpty = false;
-				entry.isRequirdUpdate = false;
+				entry.isRequiredUpdate = false;
 				entry.timeStamp = time(nullptr);
 
 				uint offset = (address / _blockSize) * _blockSize;
-				memcpy(entry.datas, &entry.datas[offset / 4], sizeof(uint) * _blockSize);
+				memcpy(entry.datas, &_systemMemory[offset / 4], sizeof(uint) * _blockSize);
 
 				entry.memAddress = offset;
 				success = true;
@@ -187,7 +197,7 @@ public:
 		if (entry.isRequiredUpdate)
 		{
 			uint writeAddress = entry.memAddress;
-			memcpy(&_systemMem[writeAddress / 4], entry.datas, sizeof(uint) * _blockSize);
+			memcpy(&_systemMemory[writeAddress / 4], entry.datas, sizeof(uint) * _blockSize);
 			
 			entry.isRequiredUpdate = false;
 			entry.isEmpty = true;
@@ -202,12 +212,12 @@ public:
 		CacheLine command = MakeCacheLineCommand(address);
 
 		CacheEntry* entry = nullptr;
-		bool isHit = IsValid(command) && IsTagMatch(command, &entry, &entryGroup);
+		bool isHit = IsValid(command) && IsTagMatch(command, &entry);
 		if (isHit) //딱히 더 손볼건 없는듯
 		{
 			_hitCount++;
 			ASSERT_COND_MSG(entry, "Error, what the");
-			result = entry->datas[command.offset];
+			result = entry->datas[command.offset / 4];
 		}
 		else
 		{
@@ -218,10 +228,10 @@ public:
 
 			isHit = IsValid(command) && IsTagMatch(command, &entry);
 			ASSERT_COND_MSG(isHit, "Error, what the hell");
-			result = entry->datas[command.offset];
+			result = entry->datas[command.offset / 4];
 		}
 
-		entryGroup->timeStamp = time(nullptr);
+		entry->timeStamp = time(nullptr);
 		return result;
 	}
 
@@ -229,10 +239,8 @@ public:
 	{
 		CacheLine command = MakeCacheLineCommand(address);
 
-		CacheEntryGroup* entryGroup = nullptr;
 		CacheEntry* entry = nullptr;
-
-		bool isHit = IsValid(command) && IsTagMatch(command, &entry, &entryGroup);
+		bool isHit = IsValid(command) && IsTagMatch(command, &entry);
 
 		if (isHit)
 		{
@@ -245,11 +253,11 @@ public:
 			if (LoadCache(address) == false)
 				ASSERT_COND_MSG(Replace(address), "Error, yeah");
 
-			isHit = IsValid(command) && IsTagMatch(command, &entry, &entryGroup);
+			isHit = IsValid(command) && IsTagMatch(command, &entry);
 			ASSERT_COND_MSG(isHit, "Error, what the hell");
 		}
 
-		entry->datas[command.offset] = data;
+		entry->datas[command.offset / 4] = data;
 		entry->isRequiredUpdate = true;
 		entry->timeStamp = time(nullptr);
 	}
