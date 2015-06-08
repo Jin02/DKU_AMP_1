@@ -32,6 +32,7 @@ System::~System()
 	for(auto iter : _insts)
 		SAFE_DELETE(iter.pip);
 
+    SAFE_DELETE(_cache);
 	_insts.clear();
 }
 
@@ -74,6 +75,12 @@ void System::Load(const std::string& path)
 		for(int i=0; i<length / 4; ++i)
 			_processorMemory[i] = LittleEndianToBigEndian(_processorMemory[i]);
 	}
+}
+
+void System::InitializeCache(uint cacheSize, uint cacheBlockSize, uint nWay)
+{
+    SAFE_DELETE(_cache);
+    _cache = new NSetCache(cacheSize, cacheBlockSize, nWay, _processorMemory.data());
 }
 
 void System::Run()
@@ -187,18 +194,21 @@ void System::RunCycle(const InstructionControllerInfo& stage)
 unsigned int System::GetDataFromMemory(uint address)
 {
     ASSERT_COND_MSG((address % 4) == 0, "strange address");
-    
-    ASSERT_COND_MSG(_cache, "Where is your cache");
-    uint data = _cache->FetchData(address);
-    
-    return data;
-    //return _processorMemory[address/4];
+    return _cache ? _cache->FetchData(address) : _processorMemory[address/4];
 }
 
 void System::SetDataToMemory(uint address, unsigned int data)
 {
     ASSERT_COND_MSG((address % 4) == 0, "strange address");
-    _processorMemory[address/4] = data;
+
+    if(_cache)
+    {
+        _cache->InputData(address, data);
+    }
+    else
+    {
+        _processorMemory[address/4] = data;
+    }
 }
 
 void System::CancelInstructionController(uint currentCycle)

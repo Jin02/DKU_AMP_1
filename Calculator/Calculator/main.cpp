@@ -15,22 +15,22 @@
 
 int main(int argc, const char * argv[])
 {
-    uint arr[100] = {0, };
-    
-    for(uint i = 0; i < 100; ++i)
-        arr[i] = 100 + i + 1;
-    
-    NSetCache test(256, 16, 2, arr);
-    test.FetchData(0);
-    test.InputData(4, 1);
-    test.FetchData(8);
-    test.FetchData(4);
-    test.InputData(16, 2);
-    test.FetchData(20);
-    test.FetchData(16);
-    test.InputData(32, 2);
-    test.FetchData(32);
-    test.FetchData(0);
+//    uint arr[100] = {0, };
+//    
+//    for(uint i = 0; i < 100; ++i)
+//        arr[i] = 100 + i + 1;
+//    
+//    NSetCache test(256, 16, 2, arr);
+//    test.FetchData(0);
+//    test.InputData(4, 1);
+//    test.FetchData(8);
+//    test.FetchData(4);
+//    test.InputData(16, 2);
+//    test.FetchData(20);
+//    test.FetchData(16);
+//    test.InputData(32, 2);
+//    test.FetchData(32);
+//    test.FetchData(0);
     
     GlobalDumpManagerAddLogNewLine("--------- Init ---------");
     System* system = System::GetInstance();

@@ -3,6 +3,63 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "PipelineStage::RunStage():PipelineStage.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "_instructionValue">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "StoreWord::Execution(Instruction const*, Instruction const*):Store.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "_rsData">
+            </PersistentString>
+            <PersistentString
+               value = "_rsData + _immediate">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "System::GetDataFromMemory(unsigned int):System.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "_cache">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "JumpAndLink::Execution(Instruction const*, Instruction const*):JFormatInstruction.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "_pc">
+            </PersistentString>
+            <PersistentString
+               value = "_address">
+            </PersistentString>
+            <PersistentString
+               value = "_executionResult">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "PipelineStage::Fetch():PipelineStage.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "_pc">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "NSetCache::MakeCacheLineCommand(unsigned int):NSetCache.h">
+         <PersistentStrings>
+            <PersistentString
+               value = "address">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "System::Run():System.cpp">
          <PersistentStrings>
             <PersistentString
@@ -20,31 +77,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "StoreWord::Execution(Instruction const*, Instruction const*):Store.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "_rsData">
-            </PersistentString>
-            <PersistentString
-               value = "_rsData + _immediate">
-            </PersistentString>
-         </PersistentStrings>
+         contextName = "NSetCache::LoadCache(unsigned int):NSetCache.h">
       </ContextState>
       <ContextState
-         contextName = "PipelineStage::Fetch():PipelineStage.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "_pc">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "PipelineStage::RunStage():PipelineStage.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "_instructionValue">
-            </PersistentString>
-         </PersistentStrings>
+         contextName = "NSetCache::FetchData(unsigned int):NSetCache.h">
       </ContextState>
       <ContextState
          contextName = "System::RunCycle():System.cpp">
@@ -57,20 +93,6 @@
             </PersistentString>
             <PersistentString
                value = "front-&gt;GetProgramCounter()">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "JumpAndLink::Execution(Instruction const*, Instruction const*):JFormatInstruction.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "_pc">
-            </PersistentString>
-            <PersistentString
-               value = "_executionResult">
-            </PersistentString>
-            <PersistentString
-               value = "_address">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

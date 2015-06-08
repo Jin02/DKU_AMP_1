@@ -57,6 +57,7 @@ private:
 	void CancelInstructionController(uint currentCycle);
 
 public:
+    void InitializeCache(uint cacheSize, uint cacheBlockSize, uint nWay);
     void CreateCache(uint cacheSize, uint cacheBlockSize, uint nWay);
 	void Load(const std::string& path);
 
