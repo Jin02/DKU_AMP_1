@@ -1,4 +1,5 @@
 #include "NSetCache.h"
+#include "DumpLogManager.h"
 
 NSetCache::NSetCache(uint cacheSize, uint cacheBlockSize, uint nWay, uint* systemMemory)
 : _nWay(nWay), _systemMemory(systemMemory), _blockSize(cacheBlockSize), _hitCount(0), _missCount(0)
@@ -74,7 +75,7 @@ bool NSetCache::IsValid(const CacheLine& command, CacheEntry** outEntry)
             if (outEntry)
                 (*outEntry) = &entry;
             
-            return true;
+            return (entry.isEmpty == false);
         }
     }
     
@@ -92,7 +93,7 @@ bool NSetCache::IsTagMatch(const CacheLine& command, CacheEntry** outEntry)
             if (outEntry)
                 (*outEntry) = &entry;
             
-            return true;
+            return (entry.isEmpty == false);
         }
     }
     
@@ -115,7 +116,7 @@ bool NSetCache::LoadCache(uint address)
             entry.isRequiredUpdate = false;
             entry.timeStamp = time(nullptr);
             
-            memcpy(entry.datas, &_systemMemory[offset / 4], sizeof(uint) * _blockSize);
+            memcpy(entry.datas, &_systemMemory[offset / 4], _blockSize);
             
             entry.memAddress = offset;
             success = true;
@@ -134,9 +135,13 @@ bool NSetCache::Replace(uint address)
     
     //first valus is wayIdx
     std::vector<std::pair<uint, time_t>> timeStamps;
-    
+
+    bool isAllReadCache = false;
     for (uint wayIdx = 0; wayIdx < _nWay; ++wayIdx)
+    {
         timeStamps.push_back(std::make_pair(wayIdx, _cacheDatas[command.index][wayIdx].timeStamp));
+        isAllReadCache = (_cacheDatas[command.index][wayIdx].isRequiredUpdate == false);
+    }
     
     auto sortFunc = [](const std::pair<uint, time_t>& left, std::pair<uint, time_t>& right)
     {
@@ -144,16 +149,15 @@ bool NSetCache::Replace(uint address)
     };
     
     std::sort(timeStamps.begin(), timeStamps.end(), sortFunc);
-    
     const std::pair<uint, time_t>& replaceTarget = timeStamps[0];
     
     //first value is way idx
     CacheEntry& entry = _cacheDatas[command.index][replaceTarget.first];
     
-    if (entry.isRequiredUpdate)
+    if (entry.isRequiredUpdate || isAllReadCache)
     {
         uint writeAddress = entry.memAddress;
-        memcpy(&_systemMemory[writeAddress / 4], entry.datas, sizeof(uint) * _blockSize);
+        memcpy(&_systemMemory[writeAddress / 4], entry.datas, _blockSize);
         
         entry.isRequiredUpdate = false;
         entry.isEmpty = true;
