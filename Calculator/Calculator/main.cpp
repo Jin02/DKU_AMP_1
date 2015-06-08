@@ -39,7 +39,8 @@ int main(int argc, const char * argv[])
 	GlobalDumpManagerAddLogNewLine("Load .bin file : " + fileName);
 	system->Load(fileName);
 	GlobalDumpManagerAddLogNewLine("--------- Done ---------\n\n");
-
+	GlobalDumpManagerAddLogNewLine("--------- Init Cache ---------");
+    system->InitializeCache(256, 64, 2);
 	GlobalDumpManagerAddLogNewLine("--------- System Start ---------");
 	system->Run();
 	GlobalDumpManagerAddLogNewLine("--------- System End ---------");
