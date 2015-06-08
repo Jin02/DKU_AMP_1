@@ -168,6 +168,7 @@ bool NSetCache::Replace(uint address)
 
 uint NSetCache::FetchData(uint address)
 {
+    GlobalDumpLogManager->AddLog("Cache Fetch Data\n");
     uint result = 0;
     CacheLine command = MakeCacheLineCommand(address);
     
@@ -175,13 +176,13 @@ uint NSetCache::FetchData(uint address)
     bool isHit = IsValid(command) && IsTagMatch(command, &entry);
     if (isHit) //딱히 더 손볼건 없는듯
     {
-        _hitCount++;
+        GlobalDumpLogManager->AddLog("Cache Hit\t\t| Current Count = " + std::to_string(++_hitCount), true);
         ASSERT_COND_MSG(entry, "Error, what the");
         result = entry->datas[command.offset / 4];
     }
     else
     {
-        _missCount++;
+        GlobalDumpLogManager->AddLog("Cache Miss\t\t| Current Count = " + std::to_string(++_missCount), true);
         
         if (LoadCache(address) == false)
             ASSERT_COND_MSG(Replace(address), "Error, where is your memory?");
@@ -190,6 +191,8 @@ uint NSetCache::FetchData(uint address)
         ASSERT_COND_MSG(isHit, "Error, Invalid result value");
         result = entry->datas[command.offset / 4];
     }
+    
+    GlobalDumpLogManager->AddLog("Current Hit Rate\t| " + std::to_string( (float)_hitCount / (float)(_hitCount + _missCount)), true);
     
     entry->timeStamp = time(nullptr);
     return result;
@@ -204,11 +207,11 @@ void NSetCache::InputData(uint address, uint data)
     
     if (isHit)
     {
-        _hitCount++;
+        GlobalDumpLogManager->AddLog("Cache Hit\t\t| Current Count = " + std::to_string(++_hitCount), true);
     }
     else
     {
-        _missCount++;
+        GlobalDumpLogManager->AddLog("Cache Miss\t\t| Current Count = " + std::to_string(++_missCount), true);
         
         if (LoadCache(address) == false)
             ASSERT_COND_MSG(Replace(address), "Error, where is your memory?");
@@ -216,6 +219,8 @@ void NSetCache::InputData(uint address, uint data)
         isHit = IsValid(command) && IsTagMatch(command, &entry);
         ASSERT_COND_MSG(isHit, "Error, Invalid result value");
     }
+    
+    GlobalDumpLogManager->AddLog("Current Hit Rate\t| " + std::to_string( (float)_hitCount / (float)(_hitCount + _missCount)), true);
     
     entry->datas[command.offset / 4] = data;
     entry->isRequiredUpdate = true;

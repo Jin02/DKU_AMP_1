@@ -80,6 +80,9 @@ void System::Load(const std::string& path)
 void System::InitializeCache(uint cacheSize, uint cacheBlockSize, uint nWay)
 {
     SAFE_DELETE(_cache);
+    
+    GlobalDumpLogManager->AddLog("Cache Size\t\t| " + std::to_string(cacheSize) + "\nCache Block Size\t| " + std::to_string(cacheBlockSize) + "\nCache Ways\t\t| " + std::to_string(nWay) + "\n");
+
     _cache = new NSetCache(cacheSize, cacheBlockSize, nWay, _processorMemory.data());
 }
 
@@ -90,7 +93,7 @@ void System::Run()
 		GlobalDumpLogManager->AddLog("-----------------------------------------------", true);
 		{
 			bool end = (_programCounter == 0xffffffff);
-			GlobalDumpLogManager->AddLog("Cycle Num\t| " + std::to_string(_cycle++), true);
+			GlobalDumpLogManager->AddLog("Cycle Num\t\t| " + std::to_string(_cycle++), true);
 
 			if(end == false)
 			{

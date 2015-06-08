@@ -12,7 +12,7 @@ RFormatInstruction::RFormatInstruction(unsigned int rs, unsigned int rt, unsigne
     _rtData = system->GetDataFromRegister(rt);
 
 	char buff[256] = {0, };
-	sprintf(buff, "R Type\t\t| rsData = 0x%x = register[rs=0x%x]  / rtData = 0x%x = register[rt=0x%x]", _rsData, rs, _rtData, rt);
+	sprintf(buff, "R Type\t\t\t| rsData = 0x%x = register[rs=0x%x]  / rtData = 0x%x = register[rt=0x%x]", _rsData, rs, _rtData, rt);
 	GlobalDumpLogManager->AddLog(buff, true);
 }
 

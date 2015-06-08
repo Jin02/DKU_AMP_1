@@ -176,7 +176,7 @@ void InstructionController::Decode(uint instruction)
         mask				= FillBit(17, 31, 15);
         uint branchAddr     = FillBit(17, 31, 15) | (immediate << 2);
         
-        sprintf(buff, "I Type\t\t| opcode 0x%x / signExtImm 0x%x / zeroExtImm 0x%x / branchAddr 0x%x", opCode, signExtImm, zeroExtImm, branchAddr);
+        sprintf(buff, "I Type\t\t\t| opcode 0x%x / signExtImm 0x%x / zeroExtImm 0x%x / branchAddr 0x%x", opCode, signExtImm, zeroExtImm, branchAddr);
         GlobalDumpLogManager->AddLog(buff, true);
         
 		std::string backCode = " $" + std::to_string(rt) + ", $" + std::to_string(rs) + ", " + std::to_string((short)immediate);
@@ -266,28 +266,28 @@ void InstructionController::RunStage()
     if(_state == State::Fetch)
 	{
         _instructionValue = Fetch();
-		GlobalDumpLogManager->AddLog("Fetch State\t| instruction Value is 0x" + GlobalDumpLogManager->UIntToHexString(_instructionValue), true);
+		GlobalDumpLogManager->AddLog("Fetch State\t\t| instruction Value is 0x" + GlobalDumpLogManager->UIntToHexString(_instructionValue), true);
 	}
     else if(_state == State::Decode)
 	{
-		GlobalDumpLogManager->AddLog("Decode State\t| instruction Value is 0x" + GlobalDumpLogManager->UIntToHexString(_instructionValue), true);
+		GlobalDumpLogManager->AddLog("Decode State\t\t| instruction Value is 0x" + GlobalDumpLogManager->UIntToHexString(_instructionValue), true);
 		Decode(_instructionValue);
 	}
     else if(_state == State::Execution)
 	{
-		GlobalDumpLogManager->AddLog("Execution State\t| instruction is " + _instruction->GetName(), true);
+		GlobalDumpLogManager->AddLog("Execution State\t\t| instruction is " + _instruction->GetName(), true);
 		Execution(_prev2StepPip, _prev1StepPip);
 		GlobalDumpLogManager->AddLog("\n");
 	}
     else if(_state == State::Memory)
 	{		
-		GlobalDumpLogManager->AddLog("Memory State\t| instruction is " + _instruction->GetName(), true);
+		GlobalDumpLogManager->AddLog("Memory State\t\t| instruction is " + _instruction->GetName(), true);
 		Memory(_prev2StepPip, _prev1StepPip);
 		GlobalDumpLogManager->AddLog("\n");
 	}
     else if(_state == State::WriteBack)
 	{
-		GlobalDumpLogManager->AddLog("WriteBack State\t| instruction is " + _instruction->GetName(), true);
+		GlobalDumpLogManager->AddLog("WriteBack State\t\t| instruction is " + _instruction->GetName(), true);
 		WriteBack();
 		GlobalDumpLogManager->AddLog("\n");
 	}

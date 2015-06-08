@@ -8,2037 +8,2538 @@ This system is based little endian. so, I will convert this data to big endian f
 --------- Done ---------
 
 
+--------- Init Cache ---------
+Cache Size		| 256
+Cache Block Size	| 64
+Cache Ways		| 2
+----------- Done -------------
+
+
 --------- System Start ---------
 -----------------------------------------------
-Cycle Num	| 0
-Fetch State	| instruction Value is 0x0x27bdffd8
+Cycle Num		| 0
+Cache Fetch Data
+Cache Miss		| Current Count = 1
+Current Hit Rate	| 0.000000
+Fetch State		| instruction Value is 0x0x27bdffd8
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 1
-Decode State	| instruction Value is 0x0x27bdffd8
-I Type		| opcode 0x9 / signExtImm 0xffffffd8 / zeroExtImm 0xffd8 / branchAddr 0xffffff60
-I Type		| rsData = 0x8000 = register[rs=0x1d]  / rt = 0x1d / immediate = 0xffffffd8
-Instruction	| AddImmediateUnsigned
+Cycle Num		| 1
+Decode State		| instruction Value is 0x0x27bdffd8
+I Type			| opcode 0x9 / signExtImm 0xffffffd8 / zeroExtImm 0xffd8 / branchAddr 0xffffff60
+I Type			| rsData = 0x8000 = register[rs=0x1d]  / rt = 0x1d / immediate = 0xffffffd8
+Instruction		| AddImmediateUnsigned
 
-Fetch State	| instruction Value is 0x0xafbf0024
+Cache Fetch Data
+Cache Hit		| Current Count = 1
+Current Hit Rate	| 0.500000
+Fetch State		| instruction Value is 0x0xafbf0024
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 2
-Execution State	| instruction is AddImmediateUnsigned
+Cycle Num		| 2
+Execution State		| instruction is AddImmediateUnsigned
 ExecutionResult = 0x7fd8 / ExecutionResult = R[rs] + SignExtImmediate
 
-Decode State	| instruction Value is 0x0xafbf0024
-I Type		| opcode 0x2b / signExtImm 0x24 / zeroExtImm 0x24 / branchAddr 0x90
-I Type		| rsData = 0x8000 = register[rs=0x1d]  / rt = 0x1f / immediate = 0x24
-Instruction	| StoreWord
+Decode State		| instruction Value is 0x0xafbf0024
+I Type			| opcode 0x2b / signExtImm 0x24 / zeroExtImm 0x24 / branchAddr 0x90
+I Type			| rsData = 0x8000 = register[rs=0x1d]  / rt = 0x1f / immediate = 0x24
+Instruction		| StoreWord
 
-Fetch State	| instruction Value is 0x0xafbe0020
+Cache Fetch Data
+Cache Hit		| Current Count = 2
+Current Hit Rate	| 0.666667
+Fetch State		| instruction Value is 0x0xafbe0020
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 3
-Memory State	| instruction is AddImmediateUnsigned
+Cycle Num		| 3
+Memory State		| instruction is AddImmediateUnsigned
 
-Execution State	| instruction is StoreWord
+Execution State		| instruction is StoreWord
 ExecutionResult = 0x7ffc / ExecutionResult = R[rs] + SignExtImm
 
-Decode State	| instruction Value is 0x0xafbe0020
-I Type		| opcode 0x2b / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
-I Type		| rsData = 0x8000 = register[rs=0x1d]  / rt = 0x1e / immediate = 0x20
-Instruction	| StoreWord
+Decode State		| instruction Value is 0x0xafbe0020
+I Type			| opcode 0x2b / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
+I Type			| rsData = 0x8000 = register[rs=0x1d]  / rt = 0x1e / immediate = 0x20
+Instruction		| StoreWord
 
-Fetch State	| instruction Value is 0x0x3a0f021
+Cache Fetch Data
+Cache Hit		| Current Count = 3
+Current Hit Rate	| 0.750000
+Fetch State		| instruction Value is 0x0x3a0f021
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 4
-WriteBack State	| instruction is AddImmediateUnsigned
+Cycle Num		| 4
+WriteBack State		| instruction is AddImmediateUnsigned
 R[rt=0x1d] = 0x7fd8 / ExecutionResult 
 
-Memory State	| instruction is StoreWord
+Memory State		| instruction is StoreWord
+Cache Miss		| Current Count = 2
+Current Hit Rate	| 0.600000
 M[R[rs] + SignExtImm] = R[rt]
 M[(R[29](0x7fd8) + 0x24) = 0x7ffc] = R[31](0xffffffff)
 
-Execution State	| instruction is StoreWord
+Execution State		| instruction is StoreWord
 ExecutionResult = 0x7ff8 / ExecutionResult = R[rs] + SignExtImm
 
-Decode State	| instruction Value is 0x0x3a0f021
+Decode State		| instruction Value is 0x0x3a0f021
 R Type		| rd 0x1e / rs 0x1d / rt 0x0 / shamt 0x0 / funct 0x21
-R Type		| rsData = 0x7fd8 = register[rs=0x1d]  / rtData = 0x0 = register[rt=0x0]
-Instruction	| AddUnsigned
+R Type			| rsData = 0x7fd8 = register[rs=0x1d]  / rtData = 0x0 = register[rt=0x0]
+Instruction		| AddUnsigned
 
-Fetch State	| instruction Value is 0x0xafc00018
+Cache Fetch Data
+Cache Hit		| Current Count = 4
+Current Hit Rate	| 0.666667
+Fetch State		| instruction Value is 0x0xafc00018
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 5
-WriteBack State	| instruction is StoreWord
+Cycle Num		| 5
+WriteBack State		| instruction is StoreWord
 
-Memory State	| instruction is StoreWord
+Memory State		| instruction is StoreWord
+Cache Hit		| Current Count = 5
+Current Hit Rate	| 0.714286
 M[R[rs] + SignExtImm] = R[rt]
 M[(R[29](0x7fd8) + 0x20) = 0x7ff8] = R[30](0x0)
 
-Execution State	| instruction is AddUnsigned
+Execution State		| instruction is AddUnsigned
 ExecutionResult = 0x7fd8 / ExecutionResult = R[rs] + R[rt]
 
-Decode State	| instruction Value is 0x0xafc00018
-I Type		| opcode 0x2b / signExtImm 0x18 / zeroExtImm 0x18 / branchAddr 0x60
-I Type		| rsData = 0x0 = register[rs=0x1e]  / rt = 0x0 / immediate = 0x18
-Instruction	| StoreWord
+Decode State		| instruction Value is 0x0xafc00018
+I Type			| opcode 0x2b / signExtImm 0x18 / zeroExtImm 0x18 / branchAddr 0x60
+I Type			| rsData = 0x0 = register[rs=0x1e]  / rt = 0x0 / immediate = 0x18
+Instruction		| StoreWord
 
-Fetch State	| instruction Value is 0x0x24040005
+Cache Fetch Data
+Cache Hit		| Current Count = 6
+Current Hit Rate	| 0.750000
+Fetch State		| instruction Value is 0x0x24040005
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 6
-WriteBack State	| instruction is StoreWord
+Cycle Num		| 6
+WriteBack State		| instruction is StoreWord
 
-Memory State	| instruction is AddUnsigned
+Memory State		| instruction is AddUnsigned
 
-Execution State	| instruction is StoreWord
+Execution State		| instruction is StoreWord
 ExecutionResult = 0x7ff0 / ExecutionResult = R[rs] + SignExtImm
 
-Decode State	| instruction Value is 0x0x24040005
-I Type		| opcode 0x9 / signExtImm 0x5 / zeroExtImm 0x5 / branchAddr 0x14
-I Type		| rsData = 0x0 = register[rs=0x0]  / rt = 0x4 / immediate = 0x5
-Instruction	| AddImmediateUnsigned
+Decode State		| instruction Value is 0x0x24040005
+I Type			| opcode 0x9 / signExtImm 0x5 / zeroExtImm 0x5 / branchAddr 0x14
+I Type			| rsData = 0x0 = register[rs=0x0]  / rt = 0x4 / immediate = 0x5
+Instruction		| AddImmediateUnsigned
 
-Fetch State	| instruction Value is 0x0xc000010
+Cache Fetch Data
+Cache Hit		| Current Count = 7
+Current Hit Rate	| 0.777778
+Fetch State		| instruction Value is 0x0xc000010
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 7
-WriteBack State	| instruction is AddUnsigned
+Cycle Num		| 7
+WriteBack State		| instruction is AddUnsigned
 R[rd=0x1e] = 0x7fd8
 
-Memory State	| instruction is StoreWord
+Memory State		| instruction is StoreWord
+Cache Hit		| Current Count = 8
+Current Hit Rate	| 0.800000
 M[R[rs] + SignExtImm] = R[rt]
 M[(R[30](0x7fd8) + 0x18) = 0x7ff0] = R[0](0x0)
 
-Execution State	| instruction is AddImmediateUnsigned
+Execution State		| instruction is AddImmediateUnsigned
 ExecutionResult = 0x5 / ExecutionResult = R[rs] + SignExtImmediate
 
-Decode State	| instruction Value is 0x0xc000010
+Decode State		| instruction Value is 0x0xc000010
 J Type		| opcode 0x3 / address 0x40
 J Type		| address = 0x40
-Instruction	| JumpAndLink
+Instruction		| JumpAndLink
 
-Fetch State	| instruction Value is 0x0x0
+Cache Fetch Data
+Cache Hit		| Current Count = 9
+Current Hit Rate	| 0.818182
+Fetch State		| instruction Value is 0x0x0
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 8
-WriteBack State	| instruction is StoreWord
+Cycle Num		| 8
+WriteBack State		| instruction is StoreWord
 
-Memory State	| instruction is AddImmediateUnsigned
+Memory State		| instruction is AddImmediateUnsigned
 
-Execution State	| instruction is JumpAndLink
+Execution State		| instruction is JumpAndLink
 R[31] = PC + 8; PC = JumpAddr
 R[31] = 0x20; PC = 0x40
 
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 9
-WriteBack State	| instruction is AddImmediateUnsigned
+Cycle Num		| 9
+WriteBack State		| instruction is AddImmediateUnsigned
 R[rt=0x4] = 0x5 / ExecutionResult 
 
-Memory State	| instruction is JumpAndLink
+Memory State		| instruction is JumpAndLink
 
-Fetch State	| instruction Value is 0x0x27bdffe0
+Cache Fetch Data
+Cache Miss		| Current Count = 3
+Current Hit Rate	| 0.750000
+Fetch State		| instruction Value is 0x0x27bdffe0
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 10
-WriteBack State	| instruction is JumpAndLink
+Cycle Num		| 10
+WriteBack State		| instruction is JumpAndLink
 
-Decode State	| instruction Value is 0x0x27bdffe0
-I Type		| opcode 0x9 / signExtImm 0xffffffe0 / zeroExtImm 0xffe0 / branchAddr 0xffffff80
-I Type		| rsData = 0x7fd8 = register[rs=0x1d]  / rt = 0x1d / immediate = 0xffffffe0
-Instruction	| AddImmediateUnsigned
+Decode State		| instruction Value is 0x0x27bdffe0
+I Type			| opcode 0x9 / signExtImm 0xffffffe0 / zeroExtImm 0xffe0 / branchAddr 0xffffff80
+I Type			| rsData = 0x7fd8 = register[rs=0x1d]  / rt = 0x1d / immediate = 0xffffffe0
+Instruction		| AddImmediateUnsigned
 
-Fetch State	| instruction Value is 0x0xafbf001c
+Cache Fetch Data
+Cache Hit		| Current Count = 10
+Current Hit Rate	| 0.769231
+Fetch State		| instruction Value is 0x0xafbf001c
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 11
-Execution State	| instruction is AddImmediateUnsigned
+Cycle Num		| 11
+Execution State		| instruction is AddImmediateUnsigned
 ExecutionResult = 0x7fb8 / ExecutionResult = R[rs] + SignExtImmediate
 
-Decode State	| instruction Value is 0x0xafbf001c
-I Type		| opcode 0x2b / signExtImm 0x1c / zeroExtImm 0x1c / branchAddr 0x70
-I Type		| rsData = 0x7fd8 = register[rs=0x1d]  / rt = 0x1f / immediate = 0x1c
-Instruction	| StoreWord
+Decode State		| instruction Value is 0x0xafbf001c
+I Type			| opcode 0x2b / signExtImm 0x1c / zeroExtImm 0x1c / branchAddr 0x70
+I Type			| rsData = 0x7fd8 = register[rs=0x1d]  / rt = 0x1f / immediate = 0x1c
+Instruction		| StoreWord
 
-Fetch State	| instruction Value is 0x0xafbe0018
+Cache Fetch Data
+Cache Hit		| Current Count = 11
+Current Hit Rate	| 0.785714
+Fetch State		| instruction Value is 0x0xafbe0018
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 12
-Memory State	| instruction is AddImmediateUnsigned
+Cycle Num		| 12
+Memory State		| instruction is AddImmediateUnsigned
 
-Execution State	| instruction is StoreWord
+Execution State		| instruction is StoreWord
 ExecutionResult = 0x7fd4 / ExecutionResult = R[rs] + SignExtImm
 
-Decode State	| instruction Value is 0x0xafbe0018
-I Type		| opcode 0x2b / signExtImm 0x18 / zeroExtImm 0x18 / branchAddr 0x60
-I Type		| rsData = 0x7fd8 = register[rs=0x1d]  / rt = 0x1e / immediate = 0x18
-Instruction	| StoreWord
+Decode State		| instruction Value is 0x0xafbe0018
+I Type			| opcode 0x2b / signExtImm 0x18 / zeroExtImm 0x18 / branchAddr 0x60
+I Type			| rsData = 0x7fd8 = register[rs=0x1d]  / rt = 0x1e / immediate = 0x18
+Instruction		| StoreWord
 
-Fetch State	| instruction Value is 0x0x3a0f021
+Cache Fetch Data
+Cache Hit		| Current Count = 12
+Current Hit Rate	| 0.800000
+Fetch State		| instruction Value is 0x0x3a0f021
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 13
-WriteBack State	| instruction is AddImmediateUnsigned
+Cycle Num		| 13
+WriteBack State		| instruction is AddImmediateUnsigned
 R[rt=0x1d] = 0x7fb8 / ExecutionResult 
 
-Memory State	| instruction is StoreWord
+Memory State		| instruction is StoreWord
+Cache Hit		| Current Count = 13
+Current Hit Rate	| 0.812500
 M[R[rs] + SignExtImm] = R[rt]
 M[(R[29](0x7fb8) + 0x1c) = 0x7fd4] = R[31](0x20)
 
-Execution State	| instruction is StoreWord
+Execution State		| instruction is StoreWord
 ExecutionResult = 0x7fd0 / ExecutionResult = R[rs] + SignExtImm
 
-Decode State	| instruction Value is 0x0x3a0f021
+Decode State		| instruction Value is 0x0x3a0f021
 R Type		| rd 0x1e / rs 0x1d / rt 0x0 / shamt 0x0 / funct 0x21
-R Type		| rsData = 0x7fb8 = register[rs=0x1d]  / rtData = 0x0 = register[rt=0x0]
-Instruction	| AddUnsigned
+R Type			| rsData = 0x7fb8 = register[rs=0x1d]  / rtData = 0x0 = register[rt=0x0]
+Instruction		| AddUnsigned
 
-Fetch State	| instruction Value is 0x0xafc40020
+Cache Fetch Data
+Cache Hit		| Current Count = 14
+Current Hit Rate	| 0.823529
+Fetch State		| instruction Value is 0x0xafc40020
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 14
-WriteBack State	| instruction is StoreWord
+Cycle Num		| 14
+WriteBack State		| instruction is StoreWord
 
-Memory State	| instruction is StoreWord
+Memory State		| instruction is StoreWord
+Cache Hit		| Current Count = 15
+Current Hit Rate	| 0.833333
 M[R[rs] + SignExtImm] = R[rt]
 M[(R[29](0x7fb8) + 0x18) = 0x7fd0] = R[30](0x7fd8)
 
-Execution State	| instruction is AddUnsigned
+Execution State		| instruction is AddUnsigned
 ExecutionResult = 0x7fb8 / ExecutionResult = R[rs] + R[rt]
 
-Decode State	| instruction Value is 0x0xafc40020
-I Type		| opcode 0x2b / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
-I Type		| rsData = 0x7fd8 = register[rs=0x1e]  / rt = 0x4 / immediate = 0x20
-Instruction	| StoreWord
+Decode State		| instruction Value is 0x0xafc40020
+I Type			| opcode 0x2b / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
+I Type			| rsData = 0x7fd8 = register[rs=0x1e]  / rt = 0x4 / immediate = 0x20
+Instruction		| StoreWord
 
-Fetch State	| instruction Value is 0x0x8fc30020
+Cache Fetch Data
+Cache Hit		| Current Count = 16
+Current Hit Rate	| 0.842105
+Fetch State		| instruction Value is 0x0x8fc30020
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 15
-WriteBack State	| instruction is StoreWord
+Cycle Num		| 15
+WriteBack State		| instruction is StoreWord
 
-Memory State	| instruction is AddUnsigned
+Memory State		| instruction is AddUnsigned
 
-Execution State	| instruction is StoreWord
+Execution State		| instruction is StoreWord
 ExecutionResult = 0x7fd8 / ExecutionResult = R[rs] + SignExtImm
 
-Decode State	| instruction Value is 0x0x8fc30020
-I Type		| opcode 0x23 / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
-I Type		| rsData = 0x7fd8 = register[rs=0x1e]  / rt = 0x3 / immediate = 0x20
-Instruction	| LoadWord
+Decode State		| instruction Value is 0x0x8fc30020
+I Type			| opcode 0x23 / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
+I Type			| rsData = 0x7fd8 = register[rs=0x1e]  / rt = 0x3 / immediate = 0x20
+Instruction		| LoadWord
 
-Fetch State	| instruction Value is 0x0x24020001
+Cache Fetch Data
+Cache Hit		| Current Count = 17
+Current Hit Rate	| 0.850000
+Fetch State		| instruction Value is 0x0x24020001
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 16
-WriteBack State	| instruction is AddUnsigned
+Cycle Num		| 16
+WriteBack State		| instruction is AddUnsigned
 R[rd=0x1e] = 0x7fb8
 
-Memory State	| instruction is StoreWord
+Memory State		| instruction is StoreWord
+Cache Hit		| Current Count = 18
+Current Hit Rate	| 0.857143
 M[R[rs] + SignExtImm] = R[rt]
 M[(R[30](0x7fb8) + 0x20) = 0x7fd8] = R[4](0x5)
 
-Execution State	| instruction is LoadWord
+Execution State		| instruction is LoadWord
 ExecutionResult = 0x7fd8 / ExecutionResult = R[rs] + SignExtImm
 
-Decode State	| instruction Value is 0x0x24020001
-I Type		| opcode 0x9 / signExtImm 0x1 / zeroExtImm 0x1 / branchAddr 0x4
-I Type		| rsData = 0x0 = register[rs=0x0]  / rt = 0x2 / immediate = 0x1
-Instruction	| AddImmediateUnsigned
+Decode State		| instruction Value is 0x0x24020001
+I Type			| opcode 0x9 / signExtImm 0x1 / zeroExtImm 0x1 / branchAddr 0x4
+I Type			| rsData = 0x0 = register[rs=0x0]  / rt = 0x2 / immediate = 0x1
+Instruction		| AddImmediateUnsigned
 
-Fetch State	| instruction Value is 0x0x14620004
+Cache Fetch Data
+Cache Hit		| Current Count = 19
+Current Hit Rate	| 0.863636
+Fetch State		| instruction Value is 0x0x14620004
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 17
-WriteBack State	| instruction is StoreWord
+Cycle Num		| 17
+WriteBack State		| instruction is StoreWord
 
-Memory State	| instruction is LoadWord
+Memory State		| instruction is LoadWord
+Cache Fetch Data
+Cache Hit		| Current Count = 20
+Current Hit Rate	| 0.869565
 
-Execution State	| instruction is AddImmediateUnsigned
+Execution State		| instruction is AddImmediateUnsigned
 ExecutionResult = 0x1 / ExecutionResult = R[rs] + SignExtImmediate
 
-Decode State	| instruction Value is 0x0x14620004
-I Type		| opcode 0x5 / signExtImm 0x4 / zeroExtImm 0x4 / branchAddr 0x10
-I Type		| rsData = 0x0 = register[rs=0x3]  / rt = 0x2 / immediate = 0x10
-Instruction	| BranchOnNotEqual
+Decode State		| instruction Value is 0x0x14620004
+I Type			| opcode 0x5 / signExtImm 0x4 / zeroExtImm 0x4 / branchAddr 0x10
+I Type			| rsData = 0x0 = register[rs=0x3]  / rt = 0x2 / immediate = 0x10
+Instruction		| BranchOnNotEqual
 
-Fetch State	| instruction Value is 0x0x0
+Cache Fetch Data
+Cache Hit		| Current Count = 21
+Current Hit Rate	| 0.875000
+Fetch State		| instruction Value is 0x0x0
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 18
-WriteBack State	| instruction is LoadWord
+Cycle Num		| 18
+WriteBack State		| instruction is LoadWord
 R[rt] = M[R[rs] + SignExtImmm]
 R[3] = M[R[30](0x7fb8) + 0x20] = 0x7fd8
 
-Memory State	| instruction is AddImmediateUnsigned
+Memory State		| instruction is AddImmediateUnsigned
 
-Execution State	| instruction is BranchOnNotEqual
-if(R[rs] != R[rt])	PC = PC + 4 + BranchAddr
-if(R[3](0x5) != R[2](0x1))	PC = {0x5c + 4 + 0x10}(0x70)
+Execution State		| instruction is BranchOnNotEqual
+if(R[rs] != R[rt])		PC = PC + 4 + BranchAddr
+if(R[3](0x5) != R[2](0x1))		PC = {0x5c + 4 + 0x10}(0x70)
 
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 19
-WriteBack State	| instruction is AddImmediateUnsigned
+Cycle Num		| 19
+WriteBack State		| instruction is AddImmediateUnsigned
 R[rt=0x2] = 0x1 / ExecutionResult 
 
-Memory State	| instruction is BranchOnNotEqual
+Memory State		| instruction is BranchOnNotEqual
 
-Fetch State	| instruction Value is 0x0x8fc20020
+Cache Fetch Data
+Cache Hit		| Current Count = 22
+Current Hit Rate	| 0.880000
+Fetch State		| instruction Value is 0x0x8fc20020
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 20
-WriteBack State	| instruction is BranchOnNotEqual
+Cycle Num		| 20
+WriteBack State		| instruction is BranchOnNotEqual
 
-Decode State	| instruction Value is 0x0x8fc20020
-I Type		| opcode 0x23 / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
-I Type		| rsData = 0x7fb8 = register[rs=0x1e]  / rt = 0x2 / immediate = 0x20
-Instruction	| LoadWord
+Decode State		| instruction Value is 0x0x8fc20020
+I Type			| opcode 0x23 / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
+I Type			| rsData = 0x7fb8 = register[rs=0x1e]  / rt = 0x2 / immediate = 0x20
+Instruction		| LoadWord
 
-Fetch State	| instruction Value is 0x0x2442ffff
+Cache Fetch Data
+Cache Hit		| Current Count = 23
+Current Hit Rate	| 0.884615
+Fetch State		| instruction Value is 0x0x2442ffff
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 21
-Execution State	| instruction is LoadWord
+Cycle Num		| 21
+Execution State		| instruction is LoadWord
 ExecutionResult = 0x7fd8 / ExecutionResult = R[rs] + SignExtImm
 
-Decode State	| instruction Value is 0x0x2442ffff
-I Type		| opcode 0x9 / signExtImm 0xffffffff / zeroExtImm 0xffff / branchAddr 0xfffffffc
-I Type		| rsData = 0x1 = register[rs=0x2]  / rt = 0x2 / immediate = 0xffffffff
-Instruction	| AddImmediateUnsigned
+Decode State		| instruction Value is 0x0x2442ffff
+I Type			| opcode 0x9 / signExtImm 0xffffffff / zeroExtImm 0xffff / branchAddr 0xfffffffc
+I Type			| rsData = 0x1 = register[rs=0x2]  / rt = 0x2 / immediate = 0xffffffff
+Instruction		| AddImmediateUnsigned
 
-Fetch State	| instruction Value is 0x0x402021
+Cache Fetch Data
+Cache Hit		| Current Count = 24
+Current Hit Rate	| 0.888889
+Fetch State		| instruction Value is 0x0x402021
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 22
-Memory State	| instruction is LoadWord
+Cycle Num		| 22
+Memory State		| instruction is LoadWord
+Cache Fetch Data
+Cache Hit		| Current Count = 25
+Current Hit Rate	| 0.892857
 
-Execution State	| instruction is AddImmediateUnsigned
+Execution State		| instruction is AddImmediateUnsigned
 ExecutionResult = 0x4 / ExecutionResult = R[rs] + SignExtImmediate
 
-Decode State	| instruction Value is 0x0x402021
+Decode State		| instruction Value is 0x0x402021
 R Type		| rd 0x4 / rs 0x2 / rt 0x0 / shamt 0x0 / funct 0x21
-R Type		| rsData = 0x1 = register[rs=0x2]  / rtData = 0x0 = register[rt=0x0]
-Instruction	| AddUnsigned
+R Type			| rsData = 0x1 = register[rs=0x2]  / rtData = 0x0 = register[rt=0x0]
+Instruction		| AddUnsigned
 
-Fetch State	| instruction Value is 0x0xc000010
+Cache Fetch Data
+Cache Hit		| Current Count = 26
+Current Hit Rate	| 0.896552
+Fetch State		| instruction Value is 0x0xc000010
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 23
-WriteBack State	| instruction is LoadWord
+Cycle Num		| 23
+WriteBack State		| instruction is LoadWord
 R[rt] = M[R[rs] + SignExtImmm]
 R[2] = M[R[30](0x7fb8) + 0x20] = 0x7fd8
 
-Memory State	| instruction is AddImmediateUnsigned
+Memory State		| instruction is AddImmediateUnsigned
 
-Execution State	| instruction is AddUnsigned
+Execution State		| instruction is AddUnsigned
 ExecutionResult = 0x4 / ExecutionResult = R[rs] + R[rt]
 
-Decode State	| instruction Value is 0x0xc000010
+Decode State		| instruction Value is 0x0xc000010
 J Type		| opcode 0x3 / address 0x40
 J Type		| address = 0x40
-Instruction	| JumpAndLink
+Instruction		| JumpAndLink
 
-Fetch State	| instruction Value is 0x0x0
+Cache Fetch Data
+Cache Miss		| Current Count = 4
+Current Hit Rate	| 0.866667
+Fetch State		| instruction Value is 0x0x0
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 24
-WriteBack State	| instruction is AddImmediateUnsigned
+Cycle Num		| 24
+WriteBack State		| instruction is AddImmediateUnsigned
 R[rt=0x2] = 0x4 / ExecutionResult 
 
-Memory State	| instruction is AddUnsigned
+Memory State		| instruction is AddUnsigned
 
-Execution State	| instruction is JumpAndLink
+Execution State		| instruction is JumpAndLink
 R[31] = PC + 8; PC = JumpAddr
 R[31] = 0x84; PC = 0x40
 
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 25
-WriteBack State	| instruction is AddUnsigned
+Cycle Num		| 25
+WriteBack State		| instruction is AddUnsigned
 R[rd=0x4] = 0x4
 
-Memory State	| instruction is JumpAndLink
+Memory State		| instruction is JumpAndLink
 
-Fetch State	| instruction Value is 0x0x27bdffe0
+Cache Fetch Data
+Cache Hit		| Current Count = 27
+Current Hit Rate	| 0.870968
+Fetch State		| instruction Value is 0x0x27bdffe0
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 26
-WriteBack State	| instruction is JumpAndLink
+Cycle Num		| 26
+WriteBack State		| instruction is JumpAndLink
 
-Decode State	| instruction Value is 0x0x27bdffe0
-I Type		| opcode 0x9 / signExtImm 0xffffffe0 / zeroExtImm 0xffe0 / branchAddr 0xffffff80
-I Type		| rsData = 0x7fb8 = register[rs=0x1d]  / rt = 0x1d / immediate = 0xffffffe0
-Instruction	| AddImmediateUnsigned
+Decode State		| instruction Value is 0x0x27bdffe0
+I Type			| opcode 0x9 / signExtImm 0xffffffe0 / zeroExtImm 0xffe0 / branchAddr 0xffffff80
+I Type			| rsData = 0x7fb8 = register[rs=0x1d]  / rt = 0x1d / immediate = 0xffffffe0
+Instruction		| AddImmediateUnsigned
 
-Fetch State	| instruction Value is 0x0xafbf001c
+Cache Fetch Data
+Cache Hit		| Current Count = 28
+Current Hit Rate	| 0.875000
+Fetch State		| instruction Value is 0x0xafbf001c
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 27
-Execution State	| instruction is AddImmediateUnsigned
+Cycle Num		| 27
+Execution State		| instruction is AddImmediateUnsigned
 ExecutionResult = 0x7f98 / ExecutionResult = R[rs] + SignExtImmediate
 
-Decode State	| instruction Value is 0x0xafbf001c
-I Type		| opcode 0x2b / signExtImm 0x1c / zeroExtImm 0x1c / branchAddr 0x70
-I Type		| rsData = 0x7fb8 = register[rs=0x1d]  / rt = 0x1f / immediate = 0x1c
-Instruction	| StoreWord
+Decode State		| instruction Value is 0x0xafbf001c
+I Type			| opcode 0x2b / signExtImm 0x1c / zeroExtImm 0x1c / branchAddr 0x70
+I Type			| rsData = 0x7fb8 = register[rs=0x1d]  / rt = 0x1f / immediate = 0x1c
+Instruction		| StoreWord
 
-Fetch State	| instruction Value is 0x0xafbe0018
+Cache Fetch Data
+Cache Hit		| Current Count = 29
+Current Hit Rate	| 0.878788
+Fetch State		| instruction Value is 0x0xafbe0018
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 28
-Memory State	| instruction is AddImmediateUnsigned
+Cycle Num		| 28
+Memory State		| instruction is AddImmediateUnsigned
 
-Execution State	| instruction is StoreWord
+Execution State		| instruction is StoreWord
 ExecutionResult = 0x7fb4 / ExecutionResult = R[rs] + SignExtImm
 
-Decode State	| instruction Value is 0x0xafbe0018
-I Type		| opcode 0x2b / signExtImm 0x18 / zeroExtImm 0x18 / branchAddr 0x60
-I Type		| rsData = 0x7fb8 = register[rs=0x1d]  / rt = 0x1e / immediate = 0x18
-Instruction	| StoreWord
+Decode State		| instruction Value is 0x0xafbe0018
+I Type			| opcode 0x2b / signExtImm 0x18 / zeroExtImm 0x18 / branchAddr 0x60
+I Type			| rsData = 0x7fb8 = register[rs=0x1d]  / rt = 0x1e / immediate = 0x18
+Instruction		| StoreWord
 
-Fetch State	| instruction Value is 0x0x3a0f021
+Cache Fetch Data
+Cache Hit		| Current Count = 30
+Current Hit Rate	| 0.882353
+Fetch State		| instruction Value is 0x0x3a0f021
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 29
-WriteBack State	| instruction is AddImmediateUnsigned
+Cycle Num		| 29
+WriteBack State		| instruction is AddImmediateUnsigned
 R[rt=0x1d] = 0x7f98 / ExecutionResult 
 
-Memory State	| instruction is StoreWord
+Memory State		| instruction is StoreWord
+Cache Miss		| Current Count = 5
+Current Hit Rate	| 0.857143
 M[R[rs] + SignExtImm] = R[rt]
 M[(R[29](0x7f98) + 0x1c) = 0x7fb4] = R[31](0x84)
 
-Execution State	| instruction is StoreWord
+Execution State		| instruction is StoreWord
 ExecutionResult = 0x7fb0 / ExecutionResult = R[rs] + SignExtImm
 
-Decode State	| instruction Value is 0x0x3a0f021
+Decode State		| instruction Value is 0x0x3a0f021
 R Type		| rd 0x1e / rs 0x1d / rt 0x0 / shamt 0x0 / funct 0x21
-R Type		| rsData = 0x7f98 = register[rs=0x1d]  / rtData = 0x0 = register[rt=0x0]
-Instruction	| AddUnsigned
+R Type			| rsData = 0x7f98 = register[rs=0x1d]  / rtData = 0x0 = register[rt=0x0]
+Instruction		| AddUnsigned
 
-Fetch State	| instruction Value is 0x0xafc40020
+Cache Fetch Data
+Cache Hit		| Current Count = 31
+Current Hit Rate	| 0.861111
+Fetch State		| instruction Value is 0x0xafc40020
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 30
-WriteBack State	| instruction is StoreWord
+Cycle Num		| 30
+WriteBack State		| instruction is StoreWord
 
-Memory State	| instruction is StoreWord
+Memory State		| instruction is StoreWord
+Cache Hit		| Current Count = 32
+Current Hit Rate	| 0.864865
 M[R[rs] + SignExtImm] = R[rt]
 M[(R[29](0x7f98) + 0x18) = 0x7fb0] = R[30](0x7fb8)
 
-Execution State	| instruction is AddUnsigned
+Execution State		| instruction is AddUnsigned
 ExecutionResult = 0x7f98 / ExecutionResult = R[rs] + R[rt]
 
-Decode State	| instruction Value is 0x0xafc40020
-I Type		| opcode 0x2b / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
-I Type		| rsData = 0x7fb8 = register[rs=0x1e]  / rt = 0x4 / immediate = 0x20
-Instruction	| StoreWord
+Decode State		| instruction Value is 0x0xafc40020
+I Type			| opcode 0x2b / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
+I Type			| rsData = 0x7fb8 = register[rs=0x1e]  / rt = 0x4 / immediate = 0x20
+Instruction		| StoreWord
 
-Fetch State	| instruction Value is 0x0x8fc30020
+Cache Fetch Data
+Cache Hit		| Current Count = 33
+Current Hit Rate	| 0.868421
+Fetch State		| instruction Value is 0x0x8fc30020
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 31
-WriteBack State	| instruction is StoreWord
+Cycle Num		| 31
+WriteBack State		| instruction is StoreWord
 
-Memory State	| instruction is AddUnsigned
+Memory State		| instruction is AddUnsigned
 
-Execution State	| instruction is StoreWord
+Execution State		| instruction is StoreWord
 ExecutionResult = 0x7fb8 / ExecutionResult = R[rs] + SignExtImm
 
-Decode State	| instruction Value is 0x0x8fc30020
-I Type		| opcode 0x23 / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
-I Type		| rsData = 0x7fb8 = register[rs=0x1e]  / rt = 0x3 / immediate = 0x20
-Instruction	| LoadWord
+Decode State		| instruction Value is 0x0x8fc30020
+I Type			| opcode 0x23 / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
+I Type			| rsData = 0x7fb8 = register[rs=0x1e]  / rt = 0x3 / immediate = 0x20
+Instruction		| LoadWord
 
-Fetch State	| instruction Value is 0x0x24020001
+Cache Fetch Data
+Cache Hit		| Current Count = 34
+Current Hit Rate	| 0.871795
+Fetch State		| instruction Value is 0x0x24020001
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 32
-WriteBack State	| instruction is AddUnsigned
+Cycle Num		| 32
+WriteBack State		| instruction is AddUnsigned
 R[rd=0x1e] = 0x7f98
 
-Memory State	| instruction is StoreWord
+Memory State		| instruction is StoreWord
+Cache Hit		| Current Count = 35
+Current Hit Rate	| 0.875000
 M[R[rs] + SignExtImm] = R[rt]
 M[(R[30](0x7f98) + 0x20) = 0x7fb8] = R[4](0x4)
 
-Execution State	| instruction is LoadWord
+Execution State		| instruction is LoadWord
 ExecutionResult = 0x7fb8 / ExecutionResult = R[rs] + SignExtImm
 
-Decode State	| instruction Value is 0x0x24020001
-I Type		| opcode 0x9 / signExtImm 0x1 / zeroExtImm 0x1 / branchAddr 0x4
-I Type		| rsData = 0x0 = register[rs=0x0]  / rt = 0x2 / immediate = 0x1
-Instruction	| AddImmediateUnsigned
+Decode State		| instruction Value is 0x0x24020001
+I Type			| opcode 0x9 / signExtImm 0x1 / zeroExtImm 0x1 / branchAddr 0x4
+I Type			| rsData = 0x0 = register[rs=0x0]  / rt = 0x2 / immediate = 0x1
+Instruction		| AddImmediateUnsigned
 
-Fetch State	| instruction Value is 0x0x14620004
+Cache Fetch Data
+Cache Hit		| Current Count = 36
+Current Hit Rate	| 0.878049
+Fetch State		| instruction Value is 0x0x14620004
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 33
-WriteBack State	| instruction is StoreWord
+Cycle Num		| 33
+WriteBack State		| instruction is StoreWord
 
-Memory State	| instruction is LoadWord
+Memory State		| instruction is LoadWord
+Cache Fetch Data
+Cache Hit		| Current Count = 37
+Current Hit Rate	| 0.880952
 
-Execution State	| instruction is AddImmediateUnsigned
+Execution State		| instruction is AddImmediateUnsigned
 ExecutionResult = 0x1 / ExecutionResult = R[rs] + SignExtImmediate
 
-Decode State	| instruction Value is 0x0x14620004
-I Type		| opcode 0x5 / signExtImm 0x4 / zeroExtImm 0x4 / branchAddr 0x10
-I Type		| rsData = 0x5 = register[rs=0x3]  / rt = 0x2 / immediate = 0x10
-Instruction	| BranchOnNotEqual
+Decode State		| instruction Value is 0x0x14620004
+I Type			| opcode 0x5 / signExtImm 0x4 / zeroExtImm 0x4 / branchAddr 0x10
+I Type			| rsData = 0x5 = register[rs=0x3]  / rt = 0x2 / immediate = 0x10
+Instruction		| BranchOnNotEqual
 
-Fetch State	| instruction Value is 0x0x0
+Cache Fetch Data
+Cache Hit		| Current Count = 38
+Current Hit Rate	| 0.883721
+Fetch State		| instruction Value is 0x0x0
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 34
-WriteBack State	| instruction is LoadWord
+Cycle Num		| 34
+WriteBack State		| instruction is LoadWord
 R[rt] = M[R[rs] + SignExtImmm]
 R[3] = M[R[30](0x7f98) + 0x20] = 0x7fb8
 
-Memory State	| instruction is AddImmediateUnsigned
+Memory State		| instruction is AddImmediateUnsigned
 
-Execution State	| instruction is BranchOnNotEqual
-if(R[rs] != R[rt])	PC = PC + 4 + BranchAddr
-if(R[3](0x4) != R[2](0x1))	PC = {0x5c + 4 + 0x10}(0x70)
+Execution State		| instruction is BranchOnNotEqual
+if(R[rs] != R[rt])		PC = PC + 4 + BranchAddr
+if(R[3](0x4) != R[2](0x1))		PC = {0x5c + 4 + 0x10}(0x70)
 
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 35
-WriteBack State	| instruction is AddImmediateUnsigned
+Cycle Num		| 35
+WriteBack State		| instruction is AddImmediateUnsigned
 R[rt=0x2] = 0x1 / ExecutionResult 
 
-Memory State	| instruction is BranchOnNotEqual
+Memory State		| instruction is BranchOnNotEqual
 
-Fetch State	| instruction Value is 0x0x8fc20020
+Cache Fetch Data
+Cache Hit		| Current Count = 39
+Current Hit Rate	| 0.886364
+Fetch State		| instruction Value is 0x0x8fc20020
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 36
-WriteBack State	| instruction is BranchOnNotEqual
+Cycle Num		| 36
+WriteBack State		| instruction is BranchOnNotEqual
 
-Decode State	| instruction Value is 0x0x8fc20020
-I Type		| opcode 0x23 / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
-I Type		| rsData = 0x7f98 = register[rs=0x1e]  / rt = 0x2 / immediate = 0x20
-Instruction	| LoadWord
+Decode State		| instruction Value is 0x0x8fc20020
+I Type			| opcode 0x23 / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
+I Type			| rsData = 0x7f98 = register[rs=0x1e]  / rt = 0x2 / immediate = 0x20
+Instruction		| LoadWord
 
-Fetch State	| instruction Value is 0x0x2442ffff
+Cache Fetch Data
+Cache Hit		| Current Count = 40
+Current Hit Rate	| 0.888889
+Fetch State		| instruction Value is 0x0x2442ffff
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 37
-Execution State	| instruction is LoadWord
+Cycle Num		| 37
+Execution State		| instruction is LoadWord
 ExecutionResult = 0x7fb8 / ExecutionResult = R[rs] + SignExtImm
 
-Decode State	| instruction Value is 0x0x2442ffff
-I Type		| opcode 0x9 / signExtImm 0xffffffff / zeroExtImm 0xffff / branchAddr 0xfffffffc
-I Type		| rsData = 0x1 = register[rs=0x2]  / rt = 0x2 / immediate = 0xffffffff
-Instruction	| AddImmediateUnsigned
+Decode State		| instruction Value is 0x0x2442ffff
+I Type			| opcode 0x9 / signExtImm 0xffffffff / zeroExtImm 0xffff / branchAddr 0xfffffffc
+I Type			| rsData = 0x1 = register[rs=0x2]  / rt = 0x2 / immediate = 0xffffffff
+Instruction		| AddImmediateUnsigned
 
-Fetch State	| instruction Value is 0x0x402021
+Cache Fetch Data
+Cache Hit		| Current Count = 41
+Current Hit Rate	| 0.891304
+Fetch State		| instruction Value is 0x0x402021
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 38
-Memory State	| instruction is LoadWord
+Cycle Num		| 38
+Memory State		| instruction is LoadWord
+Cache Fetch Data
+Cache Hit		| Current Count = 42
+Current Hit Rate	| 0.893617
 
-Execution State	| instruction is AddImmediateUnsigned
+Execution State		| instruction is AddImmediateUnsigned
 ExecutionResult = 0x3 / ExecutionResult = R[rs] + SignExtImmediate
 
-Decode State	| instruction Value is 0x0x402021
+Decode State		| instruction Value is 0x0x402021
 R Type		| rd 0x4 / rs 0x2 / rt 0x0 / shamt 0x0 / funct 0x21
-R Type		| rsData = 0x1 = register[rs=0x2]  / rtData = 0x0 = register[rt=0x0]
-Instruction	| AddUnsigned
+R Type			| rsData = 0x1 = register[rs=0x2]  / rtData = 0x0 = register[rt=0x0]
+Instruction		| AddUnsigned
 
-Fetch State	| instruction Value is 0x0xc000010
+Cache Fetch Data
+Cache Hit		| Current Count = 43
+Current Hit Rate	| 0.895833
+Fetch State		| instruction Value is 0x0xc000010
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 39
-WriteBack State	| instruction is LoadWord
+Cycle Num		| 39
+WriteBack State		| instruction is LoadWord
 R[rt] = M[R[rs] + SignExtImmm]
 R[2] = M[R[30](0x7f98) + 0x20] = 0x7fb8
 
-Memory State	| instruction is AddImmediateUnsigned
+Memory State		| instruction is AddImmediateUnsigned
 
-Execution State	| instruction is AddUnsigned
+Execution State		| instruction is AddUnsigned
 ExecutionResult = 0x3 / ExecutionResult = R[rs] + R[rt]
 
-Decode State	| instruction Value is 0x0xc000010
+Decode State		| instruction Value is 0x0xc000010
 J Type		| opcode 0x3 / address 0x40
 J Type		| address = 0x40
-Instruction	| JumpAndLink
+Instruction		| JumpAndLink
 
-Fetch State	| instruction Value is 0x0x0
+Cache Fetch Data
+Cache Hit		| Current Count = 44
+Current Hit Rate	| 0.897959
+Fetch State		| instruction Value is 0x0x0
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 40
-WriteBack State	| instruction is AddImmediateUnsigned
+Cycle Num		| 40
+WriteBack State		| instruction is AddImmediateUnsigned
 R[rt=0x2] = 0x3 / ExecutionResult 
 
-Memory State	| instruction is AddUnsigned
+Memory State		| instruction is AddUnsigned
 
-Execution State	| instruction is JumpAndLink
+Execution State		| instruction is JumpAndLink
 R[31] = PC + 8; PC = JumpAddr
 R[31] = 0x84; PC = 0x40
 
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 41
-WriteBack State	| instruction is AddUnsigned
+Cycle Num		| 41
+WriteBack State		| instruction is AddUnsigned
 R[rd=0x4] = 0x3
 
-Memory State	| instruction is JumpAndLink
+Memory State		| instruction is JumpAndLink
 
-Fetch State	| instruction Value is 0x0x27bdffe0
+Cache Fetch Data
+Cache Hit		| Current Count = 45
+Current Hit Rate	| 0.900000
+Fetch State		| instruction Value is 0x0x27bdffe0
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 42
-WriteBack State	| instruction is JumpAndLink
+Cycle Num		| 42
+WriteBack State		| instruction is JumpAndLink
 
-Decode State	| instruction Value is 0x0x27bdffe0
-I Type		| opcode 0x9 / signExtImm 0xffffffe0 / zeroExtImm 0xffe0 / branchAddr 0xffffff80
-I Type		| rsData = 0x7f98 = register[rs=0x1d]  / rt = 0x1d / immediate = 0xffffffe0
-Instruction	| AddImmediateUnsigned
+Decode State		| instruction Value is 0x0x27bdffe0
+I Type			| opcode 0x9 / signExtImm 0xffffffe0 / zeroExtImm 0xffe0 / branchAddr 0xffffff80
+I Type			| rsData = 0x7f98 = register[rs=0x1d]  / rt = 0x1d / immediate = 0xffffffe0
+Instruction		| AddImmediateUnsigned
 
-Fetch State	| instruction Value is 0x0xafbf001c
+Cache Fetch Data
+Cache Hit		| Current Count = 46
+Current Hit Rate	| 0.901961
+Fetch State		| instruction Value is 0x0xafbf001c
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 43
-Execution State	| instruction is AddImmediateUnsigned
+Cycle Num		| 43
+Execution State		| instruction is AddImmediateUnsigned
 ExecutionResult = 0x7f78 / ExecutionResult = R[rs] + SignExtImmediate
 
-Decode State	| instruction Value is 0x0xafbf001c
-I Type		| opcode 0x2b / signExtImm 0x1c / zeroExtImm 0x1c / branchAddr 0x70
-I Type		| rsData = 0x7f98 = register[rs=0x1d]  / rt = 0x1f / immediate = 0x1c
-Instruction	| StoreWord
+Decode State		| instruction Value is 0x0xafbf001c
+I Type			| opcode 0x2b / signExtImm 0x1c / zeroExtImm 0x1c / branchAddr 0x70
+I Type			| rsData = 0x7f98 = register[rs=0x1d]  / rt = 0x1f / immediate = 0x1c
+Instruction		| StoreWord
 
-Fetch State	| instruction Value is 0x0xafbe0018
+Cache Fetch Data
+Cache Hit		| Current Count = 47
+Current Hit Rate	| 0.903846
+Fetch State		| instruction Value is 0x0xafbe0018
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 44
-Memory State	| instruction is AddImmediateUnsigned
+Cycle Num		| 44
+Memory State		| instruction is AddImmediateUnsigned
 
-Execution State	| instruction is StoreWord
+Execution State		| instruction is StoreWord
 ExecutionResult = 0x7f94 / ExecutionResult = R[rs] + SignExtImm
 
-Decode State	| instruction Value is 0x0xafbe0018
-I Type		| opcode 0x2b / signExtImm 0x18 / zeroExtImm 0x18 / branchAddr 0x60
-I Type		| rsData = 0x7f98 = register[rs=0x1d]  / rt = 0x1e / immediate = 0x18
-Instruction	| StoreWord
+Decode State		| instruction Value is 0x0xafbe0018
+I Type			| opcode 0x2b / signExtImm 0x18 / zeroExtImm 0x18 / branchAddr 0x60
+I Type			| rsData = 0x7f98 = register[rs=0x1d]  / rt = 0x1e / immediate = 0x18
+Instruction		| StoreWord
 
-Fetch State	| instruction Value is 0x0x3a0f021
+Cache Fetch Data
+Cache Hit		| Current Count = 48
+Current Hit Rate	| 0.905660
+Fetch State		| instruction Value is 0x0x3a0f021
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 45
-WriteBack State	| instruction is AddImmediateUnsigned
+Cycle Num		| 45
+WriteBack State		| instruction is AddImmediateUnsigned
 R[rt=0x1d] = 0x7f78 / ExecutionResult 
 
-Memory State	| instruction is StoreWord
+Memory State		| instruction is StoreWord
+Cache Hit		| Current Count = 49
+Current Hit Rate	| 0.907407
 M[R[rs] + SignExtImm] = R[rt]
 M[(R[29](0x7f78) + 0x1c) = 0x7f94] = R[31](0x84)
 
-Execution State	| instruction is StoreWord
+Execution State		| instruction is StoreWord
 ExecutionResult = 0x7f90 / ExecutionResult = R[rs] + SignExtImm
 
-Decode State	| instruction Value is 0x0x3a0f021
+Decode State		| instruction Value is 0x0x3a0f021
 R Type		| rd 0x1e / rs 0x1d / rt 0x0 / shamt 0x0 / funct 0x21
-R Type		| rsData = 0x7f78 = register[rs=0x1d]  / rtData = 0x0 = register[rt=0x0]
-Instruction	| AddUnsigned
+R Type			| rsData = 0x7f78 = register[rs=0x1d]  / rtData = 0x0 = register[rt=0x0]
+Instruction		| AddUnsigned
 
-Fetch State	| instruction Value is 0x0xafc40020
+Cache Fetch Data
+Cache Hit		| Current Count = 50
+Current Hit Rate	| 0.909091
+Fetch State		| instruction Value is 0x0xafc40020
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 46
-WriteBack State	| instruction is StoreWord
+Cycle Num		| 46
+WriteBack State		| instruction is StoreWord
 
-Memory State	| instruction is StoreWord
+Memory State		| instruction is StoreWord
+Cache Hit		| Current Count = 51
+Current Hit Rate	| 0.910714
 M[R[rs] + SignExtImm] = R[rt]
 M[(R[29](0x7f78) + 0x18) = 0x7f90] = R[30](0x7f98)
 
-Execution State	| instruction is AddUnsigned
+Execution State		| instruction is AddUnsigned
 ExecutionResult = 0x7f78 / ExecutionResult = R[rs] + R[rt]
 
-Decode State	| instruction Value is 0x0xafc40020
-I Type		| opcode 0x2b / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
-I Type		| rsData = 0x7f98 = register[rs=0x1e]  / rt = 0x4 / immediate = 0x20
-Instruction	| StoreWord
+Decode State		| instruction Value is 0x0xafc40020
+I Type			| opcode 0x2b / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
+I Type			| rsData = 0x7f98 = register[rs=0x1e]  / rt = 0x4 / immediate = 0x20
+Instruction		| StoreWord
 
-Fetch State	| instruction Value is 0x0x8fc30020
+Cache Fetch Data
+Cache Hit		| Current Count = 52
+Current Hit Rate	| 0.912281
+Fetch State		| instruction Value is 0x0x8fc30020
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 47
-WriteBack State	| instruction is StoreWord
+Cycle Num		| 47
+WriteBack State		| instruction is StoreWord
 
-Memory State	| instruction is AddUnsigned
+Memory State		| instruction is AddUnsigned
 
-Execution State	| instruction is StoreWord
+Execution State		| instruction is StoreWord
 ExecutionResult = 0x7f98 / ExecutionResult = R[rs] + SignExtImm
 
-Decode State	| instruction Value is 0x0x8fc30020
-I Type		| opcode 0x23 / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
-I Type		| rsData = 0x7f98 = register[rs=0x1e]  / rt = 0x3 / immediate = 0x20
-Instruction	| LoadWord
+Decode State		| instruction Value is 0x0x8fc30020
+I Type			| opcode 0x23 / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
+I Type			| rsData = 0x7f98 = register[rs=0x1e]  / rt = 0x3 / immediate = 0x20
+Instruction		| LoadWord
 
-Fetch State	| instruction Value is 0x0x24020001
+Cache Fetch Data
+Cache Hit		| Current Count = 53
+Current Hit Rate	| 0.913793
+Fetch State		| instruction Value is 0x0x24020001
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 48
-WriteBack State	| instruction is AddUnsigned
+Cycle Num		| 48
+WriteBack State		| instruction is AddUnsigned
 R[rd=0x1e] = 0x7f78
 
-Memory State	| instruction is StoreWord
+Memory State		| instruction is StoreWord
+Cache Hit		| Current Count = 54
+Current Hit Rate	| 0.915254
 M[R[rs] + SignExtImm] = R[rt]
 M[(R[30](0x7f78) + 0x20) = 0x7f98] = R[4](0x3)
 
-Execution State	| instruction is LoadWord
+Execution State		| instruction is LoadWord
 ExecutionResult = 0x7f98 / ExecutionResult = R[rs] + SignExtImm
 
-Decode State	| instruction Value is 0x0x24020001
-I Type		| opcode 0x9 / signExtImm 0x1 / zeroExtImm 0x1 / branchAddr 0x4
-I Type		| rsData = 0x0 = register[rs=0x0]  / rt = 0x2 / immediate = 0x1
-Instruction	| AddImmediateUnsigned
+Decode State		| instruction Value is 0x0x24020001
+I Type			| opcode 0x9 / signExtImm 0x1 / zeroExtImm 0x1 / branchAddr 0x4
+I Type			| rsData = 0x0 = register[rs=0x0]  / rt = 0x2 / immediate = 0x1
+Instruction		| AddImmediateUnsigned
 
-Fetch State	| instruction Value is 0x0x14620004
+Cache Fetch Data
+Cache Hit		| Current Count = 55
+Current Hit Rate	| 0.916667
+Fetch State		| instruction Value is 0x0x14620004
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 49
-WriteBack State	| instruction is StoreWord
+Cycle Num		| 49
+WriteBack State		| instruction is StoreWord
 
-Memory State	| instruction is LoadWord
+Memory State		| instruction is LoadWord
+Cache Fetch Data
+Cache Hit		| Current Count = 56
+Current Hit Rate	| 0.918033
 
-Execution State	| instruction is AddImmediateUnsigned
+Execution State		| instruction is AddImmediateUnsigned
 ExecutionResult = 0x1 / ExecutionResult = R[rs] + SignExtImmediate
 
-Decode State	| instruction Value is 0x0x14620004
-I Type		| opcode 0x5 / signExtImm 0x4 / zeroExtImm 0x4 / branchAddr 0x10
-I Type		| rsData = 0x4 = register[rs=0x3]  / rt = 0x2 / immediate = 0x10
-Instruction	| BranchOnNotEqual
+Decode State		| instruction Value is 0x0x14620004
+I Type			| opcode 0x5 / signExtImm 0x4 / zeroExtImm 0x4 / branchAddr 0x10
+I Type			| rsData = 0x4 = register[rs=0x3]  / rt = 0x2 / immediate = 0x10
+Instruction		| BranchOnNotEqual
 
-Fetch State	| instruction Value is 0x0x0
+Cache Fetch Data
+Cache Hit		| Current Count = 57
+Current Hit Rate	| 0.919355
+Fetch State		| instruction Value is 0x0x0
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 50
-WriteBack State	| instruction is LoadWord
+Cycle Num		| 50
+WriteBack State		| instruction is LoadWord
 R[rt] = M[R[rs] + SignExtImmm]
 R[3] = M[R[30](0x7f78) + 0x20] = 0x7f98
 
-Memory State	| instruction is AddImmediateUnsigned
+Memory State		| instruction is AddImmediateUnsigned
 
-Execution State	| instruction is BranchOnNotEqual
-if(R[rs] != R[rt])	PC = PC + 4 + BranchAddr
-if(R[3](0x3) != R[2](0x1))	PC = {0x5c + 4 + 0x10}(0x70)
+Execution State		| instruction is BranchOnNotEqual
+if(R[rs] != R[rt])		PC = PC + 4 + BranchAddr
+if(R[3](0x3) != R[2](0x1))		PC = {0x5c + 4 + 0x10}(0x70)
 
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 51
-WriteBack State	| instruction is AddImmediateUnsigned
+Cycle Num		| 51
+WriteBack State		| instruction is AddImmediateUnsigned
 R[rt=0x2] = 0x1 / ExecutionResult 
 
-Memory State	| instruction is BranchOnNotEqual
+Memory State		| instruction is BranchOnNotEqual
 
-Fetch State	| instruction Value is 0x0x8fc20020
+Cache Fetch Data
+Cache Hit		| Current Count = 58
+Current Hit Rate	| 0.920635
+Fetch State		| instruction Value is 0x0x8fc20020
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 52
-WriteBack State	| instruction is BranchOnNotEqual
+Cycle Num		| 52
+WriteBack State		| instruction is BranchOnNotEqual
 
-Decode State	| instruction Value is 0x0x8fc20020
-I Type		| opcode 0x23 / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
-I Type		| rsData = 0x7f78 = register[rs=0x1e]  / rt = 0x2 / immediate = 0x20
-Instruction	| LoadWord
+Decode State		| instruction Value is 0x0x8fc20020
+I Type			| opcode 0x23 / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
+I Type			| rsData = 0x7f78 = register[rs=0x1e]  / rt = 0x2 / immediate = 0x20
+Instruction		| LoadWord
 
-Fetch State	| instruction Value is 0x0x2442ffff
+Cache Fetch Data
+Cache Hit		| Current Count = 59
+Current Hit Rate	| 0.921875
+Fetch State		| instruction Value is 0x0x2442ffff
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 53
-Execution State	| instruction is LoadWord
+Cycle Num		| 53
+Execution State		| instruction is LoadWord
 ExecutionResult = 0x7f98 / ExecutionResult = R[rs] + SignExtImm
 
-Decode State	| instruction Value is 0x0x2442ffff
-I Type		| opcode 0x9 / signExtImm 0xffffffff / zeroExtImm 0xffff / branchAddr 0xfffffffc
-I Type		| rsData = 0x1 = register[rs=0x2]  / rt = 0x2 / immediate = 0xffffffff
-Instruction	| AddImmediateUnsigned
+Decode State		| instruction Value is 0x0x2442ffff
+I Type			| opcode 0x9 / signExtImm 0xffffffff / zeroExtImm 0xffff / branchAddr 0xfffffffc
+I Type			| rsData = 0x1 = register[rs=0x2]  / rt = 0x2 / immediate = 0xffffffff
+Instruction		| AddImmediateUnsigned
 
-Fetch State	| instruction Value is 0x0x402021
+Cache Fetch Data
+Cache Hit		| Current Count = 60
+Current Hit Rate	| 0.923077
+Fetch State		| instruction Value is 0x0x402021
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 54
-Memory State	| instruction is LoadWord
+Cycle Num		| 54
+Memory State		| instruction is LoadWord
+Cache Fetch Data
+Cache Hit		| Current Count = 61
+Current Hit Rate	| 0.924242
 
-Execution State	| instruction is AddImmediateUnsigned
+Execution State		| instruction is AddImmediateUnsigned
 ExecutionResult = 0x2 / ExecutionResult = R[rs] + SignExtImmediate
 
-Decode State	| instruction Value is 0x0x402021
+Decode State		| instruction Value is 0x0x402021
 R Type		| rd 0x4 / rs 0x2 / rt 0x0 / shamt 0x0 / funct 0x21
-R Type		| rsData = 0x1 = register[rs=0x2]  / rtData = 0x0 = register[rt=0x0]
-Instruction	| AddUnsigned
+R Type			| rsData = 0x1 = register[rs=0x2]  / rtData = 0x0 = register[rt=0x0]
+Instruction		| AddUnsigned
 
-Fetch State	| instruction Value is 0x0xc000010
+Cache Fetch Data
+Cache Hit		| Current Count = 62
+Current Hit Rate	| 0.925373
+Fetch State		| instruction Value is 0x0xc000010
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 55
-WriteBack State	| instruction is LoadWord
+Cycle Num		| 55
+WriteBack State		| instruction is LoadWord
 R[rt] = M[R[rs] + SignExtImmm]
 R[2] = M[R[30](0x7f78) + 0x20] = 0x7f98
 
-Memory State	| instruction is AddImmediateUnsigned
+Memory State		| instruction is AddImmediateUnsigned
 
-Execution State	| instruction is AddUnsigned
+Execution State		| instruction is AddUnsigned
 ExecutionResult = 0x2 / ExecutionResult = R[rs] + R[rt]
 
-Decode State	| instruction Value is 0x0xc000010
+Decode State		| instruction Value is 0x0xc000010
 J Type		| opcode 0x3 / address 0x40
 J Type		| address = 0x40
-Instruction	| JumpAndLink
+Instruction		| JumpAndLink
 
-Fetch State	| instruction Value is 0x0x0
+Cache Fetch Data
+Cache Hit		| Current Count = 63
+Current Hit Rate	| 0.926471
+Fetch State		| instruction Value is 0x0x0
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 56
-WriteBack State	| instruction is AddImmediateUnsigned
+Cycle Num		| 56
+WriteBack State		| instruction is AddImmediateUnsigned
 R[rt=0x2] = 0x2 / ExecutionResult 
 
-Memory State	| instruction is AddUnsigned
+Memory State		| instruction is AddUnsigned
 
-Execution State	| instruction is JumpAndLink
+Execution State		| instruction is JumpAndLink
 R[31] = PC + 8; PC = JumpAddr
 R[31] = 0x84; PC = 0x40
 
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 57
-WriteBack State	| instruction is AddUnsigned
+Cycle Num		| 57
+WriteBack State		| instruction is AddUnsigned
 R[rd=0x4] = 0x2
 
-Memory State	| instruction is JumpAndLink
+Memory State		| instruction is JumpAndLink
 
-Fetch State	| instruction Value is 0x0x27bdffe0
+Cache Fetch Data
+Cache Hit		| Current Count = 64
+Current Hit Rate	| 0.927536
+Fetch State		| instruction Value is 0x0x27bdffe0
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 58
-WriteBack State	| instruction is JumpAndLink
+Cycle Num		| 58
+WriteBack State		| instruction is JumpAndLink
 
-Decode State	| instruction Value is 0x0x27bdffe0
-I Type		| opcode 0x9 / signExtImm 0xffffffe0 / zeroExtImm 0xffe0 / branchAddr 0xffffff80
-I Type		| rsData = 0x7f78 = register[rs=0x1d]  / rt = 0x1d / immediate = 0xffffffe0
-Instruction	| AddImmediateUnsigned
+Decode State		| instruction Value is 0x0x27bdffe0
+I Type			| opcode 0x9 / signExtImm 0xffffffe0 / zeroExtImm 0xffe0 / branchAddr 0xffffff80
+I Type			| rsData = 0x7f78 = register[rs=0x1d]  / rt = 0x1d / immediate = 0xffffffe0
+Instruction		| AddImmediateUnsigned
 
-Fetch State	| instruction Value is 0x0xafbf001c
+Cache Fetch Data
+Cache Hit		| Current Count = 65
+Current Hit Rate	| 0.928571
+Fetch State		| instruction Value is 0x0xafbf001c
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 59
-Execution State	| instruction is AddImmediateUnsigned
+Cycle Num		| 59
+Execution State		| instruction is AddImmediateUnsigned
 ExecutionResult = 0x7f58 / ExecutionResult = R[rs] + SignExtImmediate
 
-Decode State	| instruction Value is 0x0xafbf001c
-I Type		| opcode 0x2b / signExtImm 0x1c / zeroExtImm 0x1c / branchAddr 0x70
-I Type		| rsData = 0x7f78 = register[rs=0x1d]  / rt = 0x1f / immediate = 0x1c
-Instruction	| StoreWord
+Decode State		| instruction Value is 0x0xafbf001c
+I Type			| opcode 0x2b / signExtImm 0x1c / zeroExtImm 0x1c / branchAddr 0x70
+I Type			| rsData = 0x7f78 = register[rs=0x1d]  / rt = 0x1f / immediate = 0x1c
+Instruction		| StoreWord
 
-Fetch State	| instruction Value is 0x0xafbe0018
+Cache Fetch Data
+Cache Hit		| Current Count = 66
+Current Hit Rate	| 0.929577
+Fetch State		| instruction Value is 0x0xafbe0018
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 60
-Memory State	| instruction is AddImmediateUnsigned
+Cycle Num		| 60
+Memory State		| instruction is AddImmediateUnsigned
 
-Execution State	| instruction is StoreWord
+Execution State		| instruction is StoreWord
 ExecutionResult = 0x7f74 / ExecutionResult = R[rs] + SignExtImm
 
-Decode State	| instruction Value is 0x0xafbe0018
-I Type		| opcode 0x2b / signExtImm 0x18 / zeroExtImm 0x18 / branchAddr 0x60
-I Type		| rsData = 0x7f78 = register[rs=0x1d]  / rt = 0x1e / immediate = 0x18
-Instruction	| StoreWord
+Decode State		| instruction Value is 0x0xafbe0018
+I Type			| opcode 0x2b / signExtImm 0x18 / zeroExtImm 0x18 / branchAddr 0x60
+I Type			| rsData = 0x7f78 = register[rs=0x1d]  / rt = 0x1e / immediate = 0x18
+Instruction		| StoreWord
 
-Fetch State	| instruction Value is 0x0x3a0f021
+Cache Fetch Data
+Cache Hit		| Current Count = 67
+Current Hit Rate	| 0.930556
+Fetch State		| instruction Value is 0x0x3a0f021
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 61
-WriteBack State	| instruction is AddImmediateUnsigned
+Cycle Num		| 61
+WriteBack State		| instruction is AddImmediateUnsigned
 R[rt=0x1d] = 0x7f58 / ExecutionResult 
 
-Memory State	| instruction is StoreWord
+Memory State		| instruction is StoreWord
+Cache Miss		| Current Count = 6
+Current Hit Rate	| 0.917808
 M[R[rs] + SignExtImm] = R[rt]
 M[(R[29](0x7f58) + 0x1c) = 0x7f74] = R[31](0x84)
 
-Execution State	| instruction is StoreWord
+Execution State		| instruction is StoreWord
 ExecutionResult = 0x7f70 / ExecutionResult = R[rs] + SignExtImm
 
-Decode State	| instruction Value is 0x0x3a0f021
+Decode State		| instruction Value is 0x0x3a0f021
 R Type		| rd 0x1e / rs 0x1d / rt 0x0 / shamt 0x0 / funct 0x21
-R Type		| rsData = 0x7f58 = register[rs=0x1d]  / rtData = 0x0 = register[rt=0x0]
-Instruction	| AddUnsigned
+R Type			| rsData = 0x7f58 = register[rs=0x1d]  / rtData = 0x0 = register[rt=0x0]
+Instruction		| AddUnsigned
 
-Fetch State	| instruction Value is 0x0xafc40020
+Cache Fetch Data
+Cache Hit		| Current Count = 68
+Current Hit Rate	| 0.918919
+Fetch State		| instruction Value is 0x0xafc40020
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 62
-WriteBack State	| instruction is StoreWord
+Cycle Num		| 62
+WriteBack State		| instruction is StoreWord
 
-Memory State	| instruction is StoreWord
+Memory State		| instruction is StoreWord
+Cache Hit		| Current Count = 69
+Current Hit Rate	| 0.920000
 M[R[rs] + SignExtImm] = R[rt]
 M[(R[29](0x7f58) + 0x18) = 0x7f70] = R[30](0x7f78)
 
-Execution State	| instruction is AddUnsigned
+Execution State		| instruction is AddUnsigned
 ExecutionResult = 0x7f58 / ExecutionResult = R[rs] + R[rt]
 
-Decode State	| instruction Value is 0x0xafc40020
-I Type		| opcode 0x2b / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
-I Type		| rsData = 0x7f78 = register[rs=0x1e]  / rt = 0x4 / immediate = 0x20
-Instruction	| StoreWord
+Decode State		| instruction Value is 0x0xafc40020
+I Type			| opcode 0x2b / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
+I Type			| rsData = 0x7f78 = register[rs=0x1e]  / rt = 0x4 / immediate = 0x20
+Instruction		| StoreWord
 
-Fetch State	| instruction Value is 0x0x8fc30020
+Cache Fetch Data
+Cache Hit		| Current Count = 70
+Current Hit Rate	| 0.921053
+Fetch State		| instruction Value is 0x0x8fc30020
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 63
-WriteBack State	| instruction is StoreWord
+Cycle Num		| 63
+WriteBack State		| instruction is StoreWord
 
-Memory State	| instruction is AddUnsigned
+Memory State		| instruction is AddUnsigned
 
-Execution State	| instruction is StoreWord
+Execution State		| instruction is StoreWord
 ExecutionResult = 0x7f78 / ExecutionResult = R[rs] + SignExtImm
 
-Decode State	| instruction Value is 0x0x8fc30020
-I Type		| opcode 0x23 / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
-I Type		| rsData = 0x7f78 = register[rs=0x1e]  / rt = 0x3 / immediate = 0x20
-Instruction	| LoadWord
+Decode State		| instruction Value is 0x0x8fc30020
+I Type			| opcode 0x23 / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
+I Type			| rsData = 0x7f78 = register[rs=0x1e]  / rt = 0x3 / immediate = 0x20
+Instruction		| LoadWord
 
-Fetch State	| instruction Value is 0x0x24020001
+Cache Fetch Data
+Cache Hit		| Current Count = 71
+Current Hit Rate	| 0.922078
+Fetch State		| instruction Value is 0x0x24020001
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 64
-WriteBack State	| instruction is AddUnsigned
+Cycle Num		| 64
+WriteBack State		| instruction is AddUnsigned
 R[rd=0x1e] = 0x7f58
 
-Memory State	| instruction is StoreWord
+Memory State		| instruction is StoreWord
+Cache Hit		| Current Count = 72
+Current Hit Rate	| 0.923077
 M[R[rs] + SignExtImm] = R[rt]
 M[(R[30](0x7f58) + 0x20) = 0x7f78] = R[4](0x2)
 
-Execution State	| instruction is LoadWord
+Execution State		| instruction is LoadWord
 ExecutionResult = 0x7f78 / ExecutionResult = R[rs] + SignExtImm
 
-Decode State	| instruction Value is 0x0x24020001
-I Type		| opcode 0x9 / signExtImm 0x1 / zeroExtImm 0x1 / branchAddr 0x4
-I Type		| rsData = 0x0 = register[rs=0x0]  / rt = 0x2 / immediate = 0x1
-Instruction	| AddImmediateUnsigned
+Decode State		| instruction Value is 0x0x24020001
+I Type			| opcode 0x9 / signExtImm 0x1 / zeroExtImm 0x1 / branchAddr 0x4
+I Type			| rsData = 0x0 = register[rs=0x0]  / rt = 0x2 / immediate = 0x1
+Instruction		| AddImmediateUnsigned
 
-Fetch State	| instruction Value is 0x0x14620004
+Cache Fetch Data
+Cache Hit		| Current Count = 73
+Current Hit Rate	| 0.924051
+Fetch State		| instruction Value is 0x0x14620004
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 65
-WriteBack State	| instruction is StoreWord
+Cycle Num		| 65
+WriteBack State		| instruction is StoreWord
 
-Memory State	| instruction is LoadWord
+Memory State		| instruction is LoadWord
+Cache Fetch Data
+Cache Hit		| Current Count = 74
+Current Hit Rate	| 0.925000
 
-Execution State	| instruction is AddImmediateUnsigned
+Execution State		| instruction is AddImmediateUnsigned
 ExecutionResult = 0x1 / ExecutionResult = R[rs] + SignExtImmediate
 
-Decode State	| instruction Value is 0x0x14620004
-I Type		| opcode 0x5 / signExtImm 0x4 / zeroExtImm 0x4 / branchAddr 0x10
-I Type		| rsData = 0x3 = register[rs=0x3]  / rt = 0x2 / immediate = 0x10
-Instruction	| BranchOnNotEqual
+Decode State		| instruction Value is 0x0x14620004
+I Type			| opcode 0x5 / signExtImm 0x4 / zeroExtImm 0x4 / branchAddr 0x10
+I Type			| rsData = 0x3 = register[rs=0x3]  / rt = 0x2 / immediate = 0x10
+Instruction		| BranchOnNotEqual
 
-Fetch State	| instruction Value is 0x0x0
+Cache Fetch Data
+Cache Hit		| Current Count = 75
+Current Hit Rate	| 0.925926
+Fetch State		| instruction Value is 0x0x0
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 66
-WriteBack State	| instruction is LoadWord
+Cycle Num		| 66
+WriteBack State		| instruction is LoadWord
 R[rt] = M[R[rs] + SignExtImmm]
 R[3] = M[R[30](0x7f58) + 0x20] = 0x7f78
 
-Memory State	| instruction is AddImmediateUnsigned
+Memory State		| instruction is AddImmediateUnsigned
 
-Execution State	| instruction is BranchOnNotEqual
-if(R[rs] != R[rt])	PC = PC + 4 + BranchAddr
-if(R[3](0x2) != R[2](0x1))	PC = {0x5c + 4 + 0x10}(0x70)
+Execution State		| instruction is BranchOnNotEqual
+if(R[rs] != R[rt])		PC = PC + 4 + BranchAddr
+if(R[3](0x2) != R[2](0x1))		PC = {0x5c + 4 + 0x10}(0x70)
 
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 67
-WriteBack State	| instruction is AddImmediateUnsigned
+Cycle Num		| 67
+WriteBack State		| instruction is AddImmediateUnsigned
 R[rt=0x2] = 0x1 / ExecutionResult 
 
-Memory State	| instruction is BranchOnNotEqual
+Memory State		| instruction is BranchOnNotEqual
 
-Fetch State	| instruction Value is 0x0x8fc20020
+Cache Fetch Data
+Cache Hit		| Current Count = 76
+Current Hit Rate	| 0.926829
+Fetch State		| instruction Value is 0x0x8fc20020
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 68
-WriteBack State	| instruction is BranchOnNotEqual
+Cycle Num		| 68
+WriteBack State		| instruction is BranchOnNotEqual
 
-Decode State	| instruction Value is 0x0x8fc20020
-I Type		| opcode 0x23 / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
-I Type		| rsData = 0x7f58 = register[rs=0x1e]  / rt = 0x2 / immediate = 0x20
-Instruction	| LoadWord
+Decode State		| instruction Value is 0x0x8fc20020
+I Type			| opcode 0x23 / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
+I Type			| rsData = 0x7f58 = register[rs=0x1e]  / rt = 0x2 / immediate = 0x20
+Instruction		| LoadWord
 
-Fetch State	| instruction Value is 0x0x2442ffff
+Cache Fetch Data
+Cache Hit		| Current Count = 77
+Current Hit Rate	| 0.927711
+Fetch State		| instruction Value is 0x0x2442ffff
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 69
-Execution State	| instruction is LoadWord
+Cycle Num		| 69
+Execution State		| instruction is LoadWord
 ExecutionResult = 0x7f78 / ExecutionResult = R[rs] + SignExtImm
 
-Decode State	| instruction Value is 0x0x2442ffff
-I Type		| opcode 0x9 / signExtImm 0xffffffff / zeroExtImm 0xffff / branchAddr 0xfffffffc
-I Type		| rsData = 0x1 = register[rs=0x2]  / rt = 0x2 / immediate = 0xffffffff
-Instruction	| AddImmediateUnsigned
+Decode State		| instruction Value is 0x0x2442ffff
+I Type			| opcode 0x9 / signExtImm 0xffffffff / zeroExtImm 0xffff / branchAddr 0xfffffffc
+I Type			| rsData = 0x1 = register[rs=0x2]  / rt = 0x2 / immediate = 0xffffffff
+Instruction		| AddImmediateUnsigned
 
-Fetch State	| instruction Value is 0x0x402021
+Cache Fetch Data
+Cache Hit		| Current Count = 78
+Current Hit Rate	| 0.928571
+Fetch State		| instruction Value is 0x0x402021
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 70
-Memory State	| instruction is LoadWord
+Cycle Num		| 70
+Memory State		| instruction is LoadWord
+Cache Fetch Data
+Cache Hit		| Current Count = 79
+Current Hit Rate	| 0.929412
 
-Execution State	| instruction is AddImmediateUnsigned
+Execution State		| instruction is AddImmediateUnsigned
 ExecutionResult = 0x1 / ExecutionResult = R[rs] + SignExtImmediate
 
-Decode State	| instruction Value is 0x0x402021
+Decode State		| instruction Value is 0x0x402021
 R Type		| rd 0x4 / rs 0x2 / rt 0x0 / shamt 0x0 / funct 0x21
-R Type		| rsData = 0x1 = register[rs=0x2]  / rtData = 0x0 = register[rt=0x0]
-Instruction	| AddUnsigned
+R Type			| rsData = 0x1 = register[rs=0x2]  / rtData = 0x0 = register[rt=0x0]
+Instruction		| AddUnsigned
 
-Fetch State	| instruction Value is 0x0xc000010
+Cache Fetch Data
+Cache Hit		| Current Count = 80
+Current Hit Rate	| 0.930233
+Fetch State		| instruction Value is 0x0xc000010
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 71
-WriteBack State	| instruction is LoadWord
+Cycle Num		| 71
+WriteBack State		| instruction is LoadWord
 R[rt] = M[R[rs] + SignExtImmm]
 R[2] = M[R[30](0x7f58) + 0x20] = 0x7f78
 
-Memory State	| instruction is AddImmediateUnsigned
+Memory State		| instruction is AddImmediateUnsigned
 
-Execution State	| instruction is AddUnsigned
+Execution State		| instruction is AddUnsigned
 ExecutionResult = 0x1 / ExecutionResult = R[rs] + R[rt]
 
-Decode State	| instruction Value is 0x0xc000010
+Decode State		| instruction Value is 0x0xc000010
 J Type		| opcode 0x3 / address 0x40
 J Type		| address = 0x40
-Instruction	| JumpAndLink
+Instruction		| JumpAndLink
 
-Fetch State	| instruction Value is 0x0x0
+Cache Fetch Data
+Cache Hit		| Current Count = 81
+Current Hit Rate	| 0.931035
+Fetch State		| instruction Value is 0x0x0
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 72
-WriteBack State	| instruction is AddImmediateUnsigned
+Cycle Num		| 72
+WriteBack State		| instruction is AddImmediateUnsigned
 R[rt=0x2] = 0x1 / ExecutionResult 
 
-Memory State	| instruction is AddUnsigned
+Memory State		| instruction is AddUnsigned
 
-Execution State	| instruction is JumpAndLink
+Execution State		| instruction is JumpAndLink
 R[31] = PC + 8; PC = JumpAddr
 R[31] = 0x84; PC = 0x40
 
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 73
-WriteBack State	| instruction is AddUnsigned
+Cycle Num		| 73
+WriteBack State		| instruction is AddUnsigned
 R[rd=0x4] = 0x1
 
-Memory State	| instruction is JumpAndLink
+Memory State		| instruction is JumpAndLink
 
-Fetch State	| instruction Value is 0x0x27bdffe0
+Cache Fetch Data
+Cache Hit		| Current Count = 82
+Current Hit Rate	| 0.931818
+Fetch State		| instruction Value is 0x0x27bdffe0
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 74
-WriteBack State	| instruction is JumpAndLink
+Cycle Num		| 74
+WriteBack State		| instruction is JumpAndLink
 
-Decode State	| instruction Value is 0x0x27bdffe0
-I Type		| opcode 0x9 / signExtImm 0xffffffe0 / zeroExtImm 0xffe0 / branchAddr 0xffffff80
-I Type		| rsData = 0x7f58 = register[rs=0x1d]  / rt = 0x1d / immediate = 0xffffffe0
-Instruction	| AddImmediateUnsigned
+Decode State		| instruction Value is 0x0x27bdffe0
+I Type			| opcode 0x9 / signExtImm 0xffffffe0 / zeroExtImm 0xffe0 / branchAddr 0xffffff80
+I Type			| rsData = 0x7f58 = register[rs=0x1d]  / rt = 0x1d / immediate = 0xffffffe0
+Instruction		| AddImmediateUnsigned
 
-Fetch State	| instruction Value is 0x0xafbf001c
+Cache Fetch Data
+Cache Hit		| Current Count = 83
+Current Hit Rate	| 0.932584
+Fetch State		| instruction Value is 0x0xafbf001c
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 75
-Execution State	| instruction is AddImmediateUnsigned
+Cycle Num		| 75
+Execution State		| instruction is AddImmediateUnsigned
 ExecutionResult = 0x7f38 / ExecutionResult = R[rs] + SignExtImmediate
 
-Decode State	| instruction Value is 0x0xafbf001c
-I Type		| opcode 0x2b / signExtImm 0x1c / zeroExtImm 0x1c / branchAddr 0x70
-I Type		| rsData = 0x7f58 = register[rs=0x1d]  / rt = 0x1f / immediate = 0x1c
-Instruction	| StoreWord
+Decode State		| instruction Value is 0x0xafbf001c
+I Type			| opcode 0x2b / signExtImm 0x1c / zeroExtImm 0x1c / branchAddr 0x70
+I Type			| rsData = 0x7f58 = register[rs=0x1d]  / rt = 0x1f / immediate = 0x1c
+Instruction		| StoreWord
 
-Fetch State	| instruction Value is 0x0xafbe0018
+Cache Fetch Data
+Cache Hit		| Current Count = 84
+Current Hit Rate	| 0.933333
+Fetch State		| instruction Value is 0x0xafbe0018
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 76
-Memory State	| instruction is AddImmediateUnsigned
+Cycle Num		| 76
+Memory State		| instruction is AddImmediateUnsigned
 
-Execution State	| instruction is StoreWord
+Execution State		| instruction is StoreWord
 ExecutionResult = 0x7f54 / ExecutionResult = R[rs] + SignExtImm
 
-Decode State	| instruction Value is 0x0xafbe0018
-I Type		| opcode 0x2b / signExtImm 0x18 / zeroExtImm 0x18 / branchAddr 0x60
-I Type		| rsData = 0x7f58 = register[rs=0x1d]  / rt = 0x1e / immediate = 0x18
-Instruction	| StoreWord
+Decode State		| instruction Value is 0x0xafbe0018
+I Type			| opcode 0x2b / signExtImm 0x18 / zeroExtImm 0x18 / branchAddr 0x60
+I Type			| rsData = 0x7f58 = register[rs=0x1d]  / rt = 0x1e / immediate = 0x18
+Instruction		| StoreWord
 
-Fetch State	| instruction Value is 0x0x3a0f021
+Cache Fetch Data
+Cache Hit		| Current Count = 85
+Current Hit Rate	| 0.934066
+Fetch State		| instruction Value is 0x0x3a0f021
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 77
-WriteBack State	| instruction is AddImmediateUnsigned
+Cycle Num		| 77
+WriteBack State		| instruction is AddImmediateUnsigned
 R[rt=0x1d] = 0x7f38 / ExecutionResult 
 
-Memory State	| instruction is StoreWord
+Memory State		| instruction is StoreWord
+Cache Hit		| Current Count = 86
+Current Hit Rate	| 0.934783
 M[R[rs] + SignExtImm] = R[rt]
 M[(R[29](0x7f38) + 0x1c) = 0x7f54] = R[31](0x84)
 
-Execution State	| instruction is StoreWord
+Execution State		| instruction is StoreWord
 ExecutionResult = 0x7f50 / ExecutionResult = R[rs] + SignExtImm
 
-Decode State	| instruction Value is 0x0x3a0f021
+Decode State		| instruction Value is 0x0x3a0f021
 R Type		| rd 0x1e / rs 0x1d / rt 0x0 / shamt 0x0 / funct 0x21
-R Type		| rsData = 0x7f38 = register[rs=0x1d]  / rtData = 0x0 = register[rt=0x0]
-Instruction	| AddUnsigned
+R Type			| rsData = 0x7f38 = register[rs=0x1d]  / rtData = 0x0 = register[rt=0x0]
+Instruction		| AddUnsigned
 
-Fetch State	| instruction Value is 0x0xafc40020
+Cache Fetch Data
+Cache Hit		| Current Count = 87
+Current Hit Rate	| 0.935484
+Fetch State		| instruction Value is 0x0xafc40020
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 78
-WriteBack State	| instruction is StoreWord
+Cycle Num		| 78
+WriteBack State		| instruction is StoreWord
 
-Memory State	| instruction is StoreWord
+Memory State		| instruction is StoreWord
+Cache Hit		| Current Count = 88
+Current Hit Rate	| 0.936170
 M[R[rs] + SignExtImm] = R[rt]
 M[(R[29](0x7f38) + 0x18) = 0x7f50] = R[30](0x7f58)
 
-Execution State	| instruction is AddUnsigned
+Execution State		| instruction is AddUnsigned
 ExecutionResult = 0x7f38 / ExecutionResult = R[rs] + R[rt]
 
-Decode State	| instruction Value is 0x0xafc40020
-I Type		| opcode 0x2b / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
-I Type		| rsData = 0x7f58 = register[rs=0x1e]  / rt = 0x4 / immediate = 0x20
-Instruction	| StoreWord
+Decode State		| instruction Value is 0x0xafc40020
+I Type			| opcode 0x2b / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
+I Type			| rsData = 0x7f58 = register[rs=0x1e]  / rt = 0x4 / immediate = 0x20
+Instruction		| StoreWord
 
-Fetch State	| instruction Value is 0x0x8fc30020
+Cache Fetch Data
+Cache Hit		| Current Count = 89
+Current Hit Rate	| 0.936842
+Fetch State		| instruction Value is 0x0x8fc30020
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 79
-WriteBack State	| instruction is StoreWord
+Cycle Num		| 79
+WriteBack State		| instruction is StoreWord
 
-Memory State	| instruction is AddUnsigned
+Memory State		| instruction is AddUnsigned
 
-Execution State	| instruction is StoreWord
+Execution State		| instruction is StoreWord
 ExecutionResult = 0x7f58 / ExecutionResult = R[rs] + SignExtImm
 
-Decode State	| instruction Value is 0x0x8fc30020
-I Type		| opcode 0x23 / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
-I Type		| rsData = 0x7f58 = register[rs=0x1e]  / rt = 0x3 / immediate = 0x20
-Instruction	| LoadWord
+Decode State		| instruction Value is 0x0x8fc30020
+I Type			| opcode 0x23 / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
+I Type			| rsData = 0x7f58 = register[rs=0x1e]  / rt = 0x3 / immediate = 0x20
+Instruction		| LoadWord
 
-Fetch State	| instruction Value is 0x0x24020001
+Cache Fetch Data
+Cache Hit		| Current Count = 90
+Current Hit Rate	| 0.937500
+Fetch State		| instruction Value is 0x0x24020001
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 80
-WriteBack State	| instruction is AddUnsigned
+Cycle Num		| 80
+WriteBack State		| instruction is AddUnsigned
 R[rd=0x1e] = 0x7f38
 
-Memory State	| instruction is StoreWord
+Memory State		| instruction is StoreWord
+Cache Hit		| Current Count = 91
+Current Hit Rate	| 0.938144
 M[R[rs] + SignExtImm] = R[rt]
 M[(R[30](0x7f38) + 0x20) = 0x7f58] = R[4](0x1)
 
-Execution State	| instruction is LoadWord
+Execution State		| instruction is LoadWord
 ExecutionResult = 0x7f58 / ExecutionResult = R[rs] + SignExtImm
 
-Decode State	| instruction Value is 0x0x24020001
-I Type		| opcode 0x9 / signExtImm 0x1 / zeroExtImm 0x1 / branchAddr 0x4
-I Type		| rsData = 0x0 = register[rs=0x0]  / rt = 0x2 / immediate = 0x1
-Instruction	| AddImmediateUnsigned
+Decode State		| instruction Value is 0x0x24020001
+I Type			| opcode 0x9 / signExtImm 0x1 / zeroExtImm 0x1 / branchAddr 0x4
+I Type			| rsData = 0x0 = register[rs=0x0]  / rt = 0x2 / immediate = 0x1
+Instruction		| AddImmediateUnsigned
 
-Fetch State	| instruction Value is 0x0x14620004
+Cache Fetch Data
+Cache Hit		| Current Count = 92
+Current Hit Rate	| 0.938776
+Fetch State		| instruction Value is 0x0x14620004
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 81
-WriteBack State	| instruction is StoreWord
+Cycle Num		| 81
+WriteBack State		| instruction is StoreWord
 
-Memory State	| instruction is LoadWord
+Memory State		| instruction is LoadWord
+Cache Fetch Data
+Cache Hit		| Current Count = 93
+Current Hit Rate	| 0.939394
 
-Execution State	| instruction is AddImmediateUnsigned
+Execution State		| instruction is AddImmediateUnsigned
 ExecutionResult = 0x1 / ExecutionResult = R[rs] + SignExtImmediate
 
-Decode State	| instruction Value is 0x0x14620004
-I Type		| opcode 0x5 / signExtImm 0x4 / zeroExtImm 0x4 / branchAddr 0x10
-I Type		| rsData = 0x2 = register[rs=0x3]  / rt = 0x2 / immediate = 0x10
-Instruction	| BranchOnNotEqual
+Decode State		| instruction Value is 0x0x14620004
+I Type			| opcode 0x5 / signExtImm 0x4 / zeroExtImm 0x4 / branchAddr 0x10
+I Type			| rsData = 0x2 = register[rs=0x3]  / rt = 0x2 / immediate = 0x10
+Instruction		| BranchOnNotEqual
 
-Fetch State	| instruction Value is 0x0x0
+Cache Fetch Data
+Cache Hit		| Current Count = 94
+Current Hit Rate	| 0.940000
+Fetch State		| instruction Value is 0x0x0
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 82
-WriteBack State	| instruction is LoadWord
+Cycle Num		| 82
+WriteBack State		| instruction is LoadWord
 R[rt] = M[R[rs] + SignExtImmm]
 R[3] = M[R[30](0x7f38) + 0x20] = 0x7f58
 
-Memory State	| instruction is AddImmediateUnsigned
+Memory State		| instruction is AddImmediateUnsigned
 
-Execution State	| instruction is BranchOnNotEqual
-if(R[rs] != R[rt])	PC = PC + 4 + BranchAddr
-if(R[3](0x1) != R[2](0x1))	PC = {0x5c + 4 + 0x10}(0x70)
+Execution State		| instruction is BranchOnNotEqual
+if(R[rs] != R[rt])		PC = PC + 4 + BranchAddr
+if(R[3](0x1) != R[2](0x1))		PC = {0x5c + 4 + 0x10}(0x70)
 
-Decode State	| instruction Value is 0x0x0
-Fetch State	| instruction Value is 0x0x24020001
+Decode State		| instruction Value is 0x0x0
+Cache Fetch Data
+Cache Hit		| Current Count = 95
+Current Hit Rate	| 0.940594
+Fetch State		| instruction Value is 0x0x24020001
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 83
-WriteBack State	| instruction is AddImmediateUnsigned
+Cycle Num		| 83
+WriteBack State		| instruction is AddImmediateUnsigned
 R[rt=0x2] = 0x1 / ExecutionResult 
 
-Memory State	| instruction is BranchOnNotEqual
+Memory State		| instruction is BranchOnNotEqual
 
-Decode State	| instruction Value is 0x0x24020001
-I Type		| opcode 0x9 / signExtImm 0x1 / zeroExtImm 0x1 / branchAddr 0x4
-I Type		| rsData = 0x0 = register[rs=0x0]  / rt = 0x2 / immediate = 0x1
-Instruction	| AddImmediateUnsigned
+Decode State		| instruction Value is 0x0x24020001
+I Type			| opcode 0x9 / signExtImm 0x1 / zeroExtImm 0x1 / branchAddr 0x4
+I Type			| rsData = 0x0 = register[rs=0x0]  / rt = 0x2 / immediate = 0x1
+Instruction		| AddImmediateUnsigned
 
-Fetch State	| instruction Value is 0x0x8000024
+Cache Fetch Data
+Cache Hit		| Current Count = 96
+Current Hit Rate	| 0.941176
+Fetch State		| instruction Value is 0x0x8000024
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 84
-WriteBack State	| instruction is BranchOnNotEqual
+Cycle Num		| 84
+WriteBack State		| instruction is BranchOnNotEqual
 
-Execution State	| instruction is AddImmediateUnsigned
+Execution State		| instruction is AddImmediateUnsigned
 ExecutionResult = 0x1 / ExecutionResult = R[rs] + SignExtImmediate
 
-Decode State	| instruction Value is 0x0x8000024
+Decode State		| instruction Value is 0x0x8000024
 J Type		| opcode 0x2 / address 0x90
 J Type		| address = 0x90
-Instruction	| Jump
+Instruction		| Jump
 
-Fetch State	| instruction Value is 0x0x0
+Cache Fetch Data
+Cache Hit		| Current Count = 97
+Current Hit Rate	| 0.941748
+Fetch State		| instruction Value is 0x0x0
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 85
-Memory State	| instruction is AddImmediateUnsigned
+Cycle Num		| 85
+Memory State		| instruction is AddImmediateUnsigned
 
-Execution State	| instruction is Jump
+Execution State		| instruction is Jump
 PC = JumpAddr
 PC = 0x90
 
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 86
-WriteBack State	| instruction is AddImmediateUnsigned
+Cycle Num		| 86
+WriteBack State		| instruction is AddImmediateUnsigned
 R[rt=0x2] = 0x1 / ExecutionResult 
 
-Memory State	| instruction is Jump
+Memory State		| instruction is Jump
 
-Fetch State	| instruction Value is 0x0x3c0e821
+Cache Fetch Data
+Cache Hit		| Current Count = 98
+Current Hit Rate	| 0.942308
+Fetch State		| instruction Value is 0x0x3c0e821
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 87
-WriteBack State	| instruction is Jump
+Cycle Num		| 87
+WriteBack State		| instruction is Jump
 
-Decode State	| instruction Value is 0x0x3c0e821
+Decode State		| instruction Value is 0x0x3c0e821
 R Type		| rd 0x1d / rs 0x1e / rt 0x0 / shamt 0x0 / funct 0x21
-R Type		| rsData = 0x7f38 = register[rs=0x1e]  / rtData = 0x0 = register[rt=0x0]
-Instruction	| AddUnsigned
+R Type			| rsData = 0x7f38 = register[rs=0x1e]  / rtData = 0x0 = register[rt=0x0]
+Instruction		| AddUnsigned
 
-Fetch State	| instruction Value is 0x0x8fbf001c
+Cache Fetch Data
+Cache Hit		| Current Count = 99
+Current Hit Rate	| 0.942857
+Fetch State		| instruction Value is 0x0x8fbf001c
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 88
-Execution State	| instruction is AddUnsigned
+Cycle Num		| 88
+Execution State		| instruction is AddUnsigned
 ExecutionResult = 0x7f38 / ExecutionResult = R[rs] + R[rt]
 
-Decode State	| instruction Value is 0x0x8fbf001c
-I Type		| opcode 0x23 / signExtImm 0x1c / zeroExtImm 0x1c / branchAddr 0x70
-I Type		| rsData = 0x7f38 = register[rs=0x1d]  / rt = 0x1f / immediate = 0x1c
-Instruction	| LoadWord
+Decode State		| instruction Value is 0x0x8fbf001c
+I Type			| opcode 0x23 / signExtImm 0x1c / zeroExtImm 0x1c / branchAddr 0x70
+I Type			| rsData = 0x7f38 = register[rs=0x1d]  / rt = 0x1f / immediate = 0x1c
+Instruction		| LoadWord
 
-Fetch State	| instruction Value is 0x0x8fbe0018
+Cache Fetch Data
+Cache Hit		| Current Count = 100
+Current Hit Rate	| 0.943396
+Fetch State		| instruction Value is 0x0x8fbe0018
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 89
-Memory State	| instruction is AddUnsigned
+Cycle Num		| 89
+Memory State		| instruction is AddUnsigned
 
-Execution State	| instruction is LoadWord
+Execution State		| instruction is LoadWord
 ExecutionResult = 0x7f54 / ExecutionResult = R[rs] + SignExtImm
 
-Decode State	| instruction Value is 0x0x8fbe0018
-I Type		| opcode 0x23 / signExtImm 0x18 / zeroExtImm 0x18 / branchAddr 0x60
-I Type		| rsData = 0x7f38 = register[rs=0x1d]  / rt = 0x1e / immediate = 0x18
-Instruction	| LoadWord
+Decode State		| instruction Value is 0x0x8fbe0018
+I Type			| opcode 0x23 / signExtImm 0x18 / zeroExtImm 0x18 / branchAddr 0x60
+I Type			| rsData = 0x7f38 = register[rs=0x1d]  / rt = 0x1e / immediate = 0x18
+Instruction		| LoadWord
 
-Fetch State	| instruction Value is 0x0x27bd0020
+Cache Fetch Data
+Cache Hit		| Current Count = 101
+Current Hit Rate	| 0.943925
+Fetch State		| instruction Value is 0x0x27bd0020
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 90
-WriteBack State	| instruction is AddUnsigned
+Cycle Num		| 90
+WriteBack State		| instruction is AddUnsigned
 R[rd=0x1d] = 0x7f38
 
-Memory State	| instruction is LoadWord
+Memory State		| instruction is LoadWord
+Cache Fetch Data
+Cache Hit		| Current Count = 102
+Current Hit Rate	| 0.944444
 
-Execution State	| instruction is LoadWord
+Execution State		| instruction is LoadWord
 ExecutionResult = 0x7f50 / ExecutionResult = R[rs] + SignExtImm
 
-Decode State	| instruction Value is 0x0x27bd0020
-I Type		| opcode 0x9 / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
-I Type		| rsData = 0x7f38 = register[rs=0x1d]  / rt = 0x1d / immediate = 0x20
-Instruction	| AddImmediateUnsigned
+Decode State		| instruction Value is 0x0x27bd0020
+I Type			| opcode 0x9 / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
+I Type			| rsData = 0x7f38 = register[rs=0x1d]  / rt = 0x1d / immediate = 0x20
+Instruction		| AddImmediateUnsigned
 
-Fetch State	| instruction Value is 0x0x3e00008
+Cache Fetch Data
+Cache Hit		| Current Count = 103
+Current Hit Rate	| 0.944954
+Fetch State		| instruction Value is 0x0x3e00008
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 91
-WriteBack State	| instruction is LoadWord
+Cycle Num		| 91
+WriteBack State		| instruction is LoadWord
 R[rt] = M[R[rs] + SignExtImmm]
 R[31] = M[R[29](0x7f38) + 0x1c] = 0x7f54
 
-Memory State	| instruction is LoadWord
+Memory State		| instruction is LoadWord
+Cache Fetch Data
+Cache Hit		| Current Count = 104
+Current Hit Rate	| 0.945455
 
-Execution State	| instruction is AddImmediateUnsigned
+Execution State		| instruction is AddImmediateUnsigned
 ExecutionResult = 0x7f58 / ExecutionResult = R[rs] + SignExtImmediate
 
-Decode State	| instruction Value is 0x0x3e00008
+Decode State		| instruction Value is 0x0x3e00008
 R Type		| rd 0x0 / rs 0x1f / rt 0x0 / shamt 0x0 / funct 0x8
-R Type		| rsData = 0x84 = register[rs=0x1f]  / rtData = 0x0 = register[rt=0x0]
-Instruction	| JumpRegister
+R Type			| rsData = 0x84 = register[rs=0x1f]  / rtData = 0x0 = register[rt=0x0]
+Instruction		| JumpRegister
 
-Fetch State	| instruction Value is 0x0x0
+Cache Fetch Data
+Cache Hit		| Current Count = 105
+Current Hit Rate	| 0.945946
+Fetch State		| instruction Value is 0x0x0
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 92
-WriteBack State	| instruction is LoadWord
+Cycle Num		| 92
+WriteBack State		| instruction is LoadWord
 R[rt] = M[R[rs] + SignExtImmm]
 R[30] = M[R[29](0x7f38) + 0x18] = 0x7f50
 
-Memory State	| instruction is AddImmediateUnsigned
+Memory State		| instruction is AddImmediateUnsigned
 
-Execution State	| instruction is JumpRegister
+Execution State		| instruction is JumpRegister
 PC = R[rs]
 PC = R[31](0x84)
 
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 93
-WriteBack State	| instruction is AddImmediateUnsigned
+Cycle Num		| 93
+WriteBack State		| instruction is AddImmediateUnsigned
 R[rt=0x1d] = 0x7f58 / ExecutionResult 
 
-Memory State	| instruction is JumpRegister
+Memory State		| instruction is JumpRegister
 
-Fetch State	| instruction Value is 0x0x401821
+Cache Fetch Data
+Cache Hit		| Current Count = 106
+Current Hit Rate	| 0.946429
+Fetch State		| instruction Value is 0x0x401821
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 94
-WriteBack State	| instruction is JumpRegister
+Cycle Num		| 94
+WriteBack State		| instruction is JumpRegister
 
-Decode State	| instruction Value is 0x0x401821
+Decode State		| instruction Value is 0x0x401821
 R Type		| rd 0x3 / rs 0x2 / rt 0x0 / shamt 0x0 / funct 0x21
-R Type		| rsData = 0x1 = register[rs=0x2]  / rtData = 0x0 = register[rt=0x0]
-Instruction	| AddUnsigned
+R Type			| rsData = 0x1 = register[rs=0x2]  / rtData = 0x0 = register[rt=0x0]
+Instruction		| AddUnsigned
 
-Fetch State	| instruction Value is 0x0x8fc20020
+Cache Fetch Data
+Cache Hit		| Current Count = 107
+Current Hit Rate	| 0.946903
+Fetch State		| instruction Value is 0x0x8fc20020
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 95
-Execution State	| instruction is AddUnsigned
+Cycle Num		| 95
+Execution State		| instruction is AddUnsigned
 ExecutionResult = 0x1 / ExecutionResult = R[rs] + R[rt]
 
-Decode State	| instruction Value is 0x0x8fc20020
-I Type		| opcode 0x23 / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
-I Type		| rsData = 0x7f58 = register[rs=0x1e]  / rt = 0x2 / immediate = 0x20
-Instruction	| LoadWord
+Decode State		| instruction Value is 0x0x8fc20020
+I Type			| opcode 0x23 / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
+I Type			| rsData = 0x7f58 = register[rs=0x1e]  / rt = 0x2 / immediate = 0x20
+Instruction		| LoadWord
 
-Fetch State	| instruction Value is 0x0x70621002
+Cache Fetch Data
+Cache Hit		| Current Count = 108
+Current Hit Rate	| 0.947368
+Fetch State		| instruction Value is 0x0x70621002
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 96
-Memory State	| instruction is AddUnsigned
+Cycle Num		| 96
+Memory State		| instruction is AddUnsigned
 
-Execution State	| instruction is LoadWord
+Execution State		| instruction is LoadWord
 ExecutionResult = 0x7f78 / ExecutionResult = R[rs] + SignExtImm
 
-Decode State	| instruction Value is 0x0x70621002
-I Type		| opcode 0x1c / signExtImm 0x1002 / zeroExtImm 0x1002 / branchAddr 0x4008
+Decode State		| instruction Value is 0x0x70621002
+I Type			| opcode 0x1c / signExtImm 0x1002 / zeroExtImm 0x1002 / branchAddr 0x4008
  / funct 0x%x
-R Type		| rsData = 0x1 = register[rs=0x3]  / rtData = 0x1 = register[rt=0x2]
-Instruction	| Multiply32BitRes
+R Type			| rsData = 0x1 = register[rs=0x3]  / rtData = 0x1 = register[rt=0x2]
+Instruction		| Multiply32BitRes
 
-Fetch State	| instruction Value is 0x0x3c0e821
+Cache Fetch Data
+Cache Hit		| Current Count = 109
+Current Hit Rate	| 0.947826
+Fetch State		| instruction Value is 0x0x3c0e821
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 97
-WriteBack State	| instruction is AddUnsigned
+Cycle Num		| 97
+WriteBack State		| instruction is AddUnsigned
 R[rd=0x3] = 0x1
 
-Memory State	| instruction is LoadWord
+Memory State		| instruction is LoadWord
+Cache Fetch Data
+Cache Hit		| Current Count = 110
+Current Hit Rate	| 0.948276
 
-Execution State	| instruction is Multiply32BitRes
+Execution State		| instruction is Multiply32BitRes
 ExecutionResult = 0x3 / ExecutionResult = R[rs] * R[rt]
 
-Decode State	| instruction Value is 0x0x3c0e821
+Decode State		| instruction Value is 0x0x3c0e821
 R Type		| rd 0x1d / rs 0x1e / rt 0x0 / shamt 0x0 / funct 0x21
-R Type		| rsData = 0x7f58 = register[rs=0x1e]  / rtData = 0x0 = register[rt=0x0]
-Instruction	| AddUnsigned
+R Type			| rsData = 0x7f58 = register[rs=0x1e]  / rtData = 0x0 = register[rt=0x0]
+Instruction		| AddUnsigned
 
-Fetch State	| instruction Value is 0x0x8fbf001c
+Cache Fetch Data
+Cache Hit		| Current Count = 111
+Current Hit Rate	| 0.948718
+Fetch State		| instruction Value is 0x0x8fbf001c
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 98
-WriteBack State	| instruction is LoadWord
+Cycle Num		| 98
+WriteBack State		| instruction is LoadWord
 R[rt] = M[R[rs] + SignExtImmm]
 R[2] = M[R[30](0x7f58) + 0x20] = 0x7f78
 
-Memory State	| instruction is Multiply32BitRes
+Memory State		| instruction is Multiply32BitRes
 
-Execution State	| instruction is AddUnsigned
+Execution State		| instruction is AddUnsigned
 ExecutionResult = 0x7f58 / ExecutionResult = R[rs] + R[rt]
 
-Decode State	| instruction Value is 0x0x8fbf001c
-I Type		| opcode 0x23 / signExtImm 0x1c / zeroExtImm 0x1c / branchAddr 0x70
-I Type		| rsData = 0x7f58 = register[rs=0x1d]  / rt = 0x1f / immediate = 0x1c
-Instruction	| LoadWord
+Decode State		| instruction Value is 0x0x8fbf001c
+I Type			| opcode 0x23 / signExtImm 0x1c / zeroExtImm 0x1c / branchAddr 0x70
+I Type			| rsData = 0x7f58 = register[rs=0x1d]  / rt = 0x1f / immediate = 0x1c
+Instruction		| LoadWord
 
-Fetch State	| instruction Value is 0x0x8fbe0018
+Cache Fetch Data
+Cache Hit		| Current Count = 112
+Current Hit Rate	| 0.949153
+Fetch State		| instruction Value is 0x0x8fbe0018
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 99
-WriteBack State	| instruction is Multiply32BitRes
+Cycle Num		| 99
+WriteBack State		| instruction is Multiply32BitRes
 R[rd=0x2] = 0x2
 
-Memory State	| instruction is AddUnsigned
+Memory State		| instruction is AddUnsigned
 
-Execution State	| instruction is LoadWord
+Execution State		| instruction is LoadWord
 ExecutionResult = 0x7f74 / ExecutionResult = R[rs] + SignExtImm
 
-Decode State	| instruction Value is 0x0x8fbe0018
-I Type		| opcode 0x23 / signExtImm 0x18 / zeroExtImm 0x18 / branchAddr 0x60
-I Type		| rsData = 0x7f58 = register[rs=0x1d]  / rt = 0x1e / immediate = 0x18
-Instruction	| LoadWord
+Decode State		| instruction Value is 0x0x8fbe0018
+I Type			| opcode 0x23 / signExtImm 0x18 / zeroExtImm 0x18 / branchAddr 0x60
+I Type			| rsData = 0x7f58 = register[rs=0x1d]  / rt = 0x1e / immediate = 0x18
+Instruction		| LoadWord
 
-Fetch State	| instruction Value is 0x0x27bd0020
+Cache Fetch Data
+Cache Hit		| Current Count = 113
+Current Hit Rate	| 0.949580
+Fetch State		| instruction Value is 0x0x27bd0020
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 100
-WriteBack State	| instruction is AddUnsigned
+Cycle Num		| 100
+WriteBack State		| instruction is AddUnsigned
 R[rd=0x1d] = 0x7f58
 
-Memory State	| instruction is LoadWord
+Memory State		| instruction is LoadWord
+Cache Fetch Data
+Cache Hit		| Current Count = 114
+Current Hit Rate	| 0.950000
 
-Execution State	| instruction is LoadWord
+Execution State		| instruction is LoadWord
 ExecutionResult = 0x7f70 / ExecutionResult = R[rs] + SignExtImm
 
-Decode State	| instruction Value is 0x0x27bd0020
-I Type		| opcode 0x9 / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
-I Type		| rsData = 0x7f58 = register[rs=0x1d]  / rt = 0x1d / immediate = 0x20
-Instruction	| AddImmediateUnsigned
+Decode State		| instruction Value is 0x0x27bd0020
+I Type			| opcode 0x9 / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
+I Type			| rsData = 0x7f58 = register[rs=0x1d]  / rt = 0x1d / immediate = 0x20
+Instruction		| AddImmediateUnsigned
 
-Fetch State	| instruction Value is 0x0x3e00008
+Cache Fetch Data
+Cache Hit		| Current Count = 115
+Current Hit Rate	| 0.950413
+Fetch State		| instruction Value is 0x0x3e00008
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 101
-WriteBack State	| instruction is LoadWord
+Cycle Num		| 101
+WriteBack State		| instruction is LoadWord
 R[rt] = M[R[rs] + SignExtImmm]
 R[31] = M[R[29](0x7f58) + 0x1c] = 0x7f74
 
-Memory State	| instruction is LoadWord
+Memory State		| instruction is LoadWord
+Cache Fetch Data
+Cache Hit		| Current Count = 116
+Current Hit Rate	| 0.950820
 
-Execution State	| instruction is AddImmediateUnsigned
+Execution State		| instruction is AddImmediateUnsigned
 ExecutionResult = 0x7f78 / ExecutionResult = R[rs] + SignExtImmediate
 
-Decode State	| instruction Value is 0x0x3e00008
+Decode State		| instruction Value is 0x0x3e00008
 R Type		| rd 0x0 / rs 0x1f / rt 0x0 / shamt 0x0 / funct 0x8
-R Type		| rsData = 0x84 = register[rs=0x1f]  / rtData = 0x0 = register[rt=0x0]
-Instruction	| JumpRegister
+R Type			| rsData = 0x84 = register[rs=0x1f]  / rtData = 0x0 = register[rt=0x0]
+Instruction		| JumpRegister
 
-Fetch State	| instruction Value is 0x0x0
+Cache Fetch Data
+Cache Hit		| Current Count = 117
+Current Hit Rate	| 0.951219
+Fetch State		| instruction Value is 0x0x0
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 102
-WriteBack State	| instruction is LoadWord
+Cycle Num		| 102
+WriteBack State		| instruction is LoadWord
 R[rt] = M[R[rs] + SignExtImmm]
 R[30] = M[R[29](0x7f58) + 0x18] = 0x7f70
 
-Memory State	| instruction is AddImmediateUnsigned
+Memory State		| instruction is AddImmediateUnsigned
 
-Execution State	| instruction is JumpRegister
+Execution State		| instruction is JumpRegister
 PC = R[rs]
 PC = R[31](0x84)
 
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 103
-WriteBack State	| instruction is AddImmediateUnsigned
+Cycle Num		| 103
+WriteBack State		| instruction is AddImmediateUnsigned
 R[rt=0x1d] = 0x7f78 / ExecutionResult 
 
-Memory State	| instruction is JumpRegister
+Memory State		| instruction is JumpRegister
 
-Fetch State	| instruction Value is 0x0x401821
+Cache Fetch Data
+Cache Hit		| Current Count = 118
+Current Hit Rate	| 0.951613
+Fetch State		| instruction Value is 0x0x401821
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 104
-WriteBack State	| instruction is JumpRegister
+Cycle Num		| 104
+WriteBack State		| instruction is JumpRegister
 
-Decode State	| instruction Value is 0x0x401821
+Decode State		| instruction Value is 0x0x401821
 R Type		| rd 0x3 / rs 0x2 / rt 0x0 / shamt 0x0 / funct 0x21
-R Type		| rsData = 0x2 = register[rs=0x2]  / rtData = 0x0 = register[rt=0x0]
-Instruction	| AddUnsigned
+R Type			| rsData = 0x2 = register[rs=0x2]  / rtData = 0x0 = register[rt=0x0]
+Instruction		| AddUnsigned
 
-Fetch State	| instruction Value is 0x0x8fc20020
+Cache Fetch Data
+Cache Hit		| Current Count = 119
+Current Hit Rate	| 0.952000
+Fetch State		| instruction Value is 0x0x8fc20020
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 105
-Execution State	| instruction is AddUnsigned
+Cycle Num		| 105
+Execution State		| instruction is AddUnsigned
 ExecutionResult = 0x2 / ExecutionResult = R[rs] + R[rt]
 
-Decode State	| instruction Value is 0x0x8fc20020
-I Type		| opcode 0x23 / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
-I Type		| rsData = 0x7f78 = register[rs=0x1e]  / rt = 0x2 / immediate = 0x20
-Instruction	| LoadWord
+Decode State		| instruction Value is 0x0x8fc20020
+I Type			| opcode 0x23 / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
+I Type			| rsData = 0x7f78 = register[rs=0x1e]  / rt = 0x2 / immediate = 0x20
+Instruction		| LoadWord
 
-Fetch State	| instruction Value is 0x0x70621002
+Cache Fetch Data
+Cache Hit		| Current Count = 120
+Current Hit Rate	| 0.952381
+Fetch State		| instruction Value is 0x0x70621002
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 106
-Memory State	| instruction is AddUnsigned
+Cycle Num		| 106
+Memory State		| instruction is AddUnsigned
 
-Execution State	| instruction is LoadWord
+Execution State		| instruction is LoadWord
 ExecutionResult = 0x7f98 / ExecutionResult = R[rs] + SignExtImm
 
-Decode State	| instruction Value is 0x0x70621002
-I Type		| opcode 0x1c / signExtImm 0x1002 / zeroExtImm 0x1002 / branchAddr 0x4008
+Decode State		| instruction Value is 0x0x70621002
+I Type			| opcode 0x1c / signExtImm 0x1002 / zeroExtImm 0x1002 / branchAddr 0x4008
  / funct 0x%x
-R Type		| rsData = 0x1 = register[rs=0x3]  / rtData = 0x2 = register[rt=0x2]
-Instruction	| Multiply32BitRes
+R Type			| rsData = 0x1 = register[rs=0x3]  / rtData = 0x2 = register[rt=0x2]
+Instruction		| Multiply32BitRes
 
-Fetch State	| instruction Value is 0x0x3c0e821
+Cache Fetch Data
+Cache Hit		| Current Count = 121
+Current Hit Rate	| 0.952756
+Fetch State		| instruction Value is 0x0x3c0e821
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 107
-WriteBack State	| instruction is AddUnsigned
+Cycle Num		| 107
+WriteBack State		| instruction is AddUnsigned
 R[rd=0x3] = 0x2
 
-Memory State	| instruction is LoadWord
+Memory State		| instruction is LoadWord
+Cache Fetch Data
+Cache Hit		| Current Count = 122
+Current Hit Rate	| 0.953125
 
-Execution State	| instruction is Multiply32BitRes
+Execution State		| instruction is Multiply32BitRes
 ExecutionResult = 0x5 / ExecutionResult = R[rs] * R[rt]
 
-Decode State	| instruction Value is 0x0x3c0e821
+Decode State		| instruction Value is 0x0x3c0e821
 R Type		| rd 0x1d / rs 0x1e / rt 0x0 / shamt 0x0 / funct 0x21
-R Type		| rsData = 0x7f78 = register[rs=0x1e]  / rtData = 0x0 = register[rt=0x0]
-Instruction	| AddUnsigned
+R Type			| rsData = 0x7f78 = register[rs=0x1e]  / rtData = 0x0 = register[rt=0x0]
+Instruction		| AddUnsigned
 
-Fetch State	| instruction Value is 0x0x8fbf001c
+Cache Fetch Data
+Cache Hit		| Current Count = 123
+Current Hit Rate	| 0.953488
+Fetch State		| instruction Value is 0x0x8fbf001c
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 108
-WriteBack State	| instruction is LoadWord
+Cycle Num		| 108
+WriteBack State		| instruction is LoadWord
 R[rt] = M[R[rs] + SignExtImmm]
 R[2] = M[R[30](0x7f78) + 0x20] = 0x7f98
 
-Memory State	| instruction is Multiply32BitRes
+Memory State		| instruction is Multiply32BitRes
 
-Execution State	| instruction is AddUnsigned
+Execution State		| instruction is AddUnsigned
 ExecutionResult = 0x7f78 / ExecutionResult = R[rs] + R[rt]
 
-Decode State	| instruction Value is 0x0x8fbf001c
-I Type		| opcode 0x23 / signExtImm 0x1c / zeroExtImm 0x1c / branchAddr 0x70
-I Type		| rsData = 0x7f78 = register[rs=0x1d]  / rt = 0x1f / immediate = 0x1c
-Instruction	| LoadWord
+Decode State		| instruction Value is 0x0x8fbf001c
+I Type			| opcode 0x23 / signExtImm 0x1c / zeroExtImm 0x1c / branchAddr 0x70
+I Type			| rsData = 0x7f78 = register[rs=0x1d]  / rt = 0x1f / immediate = 0x1c
+Instruction		| LoadWord
 
-Fetch State	| instruction Value is 0x0x8fbe0018
+Cache Fetch Data
+Cache Hit		| Current Count = 124
+Current Hit Rate	| 0.953846
+Fetch State		| instruction Value is 0x0x8fbe0018
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 109
-WriteBack State	| instruction is Multiply32BitRes
+Cycle Num		| 109
+WriteBack State		| instruction is Multiply32BitRes
 R[rd=0x2] = 0x6
 
-Memory State	| instruction is AddUnsigned
+Memory State		| instruction is AddUnsigned
 
-Execution State	| instruction is LoadWord
+Execution State		| instruction is LoadWord
 ExecutionResult = 0x7f94 / ExecutionResult = R[rs] + SignExtImm
 
-Decode State	| instruction Value is 0x0x8fbe0018
-I Type		| opcode 0x23 / signExtImm 0x18 / zeroExtImm 0x18 / branchAddr 0x60
-I Type		| rsData = 0x7f78 = register[rs=0x1d]  / rt = 0x1e / immediate = 0x18
-Instruction	| LoadWord
+Decode State		| instruction Value is 0x0x8fbe0018
+I Type			| opcode 0x23 / signExtImm 0x18 / zeroExtImm 0x18 / branchAddr 0x60
+I Type			| rsData = 0x7f78 = register[rs=0x1d]  / rt = 0x1e / immediate = 0x18
+Instruction		| LoadWord
 
-Fetch State	| instruction Value is 0x0x27bd0020
+Cache Fetch Data
+Cache Hit		| Current Count = 125
+Current Hit Rate	| 0.954198
+Fetch State		| instruction Value is 0x0x27bd0020
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 110
-WriteBack State	| instruction is AddUnsigned
+Cycle Num		| 110
+WriteBack State		| instruction is AddUnsigned
 R[rd=0x1d] = 0x7f78
 
-Memory State	| instruction is LoadWord
+Memory State		| instruction is LoadWord
+Cache Fetch Data
+Cache Hit		| Current Count = 126
+Current Hit Rate	| 0.954545
 
-Execution State	| instruction is LoadWord
+Execution State		| instruction is LoadWord
 ExecutionResult = 0x7f90 / ExecutionResult = R[rs] + SignExtImm
 
-Decode State	| instruction Value is 0x0x27bd0020
-I Type		| opcode 0x9 / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
-I Type		| rsData = 0x7f78 = register[rs=0x1d]  / rt = 0x1d / immediate = 0x20
-Instruction	| AddImmediateUnsigned
+Decode State		| instruction Value is 0x0x27bd0020
+I Type			| opcode 0x9 / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
+I Type			| rsData = 0x7f78 = register[rs=0x1d]  / rt = 0x1d / immediate = 0x20
+Instruction		| AddImmediateUnsigned
 
-Fetch State	| instruction Value is 0x0x3e00008
+Cache Fetch Data
+Cache Hit		| Current Count = 127
+Current Hit Rate	| 0.954887
+Fetch State		| instruction Value is 0x0x3e00008
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 111
-WriteBack State	| instruction is LoadWord
+Cycle Num		| 111
+WriteBack State		| instruction is LoadWord
 R[rt] = M[R[rs] + SignExtImmm]
 R[31] = M[R[29](0x7f78) + 0x1c] = 0x7f94
 
-Memory State	| instruction is LoadWord
+Memory State		| instruction is LoadWord
+Cache Fetch Data
+Cache Hit		| Current Count = 128
+Current Hit Rate	| 0.955224
 
-Execution State	| instruction is AddImmediateUnsigned
+Execution State		| instruction is AddImmediateUnsigned
 ExecutionResult = 0x7f98 / ExecutionResult = R[rs] + SignExtImmediate
 
-Decode State	| instruction Value is 0x0x3e00008
+Decode State		| instruction Value is 0x0x3e00008
 R Type		| rd 0x0 / rs 0x1f / rt 0x0 / shamt 0x0 / funct 0x8
-R Type		| rsData = 0x84 = register[rs=0x1f]  / rtData = 0x0 = register[rt=0x0]
-Instruction	| JumpRegister
+R Type			| rsData = 0x84 = register[rs=0x1f]  / rtData = 0x0 = register[rt=0x0]
+Instruction		| JumpRegister
 
-Fetch State	| instruction Value is 0x0x0
+Cache Fetch Data
+Cache Hit		| Current Count = 129
+Current Hit Rate	| 0.955556
+Fetch State		| instruction Value is 0x0x0
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 112
-WriteBack State	| instruction is LoadWord
+Cycle Num		| 112
+WriteBack State		| instruction is LoadWord
 R[rt] = M[R[rs] + SignExtImmm]
 R[30] = M[R[29](0x7f78) + 0x18] = 0x7f90
 
-Memory State	| instruction is AddImmediateUnsigned
+Memory State		| instruction is AddImmediateUnsigned
 
-Execution State	| instruction is JumpRegister
+Execution State		| instruction is JumpRegister
 PC = R[rs]
 PC = R[31](0x84)
 
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 113
-WriteBack State	| instruction is AddImmediateUnsigned
+Cycle Num		| 113
+WriteBack State		| instruction is AddImmediateUnsigned
 R[rt=0x1d] = 0x7f98 / ExecutionResult 
 
-Memory State	| instruction is JumpRegister
+Memory State		| instruction is JumpRegister
 
-Fetch State	| instruction Value is 0x0x401821
+Cache Fetch Data
+Cache Hit		| Current Count = 130
+Current Hit Rate	| 0.955882
+Fetch State		| instruction Value is 0x0x401821
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 114
-WriteBack State	| instruction is JumpRegister
+Cycle Num		| 114
+WriteBack State		| instruction is JumpRegister
 
-Decode State	| instruction Value is 0x0x401821
+Decode State		| instruction Value is 0x0x401821
 R Type		| rd 0x3 / rs 0x2 / rt 0x0 / shamt 0x0 / funct 0x21
-R Type		| rsData = 0x6 = register[rs=0x2]  / rtData = 0x0 = register[rt=0x0]
-Instruction	| AddUnsigned
+R Type			| rsData = 0x6 = register[rs=0x2]  / rtData = 0x0 = register[rt=0x0]
+Instruction		| AddUnsigned
 
-Fetch State	| instruction Value is 0x0x8fc20020
+Cache Fetch Data
+Cache Hit		| Current Count = 131
+Current Hit Rate	| 0.956204
+Fetch State		| instruction Value is 0x0x8fc20020
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 115
-Execution State	| instruction is AddUnsigned
+Cycle Num		| 115
+Execution State		| instruction is AddUnsigned
 ExecutionResult = 0x6 / ExecutionResult = R[rs] + R[rt]
 
-Decode State	| instruction Value is 0x0x8fc20020
-I Type		| opcode 0x23 / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
-I Type		| rsData = 0x7f98 = register[rs=0x1e]  / rt = 0x2 / immediate = 0x20
-Instruction	| LoadWord
+Decode State		| instruction Value is 0x0x8fc20020
+I Type			| opcode 0x23 / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
+I Type			| rsData = 0x7f98 = register[rs=0x1e]  / rt = 0x2 / immediate = 0x20
+Instruction		| LoadWord
 
-Fetch State	| instruction Value is 0x0x70621002
+Cache Fetch Data
+Cache Hit		| Current Count = 132
+Current Hit Rate	| 0.956522
+Fetch State		| instruction Value is 0x0x70621002
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 116
-Memory State	| instruction is AddUnsigned
+Cycle Num		| 116
+Memory State		| instruction is AddUnsigned
 
-Execution State	| instruction is LoadWord
+Execution State		| instruction is LoadWord
 ExecutionResult = 0x7fb8 / ExecutionResult = R[rs] + SignExtImm
 
-Decode State	| instruction Value is 0x0x70621002
-I Type		| opcode 0x1c / signExtImm 0x1002 / zeroExtImm 0x1002 / branchAddr 0x4008
+Decode State		| instruction Value is 0x0x70621002
+I Type			| opcode 0x1c / signExtImm 0x1002 / zeroExtImm 0x1002 / branchAddr 0x4008
  / funct 0x%x
-R Type		| rsData = 0x2 = register[rs=0x3]  / rtData = 0x6 = register[rt=0x2]
-Instruction	| Multiply32BitRes
+R Type			| rsData = 0x2 = register[rs=0x3]  / rtData = 0x6 = register[rt=0x2]
+Instruction		| Multiply32BitRes
 
-Fetch State	| instruction Value is 0x0x3c0e821
+Cache Fetch Data
+Cache Hit		| Current Count = 133
+Current Hit Rate	| 0.956835
+Fetch State		| instruction Value is 0x0x3c0e821
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 117
-WriteBack State	| instruction is AddUnsigned
+Cycle Num		| 117
+WriteBack State		| instruction is AddUnsigned
 R[rd=0x3] = 0x6
 
-Memory State	| instruction is LoadWord
+Memory State		| instruction is LoadWord
+Cache Fetch Data
+Cache Hit		| Current Count = 134
+Current Hit Rate	| 0.957143
 
-Execution State	| instruction is Multiply32BitRes
+Execution State		| instruction is Multiply32BitRes
 ExecutionResult = 0xa / ExecutionResult = R[rs] * R[rt]
 
-Decode State	| instruction Value is 0x0x3c0e821
+Decode State		| instruction Value is 0x0x3c0e821
 R Type		| rd 0x1d / rs 0x1e / rt 0x0 / shamt 0x0 / funct 0x21
-R Type		| rsData = 0x7f98 = register[rs=0x1e]  / rtData = 0x0 = register[rt=0x0]
-Instruction	| AddUnsigned
+R Type			| rsData = 0x7f98 = register[rs=0x1e]  / rtData = 0x0 = register[rt=0x0]
+Instruction		| AddUnsigned
 
-Fetch State	| instruction Value is 0x0x8fbf001c
+Cache Fetch Data
+Cache Hit		| Current Count = 135
+Current Hit Rate	| 0.957447
+Fetch State		| instruction Value is 0x0x8fbf001c
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 118
-WriteBack State	| instruction is LoadWord
+Cycle Num		| 118
+WriteBack State		| instruction is LoadWord
 R[rt] = M[R[rs] + SignExtImmm]
 R[2] = M[R[30](0x7f98) + 0x20] = 0x7fb8
 
-Memory State	| instruction is Multiply32BitRes
+Memory State		| instruction is Multiply32BitRes
 
-Execution State	| instruction is AddUnsigned
+Execution State		| instruction is AddUnsigned
 ExecutionResult = 0x7f98 / ExecutionResult = R[rs] + R[rt]
 
-Decode State	| instruction Value is 0x0x8fbf001c
-I Type		| opcode 0x23 / signExtImm 0x1c / zeroExtImm 0x1c / branchAddr 0x70
-I Type		| rsData = 0x7f98 = register[rs=0x1d]  / rt = 0x1f / immediate = 0x1c
-Instruction	| LoadWord
+Decode State		| instruction Value is 0x0x8fbf001c
+I Type			| opcode 0x23 / signExtImm 0x1c / zeroExtImm 0x1c / branchAddr 0x70
+I Type			| rsData = 0x7f98 = register[rs=0x1d]  / rt = 0x1f / immediate = 0x1c
+Instruction		| LoadWord
 
-Fetch State	| instruction Value is 0x0x8fbe0018
+Cache Fetch Data
+Cache Hit		| Current Count = 136
+Current Hit Rate	| 0.957747
+Fetch State		| instruction Value is 0x0x8fbe0018
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 119
-WriteBack State	| instruction is Multiply32BitRes
+Cycle Num		| 119
+WriteBack State		| instruction is Multiply32BitRes
 R[rd=0x2] = 0x18
 
-Memory State	| instruction is AddUnsigned
+Memory State		| instruction is AddUnsigned
 
-Execution State	| instruction is LoadWord
+Execution State		| instruction is LoadWord
 ExecutionResult = 0x7fb4 / ExecutionResult = R[rs] + SignExtImm
 
-Decode State	| instruction Value is 0x0x8fbe0018
-I Type		| opcode 0x23 / signExtImm 0x18 / zeroExtImm 0x18 / branchAddr 0x60
-I Type		| rsData = 0x7f98 = register[rs=0x1d]  / rt = 0x1e / immediate = 0x18
-Instruction	| LoadWord
+Decode State		| instruction Value is 0x0x8fbe0018
+I Type			| opcode 0x23 / signExtImm 0x18 / zeroExtImm 0x18 / branchAddr 0x60
+I Type			| rsData = 0x7f98 = register[rs=0x1d]  / rt = 0x1e / immediate = 0x18
+Instruction		| LoadWord
 
-Fetch State	| instruction Value is 0x0x27bd0020
+Cache Fetch Data
+Cache Hit		| Current Count = 137
+Current Hit Rate	| 0.958042
+Fetch State		| instruction Value is 0x0x27bd0020
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 120
-WriteBack State	| instruction is AddUnsigned
+Cycle Num		| 120
+WriteBack State		| instruction is AddUnsigned
 R[rd=0x1d] = 0x7f98
 
-Memory State	| instruction is LoadWord
+Memory State		| instruction is LoadWord
+Cache Fetch Data
+Cache Hit		| Current Count = 138
+Current Hit Rate	| 0.958333
 
-Execution State	| instruction is LoadWord
+Execution State		| instruction is LoadWord
 ExecutionResult = 0x7fb0 / ExecutionResult = R[rs] + SignExtImm
 
-Decode State	| instruction Value is 0x0x27bd0020
-I Type		| opcode 0x9 / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
-I Type		| rsData = 0x7f98 = register[rs=0x1d]  / rt = 0x1d / immediate = 0x20
-Instruction	| AddImmediateUnsigned
+Decode State		| instruction Value is 0x0x27bd0020
+I Type			| opcode 0x9 / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
+I Type			| rsData = 0x7f98 = register[rs=0x1d]  / rt = 0x1d / immediate = 0x20
+Instruction		| AddImmediateUnsigned
 
-Fetch State	| instruction Value is 0x0x3e00008
+Cache Fetch Data
+Cache Hit		| Current Count = 139
+Current Hit Rate	| 0.958621
+Fetch State		| instruction Value is 0x0x3e00008
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 121
-WriteBack State	| instruction is LoadWord
+Cycle Num		| 121
+WriteBack State		| instruction is LoadWord
 R[rt] = M[R[rs] + SignExtImmm]
 R[31] = M[R[29](0x7f98) + 0x1c] = 0x7fb4
 
-Memory State	| instruction is LoadWord
+Memory State		| instruction is LoadWord
+Cache Fetch Data
+Cache Hit		| Current Count = 140
+Current Hit Rate	| 0.958904
 
-Execution State	| instruction is AddImmediateUnsigned
+Execution State		| instruction is AddImmediateUnsigned
 ExecutionResult = 0x7fb8 / ExecutionResult = R[rs] + SignExtImmediate
 
-Decode State	| instruction Value is 0x0x3e00008
+Decode State		| instruction Value is 0x0x3e00008
 R Type		| rd 0x0 / rs 0x1f / rt 0x0 / shamt 0x0 / funct 0x8
-R Type		| rsData = 0x84 = register[rs=0x1f]  / rtData = 0x0 = register[rt=0x0]
-Instruction	| JumpRegister
+R Type			| rsData = 0x84 = register[rs=0x1f]  / rtData = 0x0 = register[rt=0x0]
+Instruction		| JumpRegister
 
-Fetch State	| instruction Value is 0x0x0
+Cache Fetch Data
+Cache Hit		| Current Count = 141
+Current Hit Rate	| 0.959184
+Fetch State		| instruction Value is 0x0x0
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 122
-WriteBack State	| instruction is LoadWord
+Cycle Num		| 122
+WriteBack State		| instruction is LoadWord
 R[rt] = M[R[rs] + SignExtImmm]
 R[30] = M[R[29](0x7f98) + 0x18] = 0x7fb0
 
-Memory State	| instruction is AddImmediateUnsigned
+Memory State		| instruction is AddImmediateUnsigned
 
-Execution State	| instruction is JumpRegister
+Execution State		| instruction is JumpRegister
 PC = R[rs]
 PC = R[31](0x84)
 
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 123
-WriteBack State	| instruction is AddImmediateUnsigned
+Cycle Num		| 123
+WriteBack State		| instruction is AddImmediateUnsigned
 R[rt=0x1d] = 0x7fb8 / ExecutionResult 
 
-Memory State	| instruction is JumpRegister
+Memory State		| instruction is JumpRegister
 
-Fetch State	| instruction Value is 0x0x401821
+Cache Fetch Data
+Cache Hit		| Current Count = 142
+Current Hit Rate	| 0.959459
+Fetch State		| instruction Value is 0x0x401821
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 124
-WriteBack State	| instruction is JumpRegister
+Cycle Num		| 124
+WriteBack State		| instruction is JumpRegister
 
-Decode State	| instruction Value is 0x0x401821
+Decode State		| instruction Value is 0x0x401821
 R Type		| rd 0x3 / rs 0x2 / rt 0x0 / shamt 0x0 / funct 0x21
-R Type		| rsData = 0x18 = register[rs=0x2]  / rtData = 0x0 = register[rt=0x0]
-Instruction	| AddUnsigned
+R Type			| rsData = 0x18 = register[rs=0x2]  / rtData = 0x0 = register[rt=0x0]
+Instruction		| AddUnsigned
 
-Fetch State	| instruction Value is 0x0x8fc20020
+Cache Fetch Data
+Cache Hit		| Current Count = 143
+Current Hit Rate	| 0.959732
+Fetch State		| instruction Value is 0x0x8fc20020
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 125
-Execution State	| instruction is AddUnsigned
+Cycle Num		| 125
+Execution State		| instruction is AddUnsigned
 ExecutionResult = 0x18 / ExecutionResult = R[rs] + R[rt]
 
-Decode State	| instruction Value is 0x0x8fc20020
-I Type		| opcode 0x23 / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
-I Type		| rsData = 0x7fb8 = register[rs=0x1e]  / rt = 0x2 / immediate = 0x20
-Instruction	| LoadWord
+Decode State		| instruction Value is 0x0x8fc20020
+I Type			| opcode 0x23 / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
+I Type			| rsData = 0x7fb8 = register[rs=0x1e]  / rt = 0x2 / immediate = 0x20
+Instruction		| LoadWord
 
-Fetch State	| instruction Value is 0x0x70621002
+Cache Fetch Data
+Cache Hit		| Current Count = 144
+Current Hit Rate	| 0.960000
+Fetch State		| instruction Value is 0x0x70621002
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 126
-Memory State	| instruction is AddUnsigned
+Cycle Num		| 126
+Memory State		| instruction is AddUnsigned
 
-Execution State	| instruction is LoadWord
+Execution State		| instruction is LoadWord
 ExecutionResult = 0x7fd8 / ExecutionResult = R[rs] + SignExtImm
 
-Decode State	| instruction Value is 0x0x70621002
-I Type		| opcode 0x1c / signExtImm 0x1002 / zeroExtImm 0x1002 / branchAddr 0x4008
+Decode State		| instruction Value is 0x0x70621002
+I Type			| opcode 0x1c / signExtImm 0x1002 / zeroExtImm 0x1002 / branchAddr 0x4008
  / funct 0x%x
-R Type		| rsData = 0x6 = register[rs=0x3]  / rtData = 0x18 = register[rt=0x2]
-Instruction	| Multiply32BitRes
+R Type			| rsData = 0x6 = register[rs=0x3]  / rtData = 0x18 = register[rt=0x2]
+Instruction		| Multiply32BitRes
 
-Fetch State	| instruction Value is 0x0x3c0e821
+Cache Fetch Data
+Cache Hit		| Current Count = 145
+Current Hit Rate	| 0.960265
+Fetch State		| instruction Value is 0x0x3c0e821
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 127
-WriteBack State	| instruction is AddUnsigned
+Cycle Num		| 127
+WriteBack State		| instruction is AddUnsigned
 R[rd=0x3] = 0x18
 
-Memory State	| instruction is LoadWord
+Memory State		| instruction is LoadWord
+Cache Fetch Data
+Cache Miss		| Current Count = 7
+Current Hit Rate	| 0.953947
 
-Execution State	| instruction is Multiply32BitRes
+Execution State		| instruction is Multiply32BitRes
 ExecutionResult = 0x1d / ExecutionResult = R[rs] * R[rt]
 
-Decode State	| instruction Value is 0x0x3c0e821
+Decode State		| instruction Value is 0x0x3c0e821
 R Type		| rd 0x1d / rs 0x1e / rt 0x0 / shamt 0x0 / funct 0x21
-R Type		| rsData = 0x7fb8 = register[rs=0x1e]  / rtData = 0x0 = register[rt=0x0]
-Instruction	| AddUnsigned
+R Type			| rsData = 0x7fb8 = register[rs=0x1e]  / rtData = 0x0 = register[rt=0x0]
+Instruction		| AddUnsigned
 
-Fetch State	| instruction Value is 0x0x8fbf001c
+Cache Fetch Data
+Cache Hit		| Current Count = 146
+Current Hit Rate	| 0.954248
+Fetch State		| instruction Value is 0x0x8fbf001c
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 128
-WriteBack State	| instruction is LoadWord
+Cycle Num		| 128
+WriteBack State		| instruction is LoadWord
 R[rt] = M[R[rs] + SignExtImmm]
 R[2] = M[R[30](0x7fb8) + 0x20] = 0x7fd8
 
-Memory State	| instruction is Multiply32BitRes
+Memory State		| instruction is Multiply32BitRes
 
-Execution State	| instruction is AddUnsigned
+Execution State		| instruction is AddUnsigned
 ExecutionResult = 0x7fb8 / ExecutionResult = R[rs] + R[rt]
 
-Decode State	| instruction Value is 0x0x8fbf001c
-I Type		| opcode 0x23 / signExtImm 0x1c / zeroExtImm 0x1c / branchAddr 0x70
-I Type		| rsData = 0x7fb8 = register[rs=0x1d]  / rt = 0x1f / immediate = 0x1c
-Instruction	| LoadWord
+Decode State		| instruction Value is 0x0x8fbf001c
+I Type			| opcode 0x23 / signExtImm 0x1c / zeroExtImm 0x1c / branchAddr 0x70
+I Type			| rsData = 0x7fb8 = register[rs=0x1d]  / rt = 0x1f / immediate = 0x1c
+Instruction		| LoadWord
 
-Fetch State	| instruction Value is 0x0x8fbe0018
+Cache Fetch Data
+Cache Hit		| Current Count = 147
+Current Hit Rate	| 0.954545
+Fetch State		| instruction Value is 0x0x8fbe0018
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 129
-WriteBack State	| instruction is Multiply32BitRes
+Cycle Num		| 129
+WriteBack State		| instruction is Multiply32BitRes
 R[rd=0x2] = 0x78
 
-Memory State	| instruction is AddUnsigned
+Memory State		| instruction is AddUnsigned
 
-Execution State	| instruction is LoadWord
+Execution State		| instruction is LoadWord
 ExecutionResult = 0x7fd4 / ExecutionResult = R[rs] + SignExtImm
 
-Decode State	| instruction Value is 0x0x8fbe0018
-I Type		| opcode 0x23 / signExtImm 0x18 / zeroExtImm 0x18 / branchAddr 0x60
-I Type		| rsData = 0x7fb8 = register[rs=0x1d]  / rt = 0x1e / immediate = 0x18
-Instruction	| LoadWord
+Decode State		| instruction Value is 0x0x8fbe0018
+I Type			| opcode 0x23 / signExtImm 0x18 / zeroExtImm 0x18 / branchAddr 0x60
+I Type			| rsData = 0x7fb8 = register[rs=0x1d]  / rt = 0x1e / immediate = 0x18
+Instruction		| LoadWord
 
-Fetch State	| instruction Value is 0x0x27bd0020
+Cache Fetch Data
+Cache Hit		| Current Count = 148
+Current Hit Rate	| 0.954839
+Fetch State		| instruction Value is 0x0x27bd0020
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 130
-WriteBack State	| instruction is AddUnsigned
+Cycle Num		| 130
+WriteBack State		| instruction is AddUnsigned
 R[rd=0x1d] = 0x7fb8
 
-Memory State	| instruction is LoadWord
+Memory State		| instruction is LoadWord
+Cache Fetch Data
+Cache Hit		| Current Count = 149
+Current Hit Rate	| 0.955128
 
-Execution State	| instruction is LoadWord
+Execution State		| instruction is LoadWord
 ExecutionResult = 0x7fd0 / ExecutionResult = R[rs] + SignExtImm
 
-Decode State	| instruction Value is 0x0x27bd0020
-I Type		| opcode 0x9 / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
-I Type		| rsData = 0x7fb8 = register[rs=0x1d]  / rt = 0x1d / immediate = 0x20
-Instruction	| AddImmediateUnsigned
+Decode State		| instruction Value is 0x0x27bd0020
+I Type			| opcode 0x9 / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
+I Type			| rsData = 0x7fb8 = register[rs=0x1d]  / rt = 0x1d / immediate = 0x20
+Instruction		| AddImmediateUnsigned
 
-Fetch State	| instruction Value is 0x0x3e00008
+Cache Fetch Data
+Cache Hit		| Current Count = 150
+Current Hit Rate	| 0.955414
+Fetch State		| instruction Value is 0x0x3e00008
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 131
-WriteBack State	| instruction is LoadWord
+Cycle Num		| 131
+WriteBack State		| instruction is LoadWord
 R[rt] = M[R[rs] + SignExtImmm]
 R[31] = M[R[29](0x7fb8) + 0x1c] = 0x7fd4
 
-Memory State	| instruction is LoadWord
+Memory State		| instruction is LoadWord
+Cache Fetch Data
+Cache Hit		| Current Count = 151
+Current Hit Rate	| 0.955696
 
-Execution State	| instruction is AddImmediateUnsigned
+Execution State		| instruction is AddImmediateUnsigned
 ExecutionResult = 0x7fd8 / ExecutionResult = R[rs] + SignExtImmediate
 
-Decode State	| instruction Value is 0x0x3e00008
+Decode State		| instruction Value is 0x0x3e00008
 R Type		| rd 0x0 / rs 0x1f / rt 0x0 / shamt 0x0 / funct 0x8
-R Type		| rsData = 0x20 = register[rs=0x1f]  / rtData = 0x0 = register[rt=0x0]
-Instruction	| JumpRegister
+R Type			| rsData = 0x20 = register[rs=0x1f]  / rtData = 0x0 = register[rt=0x0]
+Instruction		| JumpRegister
 
-Fetch State	| instruction Value is 0x0x0
+Cache Fetch Data
+Cache Hit		| Current Count = 152
+Current Hit Rate	| 0.955975
+Fetch State		| instruction Value is 0x0x0
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 132
-WriteBack State	| instruction is LoadWord
+Cycle Num		| 132
+WriteBack State		| instruction is LoadWord
 R[rt] = M[R[rs] + SignExtImmm]
 R[30] = M[R[29](0x7fb8) + 0x18] = 0x7fd0
 
-Memory State	| instruction is AddImmediateUnsigned
+Memory State		| instruction is AddImmediateUnsigned
 
-Execution State	| instruction is JumpRegister
+Execution State		| instruction is JumpRegister
 PC = R[rs]
 PC = R[31](0x20)
 
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 133
-WriteBack State	| instruction is AddImmediateUnsigned
+Cycle Num		| 133
+WriteBack State		| instruction is AddImmediateUnsigned
 R[rt=0x1d] = 0x7fd8 / ExecutionResult 
 
-Memory State	| instruction is JumpRegister
+Memory State		| instruction is JumpRegister
 
-Fetch State	| instruction Value is 0x0xafc20018
+Cache Fetch Data
+Cache Miss		| Current Count = 8
+Current Hit Rate	| 0.950000
+Fetch State		| instruction Value is 0x0xafc20018
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 134
-WriteBack State	| instruction is JumpRegister
+Cycle Num		| 134
+WriteBack State		| instruction is JumpRegister
 
-Decode State	| instruction Value is 0x0xafc20018
-I Type		| opcode 0x2b / signExtImm 0x18 / zeroExtImm 0x18 / branchAddr 0x60
-I Type		| rsData = 0x7fd8 = register[rs=0x1e]  / rt = 0x2 / immediate = 0x18
-Instruction	| StoreWord
+Decode State		| instruction Value is 0x0xafc20018
+I Type			| opcode 0x2b / signExtImm 0x18 / zeroExtImm 0x18 / branchAddr 0x60
+I Type			| rsData = 0x7fd8 = register[rs=0x1e]  / rt = 0x2 / immediate = 0x18
+Instruction		| StoreWord
 
-Fetch State	| instruction Value is 0x0x8fc20018
+Cache Fetch Data
+Cache Hit		| Current Count = 153
+Current Hit Rate	| 0.950311
+Fetch State		| instruction Value is 0x0x8fc20018
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 135
-Execution State	| instruction is StoreWord
+Cycle Num		| 135
+Execution State		| instruction is StoreWord
 ExecutionResult = 0x7ff0 / ExecutionResult = R[rs] + SignExtImm
 
-Decode State	| instruction Value is 0x0x8fc20018
-I Type		| opcode 0x23 / signExtImm 0x18 / zeroExtImm 0x18 / branchAddr 0x60
-I Type		| rsData = 0x7fd8 = register[rs=0x1e]  / rt = 0x2 / immediate = 0x18
-Instruction	| LoadWord
+Decode State		| instruction Value is 0x0x8fc20018
+I Type			| opcode 0x23 / signExtImm 0x18 / zeroExtImm 0x18 / branchAddr 0x60
+I Type			| rsData = 0x7fd8 = register[rs=0x1e]  / rt = 0x2 / immediate = 0x18
+Instruction		| LoadWord
 
-Fetch State	| instruction Value is 0x0x3c0e821
+Cache Fetch Data
+Cache Hit		| Current Count = 154
+Current Hit Rate	| 0.950617
+Fetch State		| instruction Value is 0x0x3c0e821
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 136
-Memory State	| instruction is StoreWord
+Cycle Num		| 136
+Memory State		| instruction is StoreWord
+Cache Hit		| Current Count = 155
+Current Hit Rate	| 0.950920
 M[R[rs] + SignExtImm] = R[rt]
 M[(R[30](0x7fd8) + 0x18) = 0x7ff0] = R[2](0x78)
 
-Execution State	| instruction is LoadWord
+Execution State		| instruction is LoadWord
 ExecutionResult = 0x7ff0 / ExecutionResult = R[rs] + SignExtImm
 
-Decode State	| instruction Value is 0x0x3c0e821
+Decode State		| instruction Value is 0x0x3c0e821
 R Type		| rd 0x1d / rs 0x1e / rt 0x0 / shamt 0x0 / funct 0x21
-R Type		| rsData = 0x7fd8 = register[rs=0x1e]  / rtData = 0x0 = register[rt=0x0]
-Instruction	| AddUnsigned
+R Type			| rsData = 0x7fd8 = register[rs=0x1e]  / rtData = 0x0 = register[rt=0x0]
+Instruction		| AddUnsigned
 
-Fetch State	| instruction Value is 0x0x8fbf0024
+Cache Fetch Data
+Cache Hit		| Current Count = 156
+Current Hit Rate	| 0.951219
+Fetch State		| instruction Value is 0x0x8fbf0024
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 137
-WriteBack State	| instruction is StoreWord
+Cycle Num		| 137
+WriteBack State		| instruction is StoreWord
 
-Memory State	| instruction is LoadWord
+Memory State		| instruction is LoadWord
+Cache Fetch Data
+Cache Hit		| Current Count = 157
+Current Hit Rate	| 0.951515
 
-Execution State	| instruction is AddUnsigned
+Execution State		| instruction is AddUnsigned
 ExecutionResult = 0x7fd8 / ExecutionResult = R[rs] + R[rt]
 
-Decode State	| instruction Value is 0x0x8fbf0024
-I Type		| opcode 0x23 / signExtImm 0x24 / zeroExtImm 0x24 / branchAddr 0x90
-I Type		| rsData = 0x7fd8 = register[rs=0x1d]  / rt = 0x1f / immediate = 0x24
-Instruction	| LoadWord
+Decode State		| instruction Value is 0x0x8fbf0024
+I Type			| opcode 0x23 / signExtImm 0x24 / zeroExtImm 0x24 / branchAddr 0x90
+I Type			| rsData = 0x7fd8 = register[rs=0x1d]  / rt = 0x1f / immediate = 0x24
+Instruction		| LoadWord
 
-Fetch State	| instruction Value is 0x0x8fbe0020
+Cache Fetch Data
+Cache Hit		| Current Count = 158
+Current Hit Rate	| 0.951807
+Fetch State		| instruction Value is 0x0x8fbe0020
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 138
-WriteBack State	| instruction is LoadWord
+Cycle Num		| 138
+WriteBack State		| instruction is LoadWord
 R[rt] = M[R[rs] + SignExtImmm]
 R[2] = M[R[30](0x7fd8) + 0x18] = 0x7ff0
 
-Memory State	| instruction is AddUnsigned
+Memory State		| instruction is AddUnsigned
 
-Execution State	| instruction is LoadWord
+Execution State		| instruction is LoadWord
 ExecutionResult = 0x7ffc / ExecutionResult = R[rs] + SignExtImm
 
-Decode State	| instruction Value is 0x0x8fbe0020
-I Type		| opcode 0x23 / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
-I Type		| rsData = 0x7fd8 = register[rs=0x1d]  / rt = 0x1e / immediate = 0x20
-Instruction	| LoadWord
+Decode State		| instruction Value is 0x0x8fbe0020
+I Type			| opcode 0x23 / signExtImm 0x20 / zeroExtImm 0x20 / branchAddr 0x80
+I Type			| rsData = 0x7fd8 = register[rs=0x1d]  / rt = 0x1e / immediate = 0x20
+Instruction		| LoadWord
 
-Fetch State	| instruction Value is 0x0x27bd0028
+Cache Fetch Data
+Cache Hit		| Current Count = 159
+Current Hit Rate	| 0.952096
+Fetch State		| instruction Value is 0x0x27bd0028
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 139
-WriteBack State	| instruction is AddUnsigned
+Cycle Num		| 139
+WriteBack State		| instruction is AddUnsigned
 R[rd=0x1d] = 0x7fd8
 
-Memory State	| instruction is LoadWord
+Memory State		| instruction is LoadWord
+Cache Fetch Data
+Cache Hit		| Current Count = 160
+Current Hit Rate	| 0.952381
 
-Execution State	| instruction is LoadWord
+Execution State		| instruction is LoadWord
 ExecutionResult = 0x7ff8 / ExecutionResult = R[rs] + SignExtImm
 
-Decode State	| instruction Value is 0x0x27bd0028
-I Type		| opcode 0x9 / signExtImm 0x28 / zeroExtImm 0x28 / branchAddr 0xa0
-I Type		| rsData = 0x7fd8 = register[rs=0x1d]  / rt = 0x1d / immediate = 0x28
-Instruction	| AddImmediateUnsigned
+Decode State		| instruction Value is 0x0x27bd0028
+I Type			| opcode 0x9 / signExtImm 0x28 / zeroExtImm 0x28 / branchAddr 0xa0
+I Type			| rsData = 0x7fd8 = register[rs=0x1d]  / rt = 0x1d / immediate = 0x28
+Instruction		| AddImmediateUnsigned
 
-Fetch State	| instruction Value is 0x0x3e00008
+Cache Fetch Data
+Cache Hit		| Current Count = 161
+Current Hit Rate	| 0.952663
+Fetch State		| instruction Value is 0x0x3e00008
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 140
-WriteBack State	| instruction is LoadWord
+Cycle Num		| 140
+WriteBack State		| instruction is LoadWord
 R[rt] = M[R[rs] + SignExtImmm]
 R[31] = M[R[29](0x7fd8) + 0x24] = 0x7ffc
 
-Memory State	| instruction is LoadWord
+Memory State		| instruction is LoadWord
+Cache Fetch Data
+Cache Hit		| Current Count = 162
+Current Hit Rate	| 0.952941
 
-Execution State	| instruction is AddImmediateUnsigned
+Execution State		| instruction is AddImmediateUnsigned
 ExecutionResult = 0x8000 / ExecutionResult = R[rs] + SignExtImmediate
 
-Decode State	| instruction Value is 0x0x3e00008
+Decode State		| instruction Value is 0x0x3e00008
 R Type		| rd 0x0 / rs 0x1f / rt 0x0 / shamt 0x0 / funct 0x8
-R Type		| rsData = 0xffffffff = register[rs=0x1f]  / rtData = 0x0 = register[rt=0x0]
-Instruction	| JumpRegister
+R Type			| rsData = 0xffffffff = register[rs=0x1f]  / rtData = 0x0 = register[rt=0x0]
+Instruction		| JumpRegister
 
-Fetch State	| instruction Value is 0x0x0
+Cache Fetch Data
+Cache Hit		| Current Count = 163
+Current Hit Rate	| 0.953216
+Fetch State		| instruction Value is 0x0x0
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 141
-WriteBack State	| instruction is LoadWord
+Cycle Num		| 141
+WriteBack State		| instruction is LoadWord
 R[rt] = M[R[rs] + SignExtImmm]
 R[30] = M[R[29](0x7fd8) + 0x20] = 0x7ff8
 
-Memory State	| instruction is AddImmediateUnsigned
+Memory State		| instruction is AddImmediateUnsigned
 
-Execution State	| instruction is JumpRegister
+Execution State		| instruction is JumpRegister
 PC = R[rs]
 PC = R[31](0xffffffff)
 
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 142
-WriteBack State	| instruction is AddImmediateUnsigned
+Cycle Num		| 142
+WriteBack State		| instruction is AddImmediateUnsigned
 R[rt=0x1d] = 0x8000 / ExecutionResult 
 
-Memory State	| instruction is JumpRegister
+Memory State		| instruction is JumpRegister
 
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 143
-WriteBack State	| instruction is JumpRegister
+Cycle Num		| 143
+WriteBack State		| instruction is JumpRegister
 
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 144
+Cycle Num		| 144
 -----------------------------------------------
 -----------------------------------------------
-Cycle Num	| 145
+Cycle Num		| 145
 -----------------------------------------------
 Final Return Value is 0x78(v0)
 --------- System End ---------
