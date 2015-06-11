@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>1EE727B7-1612-47AB-BB6E-825213C77FE7</string>
 	<key>IDESourceControlProjectName</key>
-	<string>Mips</string>
+	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>C2C980D6F747BE4BE3F5A3044D9034CD97CD4675</key>
 		<string>https://github.com/Jin02/MipsEmulator.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Calculator/Mips.xcodeproj</string>
+	<string>Calculator/Mips.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>C2C980D6F747BE4BE3F5A3044D9034CD97CD4675</key>
