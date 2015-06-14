@@ -26,8 +26,8 @@ NSetCache::NSetCache(uint cacheSize, uint cacheBlockSize, uint nWay, uint* syste
         _cacheDatas[i] = new CacheEntry[nWay];
         for(uint wayIdx = 0; wayIdx < nWay; ++wayIdx)
         {
-            _cacheDatas[i][wayIdx].datas = new uint[_blockSize];
-            memset(_cacheDatas[i][wayIdx].datas, 0, sizeof(uint) * _blockSize);
+            _cacheDatas[i][wayIdx].datas = new uint[_blockSize / 4];
+            memset(_cacheDatas[i][wayIdx].datas, 0, _blockSize);
         }
     }
 }
