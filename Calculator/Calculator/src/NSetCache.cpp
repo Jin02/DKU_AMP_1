@@ -1,5 +1,6 @@
 #include "NSetCache.h"
 #include "DumpLogManager.h"
+#include <algorithm>
 
 NSetCache::NSetCache(uint cacheSize, uint cacheBlockSize, uint nWay, uint* systemMemory, uint hitTime, uint missPenalty)
 : _nWay(nWay), _systemMemory(systemMemory), _blockSize(cacheBlockSize), _hitCount(0), _missCount(0),_hitTime(hitTime), _missPenalty(missPenalty)
