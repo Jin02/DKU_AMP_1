@@ -79,13 +79,13 @@ void System::Load(const std::string& path)
     return;
 }
 
-void System::InitializeCache(uint cacheSize, uint cacheBlockSize, uint nWay)
+void System::InitializeCache(uint cacheSize, uint cacheBlockSize, uint nWay, uint hitTime, uint missPenalty)
 {
     SAFE_DELETE(_cache);
     
     GlobalDumpLogManager->AddLog("Cache Size\t\t| " + std::to_string(cacheSize) + "\nCache Block Size\t| " + std::to_string(cacheBlockSize) + "\nCache Ways\t\t| " + std::to_string(nWay) + "\n");
 
-    _cache = new NSetCache(cacheSize, cacheBlockSize, nWay, _processorMemory.data());
+    _cache = new NSetCache(cacheSize, cacheBlockSize, nWay, _processorMemory.data(), hitTime, missPenalty);
 }
 
 void System::Run()
@@ -136,6 +136,9 @@ void System::Run()
 	char buff[128] = {0,};
 	sprintf(buff, "Final Return Value is 0x%x(v0)", _registers[2]);
 	GlobalDumpLogManager->AddLog(buff, true);
+    printf("%s\n", buff);
+    
+    _cache->HitAndAMATLog();
 }
 
 void System::RunCycle(const InstructionControllerInfo& stage)
@@ -244,7 +247,7 @@ bool System::CheckAllEndInst()
 	return true;
 }
 
-void System::CreateCache(uint cacheSize, uint cacheBlockSize, uint nWay)
+void System::CreateCache(uint cacheSize, uint cacheBlockSize, uint nWay, uint hitTime, uint missPenalty)
 {
-    _cache = new NSetCache(cacheSize, cacheBlockSize, nWay, _processorMemory.data());
+    _cache = new NSetCache(cacheSize, cacheBlockSize, nWay, _processorMemory.data(), hitTime, missPenalty);
 }

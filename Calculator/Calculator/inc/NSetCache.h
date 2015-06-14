@@ -36,14 +36,16 @@ private:
 	CacheEntry**		_cacheDatas;
 	uint				_nWay;
 	uint				_blockSize;
-	uint				_cacheSetCount;
 	uint				_hitCount;
 	uint				_missCount;
 	uint*       		_systemMemory;
+    
+    const uint          _hitTime;
+    const uint          _missPenalty;
 
 
 public:
-    NSetCache(uint cacheSize, uint cacheBlockSize, uint nWay, uint* systemMemory);
+    NSetCache(uint cacheSize, uint cacheBlockSize, uint nWay, uint* systemMemory, uint hitTime, uint missPenalty);
     ~NSetCache();
 
 private:
@@ -56,4 +58,5 @@ private:
 public:
     uint FetchData(uint address);
     void InputData(uint address, uint data);
+    void HitAndAMATLog();
 };

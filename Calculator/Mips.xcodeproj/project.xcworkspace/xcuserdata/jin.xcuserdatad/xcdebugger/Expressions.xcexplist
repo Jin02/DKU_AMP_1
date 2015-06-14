@@ -3,12 +3,51 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "PipelineStage::RunStage():PipelineStage.cpp">
+         contextName = "System::Load(std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; const&amp;):System.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "JumpAndLink::Execution(Instruction const*, Instruction const*):JFormatInstruction.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "_pc">
+            </PersistentString>
+            <PersistentString
+               value = "_executionResult">
+            </PersistentString>
+            <PersistentString
+               value = "_address">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "main:main.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "system-&gt;_processorMemory.__elems_">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "System::RunCycle(System::InstructionControllerInfo const&amp;):System.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "NSetCache::MakeCacheLineCommand(unsigned int):NSetCache.h">
+         <PersistentStrings>
+            <PersistentString
+               value = "address">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "InstructionController::RunStage():InstructionController.cpp">
          <PersistentStrings>
             <PersistentString
                value = "_instructionValue">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "NSetCache::FetchData(unsigned int):NSetCache.h">
       </ContextState>
       <ContextState
          contextName = "StoreWord::Execution(Instruction const*, Instruction const*):Store.cpp">
@@ -22,24 +61,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "System::GetDataFromMemory(unsigned int):System.cpp">
+         contextName = "PipelineStage::RunStage():PipelineStage.cpp">
          <PersistentStrings>
             <PersistentString
-               value = "_cache">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "JumpAndLink::Execution(Instruction const*, Instruction const*):JFormatInstruction.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "_pc">
-            </PersistentString>
-            <PersistentString
-               value = "_address">
-            </PersistentString>
-            <PersistentString
-               value = "_executionResult">
+               value = "_instructionValue">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -52,10 +77,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "NSetCache::MakeCacheLineCommand(unsigned int):NSetCache.h">
+         contextName = "System::GetDataFromMemory(unsigned int):System.cpp">
          <PersistentStrings>
             <PersistentString
-               value = "address">
+               value = "_cache">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -77,10 +102,7 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "NSetCache::LoadCache(unsigned int):NSetCache.h">
-      </ContextState>
-      <ContextState
-         contextName = "NSetCache::FetchData(unsigned int):NSetCache.h">
+         contextName = "System::System():System.cpp">
       </ContextState>
       <ContextState
          contextName = "System::RunCycle():System.cpp">
@@ -93,6 +115,31 @@
             </PersistentString>
             <PersistentString
                value = "front-&gt;GetProgramCounter()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "InstructionController::Decode(unsigned int):InstructionController.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "NSetCache::Replace(unsigned int):NSetCache.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "_cacheDatas[command.index][1]">
+            </PersistentString>
+            <PersistentString
+               value = "timeStamps">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "NSetCache::LoadCache(unsigned int):NSetCache.h">
+      </ContextState>
+      <ContextState
+         contextName = "NSetCache::HitAndAMATLog():NSetCache.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "(hitRate * _hitTime) + (missRate * _missPenalty)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

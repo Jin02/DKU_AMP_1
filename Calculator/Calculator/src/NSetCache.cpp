@@ -1,8 +1,8 @@
 #include "NSetCache.h"
 #include "DumpLogManager.h"
 
-NSetCache::NSetCache(uint cacheSize, uint cacheBlockSize, uint nWay, uint* systemMemory)
-: _nWay(nWay), _systemMemory(systemMemory), _blockSize(cacheBlockSize), _hitCount(0), _missCount(0)
+NSetCache::NSetCache(uint cacheSize, uint cacheBlockSize, uint nWay, uint* systemMemory, uint hitTime, uint missPenalty)
+: _nWay(nWay), _systemMemory(systemMemory), _blockSize(cacheBlockSize), _hitCount(0), _missCount(0),_hitTime(hitTime), _missPenalty(missPenalty)
 {
     auto log2 = [](double n)
     {
@@ -11,16 +11,16 @@ NSetCache::NSetCache(uint cacheSize, uint cacheBlockSize, uint nWay, uint* syste
     CacheLine line;
     line.offset = log2(_blockSize);
     
-    _cacheSetCount = (cacheSize / _blockSize) / nWay;
-    line.index = log2(_cacheSetCount);
+    uint cacheSetCount = (cacheSize / _blockSize) / nWay;
+    line.index = log2(cacheSetCount);
     
     line.tag = 32 - (line.index + line.offset);
     
     _lineInfo = line;
     
-    _cacheDatas = new CacheEntry*[_cacheSetCount + 1];
+    _cacheDatas = new CacheEntry*[line.index + 1];
     
-    for (uint i = 0; i < _cacheSetCount + 1; ++i)
+    for (uint i = 0; i < line.index + 1; ++i)
     {
         _cacheDatas[i] = new CacheEntry[nWay];
         for(uint wayIdx = 0; wayIdx < nWay; ++wayIdx)
@@ -192,7 +192,7 @@ uint NSetCache::FetchData(uint address)
         result = entry->datas[command.offset / 4];
     }
     
-    GlobalDumpLogManager->AddLog("Current Hit Rate\t| " + std::to_string( (float)_hitCount / (float)(_hitCount + _missCount)), true);
+    HitAndAMATLog();
     
     entry->timeStamp = clock();
     return result;
@@ -220,9 +220,22 @@ void NSetCache::InputData(uint address, uint data)
         ASSERT_COND_MSG(isHit, "Error, Invalid result value");
     }
     
-    GlobalDumpLogManager->AddLog("Current Hit Rate\t| " + std::to_string( (float)_hitCount / (float)(_hitCount + _missCount)), true);
+    HitAndAMATLog();
     
     entry->datas[command.offset / 4] = data;
     entry->isRequiredUpdate = true;
     entry->timeStamp = clock();
+}
+
+void NSetCache::HitAndAMATLog()
+{
+    float hitRate = (float)_hitCount / (float)(_hitCount + _missCount);
+    std::string buff = "Current Hit Rate\t| " + std::to_string(hitRate);
+    GlobalDumpLogManager->AddLog(buff, true);
+    printf("%s\n", buff.c_str());
+    
+    float missRate = (float)_missCount / (float)(_hitCount + _missCount);
+    buff = "Current AMAT\t\t| " + std::to_string((hitRate * _hitTime) + (missRate * _missPenalty));
+    GlobalDumpLogManager->AddLog(buff, true);    
+    printf("%s\n", buff.c_str());
 }

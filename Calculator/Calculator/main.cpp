@@ -23,7 +23,7 @@ int main(int argc, const char * argv[])
 	system->Load(fileName);
 	GlobalDumpManagerAddLogNewLine("--------- Done ---------\n\n");
 	GlobalDumpManagerAddLogNewLine("--------- Init Cache ---------");
-    system->InitializeCache(256, 64, 2);
+    system->InitializeCache(256, 64, 2, 3, 8);
 	GlobalDumpManagerAddLogNewLine("----------- Done -------------\n\n");
     GlobalDumpManagerAddLogNewLine("--------- System Start ---------");
 	system->Run();
