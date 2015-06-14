@@ -114,7 +114,7 @@ bool NSetCache::LoadCache(uint address)
             entry.tag = command.tag;
             entry.isEmpty = false;
             entry.isRequiredUpdate = false;
-            entry.timeStamp = time(nullptr);
+            entry.timeStamp = clock();
             
             memcpy(entry.datas, &_systemMemory[offset / 4], _blockSize);
             
@@ -134,7 +134,7 @@ bool NSetCache::Replace(uint address)
     CacheLine command = MakeCacheLineCommand(address);
     
     //first valus is wayIdx
-    std::vector<std::pair<uint, time_t>> timeStamps;
+    std::vector<std::pair<uint, clock_t>> timeStamps;
 
     bool isAllReadCache = false;
     for (uint wayIdx = 0; wayIdx < _nWay; ++wayIdx)
@@ -143,26 +143,26 @@ bool NSetCache::Replace(uint address)
         isAllReadCache = (_cacheDatas[command.index][wayIdx].isRequiredUpdate == false);
     }
     
-    auto sortFunc = [](const std::pair<uint, time_t>& left, std::pair<uint, time_t>& right)
+    auto sortFunc = [](const std::pair<uint, clock_t>& left, std::pair<uint, clock_t>& right)
     {
         return left.second < right.second;
     };
     
     std::sort(timeStamps.begin(), timeStamps.end(), sortFunc);
-    const std::pair<uint, time_t>& replaceTarget = timeStamps[0];
+    const std::pair<uint, clock_t>& replaceTarget = timeStamps[0];
     
     //first value is way idx
     CacheEntry& entry = _cacheDatas[command.index][replaceTarget.first];
-    
-    if (entry.isRequiredUpdate || isAllReadCache)
     {
         uint writeAddress = entry.memAddress;
-        memcpy(&_systemMemory[writeAddress / 4], entry.datas, _blockSize);
+
+        if(entry.isRequiredUpdate)
+            memcpy(&_systemMemory[writeAddress / 4], entry.datas, _blockSize);
         
         entry.isRequiredUpdate = false;
         entry.isEmpty = true;
     }
-    
+
     return LoadCache(address);
 }
 
@@ -194,7 +194,7 @@ uint NSetCache::FetchData(uint address)
     
     GlobalDumpLogManager->AddLog("Current Hit Rate\t| " + std::to_string( (float)_hitCount / (float)(_hitCount + _missCount)), true);
     
-    entry->timeStamp = time(nullptr);
+    entry->timeStamp = clock();
     return result;
 }
 
@@ -224,5 +224,5 @@ void NSetCache::InputData(uint address, uint data)
     
     entry->datas[command.offset / 4] = data;
     entry->isRequiredUpdate = true;
-    entry->timeStamp = time(nullptr);
+    entry->timeStamp = clock();
 }

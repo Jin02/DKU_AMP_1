@@ -22,7 +22,7 @@ public:
 		uint            tag;
 		uint*           datas;
 		bool            isEmpty;
-		time_t          timeStamp;
+		clock_t          timeStamp;
 		bool            isRequiredUpdate;
 		uint            memAddress;
 
