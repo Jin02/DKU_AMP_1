@@ -144,7 +144,7 @@ bool NSetCache::Replace(uint address)
         isAllReadCache = (_cacheDatas[command.index][wayIdx].isRequiredUpdate == false);
     }
     
-    auto sortFunc = [](const std::pair<uint, clock_t>& left, std::pair<uint, clock_t>& right)
+    auto sortFunc = [](const std::pair<uint, clock_t>& left, const std::pair<uint, clock_t>& right)
     {
         return left.second < right.second;
     };
