@@ -18,7 +18,7 @@
 #include "NSetCache.h"
 
 //8192 = 0x8000 / 4
-#define MAX_PROCESSOR_MEMORY			8192
+#define MAX_PROCESSOR_MEMORY			0x100000
 #define MAX_BRANCH_PREDICTION_CANCEL	2
 
 class System : public Mips::Singleton<System>

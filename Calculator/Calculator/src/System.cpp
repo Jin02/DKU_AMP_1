@@ -13,7 +13,7 @@ System::System()
 	std::fill(_processorMemory.begin(), _processorMemory.end(), 0);
 	std::fill(_registers.begin(), _registers.end(), 0);
 
-	SetStackPointer(0x8000);
+	SetStackPointer(MAX_PROCESSOR_MEMORY);
 	SetReturnAddress(0xffffffff);
 
 	GlobalDumpLogManager->AddLog("all clear register", true);
@@ -75,6 +75,8 @@ void System::Load(const std::string& path)
 		for(int i=0; i<length / 4; ++i)
 			_processorMemory[i] = LittleEndianToBigEndian(_processorMemory[i]);
 	}
+    
+    return;
 }
 
 void System::InitializeCache(uint cacheSize, uint cacheBlockSize, uint nWay)

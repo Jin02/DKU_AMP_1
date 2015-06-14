@@ -14,7 +14,7 @@ DumpLogManager::~DumpLogManager()
 
 void DumpLogManager::AddLog(const std::string& log, bool addNewLine)
 {
-    _buffer += log + (addNewLine ? "\n" : "");
+//    _buffer += log + (addNewLine ? "\n" : "");
 }
 
 void DumpLogManager::Print()
