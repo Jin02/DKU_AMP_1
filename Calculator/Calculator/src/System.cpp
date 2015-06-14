@@ -138,7 +138,7 @@ void System::Run()
 	GlobalDumpLogManager->AddLog(buff, true);
     printf("%s\n", buff);
     
-    _cache->HitAndAMATLog();
+    _cache->HitAndAMATLog(true);
 }
 
 void System::RunCycle(const InstructionControllerInfo& stage)

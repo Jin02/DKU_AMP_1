@@ -58,5 +58,5 @@ private:
 public:
     uint FetchData(uint address);
     void InputData(uint address, uint data);
-    void HitAndAMATLog();
+    void HitAndAMATLog(bool usePrintLog = false);
 };

@@ -228,15 +228,17 @@ void NSetCache::InputData(uint address, uint data)
     entry->timeStamp = clock();
 }
 
-void NSetCache::HitAndAMATLog()
+void NSetCache::HitAndAMATLog(bool usePrintLog)
 {
     float hitRate = (float)_hitCount / (float)(_hitCount + _missCount);
     std::string buff = "Current Hit Rate\t| " + std::to_string(hitRate);
     GlobalDumpLogManager->AddLog(buff, true);
-    printf("%s\n", buff.c_str());
+    if(usePrintLog)
+        printf("%s\n", buff.c_str());
     
     float missRate = (float)_missCount / (float)(_hitCount + _missCount);
     buff = "Current AMAT\t\t| " + std::to_string((hitRate * _hitTime) + (missRate * _missPenalty));
-    GlobalDumpLogManager->AddLog(buff, true);    
-    printf("%s\n", buff.c_str());
+    GlobalDumpLogManager->AddLog(buff, true);
+    if(usePrintLog)
+        printf("%s\n", buff.c_str());
 }
