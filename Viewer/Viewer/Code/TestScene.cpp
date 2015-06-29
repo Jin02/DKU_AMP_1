@@ -25,7 +25,7 @@ void TestScene::OnInitialize()
 	_mipsEmulator = System::GetInstance();
 
 	std::vector<std::string> disasamCodes;
-	_mipsEmulator->Load("./MipsBinFiles/input.bin", disasamCodes);
+	_mipsEmulator->Load("./MipsBinFiles/input3.bin", disasamCodes);
 
 	auto CreateSimpleImage2D = [&](const std::string& name, const std::string& shardVertexKey, const std::string& texturePath, const Math::Size<uint>& size)
 	{
@@ -135,63 +135,63 @@ void TestScene::RunOneCycle()
 
 	auto UpdateUI = [&](const System::PipelineStageInfo& stageInfo, uint indexInList)
 	{
-		//// Box Icons
-		//{
-		//	auto& line = _lineStage[indexInList];
-		//	for(int i=0; i<5; ++i)
-		//	{
-		//		line.stageImgs[i].on->SetUse(false);
-		//		line.stageImgs[i].cancel->SetUse(false);
-		//	}
+		// Box Icons
+		{
+			auto& line = _lineStage[indexInList];
+			for(int i=0; i<5; ++i)
+			{
+				line.stageImgs[i].on->SetUse(false);
+				line.stageImgs[i].cancel->SetUse(false);
+			}
 
-		//	if(stageInfo.isEnd == false)
-		//	{
-		//		if( stageInfo.pip->GetIsCancel() == false )
-		//		{
-		//			line.stageImgs[ (uint)stageInfo.pip->GetState() ].on->SetUse(true);
-		//		}
-		//		else
-		//		{
-		//			for(int i=0; i<5; ++i)
-		//				line.stageImgs[i].cancel->SetUse(true);
-		//		}
-		//	}
-		//}
+			if(stageInfo.isEnd == false)
+			{
+				if( stageInfo.pip->GetIsCancel() == false )
+				{
+					line.stageImgs[ (uint)stageInfo.pip->GetState() ].on->SetUse(true);
+				}
+				else
+				{
+					for(int i=0; i<5; ++i)
+						line.stageImgs[i].cancel->SetUse(true);
+				}
+			}
+		}
 
-		//if(stageInfo.isEnd == false)
-		//{
-		//	if( stageInfo.pip->GetIsCancel() )
-		//	{
-		//		_linePC[indexInList]->UpdateText("Stall");
-		//	}
-		//	else
-		//	{
-		//		uint pc = stageInfo.pip->GetProgramCounter();
-		//		{
-		//			std::stringstream stream;
-		//			stream << std::hex << pc;
-		//			std::string result( stream.str() );
-		//			result.insert(0, "0x");
-		//			_linePC[indexInList]->UpdateText(result);
-		//		}
-		//	}
-		//}
-		//else
-		//{
-		//	_linePC[indexInList]->UpdateText("None");
-		//}
+		if(stageInfo.isEnd == false)
+		{
+			if( stageInfo.pip->GetIsCancel() )
+			{
+				_linePC[indexInList]->UpdateText("Stall");
+			}
+			else
+			{
+				uint pc = stageInfo.pip->GetProgramCounter();
+				{
+					std::stringstream stream;
+					stream << std::hex << pc;
+					std::string result( stream.str() );
+					result.insert(0, "0x");
+					_linePC[indexInList]->UpdateText(result);
+				}
+			}
+		}
+		else
+		{
+			_linePC[indexInList]->UpdateText("None");
+		}
 	};
 
 	auto RegisterTextUpdate = [&]()
 	{
-		//for(int i=0; i<32; ++i)
-		//{
-		//	std::stringstream stream;
-		//	stream << std::hex << _mipsEmulator->GetDataFromRegister(i);
-		//	std::string regValueText(stream.str());
+		for(int i=0; i<32; ++i)
+		{
+			std::stringstream stream;
+			stream << std::hex << _mipsEmulator->GetDataFromRegister(i);
+			std::string regValueText(stream.str());
 
-		//	_registerText[i]->UpdateText( "register[" + std::to_string(i) + "] = 0x" + regValueText );
-		//}
+			_registerText[i]->UpdateText( "register[" + std::to_string(i) + "] = 0x" + regValueText );
+		}
 	};
 
 	_mipsEmulator->Run(UpdateUI, RegisterTextUpdate);
@@ -199,7 +199,7 @@ void TestScene::RunOneCycle()
 
 void TestScene::OnInput(const Device::Win32::Mouse& mouse, const  Device::Win32::Keyboard& keyboard)
 {
-	if(keyboard.states[VK_SPACE] == KEYBOARD::Type::Down)
+	if(keyboard.states[VK_SPACE] == KEYBOARD::Type::Up)
 	{
 		_nextWork = true;
 	}
