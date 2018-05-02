@@ -3,7 +3,7 @@
 #include "Common.h"
 #include "Instruction.h"
 
-class InstructionController
+class Pipeline
 {
 public:
     enum class State : uint
@@ -18,14 +18,14 @@ private:
     Instruction*    _instruction;    
     uint            _instructionValue;
 
-	InstructionController*	_prev1StepPip;
-	InstructionController*	_prev2StepPip;
+	Pipeline*		_prev1StepPip;
+	Pipeline*		_prev2StepPip;
 
 	bool			_isCancel;
 
 public:
-    InstructionController();
-    ~InstructionController();
+    Pipeline();
+    ~Pipeline();
     
 public:
     void NextState();
@@ -35,8 +35,8 @@ public:
 public:
     uint            Fetch();
 	void            Decode(uint instValue);
-    void            Execution(const InstructionController* prev2step, const InstructionController* prev1step);
-    void            Memory(const InstructionController* prev2step, const InstructionController* prev1step);
+    void            Execution(const Pipeline* prev2step, const Pipeline* prev1step);
+    void            Memory(const Pipeline* prev2step, const Pipeline* prev1step);
     void            WriteBack();
     
 public:
@@ -52,8 +52,8 @@ public:
 		_pc = v;
 	}
 
-	SET_ACCESSOR(Prev2StepPip, InstructionController*, _prev2StepPip);
-	SET_ACCESSOR(Prev1StepPip, InstructionController*, _prev1StepPip);
+	SET_ACCESSOR(Prev2StepPip, Pipeline*, _prev2StepPip);
+	SET_ACCESSOR(Prev1StepPip, Pipeline*, _prev1StepPip);
 
 	GET_ACCESSOR(IsCancel, bool, _isCancel);
 };

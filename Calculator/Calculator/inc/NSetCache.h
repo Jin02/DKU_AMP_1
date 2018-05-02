@@ -23,10 +23,10 @@ public:
 		uint*           datas;
 		bool            isEmpty;
 		clock_t          timeStamp;
-		bool            isRequiredUpdate;
+		bool            dirty;
 		uint            memAddress;
 
-		CacheEntry() : tag(0), datas(0), isEmpty(true), timeStamp(0), isRequiredUpdate(false), memAddress(-1) {}
+		CacheEntry() : tag(0), datas(0), isEmpty(true), timeStamp(0), dirty(false), memAddress(-1) {}
 		~CacheEntry() {}
 	};
 

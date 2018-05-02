@@ -7,7 +7,7 @@
 #include "Singleton.h"
 
 #include "Instruction.h"
-#include "InstructionController.h"
+#include "Pipeline.h"
 
 #include "SOCHashMap.h"
 #include <deque>
@@ -25,13 +25,13 @@ class System : public Mips::Singleton<System>
 {
 public:
 	//first value is cycle
-	struct InstructionControllerInfo
+	struct PipelineInfo
 	{
 		uint			 cycle;
-		InstructionController	*pip;
+		Pipeline*		pip;
 		bool			isEnd;
-		InstructionControllerInfo() : cycle(0), pip(nullptr), isEnd(false) {}
-		~InstructionControllerInfo() {}
+		PipelineInfo() : cycle(0), pip(nullptr), isEnd(false) {}
+		~PipelineInfo() {}
 	};
 
 private:
@@ -42,8 +42,8 @@ private:
 	unsigned int                                            _hi, _lo;
     unsigned int                                            _cycle;
     
-	SOCHashMap<uint, InstructionController*>				_hashMap;
-	std::list<InstructionControllerInfo>					_insts;
+	SOCHashMap<uint, Pipeline*>				                _pipelineMap;
+	std::deque<PipelineInfo>								_pipelineQueue;
 	std::queue<uint>                                        _removePipelineKeys;
 
     NSetCache*                                              _cache;
@@ -61,7 +61,7 @@ public:
     void CreateCache(uint cacheSize, uint cacheBlockSize, uint nWay, uint hitTime, uint missPenalty);
 	void Load(const std::string& path);
 
-	void RunCycle(const InstructionControllerInfo& stage);
+	void RunCycle(const PipelineInfo& stage);
     void Run();
 
     inline unsigned int GetDataFromRegister(int index) { return _registers[index]; }
@@ -81,12 +81,9 @@ public:
 	GET_SET_ACCESSOR(GlobalPointer, unsigned int, _registers[28]);
     
 	GET_ACCESSOR(ProgramCounter, uint, _programCounter);
-	void SetProgramCounter(uint v)
-	{
-		_programCounter = v;
-	}
+	SET_ACCESSOR(ProgramCounter, uint, _programCounter);
 
-	GET_ACCESSOR(IsPipelineEmpty, bool, _insts.empty());
+	GET_ACCESSOR(IsPipelineEmpty, bool, _pipelineQueue.empty());
 
     friend class Mips::Singleton<System>;
 };

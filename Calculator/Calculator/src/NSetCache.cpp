@@ -114,7 +114,7 @@ bool NSetCache::LoadCache(uint address)
         {
             entry.tag = command.tag;
             entry.isEmpty = false;
-            entry.isRequiredUpdate = false;
+            entry.dirty = false;
             entry.timeStamp = clock();
             
             memcpy(entry.datas, &_systemMemory[offset / 4], _blockSize);
@@ -131,72 +131,76 @@ bool NSetCache::LoadCache(uint address)
 
 bool NSetCache::Replace(uint address)
 {
-    //maybe.., i think that write lru algo.
+	// address를 캐시에서 사용할 tag, index, offset으로 분해한다.
     CacheLine command = MakeCacheLineCommand(address);
-    
-    //first valus is wayIdx
-    std::vector<std::pair<uint, clock_t>> timeStamps;
 
-    bool isAllReadCache = false;
-    for (uint wayIdx = 0; wayIdx < _nWay; ++wayIdx)
-    {
-        timeStamps.push_back(std::make_pair(wayIdx, _cacheDatas[command.index][wayIdx].timeStamp));
-        isAllReadCache = (_cacheDatas[command.index][wayIdx].isRequiredUpdate == false);
-    }
-    
-    auto sortFunc = [](const std::pair<uint, clock_t>& left, const std::pair<uint, clock_t>& right)
-    {
-        return left.second < right.second;
-    };
-    
-    std::sort(timeStamps.begin(), timeStamps.end(), sortFunc);
-    const std::pair<uint, clock_t>& replaceTarget = timeStamps[0];
-    
-    //first value is way idx
-    CacheEntry& entry = _cacheDatas[command.index][replaceTarget.first];
+	uint	minTimeWayIndex = 0;
+	clock_t	minTime			= _cacheDatas[command.index][minTimeWayIndex].timeStamp;
+    for (uint wayIdx = 1; wayIdx < _nWay; ++wayIdx)	// 캐시 라인을 순회하며 가장 낮은 time 값을 가진 캐시라인 선택
+	{
+		clock_t time = _cacheDatas[command.index][wayIdx].timeStamp;
+		if( minTime > time )
+		{
+			minTime			= time;
+			minTimeWayIndex	= wayIdx;
+		}
+	}
+	
+	// time stamp 값이 높을수록 최근에 접근한 캐시 라인이므로, 가장 낮은 time stamp 값을 가진 캐시 라인을 선택
+    CacheEntry& entry = _cacheDatas[command.index][minTimeWayIndex];
     {
         uint writeAddress = entry.memAddress;
 
-        if(entry.isRequiredUpdate)
+		// Write Back 방식으로 memory에 write를 수행
+        if(entry.dirty)
             memcpy(&_systemMemory[writeAddress / 4], entry.datas, _blockSize);
         
-        entry.isRequiredUpdate = false;
-        entry.isEmpty = true;
+        entry.dirty			= false;
+        entry.isEmpty		= true;
     }
 
+	// 메모리에서 데이터를 가져와 캐시에 등록시키는 작업.
     return LoadCache(address);
 }
 
 uint NSetCache::FetchData(uint address)
 {
     GlobalDumpLogManager->AddLog("Cache Fetch Data\n");
-    uint result = 0;
-    CacheLine command = MakeCacheLineCommand(address);
-    
-    CacheEntry* entry = nullptr;
-    bool isHit = IsValid(command) && IsTagMatch(command, &entry);
-    if (isHit) //딱히 더 손볼건 없는듯
+	// address를 분석하여 tag, index, offset으로 분해
+	CacheLine command	= MakeCacheLineCommand(address);
+	CacheEntry* entry	= nullptr;
+	
+	// Cache Hit 체크
+	bool isHit = IsValid(command) && IsTagMatch(command, &entry);
+    if (isHit == false)
     {
-        GlobalDumpLogManager->AddLog("Cache Hit\t\t| Current Count = " + std::to_string(++_hitCount), true);
-        ASSERT_COND_MSG(entry, "Error, what the");
-        result = entry->datas[command.offset / 4];
+		GlobalDumpLogManager->AddLog("Cache Miss\t\t| Current Count = " + std::to_string(++_missCount), true);
+
+		// OS Level
+		// TLB 및 Page Table로 가서 데이터를 가져와 캐시에 데이터를 등록하는 절차를 단순화.
+		if (LoadCache(address) == false)
+			ASSERT_COND_MSG(Replace(address), "Error, where is your memory?");
+		
+		// 방금 등록한 Cache line 검색. 원래는 Replace에서 별도로 가져오면 좋으나
+		for (uint i = 0; i < _nWay; ++i)
+		{
+			if (_cacheDatas[command.index][i].tag == command.tag)
+			{
+				entry = &_cacheDatas[command.index][i];
+				break;
+			}
+		}
     }
-    else
-    {
-        GlobalDumpLogManager->AddLog("Cache Miss\t\t| Current Count = " + std::to_string(++_missCount), true);
-        
-        if (LoadCache(address) == false)
-            ASSERT_COND_MSG(Replace(address), "Error, where is your memory?");
-        
-        isHit = IsValid(command) && IsTagMatch(command, &entry);
-        ASSERT_COND_MSG(isHit, "Error, Invalid result value");
-        result = entry->datas[command.offset / 4];
-    }
-    
+	else
+	{
+		GlobalDumpLogManager->AddLog("Cache Hit\t\t| Current Count = " + std::to_string(++_hitCount), true);
+	}
     HitAndAMATLog();
-    
+	
+
+	// 1 word = 4 byte니, array index로 나타내려면 /4 해야함
     entry->timeStamp = clock();
-    return result;
+    return entry->datas[command.offset / 4];
 }
 
 void NSetCache::InputData(uint address, uint data)
@@ -224,7 +228,7 @@ void NSetCache::InputData(uint address, uint data)
     HitAndAMATLog();
     
     entry->datas[command.offset / 4] = data;
-    entry->isRequiredUpdate = true;
+    entry->dirty = true;
     entry->timeStamp = clock();
 }
 
